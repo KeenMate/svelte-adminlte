@@ -1,0 +1,9 @@
+.data-table {
+	width: 100%;
+}
+.data-table td .has-ellipsis {
+	display: inline-block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

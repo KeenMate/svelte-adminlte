@@ -1,0 +1,17 @@
+@font-face {
+	font-family: "Delivery";
+	src:
+		/* url("../fonts/Delivery/Delivery_W_BdIt.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_Bd.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_CdBlk.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_CdLt.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_It.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_LtIt.woff2") format("woff2"), */
+		/* url("../fonts/Delivery/Delivery_W_Lt.woff2") format("woff2") */
+		url("/fonts/Delivery/Delivery_W_Rg.woff2") format("woff2");
+}
+
+body, button, input, optgroup, select, textarea,
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Delivery" !important;
+}

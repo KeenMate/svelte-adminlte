@@ -1,0 +1,11 @@
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	border-right: none
+}
+
+.select2-selection__choice {
+	padding: 0 0 0 20px !important;
+}
+
+.select2-selection__choice__remove:hover {
+	background-color: unset !important;
+}

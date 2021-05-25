@@ -14,38 +14,31 @@
 	$: breadcrumbs = $routeBreadcrumbs || (currentRoute && currentRoute.breadcrumb) || []
 	$: title = $routeTitle || (currentRoute && currentRoute.title) || ""
 
-	// $: title = typeof currentRoute.title === "function"
-	// 	&& currentRoute.title()
-	// 	|| currentRoute.title
-
 	function noRouteBack() {
 		pop()
 	}
 </script>
 
 {#if currentRoute}
-	<div class="container">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			{#if $location !== "/"}
-				<LteButton small link squared color="" on:click={noRouteBack}>
-					<i class="fas fa-arrow-left"></i>
-				</LteButton>
-			{/if}
-			<h1>
-				{title}
-			</h1>
-			{#if breadcrumbs && breadcrumbs.length}
-				<ol class="breadcrumb">
-					{#each breadcrumbs as breadcrumb, i}
-						<li class:active={currentRoute.breadcrumb - 1 === i}>
-							{breadcrumb}
-						</li>
-					{/each}
-				</ol>
-			{/if}
-		</section>
-	</div>
+	<section class="content-header">
+		{#if $location !== "/"}
+			<LteButton small link squared color="" on:click={noRouteBack}>
+				<i class="fas fa-arrow-left"></i>
+			</LteButton>
+		{/if}
+		<h1>
+			{title}
+		</h1>
+		{#if breadcrumbs && breadcrumbs.length}
+			<ol class="breadcrumb">
+				{#each breadcrumbs as breadcrumb, i}
+					<li class:active={currentRoute.breadcrumb - 1 === i}>
+						{breadcrumb}
+					</li>
+				{/each}
+			</ol>
+		{/if}
+	</section>
 {/if}
 
 <style lang="sass">
@@ -53,8 +46,6 @@
 		display: flex
 		align-items: center
 		column-gap: .2rem
-
-		padding-left: 0
 
 		h1
 			flex: 1
