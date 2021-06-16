@@ -45,6 +45,11 @@ var app = (function () {
         const unsub = store.subscribe(...callbacks);
         return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
     }
+    function get_store_value(store) {
+        let value;
+        subscribe(store, _ => value = _)();
+        return value;
+    }
     function component_subscribe(component, store, callback) {
         component.$$.on_destroy.push(subscribe(store, callback));
     }
@@ -173,6 +178,9 @@ var app = (function () {
         if (!current_component)
             throw new Error('Function called outside component initialization');
         return current_component;
+    }
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
     }
     function afterUpdate(fn) {
         get_current_component().$$.after_update.push(fn);
@@ -545,98 +553,6 @@ var app = (function () {
         $inject_state() { }
     }
 
-    /**
-     * @typedef {Object} WrappedComponent Object returned by the `wrap` method
-     * @property {SvelteComponent} component - Component to load (this is always asynchronous)
-     * @property {RoutePrecondition[]} [conditions] - Route pre-conditions to validate
-     * @property {Object} [props] - Optional dictionary of static props
-     * @property {Object} [userData] - Optional user data dictionary
-     * @property {bool} _sveltesparouter - Internal flag; always set to true
-     */
-
-    /**
-     * @callback AsyncSvelteComponent
-     * @returns {Promise<SvelteComponent>} Returns a Promise that resolves with a Svelte component
-     */
-
-    /**
-     * @callback RoutePrecondition
-     * @param {RouteDetail} detail - Route detail object
-     * @returns {boolean|Promise<boolean>} If the callback returns a false-y value, it's interpreted as the precondition failed, so it aborts loading the component (and won't process other pre-condition callbacks)
-     */
-
-    /**
-     * @typedef {Object} WrapOptions Options object for the call to `wrap`
-     * @property {SvelteComponent} [component] - Svelte component to load (this is incompatible with `asyncComponent`)
-     * @property {AsyncSvelteComponent} [asyncComponent] - Function that returns a Promise that fulfills with a Svelte component (e.g. `{asyncComponent: () => import('Foo.svelte')}`)
-     * @property {SvelteComponent} [loadingComponent] - Svelte component to be displayed while the async route is loading (as a placeholder); when unset or false-y, no component is shown while component
-     * @property {object} [loadingParams] - Optional dictionary passed to the `loadingComponent` component as params (for an exported prop called `params`)
-     * @property {object} [userData] - Optional object that will be passed to events such as `routeLoading`, `routeLoaded`, `conditionsFailed`
-     * @property {object} [props] - Optional key-value dictionary of static props that will be passed to the component. The props are expanded with {...props}, so the key in the dictionary becomes the name of the prop.
-     * @property {RoutePrecondition[]|RoutePrecondition} [conditions] - Route pre-conditions to add, which will be executed in order
-     */
-
-    /**
-     * Wraps a component to enable multiple capabilities:
-     * 1. Using dynamically-imported component, with (e.g. `{asyncComponent: () => import('Foo.svelte')}`), which also allows bundlers to do code-splitting.
-     * 2. Adding route pre-conditions (e.g. `{conditions: [...]}`)
-     * 3. Adding static props that are passed to the component
-     * 4. Adding custom userData, which is passed to route events (e.g. route loaded events) or to route pre-conditions (e.g. `{userData: {foo: 'bar}}`)
-     * 
-     * @param {WrapOptions} args - Arguments object
-     * @returns {WrappedComponent} Wrapped component
-     */
-    function wrap(args) {
-        if (!args) {
-            throw Error('Parameter args is required')
-        }
-
-        // We need to have one and only one of component and asyncComponent
-        // This does a "XNOR"
-        if (!args.component == !args.asyncComponent) {
-            throw Error('One and only one of component and asyncComponent is required')
-        }
-
-        // If the component is not async, wrap it into a function returning a Promise
-        if (args.component) {
-            args.asyncComponent = () => Promise.resolve(args.component);
-        }
-
-        // Parameter asyncComponent and each item of conditions must be functions
-        if (typeof args.asyncComponent != 'function') {
-            throw Error('Parameter asyncComponent must be a function')
-        }
-        if (args.conditions) {
-            // Ensure it's an array
-            if (!Array.isArray(args.conditions)) {
-                args.conditions = [args.conditions];
-            }
-            for (let i = 0; i < args.conditions.length; i++) {
-                if (!args.conditions[i] || typeof args.conditions[i] != 'function') {
-                    throw Error('Invalid parameter conditions[' + i + ']')
-                }
-            }
-        }
-
-        // Check if we have a placeholder component
-        if (args.loadingComponent) {
-            args.asyncComponent.loading = args.loadingComponent;
-            args.asyncComponent.loadingParams = args.loadingParams || undefined;
-        }
-
-        // Returns an object that contains all the functions to execute too
-        // The _sveltesparouter flag is to confirm the object was created by this router
-        const obj = {
-            component: args.asyncComponent,
-            userData: args.userData,
-            conditions: (args.conditions && args.conditions.length) ? args.conditions : undefined,
-            props: (args.props && Object.keys(args.props).length) ? args.props : {},
-            _sveltesparouter: true
-        };
-
-        return obj
-    }
-
     const subscriber_queue = [];
     /**
      * Creates a `Readable` store that allows reading by subscription.
@@ -738,6 +654,98 @@ var app = (function () {
                 cleanup();
             };
         });
+    }
+
+    /**
+     * @typedef {Object} WrappedComponent Object returned by the `wrap` method
+     * @property {SvelteComponent} component - Component to load (this is always asynchronous)
+     * @property {RoutePrecondition[]} [conditions] - Route pre-conditions to validate
+     * @property {Object} [props] - Optional dictionary of static props
+     * @property {Object} [userData] - Optional user data dictionary
+     * @property {bool} _sveltesparouter - Internal flag; always set to true
+     */
+
+    /**
+     * @callback AsyncSvelteComponent
+     * @returns {Promise<SvelteComponent>} Returns a Promise that resolves with a Svelte component
+     */
+
+    /**
+     * @callback RoutePrecondition
+     * @param {RouteDetail} detail - Route detail object
+     * @returns {boolean|Promise<boolean>} If the callback returns a false-y value, it's interpreted as the precondition failed, so it aborts loading the component (and won't process other pre-condition callbacks)
+     */
+
+    /**
+     * @typedef {Object} WrapOptions Options object for the call to `wrap`
+     * @property {SvelteComponent} [component] - Svelte component to load (this is incompatible with `asyncComponent`)
+     * @property {AsyncSvelteComponent} [asyncComponent] - Function that returns a Promise that fulfills with a Svelte component (e.g. `{asyncComponent: () => import('Foo.svelte')}`)
+     * @property {SvelteComponent} [loadingComponent] - Svelte component to be displayed while the async route is loading (as a placeholder); when unset or false-y, no component is shown while component
+     * @property {object} [loadingParams] - Optional dictionary passed to the `loadingComponent` component as params (for an exported prop called `params`)
+     * @property {object} [userData] - Optional object that will be passed to events such as `routeLoading`, `routeLoaded`, `conditionsFailed`
+     * @property {object} [props] - Optional key-value dictionary of static props that will be passed to the component. The props are expanded with {...props}, so the key in the dictionary becomes the name of the prop.
+     * @property {RoutePrecondition[]|RoutePrecondition} [conditions] - Route pre-conditions to add, which will be executed in order
+     */
+
+    /**
+     * Wraps a component to enable multiple capabilities:
+     * 1. Using dynamically-imported component, with (e.g. `{asyncComponent: () => import('Foo.svelte')}`), which also allows bundlers to do code-splitting.
+     * 2. Adding route pre-conditions (e.g. `{conditions: [...]}`)
+     * 3. Adding static props that are passed to the component
+     * 4. Adding custom userData, which is passed to route events (e.g. route loaded events) or to route pre-conditions (e.g. `{userData: {foo: 'bar}}`)
+     * 
+     * @param {WrapOptions} args - Arguments object
+     * @returns {WrappedComponent} Wrapped component
+     */
+    function wrap(args) {
+        if (!args) {
+            throw Error('Parameter args is required')
+        }
+
+        // We need to have one and only one of component and asyncComponent
+        // This does a "XNOR"
+        if (!args.component == !args.asyncComponent) {
+            throw Error('One and only one of component and asyncComponent is required')
+        }
+
+        // If the component is not async, wrap it into a function returning a Promise
+        if (args.component) {
+            args.asyncComponent = () => Promise.resolve(args.component);
+        }
+
+        // Parameter asyncComponent and each item of conditions must be functions
+        if (typeof args.asyncComponent != 'function') {
+            throw Error('Parameter asyncComponent must be a function')
+        }
+        if (args.conditions) {
+            // Ensure it's an array
+            if (!Array.isArray(args.conditions)) {
+                args.conditions = [args.conditions];
+            }
+            for (let i = 0; i < args.conditions.length; i++) {
+                if (!args.conditions[i] || typeof args.conditions[i] != 'function') {
+                    throw Error('Invalid parameter conditions[' + i + ']')
+                }
+            }
+        }
+
+        // Check if we have a placeholder component
+        if (args.loadingComponent) {
+            args.asyncComponent.loading = args.loadingComponent;
+            args.asyncComponent.loadingParams = args.loadingParams || undefined;
+        }
+
+        // Returns an object that contains all the functions to execute too
+        // The _sveltesparouter flag is to confirm the object was created by this router
+        const obj = {
+            component: args.asyncComponent,
+            userData: args.userData,
+            conditions: (args.conditions && args.conditions.length) ? args.conditions : undefined,
+            props: (args.props && Object.keys(args.props).length) ? args.props : {},
+            _sveltesparouter: true
+        };
+
+        return obj
     }
 
     function regexparam (str, loose) {
@@ -1768,38 +1776,56 @@ var app = (function () {
 
     const currentUserStore = writable(null);
 
-    /* src/components/structure/navigation/MobileNavToggle.svelte generated by Svelte v3.30.1 */
+    const localStorageKey = "sidebar_opened";
+    const sidebarOpenState = writable(localStorage.getItem(localStorageKey) === "true");
+    function toggleSidebarOpened() {
+      sidebarOpenState.update((currentState) => {
+        const newState = !currentState;
+        localStorage.setItem(localStorageKey, newState.toString());
+        return newState;
+      });
+    }
 
+    /* src/components/structure/navigation/MobileNavToggle.svelte generated by Svelte v3.30.1 */
     const file = "src/components/structure/navigation/MobileNavToggle.svelte";
 
     function create_fragment$3(ctx) {
-    	let button;
+    	let a;
     	let i;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
-    			button = element("button");
+    			a = element("a");
     			i = element("i");
     			attr_dev(i, "class", "fa fa-bars");
-    			add_location(i, file, 1, 1, 110);
-    			attr_dev(button, "type", "button");
-    			attr_dev(button, "class", "navbar-toggle collapsed");
-    			attr_dev(button, "data-toggle", "collapse");
-    			attr_dev(button, "data-target", "#navbar-collapse");
-    			add_location(button, file, 0, 0, 0);
+    			add_location(i, file, 15, 1, 258);
+    			attr_dev(a, "href", "#");
+    			attr_dev(a, "class", "sidebar-toggle svelte-1hf4kjn");
+    			attr_dev(a, "data-toggle", "push-menu");
+    			attr_dev(a, "role", "button");
+    			add_location(a, file, 8, 0, 150);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, button, anchor);
-    			append_dev(button, i);
+    			insert_dev(target, a, anchor);
+    			append_dev(a, i);
+
+    			if (!mounted) {
+    				dispose = listen_dev(a, "click", /*onToggleSidenav*/ ctx[0], false, false, false);
+    				mounted = true;
+    			}
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(button);
+    			if (detaching) detach_dev(a);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -1814,16 +1840,22 @@ var app = (function () {
     	return block;
     }
 
-    function instance$3($$self, $$props) {
+    function instance$3($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("MobileNavToggle", slots, []);
+
+    	function onToggleSidenav() {
+    		toggleSidebarOpened();
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<MobileNavToggle> was created with unknown prop '${key}'`);
     	});
 
-    	return [];
+    	$$self.$capture_state = () => ({ toggleSidebarOpened, onToggleSidenav });
+    	return [onToggleSidenav];
     }
 
     class MobileNavToggle extends SvelteComponentDev {
@@ -1848,26 +1880,19 @@ var app = (function () {
     	let a;
     	let img;
     	let img_src_value;
-    	let t0;
-    	let span;
 
     	const block = {
     		c: function create() {
     			a = element("a");
     			img = element("img");
-    			t0 = space();
-    			span = element("span");
-    			span.textContent = "GČP";
     			if (img.src !== (img_src_value = "/images/logo-ge-cp.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Home");
-    			attr_dev(img, "class", "logo-lg svelte-l2qlvc");
     			attr_dev(img, "width", "200");
     			set_style(img, "opacity", ".8");
+    			attr_dev(img, "class", "svelte-s7wdzp");
     			add_location(img, file$1, 1, 1, 28);
-    			attr_dev(span, "class", "logo-mini svelte-l2qlvc");
-    			add_location(span, file$1, 7, 1, 133);
     			attr_dev(a, "href", "#/");
-    			attr_dev(a, "class", "logo svelte-l2qlvc");
+    			attr_dev(a, "class", "logo svelte-s7wdzp");
     			add_location(a, file$1, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -1876,8 +1901,6 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
     			append_dev(a, img);
-    			append_dev(a, t0);
-    			append_dev(a, span);
     		},
     		p: noop,
     		i: noop,
@@ -1927,7 +1950,7 @@ var app = (function () {
     /* src/components/structure/navigation/UserDropdownMenu.svelte generated by Svelte v3.30.1 */
     const file$2 = "src/components/structure/navigation/UserDropdownMenu.svelte";
 
-    // (31:6) {:else}
+    // (34:6) {:else}
     function create_else_block$1(ctx) {
     	let t;
 
@@ -1947,14 +1970,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(31:6) {:else}",
+    		source: "(34:6) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (29:6) {#if darkTheme}
+    // (32:6) {#if darkTheme}
     function create_if_block$1(ctx) {
     	let t;
 
@@ -1974,7 +1997,7 @@ var app = (function () {
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(29:6) {#if darkTheme}",
+    		source: "(32:6) {#if darkTheme}",
     		ctx
     	});
 
@@ -1984,20 +2007,23 @@ var app = (function () {
     function create_fragment$5(ctx) {
     	let li2;
     	let a0;
-    	let span;
+    	let span0;
     	let t0;
     	let t1;
+    	let span1;
+    	let i;
+    	let t2;
     	let ul;
     	let li0;
     	let div1;
     	let div0;
     	let button;
-    	let t2;
+    	let t3;
     	let li1;
     	let div2;
     	let a1;
-    	let t3;
     	let t4;
+    	let t5;
     	let div3;
     	let a2;
     	let mounted;
@@ -2015,25 +2041,33 @@ var app = (function () {
     		c: function create() {
     			li2 = element("li");
     			a0 = element("a");
-    			span = element("span");
+    			span0 = element("span");
     			t0 = text(/*displayName*/ ctx[0]);
     			t1 = space();
+    			span1 = element("span");
+    			i = element("i");
+    			t2 = space();
     			ul = element("ul");
     			li0 = element("li");
     			div1 = element("div");
     			div0 = element("div");
     			button = element("button");
     			if_block.c();
-    			t2 = space();
+    			t3 = space();
     			li1 = element("li");
     			div2 = element("div");
     			a1 = element("a");
-    			t3 = text(/*displayName*/ ctx[0]);
-    			t4 = space();
+    			t4 = text(/*displayName*/ ctx[0]);
+    			t5 = space();
     			div3 = element("div");
     			a2 = element("a");
     			a2.textContent = "Odhlásit";
-    			add_location(span, file$2, 16, 2, 358);
+    			attr_dev(span0, "class", "hidden-sm hidden-xs");
+    			add_location(span0, file$2, 16, 2, 358);
+    			attr_dev(i, "class", "fas fa-user");
+    			add_location(i, file$2, 18, 3, 455);
+    			attr_dev(span1, "class", "visible-sm visible-xs");
+    			add_location(span1, file$2, 17, 2, 415);
     			attr_dev(a0, "href", "#");
     			attr_dev(a0, "class", "dropdown-toggle svelte-awqaln");
     			attr_dev(a0, "data-toggle", "dropdown");
@@ -2041,26 +2075,26 @@ var app = (function () {
     			attr_dev(button, "class", "btn");
     			toggle_class(button, "bg-navy", !/*darkTheme*/ ctx[1]);
     			toggle_class(button, "bg-gray", /*darkTheme*/ ctx[1]);
-    			add_location(button, file$2, 22, 5, 525);
+    			add_location(button, file$2, 25, 5, 633);
     			attr_dev(div0, "class", "col-xs-offset-6 col-xs-6 text-center");
-    			add_location(div0, file$2, 21, 4, 469);
+    			add_location(div0, file$2, 24, 4, 577);
     			attr_dev(div1, "class", "row");
-    			add_location(div1, file$2, 20, 3, 447);
+    			add_location(div1, file$2, 23, 3, 555);
     			attr_dev(li0, "class", "user-body");
-    			add_location(li0, file$2, 19, 2, 421);
+    			add_location(li0, file$2, 22, 2, 529);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "btn btn-default btn-flat svelte-awqaln");
-    			add_location(a1, file$2, 41, 4, 881);
+    			add_location(a1, file$2, 44, 4, 989);
     			attr_dev(div2, "class", "pull-left");
-    			add_location(div2, file$2, 40, 3, 853);
+    			add_location(div2, file$2, 43, 3, 961);
     			attr_dev(a2, "class", "btn btn-default btn-flat svelte-awqaln");
-    			add_location(a2, file$2, 46, 4, 997);
+    			add_location(a2, file$2, 49, 4, 1105);
     			attr_dev(div3, "class", "pull-right");
-    			add_location(div3, file$2, 45, 3, 968);
+    			add_location(div3, file$2, 48, 3, 1076);
     			attr_dev(li1, "class", "user-footer");
-    			add_location(li1, file$2, 39, 2, 825);
+    			add_location(li1, file$2, 42, 2, 933);
     			attr_dev(ul, "class", "dropdown-menu");
-    			add_location(ul, file$2, 18, 1, 392);
+    			add_location(ul, file$2, 21, 1, 500);
     			attr_dev(li2, "class", "dropdown user user-menu svelte-awqaln");
     			add_location(li2, file$2, 14, 0, 258);
     		},
@@ -2070,21 +2104,24 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, li2, anchor);
     			append_dev(li2, a0);
-    			append_dev(a0, span);
-    			append_dev(span, t0);
-    			append_dev(li2, t1);
+    			append_dev(a0, span0);
+    			append_dev(span0, t0);
+    			append_dev(a0, t1);
+    			append_dev(a0, span1);
+    			append_dev(span1, i);
+    			append_dev(li2, t2);
     			append_dev(li2, ul);
     			append_dev(ul, li0);
     			append_dev(li0, div1);
     			append_dev(div1, div0);
     			append_dev(div0, button);
     			if_block.m(button, null);
-    			append_dev(ul, t2);
+    			append_dev(ul, t3);
     			append_dev(ul, li1);
     			append_dev(li1, div2);
     			append_dev(div2, a1);
-    			append_dev(a1, t3);
-    			append_dev(li1, t4);
+    			append_dev(a1, t4);
+    			append_dev(li1, t5);
     			append_dev(li1, div3);
     			append_dev(div3, a2);
 
@@ -2118,7 +2155,7 @@ var app = (function () {
     				toggle_class(button, "bg-gray", /*darkTheme*/ ctx[1]);
     			}
 
-    			if (dirty & /*displayName*/ 1) set_data_dev(t3, /*displayName*/ ctx[0]);
+    			if (dirty & /*displayName*/ 1) set_data_dev(t4, /*displayName*/ ctx[0]);
     		},
     		i: noop,
     		o: noop,
@@ -2221,17 +2258,17 @@ var app = (function () {
 
     function create_fragment$6(ctx) {
     	let header;
-    	let brandnavlogosidebar;
+    	let mobilenavtoggle;
     	let t0;
     	let nav;
-    	let mobilenavtoggle;
+    	let brandnavlogosidebar;
     	let t1;
     	let div;
     	let ul;
     	let userdropdownmenu;
     	let current;
-    	brandnavlogosidebar = new BrandNavLogoSidebar({ $$inline: true });
     	mobilenavtoggle = new MobileNavToggle({ $$inline: true });
+    	brandnavlogosidebar = new BrandNavLogoSidebar({ $$inline: true });
 
     	userdropdownmenu = new UserDropdownMenu({
     			props: {
@@ -2247,20 +2284,20 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			header = element("header");
-    			create_component(brandnavlogosidebar.$$.fragment);
+    			create_component(mobilenavtoggle.$$.fragment);
     			t0 = space();
     			nav = element("nav");
-    			create_component(mobilenavtoggle.$$.fragment);
+    			create_component(brandnavlogosidebar.$$.fragment);
     			t1 = space();
     			div = element("div");
     			ul = element("ul");
     			create_component(userdropdownmenu.$$.fragment);
     			attr_dev(ul, "class", "nav navbar-nav");
-    			add_location(ul, file$3, 25, 3, 623);
+    			add_location(ul, file$3, 26, 3, 624);
     			attr_dev(div, "class", "navbar-custom-menu");
-    			add_location(div, file$3, 24, 2, 587);
+    			add_location(div, file$3, 25, 2, 588);
     			attr_dev(nav, "class", "navbar navbar-static-top");
-    			add_location(nav, file$3, 21, 1, 523);
+    			add_location(nav, file$3, 21, 1, 519);
     			attr_dev(header, "class", "main-header");
     			add_location(header, file$3, 19, 0, 468);
     		},
@@ -2269,10 +2306,10 @@ var app = (function () {
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, header, anchor);
-    			mount_component(brandnavlogosidebar, header, null);
+    			mount_component(mobilenavtoggle, header, null);
     			append_dev(header, t0);
     			append_dev(header, nav);
-    			mount_component(mobilenavtoggle, nav, null);
+    			mount_component(brandnavlogosidebar, nav, null);
     			append_dev(nav, t1);
     			append_dev(nav, div);
     			append_dev(div, ul);
@@ -2287,21 +2324,21 @@ var app = (function () {
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(brandnavlogosidebar.$$.fragment, local);
     			transition_in(mobilenavtoggle.$$.fragment, local);
+    			transition_in(brandnavlogosidebar.$$.fragment, local);
     			transition_in(userdropdownmenu.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(brandnavlogosidebar.$$.fragment, local);
     			transition_out(mobilenavtoggle.$$.fragment, local);
+    			transition_out(brandnavlogosidebar.$$.fragment, local);
     			transition_out(userdropdownmenu.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(header);
-    			destroy_component(brandnavlogosidebar);
     			destroy_component(mobilenavtoggle);
+    			destroy_component(brandnavlogosidebar);
     			destroy_component(userdropdownmenu);
     		}
     	};
@@ -3552,7 +3589,7 @@ var app = (function () {
     	topnavigation = new TopNavigation({
     			props: {
     				darkTheme: /*$darkTheme*/ ctx[0],
-    				displayName: /*$currentUser*/ ctx[1] && /*$currentUser*/ ctx[1].display_name || "Neznámý"
+    				displayName: /*$currentUser*/ ctx[1] && /*$currentUser*/ ctx[1].display_name || "Unknown"
     			},
     			$$inline: true
     		});
@@ -3575,12 +3612,11 @@ var app = (function () {
     			div0 = element("div");
     			create_component(router.$$.fragment);
     			attr_dev(div0, "class", "content");
-    			add_location(div0, file$7, 31, 2, 901);
+    			add_location(div0, file$7, 45, 2, 1270);
     			attr_dev(div1, "class", "content-wrapper");
-    			toggle_class(div1, "bg-black", /*$darkTheme*/ ctx[0]);
-    			add_location(div1, file$7, 29, 1, 824);
+    			add_location(div1, file$7, 43, 1, 1221);
     			attr_dev(div2, "class", "wrapper");
-    			add_location(div2, file$7, 21, 0, 635);
+    			add_location(div2, file$7, 35, 0, 1032);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3601,12 +3637,8 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const topnavigation_changes = {};
     			if (dirty & /*$darkTheme*/ 1) topnavigation_changes.darkTheme = /*$darkTheme*/ ctx[0];
-    			if (dirty & /*$currentUser*/ 2) topnavigation_changes.displayName = /*$currentUser*/ ctx[1] && /*$currentUser*/ ctx[1].display_name || "Neznámý";
+    			if (dirty & /*$currentUser*/ 2) topnavigation_changes.displayName = /*$currentUser*/ ctx[1] && /*$currentUser*/ ctx[1].display_name || "Unknown";
     			topnavigation.$set(topnavigation_changes);
-
-    			if (dirty & /*$darkTheme*/ 1) {
-    				toggle_class(div1, "bg-black", /*$darkTheme*/ ctx[0]);
-    			}
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -3652,6 +3684,18 @@ var app = (function () {
     	component_subscribe($$self, currentUserStore, $$value => $$invalidate(1, $currentUser = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("App", slots, []);
+
+    	function applySidebarOpenState() {
+    		if (!get_store_value(sidebarOpenState)) {
+    			document.body.classList.add("sidebar-collapse", "sidebar-mini-expand-feature");
+    			document.body.classList.remove("sidebar-mini-expand-feature");
+    		}
+    	}
+
+    	onMount(() => {
+    		applySidebarOpenState();
+    	});
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -3659,13 +3703,17 @@ var app = (function () {
     	});
 
     	$$self.$capture_state = () => ({
+    		onMount,
+    		get: get_store_value,
     		Router,
     		routes,
     		darkTheme,
     		currentUser: currentUserStore,
+    		sidebarOpenState,
     		TopNavigation,
     		PageHeader,
     		Sidebar,
+    		applySidebarOpenState,
     		$darkTheme,
     		$currentUser
     	});
