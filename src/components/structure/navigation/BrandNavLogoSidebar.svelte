@@ -2,12 +2,8 @@
 	<img
 		src="/images/logo-ge-cp.svg"
 		alt="Home"
-		class="logo-lg"
 		width="200"
 		style="opacity: .8">
-	<span class="logo-mini">
-		GČP
-	</span>
 </a>
 
 <style lang="sass">
@@ -18,5 +14,6 @@
 		padding-bottom: 0
 
 		img, span
-			flex: 1
+			//flex: 1
+			max-height: 50px
 </style>

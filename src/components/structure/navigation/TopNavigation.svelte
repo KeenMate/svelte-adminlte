@@ -18,9 +18,10 @@
 </script>
 
 <header class="main-header">
-	<BrandNavLogoSidebar />
+	<MobileNavToggle />
 	<nav class="navbar navbar-static-top">
-		<MobileNavToggle />
+
+		<BrandNavLogoSidebar />
 
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">

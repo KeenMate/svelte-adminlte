@@ -14,7 +14,10 @@
 
 <li class="dropdown user user-menu">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		<span>{displayName}</span>
+		<span class="hidden-sm hidden-xs">{displayName}</span>
+		<span class="visible-sm visible-xs">
+			<i class="fas fa-user"></i>
+		</span>
 	</a>
 	<ul class="dropdown-menu">
 		<li class="user-body">
