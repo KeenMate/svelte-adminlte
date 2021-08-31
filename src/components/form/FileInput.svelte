@@ -30,7 +30,7 @@
 		<slot slot="label" name="label" />
 		<input
 			bind:this={inputElement}
-			class="form-control"
+			class="input-sm"
 			type="file"
 			{value}
 			{name}
@@ -46,7 +46,7 @@
 	<FormGroup {id}>
 		<input
 			bind:this={inputElement}
-			class="form-control"
+			class="input-sm"
 			type="file"
 			{value}
 			{name}

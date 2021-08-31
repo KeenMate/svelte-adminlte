@@ -1,12 +1,8 @@
 <script>
-	import {createEventDispatcher} from "svelte"
-
-	const dispatch = createEventDispatcher()
-
 	export let tooltip = ""
 </script>
 
-<li title={tooltip} on:click={() => dispatch("click")}>
+<li title={tooltip} on:click>
 	<a>
 		<slot />
 	</a>

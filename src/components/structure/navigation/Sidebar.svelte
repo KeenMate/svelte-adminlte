@@ -1,46 +1,43 @@
+<script>
+	import {currentUserIsAdminStore} from "../../../stores/current-user"
+</script>
+
 <aside class="main-sidebar">
 	<div class="slimScrollDiv">
 		<section class="sidebar">
 			<ul class="sidebar-menu tree" data-widget="tree">
 				<li>
-					<a href="#/">
-						<i class="fa fa-book"></i>
-						<span>Route 1</span>
+					<a href="#/comms/new">
+						<i class="fa fa-envelope"></i>
+						<span>Nová komunikace</span>
 					</a>
 				</li>
-				<li class="treeview" style="height: auto;">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu" style="display: block;">
-            <li><a href="#"><i class="far fa-circle"></i> Level One</a></li>
-            <li class="treeview">
-              <a href="#"><i class="far fa-circle"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="far fa-circle"></i> Level Two</a></li>
-                <li class="treeview">
-                  <a href="#"><i class="far fa-circle"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="far fa-circle"></i> Level Three</a></li>
-                    <li><a href="#"><i class="far fa-circle"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="far fa-circle"></i> Level One</a></li>
-          </ul>
-        </li>
+				<li>
+					<a href="#/">
+						<i class="fa fa-mail-bulk"></i>
+						<span>Komunikace</span>
+					</a>
+				</li>
+				{#if $currentUserIsAdminStore}
+					<li>
+						<a href="#/dist-channels">
+							<i class="fa fa-share-alt-square"></i>
+							<span>Distribuční kanály</span>
+						</a>
+					</li>
+					<li>
+						<a href="#/comm-channels">
+							<i class="fa fa-comments"></i>
+							<span>Komunikační kanály</span>
+						</a>
+					</li>
+					<li>
+						<a href="#/publishing-overview">
+							<i class="fa fa-image"></i>
+							<span>Publikační přehled</span>
+						</a>
+					</li>
+				{/if}
 			</ul>
 		</section>
 		<div class="slimScrollBar"></div>

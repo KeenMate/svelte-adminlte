@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+<button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">
 	<slot>
-		Close
+		Zavřít
 	</slot>
 </button>

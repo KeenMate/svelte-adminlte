@@ -4,6 +4,6 @@
 
 <TableRowFullWidth>
 	<h5 class="text-center">
-		Error occured while loading data
+		Nepodařilo se načíst data
 	</h5>
 </TableRowFullWidth>

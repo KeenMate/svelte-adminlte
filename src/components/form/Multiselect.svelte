@@ -6,17 +6,20 @@
 	import {TypingDebounceDelay} from "../../constants/ui"
 
 	export let value = null
-	export let multiple = false
 	export let placeholder = ""
+	export let multiple = false
+	export let readonly = false
 
 	const dispatch = createEventDispatcher()
 
 	let selectElement = null
+	let select$ = null
 	let searchDebounce = debounce(x => {
 		dispatch("search", x)
 	}, TypingDebounceDelay)
 
 	$: jQuery(selectElement).val(value).trigger("change")
+	$: select$?.select2({disabled: readonly && "readonly"})
 
 	function attachSelectEvent(select$) {
 		select$.on("select2:select", ev => {
@@ -42,20 +45,25 @@
 	}
 
 	onMount(() => {
-		const select$ = jQuery(selectElement).select2()
+		select$ = jQuery(selectElement).select2({
+			language: {
+				noResults() { return "Žádné výsledky" }
+			}
+		})
 		attachSelectEvent(select$)
 		attachKeyDownEvent(select$)
 	})
 </script>
 
 {#if $$slots.label}
-	<FormGroup>
+	<FormGroup on:click>
 		<slot name="label" slot="label" />
 		<select
 			bind:this={selectElement}
 			{value}
 			{multiple}
-			class="form-control select2 select2-hidden-accessible"
+			{readonly}
+			class="form-control select2 select2-hidden-accessible input-sm"
 			data-placeholder="{placeholder}"
 			style="width: 100%;"
 			tabindex="-1"
@@ -65,13 +73,13 @@
 		</select>
 	</FormGroup>
 {:else}
-
-	<FormGroup>
+	<FormGroup on:click>
 		<select
 			bind:this={selectElement}
 			{value}
 			{multiple}
-			class="form-control select2 select2-hidden-accessible"
+			{readonly}
+			class="form-control select2 select2-hidden-accessible input-sm"
 			data-placeholder="{placeholder}"
 			style="width: 100%;"
 			tabindex="-1"
@@ -81,3 +89,23 @@
 		</select>
 	</FormGroup>
 {/if}
+
+<style lang="sass">
+	:global
+		.select2-selection__choice
+			padding: 0 !important
+			padding-left: 20px !important
+
+		.select2-selection
+			height: 30px !important
+			padding-top: 4px !important
+			padding-bottom: 4px !important
+
+			.select2-selection__arrow
+				height: 24px !important
+
+		.select2-results__option
+			padding-top: 4px !important
+			padding-bottom: 4px !important
+
+</style>

@@ -5,8 +5,6 @@
 	import routeTitle from "../../stores/route-title"
 	import LteButton from "../ui/LteButton.svelte"
 
-	// let title = ""
-
 	// find current route by regex matching against route "map"
 	// by replacing any route params (/foo/:param1/baz) with ^/foo/\w+/baz$
 	$: currentRoute = Routes.find(x => $location.match("^" + x.route.replace(/:\w+/, "\\w+") + "$"))
@@ -14,7 +12,14 @@
 	$: breadcrumbs = $routeBreadcrumbs || (currentRoute && currentRoute.breadcrumb) || []
 	$: title = $routeTitle || (currentRoute && currentRoute.title) || ""
 
-	function noRouteBack() {
+	function onRouteBack() {
+		// const newRoute = popRoute()
+		//
+		// if (newRoute) {
+		// 	console.log("New route is ", newRoute.location)
+		// 	replace(`${newRoute.location}?${newRoute.querystring}`)
+		// }
+
 		pop()
 	}
 </script>
@@ -22,7 +27,7 @@
 {#if currentRoute}
 	<section class="content-header">
 		{#if $location !== "/"}
-			<LteButton small link squared color="" on:click={noRouteBack}>
+			<LteButton small link squared color="" on:click={onRouteBack}>
 				<i class="fas fa-arrow-left"></i>
 			</LteButton>
 		{/if}

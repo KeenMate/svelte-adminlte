@@ -15,7 +15,7 @@
 </script>
 
 <button
-	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat"
+	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat btn-sm"
 	class:btn-xs={xsmall}
 	class:btn-sm={small}
 	class:btn-lg={large}

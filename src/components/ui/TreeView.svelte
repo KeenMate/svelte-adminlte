@@ -7,19 +7,22 @@
 </script>
 
 <script>
-	import {findNestedPath} from "../../helpers/nested-search"
+	import {findNestedLtreePath, getParentNodePath, nodePathIsChild} from "../../helpers/tree-helpers"
 
 	export let tree = null
 	export let treeId = null
 	export let value = null
 	export let childDepth = 0
+	export let parentId = null
 	export let maxExpandedDepth = 0
-	export let getId = x => x.id
-	export let getParentId = x => x.parentId
+	export let getId = x => x.nodePath
+	export let getParentId = x => getParentNodePath(x.nodePath)
+	export let isChild = x => nodePathIsChild(x.nodePath)
 
 	const getNodeId = node => `${treeId}-${getId(node)}`
 
-	$: valuePath = findNestedPath(tree, node => getNodeId(node) === value)
+	$: parentChildrenTree = (tree || []).filter(x => !parentId ? !isChild(x) : getParentId(x) === parentId)
+	$: valuePath = findNestedLtreePath(tree, value)
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0)
 	$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree)
 	$: expandNodes(valuePath)
@@ -42,22 +45,23 @@
 	}
 
 	function recomputeExpandedNodes() {
+		// tree.forEach(x => toggleExpansion(x, false))
 		// console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
 		if (childDepth < parsedMaxExpandedDepth) {
-			expandNodes(tree)
+			expandNodes(parentChildrenTree)
 			// console.log("Expand should happen")
 		}
 	}
 </script>
 
 <ul class:child-menu={childDepth > 0}>
-	{#each tree as node (getNodeId(node))}
+	{#each parentChildrenTree as node (getNodeId(node))}
 		<li
-			class:is-child={getParentId(node) && !node.children}
-			class:has-children={node.children && node.children.length}
+			class:is-child={isChild(node)}
+			class:has-children={node.hasChildren}
 		>
 			<div class="tree-item">
-				{#if node.children && node.children.length}
+				{#if node.hasChildren}
 					<span on:click={() => toggleExpansion(node)}>
 						<i
 							class="far"
@@ -72,14 +76,18 @@
 
 				<slot {node} />
 			</div>
-			{#if $_expansionState[getNodeId(node)] && node.children && node.children.length}
+			<!--{@debug node}-->
+			<!--{@debug $_expansionState}-->
+			{#if $_expansionState[getNodeId(node)] && node.hasChildren}
+					<!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
 				<svelte:self
 					{treeId}
 					{getId}
 					{getParentId}
 					{maxExpandedDepth}
-					tree={node.children}
+					tree={tree}
 					childDepth={childDepth + 1}
+					parentId={getId(node)}
 					let:node={nodeNested}
 				>
 					<slot node={nodeNested} />
@@ -98,7 +106,7 @@
 		user-select: none
 
 		&.child-menu
-			padding-left: 2.4rem
+			padding-left: 2.6rem
 
 		li
 			&.is-child
@@ -113,7 +121,7 @@
 			.tree-item
 				display: flex
 				align-items: center
-				column-gap: .5rem
+				column-gap: .8rem
 
 				hr
 					border-top: 1px dotted gray

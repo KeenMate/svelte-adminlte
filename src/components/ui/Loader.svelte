@@ -7,8 +7,8 @@
 
 	.lds-dual-ring
 		display: inline-block
-		width: 80px
-		height: 80px
+		width: 100%
+		height: 100%
 
 		&::after
 			content: " "

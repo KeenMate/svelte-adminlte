@@ -14,7 +14,7 @@
 </script>
 
 <label>{label}</label>
-<select {value} class="form-control" on:change={onChange}>
+<select {value} class="form-control input-sm" on:change={onChange}>
 	<option value="">{placeholder}</option>
 	<option value="+420">🇨🇿 Czechia (+420)</option>
 	<option value="+49">🇩🇪 Germany (+49)</option>

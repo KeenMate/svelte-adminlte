@@ -9,6 +9,8 @@
 	export let placeholder = ""
 	export let pattern = null
 	export let readonly = false
+	export let disabled = false
+	export let hideLabel = false
 
 	const dispatch = createEventDispatcher()
 
@@ -26,11 +28,11 @@
 </script>
 
 {#if $$slots.label}
-	<FormGroup {id}>
+	<FormGroup {id} {hideLabel}>
 		<slot slot="label" name="label" />
 		<input
 			bind:this={inputElement}
-			class="form-control"
+			class="form-control input-sm"
 			{value}
 			{name}
 			{type}
@@ -38,15 +40,16 @@
 			{placeholder}
 			{pattern}
 			{readonly}
+			{disabled}
 			on:input={onInput}
 			on:keypress
 		>
 	</FormGroup>
 {:else}
-	<FormGroup {id}>
+	<FormGroup {id} {hideLabel}>
 		<input
 			bind:this={inputElement}
-			class="form-control"
+			class="form-control input-sm"
 			{value}
 			{name}
 			{type}
@@ -54,6 +57,7 @@
 			{placeholder}
 			{pattern}
 			{readonly}
+			{disabled}
 			on:input={onInput}
 			on:keypress}
 		>
