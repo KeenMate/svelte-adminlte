@@ -2,7 +2,7 @@
 	import {createEventDispatcher} from "svelte"
 	import jQuery from "jquery"
 	import moment from "moment"
-	import {DisplayDateFormat} from "../../constants/date"
+	import {DisplayDateFormat} from "../../../constants/date"
 
 	const dispatch = createEventDispatcher()
 

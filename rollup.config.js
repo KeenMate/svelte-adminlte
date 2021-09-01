@@ -66,7 +66,7 @@ export default {
 
 		copy({
 			targets: [
-				{src: "src/assets/*", dest: "public"}
+				// {src: "src/assets/*", dest: "public"}
 			]
 		}),
 

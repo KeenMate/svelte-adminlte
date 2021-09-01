@@ -1,58 +1,56 @@
 <script>
-	import {createEventDispatcher} from "svelte"
-	import PhonePrefixCombo from "../shared/PhonePrefixCombo.svelte"
-	import FormInput from "./FormInput.svelte"
+  import { createEventDispatcher } from "svelte";
+  import PhonePrefixCombo from "../shared/PhonePrefixCombo.svelte";
+  import FormInput from "./input/TextInput.svelte";
+  import Label from "./structure/Label.svelte";
 
-	const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
-	export let phone = ""
+  export let phone = "";
 
-	let phonePrefix = ""
+  let phonePrefix = "";
 
-	$: updatePhonePrefix(phone)
+  $: updatePhonePrefix(phone);
 
-	function onPhonePrefixChange(ev) {
-		const {detail: newPrefix} = ev
+  function onPhonePrefixChange(ev) {
+    const { detail: newPrefix } = ev;
 
-		let thePhone = phone
-		if (phonePrefix)
-			thePhone = thePhone.substr(phonePrefix.length + 1)
+    let thePhone = phone;
+    if (phonePrefix) thePhone = thePhone.substr(phonePrefix.length + 1);
 
-		phonePrefix = newPrefix
+    phonePrefix = newPrefix;
 
-		dispatch("input", `${newPrefix && (newPrefix + " " || "")}${thePhone}`)
-	}
+    dispatch("input", `${newPrefix && (newPrefix + " " || "")}${thePhone}`);
+  }
 
-	function updatePhonePrefix(thePhone) {
-		console.log("Updating phone prefix", thePhone)
+  function updatePhonePrefix(thePhone) {
+    console.log("Updating phone prefix", thePhone);
 
-		if (!thePhone)
-			return ""
+    if (!thePhone) return "";
 
-		const [_, match] = new RegExp(/^(\+\d{1,3})?/)
-			.exec(thePhone)
+    const [_, match] = new RegExp(/^(\+\d{1,3})?/).exec(thePhone);
 
-		phonePrefix = match
-	}
+    phonePrefix = match;
+  }
 </script>
 
 <div class="row">
-	<div class="col-md-5">
-		<PhonePrefixCombo
-			value={phonePrefix}
-			on:change={onPhonePrefixChange}
-		/>
-	</div>
-	<div class="col-md-7">
-		<FormInput
-			value="{phone}"
-			name="phone"
-			type="tel"
-			title="Enter phone in format: +123 123123123"
-			placeholder="Your contact phone"
-			on:input
-		>
-			<span slot="label">Phone</span>
-		</FormInput>
-	</div>
+  <div class="col-md-5">
+    <PhonePrefixCombo value={phonePrefix} on:change={onPhonePrefixChange} />
+  </div>
+  <div class="col-md-7">
+    <Label inputId="phone-number">
+      <span>Phone</span>
+    </Label>
+
+    <FormInput
+      value={phone}
+      name="phone"
+      id="phone-number"
+      type="tel"
+      title="Enter phone in format: +123 123123123"
+      placeholder="Your contact phone"
+      on:input
+    />
+  </div>
 </div>

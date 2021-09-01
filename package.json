@@ -10,7 +10,8 @@
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.4.1",
-    "esbuild": "^0.11.11",
+    "esbuild": "^0.12.24",
+    "felte": "^0.8.0",
     "postcss": "^8.2.8",
     "rollup": "^2.3.4",
     "rollup-plugin-copy": "^3.4.0",
@@ -21,9 +22,17 @@
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.32.13",
     "svelte": "^3.0.0",
-    "svelte-preprocess": "^4.6.9"
+    "svelte-preprocess": "^4.6.9",
+    "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-decoupled-document": "^28.0.0",
+    "@uppy/core": "^1.18.1",
+    "@uppy/dashboard": "^1.19.1",
+    "@uppy/svelte": "^0.1.9",
+    "@uppy/xhr-upload": "^1.7.2",
+    "ckeditor5-svelte": "^0.0.10",
+    "lodash": "^4.17.21",
     "svelte-spa-router": "^3.1.0"
   }
 }
