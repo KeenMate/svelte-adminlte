@@ -1,7 +1,9 @@
 <script>
   export let form;
+
+$: formParam = form || (() => {})
 </script>
 
-<form use:form class={$$props.class || ''}>
+<form use:formParam class={$$props.class || ''}>
   <slot/>
 </form>
