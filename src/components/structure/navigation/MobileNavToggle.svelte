@@ -1,20 +1,16 @@
 <script>
-	import {toggleSidebarOpened} from "../../../stores/sidebar-open-state"
+  import { toggleSidebarOpened } from "../../../stores/sidebar-open-state";
 
-	function onToggleSidenav() {
-		toggleSidebarOpened()
-	}
+  function onToggleSidenav() {
+    toggleSidebarOpened();
+  }
 </script>
 
-<a
-	href="#"
-	class="sidebar-toggle"
-	data-toggle="push-menu"
-	role="button"
-	on:click={onToggleSidenav}
->
-	<i class="fa fa-bars"></i>
-</a>
+<li class="nav-item">
+  <a class="nav-link" data-widget="pushmenu" href="#" role="button" on:click={onToggleSidenav}>
+    <i class="fas fa-bars" />
+  </a>
+</li>
 
 <style lang="sass">
 	.sidebar-toggle:before

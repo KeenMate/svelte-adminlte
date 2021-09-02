@@ -1,3 +1,3 @@
-<div class="checkbox {$$props.class || ''}">
+<div class="form-check {$$props.class || ''}">
   <slot />
 </div>

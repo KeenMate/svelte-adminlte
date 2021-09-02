@@ -22,7 +22,7 @@
 </script>
 
 <input
-  class={$$props.class || ""}
+  class="form-check-input {$$props.class || ""}"
   type="checkbox"
   bind:checked
   {id}

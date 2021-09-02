@@ -23,10 +23,12 @@ export { default as TextInput } from "./form/input/TextInput.svelte";
 
 /* [2.2] Form > Structure */
 export { default as Checkbox } from "./form/structure/Checkbox.svelte";
+export { default as CheckboxLabel } from "./form/structure/CheckboxLabel.svelte";
 export { default as Form } from "./form/structure/Form.svelte";
 export { default as FormGroup } from "./form/structure/FormGroup.svelte";
 export { default as InputGroup } from "./form/structure/InputGroup.svelte";
-export { default as InputGroupButton } from "./form/structure/InputGroupButton.svelte";
+export { default as InputGroupAppend } from "./form/structure/InputGroupAppend.svelte";
+export { default as InputGroupPrepend } from "./form/structure/InputGroupPrepend.svelte";
 export { default as Label } from "./form/structure/Label.svelte";
 
 /* [3] Shared */

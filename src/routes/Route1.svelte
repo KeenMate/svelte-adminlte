@@ -8,9 +8,11 @@
     Checkbox,
     Form,
     InputGroup,
-    InputGroupButton,
+    InputGroupAppend,
     Label,
     LteButton,
+    CheckboxLabel,
+    Dropdown,
   } from "../components";
 
   const { form } = createForm({
@@ -18,25 +20,40 @@
   });
 </script>
 
-<Form class="form-horizontal" {form}>
-  <FormGroup>
-    <Label class="col-sm-3" inputId="name">Name</Label>
+<Form horizontal {form}>
+  <FormGroup row>
+    <Label class="col-form-label col-sm-3" inputId="name">Name</Label>
     <div class="col-sm-9">
       <InputGroup>
-        <TextInput type="text" id="name" name="name" />
-        <InputGroupButton>
+        <TextInput id="name" name="name" />
+        <InputGroupAppend>
           <LteButton small>Go!</LteButton>
-        </InputGroupButton>
+        </InputGroupAppend>
       </InputGroup>
     </div>
   </FormGroup>
 
-  <FormGroup>
-    <Checkbox>
-      <Label inputId="agreement">
-        Agree
+  <FormGroup row>
+    <div class="offset-sm-3 col-sm-9">
+      <Checkbox>
         <CheckboxInput id="agreement" name="agreement" title="Agreement" />
-      </Label>
-    </Checkbox>
+        <CheckboxLabel inputId="agreement">Agree</CheckboxLabel>
+      </Checkbox>
+    </div>
+  </FormGroup>
+
+  <FormGroup row>
+    <Label class="col-form-label col-sm-3" inputId="name">Name</Label>
+    <div class="col-sm-9">
+      <InputGroup>
+        <Dropdown value="">
+          <option>Option 1</option>
+          <option>Option 1</option>
+        </Dropdown>
+        <InputGroupAppend>
+          <LteButton small>Go!</LteButton>
+        </InputGroupAppend>
+      </InputGroup>
+    </div>
   </FormGroup>
 </Form>
