@@ -2,33 +2,33 @@
 	export let noPadding = false
 </script>
 
-<div class="box box-warning">
+<div class="card card-warning">
 	{#if $$slots.header || $$slots.tools || $$slots.fullHeader}
-		<div class="box-header with-border">
+		<div class="card-header with-border">
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
-				<h3 class="box-title">
+				<h3 class="card-title">
 					<slot name="header" />
 				</h3>
-				<div class="box-tools pull-right">
+				<div class="card-tools pull-right">
 					<slot name="tools" />
 				</div>
 			{/if}
 		</div>
 	{/if}
-	<div class="box-body" class:no-padding={noPadding}>
+	<div class="card-body" class:no-padding={noPadding}>
 		<slot />
 	</div>
 	{#if $$slots.footer}
-		<div class="box-footer">
+		<div class="card-footer">
 			<slot name="footer" />
 		</div>
 	{/if}
 </div>
 
 <style lang="sass">
-	.box
+	.card
 		border-top-color: #d45f5c
 		background-color: #f9f9f9
 
@@ -39,7 +39,7 @@
 			a
 				color: white !important
 
-		.box-footer
+		.card-footer
 			padding: .5rem 1rem
 			background-color: #f9f9f9
 

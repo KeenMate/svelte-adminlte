@@ -1,6 +1,6 @@
 <script>
 	import TableEmptyRow from "./TableEmptyRow.svelte"
-	import Box from "../structure/Box.svelte"
+	import Box from "../structure/Card.svelte"
 
 	export let cssClass = ""
 </script>

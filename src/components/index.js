@@ -35,7 +35,7 @@ export { default as Label } from "./form/structure/Label.svelte";
 export { default as PhonePrefixCombo } from "./shared/PhonePrefixCombo.svelte";
 
 /* [4] Structure */
-export { default as Box } from "./structure/Box.svelte";
+export { default as Card } from "./structure/Card.svelte";
 export { default as KeenFooter } from "./structure/KeenFooter.svelte";
 export { default as Modal } from "./structure/Modal.svelte";
 export { default as OneColumnNarrow } from "./structure/OneColumnNarrow.svelte";
