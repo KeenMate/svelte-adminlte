@@ -10,8 +10,12 @@
 	export let endDate = ""
 	export let minDate = ""
 	export let maxDate = ""
+	export let opens = "right"
 	export let alwaysShowCalendars = false
 	export let showCustomRangeLabel = false
+	export let autoApply = false
+	export let singleDatePicker = false
+	export let disabled = false
 	export let ranges = undefined
 
 	let inputElement = null
@@ -20,13 +24,19 @@
 
 	$: {
 		let tmpConfig = {
-			opens: "left",
 			linkedCalendars: false,
 			locale: DateRangePickerLocale
 		}
 
+		// date range picker does not like nullish props in config - so I am setting them exclusively
 		if (startDate)
 			tmpConfig.startDate = startDate
+		if (singleDatePicker)
+			tmpConfig.singleDatePicker = singleDatePicker
+		if (opens)
+			tmpConfig.opens = opens
+		if (autoApply)
+			tmpConfig.autoApply = autoApply
 		if (endDate)
 			tmpConfig.endDate = endDate
 		if (minDate)
@@ -44,16 +54,19 @@
 	$: dateRangePicker = inputElement
 		&& jQuery(inputElement)
 			.daterangepicker(dateRangePickerConfig, function (start, end) {
+				if (disabled)
+					return
+
 				dispatch("change", {startDate: start, endDate: end})
 			})
 
 	onDestroy(() => {
-		jQuery(inputElement).daterangepicker( "destroy" )
+		jQuery(inputElement).daterangepicker("destroy")
 	})
 </script>
 
 <InputGroup
 	bind:inputElement
-	{...$$restProps}
+	{...$$props}
 >
 </InputGroup>

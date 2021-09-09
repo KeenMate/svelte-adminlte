@@ -1,25 +1,18 @@
 <script>
 	import {location, pop} from "svelte-spa-router"
-	import {Routes} from "../../routes"
+	import {Routes, routeToRegex} from "../../routes"
 	import routeBreadcrumbs from "../../stores/route-breadcrumb"
 	import routeTitle from "../../stores/route-title"
 	import LteButton from "../ui/LteButton.svelte"
 
 	// find current route by regex matching against route "map"
 	// by replacing any route params (/foo/:param1/baz) with ^/foo/\w+/baz$
-	$: currentRoute = Routes.find(x => $location.match("^" + x.route.replace(/:\w+/, "\\w+") + "$"))
+	$: currentRoute = Routes.find(x => $location.match(routeToRegex(x.route)))
 
 	$: breadcrumbs = $routeBreadcrumbs || (currentRoute && currentRoute.breadcrumb) || []
 	$: title = $routeTitle || (currentRoute && currentRoute.title) || ""
 
 	function onRouteBack() {
-		// const newRoute = popRoute()
-		//
-		// if (newRoute) {
-		// 	console.log("New route is ", newRoute.location)
-		// 	replace(`${newRoute.location}?${newRoute.querystring}`)
-		// }
-
 		pop()
 	}
 </script>
@@ -34,7 +27,7 @@
 		<h1>
 			{title}
 		</h1>
-		{#if breadcrumbs && breadcrumbs.length}
+		{#if breadcrumbs?.length}
 			<ol class="breadcrumb">
 				{#each breadcrumbs as breadcrumb, i}
 					<li class:active={currentRoute.breadcrumb - 1 === i}>

@@ -25,6 +25,10 @@ export function fillParams(route, params) {
 		)
 }
 
+export function routeToRegex(route) {
+	return "^" + route.replace(/\/:\w+(\??)/, "/?([\\w\-\d]+)$1") + "$"
+}
+
 export default {
 	[Urls.Route1]: Route1,
 	// The catch-all route must always be last

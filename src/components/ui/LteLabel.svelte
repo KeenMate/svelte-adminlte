@@ -1,8 +1,9 @@
 <script>
 	export let color = ""
 	export let title = ""
+	export let classes = ""
 </script>
 
-<span class="label {color && 'label-' + color || ''} {$$props.classes || ''}" {title}>
+<span class="label {color && 'label-' + color || ''} {classes || ''}" {title}>
 	<slot />
 </span>

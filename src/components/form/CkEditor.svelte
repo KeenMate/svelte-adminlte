@@ -19,7 +19,7 @@
 		const tmpConfig = {}
 
 		if (readonly)
-			editorConfig.toolbar = {items: []}
+			tmpConfig.toolbar = {items: []}
 
 		editorConfig = tmpConfig
 	}

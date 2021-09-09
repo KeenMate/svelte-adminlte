@@ -20,6 +20,18 @@
 				</li>
 				{#if $currentUserIsAdminStore}
 					<li>
+						<a href="#/publishing-overview">
+							<i class="fa fa-image"></i>
+							<span>Publikační přehled</span>
+						</a>
+					</li>
+					<li>
+						<a href="#/permissions">
+							<i class="fa fa-user-shield"></i>
+							<span>Oprávnění</span>
+						</a>
+					</li>
+					<li>
 						<a href="#/dist-channels">
 							<i class="fa fa-share-alt-square"></i>
 							<span>Distribuční kanály</span>
@@ -29,12 +41,6 @@
 						<a href="#/comm-channels">
 							<i class="fa fa-comments"></i>
 							<span>Komunikační kanály</span>
-						</a>
-					</li>
-					<li>
-						<a href="#/publishing-overview">
-							<i class="fa fa-image"></i>
-							<span>Publikační přehled</span>
 						</a>
 					</li>
 				{/if}
