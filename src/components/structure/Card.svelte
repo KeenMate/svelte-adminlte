@@ -1,8 +1,9 @@
 <script>
+	export let tabs = false
 	export let noPadding = false
 </script>
 
-<div class="card card-warning">
+<div class="card card-warning {$$props.class || ''}" class:card-tabs={tabs}>
 	{#if $$slots.header || $$slots.tools || $$slots.fullHeader}
 		<div class="card-header with-border">
 			{#if $$slots.fullHeader}
@@ -27,7 +28,7 @@
 	{/if}
 </div>
 
-<style lang="sass">
+<!-- <style lang="sass">
 	.card
 		border-top-color: #d45f5c
 		background-color: #f9f9f9
@@ -46,4 +47,4 @@
 			&:empty
 				padding: 0
 
-</style>
+</style> -->

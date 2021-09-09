@@ -29,11 +29,11 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          {#if $location !== "/"}
+          <!-- {#if $location !== "/"}
             <LteButton small link squared color="" on:click={onRouteBack}>
               <i class="fas fa-arrow-left" />
             </LteButton>
-          {/if}
+          {/if} -->
           <h1>
             {title}
           </h1>
@@ -54,6 +54,27 @@
     </div>
   </div>
 {/if}
+
+<!-- <div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">
+          Dashboard
+          <small>Control panel</small>
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard v1</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
 
 <!-- <style lang="sass">
 	.content-header

@@ -1,20 +1,14 @@
 <script>
-	export let active = false
-	export let classes = ""
+  export let active = false;
 </script>
 
-<li
-	class="{classes || ''}"
-	role="presentation"
-  class:active
-	on:click
->
-	<a href="javascript:void(0)" {...$$restProps}>
-		<slot />
-	</a>
+<li class="nav-item {$$props.class || ''}" role="presentation" on:click>
+  <a class="nav-link" class:active href="javascript:void(0)" {...$$restProps}>
+    <slot />
+  </a>
 </li>
 
-<style lang="sass">
+<!-- <style lang="sass">
 	li[role="presentation"]
 		//border-radius: 0
 		border: 1px solid #ddd
@@ -29,4 +23,4 @@
 			padding: .5rem
 			margin-right: 0px
 
-</style>
+</style> -->

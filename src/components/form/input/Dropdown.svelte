@@ -1,6 +1,6 @@
 <script>
   // TODO merge common code with multiselect
-  
+
   import { createEventDispatcher, onMount } from "svelte";
   import jQuery from "jquery";
   import { debounce } from "lodash";
@@ -19,7 +19,7 @@
   }, TypingDebounceDelay);
 
   $: jQuery(selectElement).val(value).trigger("change");
-  $: select$?.select2({ theme: "bootstrap4", disabled: readonly && "readonly" });
+  $: select$?.select2({ disabled: readonly && "readonly" });
 
   function attachSelectEvent(select$) {
     select$.on("select2:select", (ev) => {

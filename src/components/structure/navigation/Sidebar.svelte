@@ -11,38 +11,22 @@
   <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+      <ul class="nav nav-pills nav-sidebar flex-column text-sm" data-widget="treeview" role="menu">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        <li class="nav-item has-treeview menu-open">
-          <a href="#" class="nav-link active">
+        <li class="nav-item">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt" />
             <p>
               Starter Pages
-              <i class="right fas fa-angle-left" />
             </p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#/users" class="nav-link active">
-                <i class="far fa-circle nav-icon" />
-                <p>Users</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon" />
-                <p>Inactive Page</p>
-              </a>
-            </li>
-          </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#/users" class="nav-link">
             <i class="nav-icon fas fa-th" />
             <p>
-              Simple Link
-              <span class="right badge badge-danger">New</span>
+              Users
             </p>
           </a>
         </li>

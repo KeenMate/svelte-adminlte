@@ -24,16 +24,19 @@
   }
 </script>
 
-<input
-  bind:this={inputElement}
-  class="input-sm {$$props.class || ''}"
-  type="file"
-  {value}
-  {name}
-  {id}
-  {placeholder}
-  {pattern}
-  {readonly}
-  {multiple}
-  on:input={onInput}
-/>
+<div class="custom-file">
+  <input
+    bind:this={inputElement}
+    type="file"
+    class="custom-file-input {$$props.class || ''}"
+    {value}
+    {name}
+    {id}
+    {placeholder}
+    {pattern}
+    {readonly}
+    {multiple}
+    on:input={onInput}
+  />
+  <label class="custom-file-label" for={id}><slot /></label>
+</div>
