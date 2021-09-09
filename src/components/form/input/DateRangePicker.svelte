@@ -1,8 +1,8 @@
 <script>
 	import {createEventDispatcher, onDestroy} from "svelte"
 	import jQuery from "jquery"
-	import {DateRangePickerLocale} from "../../constants/date"
-	import InputGroup from "./InputGroup.svelte"
+	import {DateRangePickerLocale} from "../../../constants/date"
+	import InputGroup from "../structure/InputGroup.svelte"
 
 	const dispatch = createEventDispatcher()
 
