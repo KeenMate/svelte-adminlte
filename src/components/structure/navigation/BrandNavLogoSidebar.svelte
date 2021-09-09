@@ -6,7 +6,6 @@
 		style="opacity: .8">
 </a>
 
-
 <style lang="sass">
 	a
 		display: flex
