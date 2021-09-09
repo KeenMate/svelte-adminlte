@@ -17,17 +17,13 @@
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt" />
-            <p>
-              Starter Pages
-            </p>
+            <p>Starter Pages</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#/users" class="nav-link">
             <i class="nav-icon fas fa-th" />
-            <p>
-              Users
-            </p>
+            <p>Users</p>
           </a>
         </li>
       </ul>

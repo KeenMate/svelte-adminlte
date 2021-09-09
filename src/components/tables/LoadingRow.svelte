@@ -13,13 +13,5 @@
 </TableRowFullWidth>
 
 <style lang="sass">
-
-	.loader-parent
-		display: flex
-		justify-content: center
-		align-items: center
-
-		& > *
-			width: 4rem
-			height: 4rem
+	@import "../../assets/css/loader-parent"
 </style>

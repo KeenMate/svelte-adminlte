@@ -13,13 +13,6 @@
   $: title = $routeTitle || (currentRoute && currentRoute.title) || "";
 
   function onRouteBack() {
-    // const newRoute = popRoute()
-    //
-    // if (newRoute) {
-    // 	console.log("New route is ", newRoute.location)
-    // 	replace(`${newRoute.location}?${newRoute.querystring}`)
-    // }
-
     pop();
   }
 </script>
