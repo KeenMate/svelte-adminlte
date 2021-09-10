@@ -46,7 +46,7 @@
     jQuery(inputElement).daterangepicker(dateRangePickerConfig, function (start, end) {
       if (disabled) return;
 
-      if (singleDate) {
+      if (singleDatePicker) {
         dispatch("change", { date: start });
       } else {
         dispatch("change", { startDate: start, endDate: end });

@@ -29,7 +29,7 @@
     bind:this={inputElement}
     type="file"
     class="custom-file-input {$$props.class || ''}"
-    {value}
+    bind:value
     {name}
     {id}
     {placeholder}
