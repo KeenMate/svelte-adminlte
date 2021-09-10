@@ -49,9 +49,9 @@
   <Sidebar />
 
   <div class="content-wrapper">
-    {#if loading}
+    <!-- {#if loading}
       <Loader />
-    {/if}
+    {/if} -->
     <PageHeader />
     <div class="content">
       <Router {routes} />
