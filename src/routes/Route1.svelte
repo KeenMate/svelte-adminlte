@@ -3,15 +3,12 @@
 
   import {
     FormGroup,
-    CheckboxInput,
     TextInput,
-    Checkbox,
     Form,
     InputGroup,
     InputGroupAppend,
     Label,
     LteButton,
-    CheckboxLabel,
     Dropdown,
   } from "../components";
 
@@ -30,15 +27,6 @@
           <LteButton small>Go!</LteButton>
         </InputGroupAppend>
       </InputGroup>
-    </div>
-  </FormGroup>
-
-  <FormGroup row>
-    <div class="offset-sm-3 col-sm-9">
-      <Checkbox>
-        <CheckboxInput id="agreement" name="agreement" title="Agreement" />
-        <CheckboxLabel inputId="agreement">Agree</CheckboxLabel>
-      </Checkbox>
     </div>
   </FormGroup>
 

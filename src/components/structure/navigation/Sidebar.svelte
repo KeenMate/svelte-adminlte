@@ -26,6 +26,12 @@
             <p>Users</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="#/tree" class="nav-link">
+            <i class="nav-icon fas fa-th" />
+            <p>Tree</p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

@@ -1,5 +1,6 @@
 import Route1 from "./routes/Route1.svelte"
 import Users from "./routes/Users.svelte"
+import Tree from "./routes/Tree.svelte"
 import NotFound from "./routes/NotFound.svelte"
 
 export const Routes = [
@@ -14,6 +15,12 @@ export const Routes = [
 		title: "Users",
 		route: "/users",
 		breadcrumb: ["Users"]
+	},
+	{
+		name: "Tree",
+		title: "Tree",
+		route: "/tree",
+		breadcrumb: ["Tree"]
 	}
 ]
 
@@ -39,6 +46,7 @@ export function routeToRegex(route) {
 export default {
 	[Urls.Route1]: Route1,
 	[Urls.Users]: Users,
+	[Urls.Tree]: Tree,
 	// The catch-all route must always be last
 	"*": NotFound
 }
