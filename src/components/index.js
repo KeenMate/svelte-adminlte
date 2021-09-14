@@ -10,7 +10,7 @@ export { default as PhoneField } from "./form/PhoneField.svelte";
 // export { default as UploadModal } from "./form/UploadModal.svelte";
 
 /* [2.1] Form > Input */
-export { default as CheckboxInput } from "./form/input/CheckboxInput.svelte";
+export { default as Checkbox } from "./form/input/Checkbox.svelte";
 export { default as CkEditor } from "./form/input/CkEditor.svelte";
 export { default as DatePicker } from "./form/input/DatePicker.svelte";
 export { default as DateRangePicker } from "./form/input/DateRangePicker.svelte";
@@ -22,8 +22,6 @@ export { default as Textarea } from "./form/input/Textarea.svelte";
 export { default as TextInput } from "./form/input/TextInput.svelte";
 
 /* [2.2] Form > Structure */
-export { default as Checkbox } from "./form/structure/Checkbox.svelte";
-export { default as CheckboxLabel } from "./form/structure/CheckboxLabel.svelte";
 export { default as Form } from "./form/structure/Form.svelte";
 export { default as FormGroup } from "./form/structure/FormGroup.svelte";
 export { default as InputGroup } from "./form/structure/InputGroup.svelte";

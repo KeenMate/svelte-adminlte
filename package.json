@@ -12,6 +12,7 @@
     "@rollup/plugin-replace": "^2.4.1",
     "esbuild": "^0.12.24",
     "felte": "^0.8.0",
+    "inputmask": "^5.0.6",
     "postcss": "^8.2.8",
     "rollup": "^2.3.4",
     "rollup-plugin-copy": "^3.4.0",

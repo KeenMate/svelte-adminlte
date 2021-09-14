@@ -10,6 +10,8 @@
     FileInput,
   } from "../../components";
   import SvelteSelect from "svelte-select";
+  import InputGroup from "../../components/form/structure/InputGroup.svelte";
+  import InputGroupPrepend from "../../components/form/structure/InputGroupPrepend.svelte";
 
   const categoryItems = [
     { value: "adventure", label: "Adventure" },
@@ -59,7 +61,14 @@
           inputElement={dateRangePickerElement}
           on:change={({ detail: { date: d } }) => (user.birthDay = d.format("DD/MM/YYYY"))}
         >
-          <TextInput bind:inputElement={dateRangePickerElement} />
+          <InputGroup>
+            <InputGroupPrepend>
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt" />
+              </span>
+            </InputGroupPrepend>
+            <TextInput bind:inputElement={dateRangePickerElement} />
+          </InputGroup>
         </DateRangePicker>
       </FormGroup>
     </div>
@@ -83,13 +92,26 @@
           <option value="drama">Drama</option>
         </Multiselect> -->
         <div class="svelte-select">
-          <SvelteSelect items={categoryItems} isMulti isCreatable/>
+          <SvelteSelect items={categoryItems} isMulti isCreatable />
         </div>
       </FormGroup>
     </div>
   </div>
-</Form>
 
+  <div class="row">
+    <div class="col-6">
+      <FormGroup>
+        <Label class="pb-1">Phone number</Label>
+        <InputGroup>
+          <InputGroupPrepend>
+            <span class="input-group-text"><i class="fas fa-phone" /></span>
+          </InputGroupPrepend>
+          <TextInput inputMask="'mask': '999 999 999'" bind:value={user.phone} />
+        </InputGroup>
+      </FormGroup>
+    </div>
+  </div>
+</Form>
 
 <style>
   .svelte-select {

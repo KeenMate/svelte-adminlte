@@ -1171,7 +1171,7 @@ var app = (function (jQuery) {
     const { Error: Error_1, Object: Object_1$1, console: console_1$3 } = globals;
 
     // (251:0) {:else}
-    function create_else_block$3(ctx) {
+    function create_else_block$4(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -1256,7 +1256,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$3.name,
+    		id: create_else_block$4.name,
     		type: "else",
     		source: "(251:0) {:else}",
     		ctx
@@ -1266,7 +1266,7 @@ var app = (function (jQuery) {
     }
 
     // (244:0) {#if componentParams}
-    function create_if_block$9(ctx) {
+    function create_if_block$b(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -1354,7 +1354,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$9.name,
+    		id: create_if_block$b.name,
     		type: "if",
     		source: "(244:0) {#if componentParams}",
     		ctx
@@ -1363,12 +1363,12 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$L(ctx) {
+    function create_fragment$O(ctx) {
     	let current_block_type_index;
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block$9, create_else_block$3];
+    	const if_block_creators = [create_if_block$b, create_else_block$4];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -1436,7 +1436,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$L.name,
+    		id: create_fragment$O.name,
     		type: "component",
     		source: "",
     		ctx
@@ -1629,7 +1629,7 @@ var app = (function (jQuery) {
     	window.location.hash = href;
     }
 
-    function instance$L($$self, $$props, $$invalidate) {
+    function instance$O($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Router', slots, []);
     	let { routes = {} } = $$props;
@@ -2049,7 +2049,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$L, create_fragment$L, safe_not_equal, {
+    		init(this, options, instance$O, create_fragment$O, safe_not_equal, {
     			routes: 3,
     			prefix: 4,
     			restoreScrollState: 5
@@ -2059,7 +2059,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "Router",
     			options,
-    			id: create_fragment$L.name
+    			id: create_fragment$O.name
     		});
     	}
 
@@ -2089,6 +2089,10 @@ var app = (function (jQuery) {
     }
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function getDefaultExportFromCjs (x) {
+    	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+    }
 
     function createCommonjsModule(fn, basedir, module) {
     	return module = {
@@ -2126,57 +2130,2903 @@ var app = (function (jQuery) {
 
     });
 
+    var inputmask = createCommonjsModule(function (module, exports) {
+    /*!
+     * dist/inputmask
+     * https://github.com/RobinHerbots/Inputmask
+     * Copyright (c) 2010 - 2021 Robin Herbots
+     * Licensed under the MIT license
+     * Version: 5.0.6
+     */
+    !function(e, t) {
+        module.exports = t();
+    }(commonjsGlobal, (function() {
+        return function() {
+            var e = {
+                4528: function(e) {
+                    e.exports = JSON.parse('{"BACKSPACE":8,"BACKSPACE_SAFARI":127,"DELETE":46,"DOWN":40,"END":35,"ENTER":13,"ESCAPE":27,"HOME":36,"INSERT":45,"LEFT":37,"PAGE_DOWN":34,"PAGE_UP":33,"RIGHT":39,"SPACE":32,"TAB":9,"UP":38,"X":88,"Z":90,"CONTROL":17,"PAUSE/BREAK":19,"WINDOWS_LEFT":91,"WINDOWS_RIGHT":92,"KEY_229":229}');
+                },
+                8741: function(e, t) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0;
+                    var a = !("undefined" == typeof window || !window.document || !window.document.createElement);
+                    t.default = a;
+                },
+                3976: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0;
+                    var i, n = (i = a(4528)) && i.__esModule ? i : {
+                        default: i
+                    };
+                    var r = {
+                        _maxTestPos: 500,
+                        placeholder: "_",
+                        optionalmarker: [ "[", "]" ],
+                        quantifiermarker: [ "{", "}" ],
+                        groupmarker: [ "(", ")" ],
+                        alternatormarker: "|",
+                        escapeChar: "\\",
+                        mask: null,
+                        regex: null,
+                        oncomplete: function() {},
+                        onincomplete: function() {},
+                        oncleared: function() {},
+                        repeat: 0,
+                        greedy: !1,
+                        autoUnmask: !1,
+                        removeMaskOnSubmit: !1,
+                        clearMaskOnLostFocus: !0,
+                        insertMode: !0,
+                        insertModeVisual: !0,
+                        clearIncomplete: !1,
+                        alias: null,
+                        onKeyDown: function() {},
+                        onBeforeMask: null,
+                        onBeforePaste: function(e, t) {
+                            return "function" == typeof t.onBeforeMask ? t.onBeforeMask.call(this, e, t) : e;
+                        },
+                        onBeforeWrite: null,
+                        onUnMask: null,
+                        showMaskOnFocus: !0,
+                        showMaskOnHover: !0,
+                        onKeyValidation: function() {},
+                        skipOptionalPartCharacter: " ",
+                        numericInput: !1,
+                        rightAlign: !1,
+                        undoOnEscape: !0,
+                        radixPoint: "",
+                        _radixDance: !1,
+                        groupSeparator: "",
+                        keepStatic: null,
+                        positionCaretOnTab: !0,
+                        tabThrough: !1,
+                        supportsInputType: [ "text", "tel", "url", "password", "search" ],
+                        ignorables: [ n.default.BACKSPACE, n.default.TAB, n.default["PAUSE/BREAK"], n.default.ESCAPE, n.default.PAGE_UP, n.default.PAGE_DOWN, n.default.END, n.default.HOME, n.default.LEFT, n.default.UP, n.default.RIGHT, n.default.DOWN, n.default.INSERT, n.default.DELETE, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 0, 229 ],
+                        isComplete: null,
+                        preValidation: null,
+                        postValidation: null,
+                        staticDefinitionSymbol: void 0,
+                        jitMasking: !1,
+                        nullable: !0,
+                        inputEventOnly: !1,
+                        noValuePatching: !1,
+                        positionCaretOnClick: "lvp",
+                        casing: null,
+                        inputmode: "text",
+                        importDataAttributes: !0,
+                        shiftPositions: !0,
+                        usePrototypeDefinitions: !0,
+                        validationEventTimeOut: 3e3
+                    };
+                    t.default = r;
+                },
+                7392: function(e, t) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0;
+                    t.default = {
+                        9: {
+                            validator: "[0-9\uff10-\uff19]",
+                            definitionSymbol: "*"
+                        },
+                        a: {
+                            validator: "[A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]",
+                            definitionSymbol: "*"
+                        },
+                        "*": {
+                            validator: "[0-9\uff10-\uff19A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]"
+                        }
+                    };
+                },
+                253: function(e, t) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = function(e, t, a) {
+                        if (void 0 === a) return e.__data ? e.__data[t] : null;
+                        e.__data = e.__data || {}, e.__data[t] = a;
+                    };
+                },
+                3776: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.on = function(e, t) {
+                        function a(e, a) {
+                            n.addEventListener ? n.addEventListener(e, t, !1) : n.attachEvent && n.attachEvent("on" + e, t), 
+                            i[e] = i[e] || {}, i[e][a] = i[e][a] || [], i[e][a].push(t);
+                        }
+                        if (u(this[0])) for (var i = this[0].eventRegistry, n = this[0], r = e.split(" "), o = 0; o < r.length; o++) {
+                            var s = r[o].split("."), l = s[0], c = s[1] || "global";
+                            a(l, c);
+                        }
+                        return this;
+                    }, t.off = function(e, t) {
+                        var a, i;
+                        function n(e, t, n) {
+                            if (e in a == !0) if (i.removeEventListener ? i.removeEventListener(e, n, !1) : i.detachEvent && i.detachEvent("on" + e, n), 
+                            "global" === t) for (var r in a[e]) a[e][r].splice(a[e][r].indexOf(n), 1); else a[e][t].splice(a[e][t].indexOf(n), 1);
+                        }
+                        function r(e, i) {
+                            var n, r, o = [];
+                            if (e.length > 0) if (void 0 === t) for (n = 0, r = a[e][i].length; n < r; n++) o.push({
+                                ev: e,
+                                namespace: i && i.length > 0 ? i : "global",
+                                handler: a[e][i][n]
+                            }); else o.push({
+                                ev: e,
+                                namespace: i && i.length > 0 ? i : "global",
+                                handler: t
+                            }); else if (i.length > 0) for (var s in a) for (var l in a[s]) if (l === i) if (void 0 === t) for (n = 0, 
+                            r = a[s][l].length; n < r; n++) o.push({
+                                ev: s,
+                                namespace: l,
+                                handler: a[s][l][n]
+                            }); else o.push({
+                                ev: s,
+                                namespace: l,
+                                handler: t
+                            });
+                            return o;
+                        }
+                        if (u(this[0]) && e) {
+                            a = this[0].eventRegistry, i = this[0];
+                            for (var o = e.split(" "), s = 0; s < o.length; s++) for (var l = o[s].split("."), c = r(l[0], l[1]), f = 0, d = c.length; f < d; f++) n(c[f].ev, c[f].namespace, c[f].handler);
+                        }
+                        return this;
+                    }, t.trigger = function(e) {
+                        if (u(this[0])) for (var t = this[0].eventRegistry, a = this[0], i = "string" == typeof e ? e.split(" ") : [ e.type ], r = 0; r < i.length; r++) {
+                            var s = i[r].split("."), l = s[0], c = s[1] || "global";
+                            if (void 0 !== document && "global" === c) {
+                                var f, d, p = {
+                                    bubbles: !0,
+                                    cancelable: !0,
+                                    detail: arguments[1]
+                                };
+                                if (document.createEvent) {
+                                    try {
+                                        switch (l) {
+                                          case "input":
+                                            p.inputType = "insertText", f = new InputEvent(l, p);
+                                            break;
+
+                                          default:
+                                            f = new CustomEvent(l, p);
+                                        }
+                                    } catch (e) {
+                                        (f = document.createEvent("CustomEvent")).initCustomEvent(l, p.bubbles, p.cancelable, p.detail);
+                                    }
+                                    e.type && (0, n.default)(f, e), a.dispatchEvent(f);
+                                } else (f = document.createEventObject()).eventType = l, f.detail = arguments[1], 
+                                e.type && (0, n.default)(f, e), a.fireEvent("on" + f.eventType, f);
+                            } else if (void 0 !== t[l]) if (arguments[0] = arguments[0].type ? arguments[0] : o.default.Event(arguments[0]), 
+                            arguments[0].detail = arguments.slice(1), "global" === c) for (var h in t[l]) for (d = 0; d < t[l][h].length; d++) t[l][h][d].apply(a, arguments); else for (d = 0; d < t[l][c].length; d++) t[l][c][d].apply(a, arguments);
+                        }
+                        return this;
+                    }, t.Event = void 0;
+                    var i, n = l(a(600)), r = l(a(9380)), o = l(a(4963)), s = l(a(8741));
+                    function l(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    function u(e) {
+                        return e instanceof Element;
+                    }
+                    t.Event = i, "function" == typeof r.default.CustomEvent ? t.Event = i = r.default.CustomEvent : s.default && (t.Event = i = function(e, t) {
+                        t = t || {
+                            bubbles: !1,
+                            cancelable: !1,
+                            detail: void 0
+                        };
+                        var a = document.createEvent("CustomEvent");
+                        return a.initCustomEvent(e, t.bubbles, t.cancelable, t.detail), a;
+                    }, i.prototype = r.default.Event.prototype);
+                },
+                600: function(e, t) {
+                    function a(e) {
+                        return (a = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+                            return typeof e;
+                        } : function(e) {
+                            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
+                        })(e);
+                    }
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = function e() {
+                        var t, i, n, r, o, s, l = arguments[0] || {}, u = 1, c = arguments.length, f = !1;
+                        "boolean" == typeof l && (f = l, l = arguments[u] || {}, u++);
+                        "object" !== a(l) && "function" != typeof l && (l = {});
+                        for (;u < c; u++) if (null != (t = arguments[u])) for (i in t) n = l[i], r = t[i], 
+                        l !== r && (f && r && ("[object Object]" === Object.prototype.toString.call(r) || (o = Array.isArray(r))) ? (o ? (o = !1, 
+                        s = n && Array.isArray(n) ? n : []) : s = n && "[object Object]" === Object.prototype.toString.call(n) ? n : {}, 
+                        l[i] = e(f, s, r)) : void 0 !== r && (l[i] = r));
+                        return l;
+                    };
+                },
+                4963: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0;
+                    var i = s(a(600)), n = s(a(9380)), r = s(a(253)), o = a(3776);
+                    function s(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var l = n.default.document;
+                    function u(e) {
+                        return e instanceof u ? e : this instanceof u ? void (null != e && e !== n.default && (this[0] = e.nodeName ? e : void 0 !== e[0] && e[0].nodeName ? e[0] : l.querySelector(e), 
+                        void 0 !== this[0] && null !== this[0] && (this[0].eventRegistry = this[0].eventRegistry || {}))) : new u(e);
+                    }
+                    u.prototype = {
+                        on: o.on,
+                        off: o.off,
+                        trigger: o.trigger
+                    }, u.extend = i.default, u.data = r.default, u.Event = o.Event;
+                    var c = u;
+                    t.default = c;
+                },
+                9845: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.iphone = t.iemobile = t.mobile = t.ie = t.ua = void 0;
+                    var i, n = (i = a(9380)) && i.__esModule ? i : {
+                        default: i
+                    };
+                    var r = n.default.navigator && n.default.navigator.userAgent || "", o = r.indexOf("MSIE ") > 0 || r.indexOf("Trident/") > 0, s = "ontouchstart" in n.default, l = /iemobile/i.test(r), u = /iphone/i.test(r) && !l;
+                    t.iphone = u, t.iemobile = l, t.mobile = s, t.ie = o, t.ua = r;
+                },
+                7184: function(e, t) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = function(e) {
+                        return e.replace(a, "\\$1");
+                    };
+                    var a = new RegExp("(\\" + [ "/", ".", "*", "+", "?", "|", "(", ")", "[", "]", "{", "}", "\\", "$", "^" ].join("|\\") + ")", "gim");
+                },
+                6030: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.EventHandlers = void 0;
+                    var i, n = a(8711), r = (i = a(4528)) && i.__esModule ? i : {
+                        default: i
+                    }, o = a(9845), s = a(7215), l = a(7760), u = a(4713);
+                    var c = {
+                        keydownEvent: function(e) {
+                            var t = this.inputmask, a = t.opts, i = t.dependencyLib, c = t.maskset, f = this, d = i(f), p = e.keyCode, h = n.caret.call(t, f), v = a.onKeyDown.call(this, e, n.getBuffer.call(t), h, a);
+                            if (void 0 !== v) return v;
+                            if (p === r.default.BACKSPACE || p === r.default.DELETE || o.iphone && p === r.default.BACKSPACE_SAFARI || e.ctrlKey && p === r.default.X && !("oncut" in f)) e.preventDefault(), 
+                            s.handleRemove.call(t, f, p, h), (0, l.writeBuffer)(f, n.getBuffer.call(t, !0), c.p, e, f.inputmask._valueGet() !== n.getBuffer.call(t).join("")); else if (p === r.default.END || p === r.default.PAGE_DOWN) {
+                                e.preventDefault();
+                                var m = n.seekNext.call(t, n.getLastValidPosition.call(t));
+                                n.caret.call(t, f, e.shiftKey ? h.begin : m, m, !0);
+                            } else p === r.default.HOME && !e.shiftKey || p === r.default.PAGE_UP ? (e.preventDefault(), 
+                            n.caret.call(t, f, 0, e.shiftKey ? h.begin : 0, !0)) : a.undoOnEscape && p === r.default.ESCAPE && !0 !== e.altKey ? ((0, l.checkVal)(f, !0, !1, t.undoValue.split("")), d.trigger("click")) : !0 === a.tabThrough && p === r.default.TAB ? !0 === e.shiftKey ? (h.end = n.seekPrevious.call(t, h.end, !0), 
+                            !0 === u.getTest.call(t, h.end - 1).match.static && h.end--, h.begin = n.seekPrevious.call(t, h.end, !0), 
+                            h.begin >= 0 && h.end > 0 && (e.preventDefault(), n.caret.call(t, f, h.begin, h.end))) : (h.begin = n.seekNext.call(t, h.begin, !0), 
+                            h.end = n.seekNext.call(t, h.begin, !0), h.end < c.maskLength && h.end--, h.begin <= c.maskLength && (e.preventDefault(), 
+                            n.caret.call(t, f, h.begin, h.end))) : e.shiftKey || a.insertModeVisual && !1 === a.insertMode && (p === r.default.RIGHT ? setTimeout((function() {
+                                var e = n.caret.call(t, f);
+                                n.caret.call(t, f, e.begin);
+                            }), 0) : p === r.default.LEFT && setTimeout((function() {
+                                var e = n.translatePosition.call(t, f.inputmask.caretPos.begin);
+                                n.translatePosition.call(t, f.inputmask.caretPos.end);
+                                t.isRTL ? n.caret.call(t, f, e + (e === c.maskLength ? 0 : 1)) : n.caret.call(t, f, e - (0 === e ? 0 : 1));
+                            }), 0));
+                            t.ignorable = a.ignorables.includes(p);
+                        },
+                        keypressEvent: function(e, t, a, i, o) {
+                            var u = this.inputmask || this, c = u.opts, f = u.dependencyLib, d = u.maskset, p = u.el, h = f(p), v = e.which || e.charCode || e.keyCode;
+                            if (!(!0 === t || e.ctrlKey && e.altKey) && (e.ctrlKey || e.metaKey || u.ignorable)) return v === r.default.ENTER && u.undoValue !== u._valueGet(!0) && (u.undoValue = u._valueGet(!0), 
+                            setTimeout((function() {
+                                h.trigger("change");
+                            }), 0)), u.skipInputEvent = !0, !0;
+                            if (v) {
+                                44 !== v && 46 !== v || 3 !== e.location || "" === c.radixPoint || (v = c.radixPoint.charCodeAt(0));
+                                var m, g = t ? {
+                                    begin: o,
+                                    end: o
+                                } : n.caret.call(u, p), k = String.fromCharCode(v);
+                                d.writeOutBuffer = !0;
+                                var y = s.isValid.call(u, g, k, i, void 0, void 0, void 0, t);
+                                if (!1 !== y && (n.resetMaskSet.call(u, !0), m = void 0 !== y.caret ? y.caret : n.seekNext.call(u, y.pos.begin ? y.pos.begin : y.pos), 
+                                d.p = m), m = c.numericInput && void 0 === y.caret ? n.seekPrevious.call(u, m) : m, 
+                                !1 !== a && (setTimeout((function() {
+                                    c.onKeyValidation.call(p, v, y);
+                                }), 0), d.writeOutBuffer && !1 !== y)) {
+                                    var b = n.getBuffer.call(u);
+                                    (0, l.writeBuffer)(p, b, m, e, !0 !== t);
+                                }
+                                if (e.preventDefault(), t) return !1 !== y && (y.forwardPosition = m), y;
+                            }
+                        },
+                        keyupEvent: function(e) {
+                            var t = this.inputmask;
+                            !t.isComposing || e.keyCode !== r.default.KEY_229 && e.keyCode !== r.default.ENTER || t.$el.trigger("input");
+                        },
+                        pasteEvent: function(e) {
+                            var t, a = this.inputmask, i = a.opts, r = a._valueGet(!0), o = n.caret.call(a, this);
+                            a.isRTL && (t = o.end, o.end = o.begin, o.begin = t);
+                            var s = r.substr(0, o.begin), u = r.substr(o.end, r.length);
+                            if (s == (a.isRTL ? n.getBufferTemplate.call(a).slice().reverse() : n.getBufferTemplate.call(a)).slice(0, o.begin).join("") && (s = ""), 
+                            u == (a.isRTL ? n.getBufferTemplate.call(a).slice().reverse() : n.getBufferTemplate.call(a)).slice(o.end).join("") && (u = ""), 
+                            window.clipboardData && window.clipboardData.getData) r = s + window.clipboardData.getData("Text") + u; else {
+                                if (!e.clipboardData || !e.clipboardData.getData) return !0;
+                                r = s + e.clipboardData.getData("text/plain") + u;
+                            }
+                            var c = r;
+                            if ("function" == typeof i.onBeforePaste) {
+                                if (!1 === (c = i.onBeforePaste.call(a, r, i))) return e.preventDefault();
+                                c || (c = r);
+                            }
+                            return (0, l.checkVal)(this, !0, !1, c.toString().split(""), e), e.preventDefault();
+                        },
+                        inputFallBackEvent: function(e) {
+                            var t = this.inputmask, a = t.opts, i = t.dependencyLib;
+                            var s = this, f = s.inputmask._valueGet(!0), d = (t.isRTL ? n.getBuffer.call(t).slice().reverse() : n.getBuffer.call(t)).join(""), p = n.caret.call(t, s, void 0, void 0, !0);
+                            if (d !== f) {
+                                var h = function(e, i, r) {
+                                    for (var o, s, l, c = e.substr(0, r.begin).split(""), f = e.substr(r.begin).split(""), d = i.substr(0, r.begin).split(""), p = i.substr(r.begin).split(""), h = c.length >= d.length ? c.length : d.length, v = f.length >= p.length ? f.length : p.length, m = "", g = [], k = "~"; c.length < h; ) c.push(k);
+                                    for (;d.length < h; ) d.push(k);
+                                    for (;f.length < v; ) f.unshift(k);
+                                    for (;p.length < v; ) p.unshift(k);
+                                    var y = c.concat(f), b = d.concat(p);
+                                    for (s = 0, o = y.length; s < o; s++) switch (l = u.getPlaceholder.call(t, n.translatePosition.call(t, s)), 
+                                    m) {
+                                      case "insertText":
+                                        b[s - 1] === y[s] && r.begin == y.length - 1 && g.push(y[s]), s = o;
+                                        break;
+
+                                      case "insertReplacementText":
+                                      case "deleteContentBackward":
+                                        y[s] === k ? r.end++ : s = o;
+                                        break;
+
+                                      default:
+                                        y[s] !== b[s] && (y[s + 1] !== k && y[s + 1] !== l && void 0 !== y[s + 1] || (b[s] !== l || b[s + 1] !== k) && b[s] !== k ? b[s + 1] === k && b[s] === y[s + 1] ? (m = "insertText", 
+                                        g.push(y[s]), r.begin--, r.end--) : y[s] !== l && y[s] !== k && (y[s + 1] === k || b[s] !== y[s] && b[s + 1] === y[s + 1]) ? (m = "insertReplacementText", 
+                                        g.push(y[s]), r.begin--) : y[s] === k ? (m = "deleteContentBackward", (n.isMask.call(t, n.translatePosition.call(t, s), !0) || b[s] === a.radixPoint) && r.end++) : s = o : (m = "insertText", 
+                                        g.push(y[s]), r.begin--, r.end--));
+                                    }
+                                    return {
+                                        action: m,
+                                        data: g,
+                                        caret: r
+                                    };
+                                }(f = function(e, a, i) {
+                                    if (o.iemobile) {
+                                        var r = a.replace(n.getBuffer.call(t).join(""), "");
+                                        if (1 === r.length) {
+                                            var s = a.split("");
+                                            s.splice(i.begin, 0, r), a = s.join("");
+                                        }
+                                    }
+                                    return a;
+                                }(0, f, p), d, p);
+                                switch ((s.inputmask.shadowRoot || s.ownerDocument).activeElement !== s && s.focus(), 
+                                (0, l.writeBuffer)(s, n.getBuffer.call(t)), n.caret.call(t, s, p.begin, p.end, !0), 
+                                h.action) {
+                                  case "insertText":
+                                  case "insertReplacementText":
+                                    h.data.forEach((function(e, a) {
+                                        var n = new i.Event("keypress");
+                                        n.which = e.charCodeAt(0), t.ignorable = !1, c.keypressEvent.call(s, n);
+                                    })), setTimeout((function() {
+                                        t.$el.trigger("keyup");
+                                    }), 0);
+                                    break;
+
+                                  case "deleteContentBackward":
+                                    var v = new i.Event("keydown");
+                                    v.keyCode = r.default.BACKSPACE, c.keydownEvent.call(s, v);
+                                    break;
+
+                                  default:
+                                    (0, l.applyInputValue)(s, f);
+                                }
+                                e.preventDefault();
+                            }
+                        },
+                        compositionendEvent: function(e) {
+                            var t = this.inputmask;
+                            t.isComposing = !1, t.$el.trigger("input");
+                        },
+                        setValueEvent: function(e) {
+                            var t = this.inputmask, a = this, i = e && e.detail ? e.detail[0] : arguments[1];
+                            void 0 === i && (i = a.inputmask._valueGet(!0)), (0, l.applyInputValue)(a, i), (e.detail && void 0 !== e.detail[1] || void 0 !== arguments[2]) && n.caret.call(t, a, e.detail ? e.detail[1] : arguments[2]);
+                        },
+                        focusEvent: function(e) {
+                            var t = this.inputmask, a = t.opts, i = this, r = i.inputmask._valueGet();
+                            a.showMaskOnFocus && r !== n.getBuffer.call(t).join("") && (0, l.writeBuffer)(i, n.getBuffer.call(t), n.seekNext.call(t, n.getLastValidPosition.call(t))), 
+                            !0 !== a.positionCaretOnTab || !1 !== t.mouseEnter || s.isComplete.call(t, n.getBuffer.call(t)) && -1 !== n.getLastValidPosition.call(t) || c.clickEvent.apply(i, [ e, !0 ]), 
+                            t.undoValue = t._valueGet(!0);
+                        },
+                        invalidEvent: function(e) {
+                            this.inputmask.validationEvent = !0;
+                        },
+                        mouseleaveEvent: function() {
+                            var e = this.inputmask, t = e.opts, a = this;
+                            e.mouseEnter = !1, t.clearMaskOnLostFocus && (a.inputmask.shadowRoot || a.ownerDocument).activeElement !== a && (0, l.HandleNativePlaceholder)(a, e.originalPlaceholder);
+                        },
+                        clickEvent: function(e, t) {
+                            var a = this.inputmask, i = this;
+                            if ((i.inputmask.shadowRoot || i.ownerDocument).activeElement === i) {
+                                var r = n.determineNewCaretPosition.call(a, n.caret.call(a, i), t);
+                                void 0 !== r && n.caret.call(a, i, r);
+                            }
+                        },
+                        cutEvent: function(e) {
+                            var t = this.inputmask, a = t.maskset, i = this, o = n.caret.call(t, i), u = window.clipboardData || e.clipboardData, c = t.isRTL ? n.getBuffer.call(t).slice(o.end, o.begin) : n.getBuffer.call(t).slice(o.begin, o.end);
+                            u.setData("text", t.isRTL ? c.reverse().join("") : c.join("")), document.execCommand && document.execCommand("copy"), 
+                            s.handleRemove.call(t, i, r.default.DELETE, o), (0, l.writeBuffer)(i, n.getBuffer.call(t), a.p, e, t.undoValue !== t._valueGet(!0));
+                        },
+                        blurEvent: function(e) {
+                            var t = this.inputmask, a = t.opts, i = (0, t.dependencyLib)(this), r = this;
+                            if (r.inputmask) {
+                                (0, l.HandleNativePlaceholder)(r, t.originalPlaceholder);
+                                var o = r.inputmask._valueGet(), u = n.getBuffer.call(t).slice();
+                                "" !== o && (a.clearMaskOnLostFocus && (-1 === n.getLastValidPosition.call(t) && o === n.getBufferTemplate.call(t).join("") ? u = [] : l.clearOptionalTail.call(t, u)), 
+                                !1 === s.isComplete.call(t, u) && (setTimeout((function() {
+                                    i.trigger("incomplete");
+                                }), 0), a.clearIncomplete && (n.resetMaskSet.call(t), u = a.clearMaskOnLostFocus ? [] : n.getBufferTemplate.call(t).slice())), 
+                                (0, l.writeBuffer)(r, u, void 0, e)), t.undoValue !== t._valueGet(!0) && (t.undoValue = t._valueGet(!0), 
+                                i.trigger("change"));
+                            }
+                        },
+                        mouseenterEvent: function() {
+                            var e = this.inputmask, t = e.opts, a = this;
+                            if (e.mouseEnter = !0, (a.inputmask.shadowRoot || a.ownerDocument).activeElement !== a) {
+                                var i = (e.isRTL ? n.getBufferTemplate.call(e).slice().reverse() : n.getBufferTemplate.call(e)).join("");
+                                e.placeholder !== i && a.placeholder !== e.originalPlaceholder && (e.originalPlaceholder = a.placeholder), 
+                                t.showMaskOnHover && (0, l.HandleNativePlaceholder)(a, i);
+                            }
+                        },
+                        submitEvent: function() {
+                            var e = this.inputmask, t = e.opts;
+                            e.undoValue !== e._valueGet(!0) && e.$el.trigger("change"), t.clearMaskOnLostFocus && -1 === n.getLastValidPosition.call(e) && e._valueGet && e._valueGet() === n.getBufferTemplate.call(e).join("") && e._valueSet(""), 
+                            t.clearIncomplete && !1 === s.isComplete.call(e, n.getBuffer.call(e)) && e._valueSet(""), 
+                            t.removeMaskOnSubmit && (e._valueSet(e.unmaskedvalue(), !0), setTimeout((function() {
+                                (0, l.writeBuffer)(e.el, n.getBuffer.call(e));
+                            }), 0));
+                        },
+                        resetEvent: function() {
+                            var e = this.inputmask;
+                            e.refreshValue = !0, setTimeout((function() {
+                                (0, l.applyInputValue)(e.el, e._valueGet(!0));
+                            }), 0);
+                        }
+                    };
+                    t.EventHandlers = c;
+                },
+                9716: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.EventRuler = void 0;
+                    var i = s(a(2394)), n = s(a(4528)), r = a(8711), o = a(7760);
+                    function s(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var l = {
+                        on: function(e, t, a) {
+                            var s = e.inputmask.dependencyLib, l = function(t) {
+                                t.originalEvent && (t = t.originalEvent || t, arguments[0] = t);
+                                var l, u = this, c = u.inputmask, f = c ? c.opts : void 0;
+                                if (void 0 === c && "FORM" !== this.nodeName) {
+                                    var d = s.data(u, "_inputmask_opts");
+                                    s(u).off(), d && new i.default(d).mask(u);
+                                } else {
+                                    if ([ "submit", "reset", "setvalue" ].includes(t.type) || "FORM" === this.nodeName || !(u.disabled || u.readOnly && !("keydown" === t.type && t.ctrlKey && 67 === t.keyCode || !1 === f.tabThrough && t.keyCode === n.default.TAB))) {
+                                        switch (t.type) {
+                                          case "input":
+                                            if (!0 === c.skipInputEvent || t.inputType && "insertCompositionText" === t.inputType) return c.skipInputEvent = !1, 
+                                            t.preventDefault();
+                                            break;
+
+                                          case "keydown":
+                                            c.skipKeyPressEvent = !1, c.skipInputEvent = c.isComposing = t.keyCode === n.default.KEY_229;
+                                            break;
+
+                                          case "keyup":
+                                          case "compositionend":
+                                            c.isComposing && (c.skipInputEvent = !1);
+                                            break;
+
+                                          case "keypress":
+                                            if (!0 === c.skipKeyPressEvent) return t.preventDefault();
+                                            c.skipKeyPressEvent = !0;
+                                            break;
+
+                                          case "click":
+                                          case "focus":
+                                            return c.validationEvent ? (c.validationEvent = !1, e.blur(), (0, o.HandleNativePlaceholder)(e, (c.isRTL ? r.getBufferTemplate.call(c).slice().reverse() : r.getBufferTemplate.call(c)).join("")), 
+                                            setTimeout((function() {
+                                                e.focus();
+                                            }), f.validationEventTimeOut), !1) : (l = arguments, setTimeout((function() {
+                                                e.inputmask && a.apply(u, l);
+                                            }), 0), !1);
+                                        }
+                                        var p = a.apply(u, arguments);
+                                        return !1 === p && (t.preventDefault(), t.stopPropagation()), p;
+                                    }
+                                    t.preventDefault();
+                                }
+                            };
+                            [ "submit", "reset" ].includes(t) ? (l = l.bind(e), null !== e.form && s(e.form).on(t, l)) : s(e).on(t, l), 
+                            e.inputmask.events[t] = e.inputmask.events[t] || [], e.inputmask.events[t].push(l);
+                        },
+                        off: function(e, t) {
+                            if (e.inputmask && e.inputmask.events) {
+                                var a = e.inputmask.dependencyLib, i = e.inputmask.events;
+                                for (var n in t && ((i = [])[t] = e.inputmask.events[t]), i) {
+                                    for (var r = i[n]; r.length > 0; ) {
+                                        var o = r.pop();
+                                        [ "submit", "reset" ].includes(n) ? null !== e.form && a(e.form).off(n, o) : a(e).off(n, o);
+                                    }
+                                    delete e.inputmask.events[n];
+                                }
+                            }
+                        }
+                    };
+                    t.EventRuler = l;
+                },
+                219: function(e, t, a) {
+                    var i = l(a(2394)), n = l(a(4528)), r = l(a(7184)), o = a(8711);
+                    function s(e) {
+                        return (s = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+                            return typeof e;
+                        } : function(e) {
+                            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
+                        })(e);
+                    }
+                    function l(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var u = i.default.dependencyLib, c = (new Date).getFullYear(), f = {
+                        d: [ "[1-9]|[12][0-9]|3[01]", Date.prototype.setDate, "day", Date.prototype.getDate ],
+                        dd: [ "0[1-9]|[12][0-9]|3[01]", Date.prototype.setDate, "day", function() {
+                            return y(Date.prototype.getDate.call(this), 2);
+                        } ],
+                        ddd: [ "" ],
+                        dddd: [ "" ],
+                        m: [ "[1-9]|1[012]", Date.prototype.setMonth, "month", function() {
+                            return Date.prototype.getMonth.call(this) + 1;
+                        } ],
+                        mm: [ "0[1-9]|1[012]", Date.prototype.setMonth, "month", function() {
+                            return y(Date.prototype.getMonth.call(this) + 1, 2);
+                        } ],
+                        mmm: [ "" ],
+                        mmmm: [ "" ],
+                        yy: [ "[0-9]{2}", Date.prototype.setFullYear, "year", function() {
+                            return y(Date.prototype.getFullYear.call(this), 2);
+                        } ],
+                        yyyy: [ "[0-9]{4}", Date.prototype.setFullYear, "year", function() {
+                            return y(Date.prototype.getFullYear.call(this), 4);
+                        } ],
+                        h: [ "[1-9]|1[0-2]", Date.prototype.setHours, "hours", Date.prototype.getHours ],
+                        hh: [ "0[1-9]|1[0-2]", Date.prototype.setHours, "hours", function() {
+                            return y(Date.prototype.getHours.call(this), 2);
+                        } ],
+                        hx: [ function(e) {
+                            return "[0-9]{".concat(e, "}");
+                        }, Date.prototype.setHours, "hours", function(e) {
+                            return Date.prototype.getHours;
+                        } ],
+                        H: [ "1?[0-9]|2[0-3]", Date.prototype.setHours, "hours", Date.prototype.getHours ],
+                        HH: [ "0[0-9]|1[0-9]|2[0-3]", Date.prototype.setHours, "hours", function() {
+                            return y(Date.prototype.getHours.call(this), 2);
+                        } ],
+                        Hx: [ function(e) {
+                            return "[0-9]{".concat(e, "}");
+                        }, Date.prototype.setHours, "hours", function(e) {
+                            return function() {
+                                return y(Date.prototype.getHours.call(this), e);
+                            };
+                        } ],
+                        M: [ "[1-5]?[0-9]", Date.prototype.setMinutes, "minutes", Date.prototype.getMinutes ],
+                        MM: [ "0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]", Date.prototype.setMinutes, "minutes", function() {
+                            return y(Date.prototype.getMinutes.call(this), 2);
+                        } ],
+                        s: [ "[1-5]?[0-9]", Date.prototype.setSeconds, "seconds", Date.prototype.getSeconds ],
+                        ss: [ "0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]", Date.prototype.setSeconds, "seconds", function() {
+                            return y(Date.prototype.getSeconds.call(this), 2);
+                        } ],
+                        l: [ "[0-9]{3}", Date.prototype.setMilliseconds, "milliseconds", function() {
+                            return y(Date.prototype.getMilliseconds.call(this), 3);
+                        } ],
+                        L: [ "[0-9]{2}", Date.prototype.setMilliseconds, "milliseconds", function() {
+                            return y(Date.prototype.getMilliseconds.call(this), 2);
+                        } ],
+                        t: [ "[ap]", p, "ampm", h, 1 ],
+                        tt: [ "[ap]m", p, "ampm", h, 2 ],
+                        T: [ "[AP]", p, "ampm", h, 1 ],
+                        TT: [ "[AP]M", p, "ampm", h, 2 ],
+                        Z: [ "" ],
+                        o: [ "" ],
+                        S: [ "" ]
+                    }, d = {
+                        isoDate: "yyyy-mm-dd",
+                        isoTime: "HH:MM:ss",
+                        isoDateTime: "yyyy-mm-dd'T'HH:MM:ss",
+                        isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+                    };
+                    function p(e) {
+                        e.toLowerCase().includes("p") && this.setHours(this.getHours() + 12);
+                    }
+                    function h() {}
+                    function v(e) {
+                        var t = new RegExp("\\d+$").exec(e[0]);
+                        if (t && void 0 !== t[0]) {
+                            var a = f[e[0][0] + "x"].slice("");
+                            return a[0] = a[0](t[0]), a[3] = a[3](t[0]), a;
+                        }
+                        if (f[e[0]]) return f[e[0]];
+                    }
+                    function m(e) {
+                        if (!e.tokenizer) {
+                            var t = [], a = [];
+                            for (var i in f) if (/\.*x$/.test(i)) {
+                                var n = i[0] + "\\d+";
+                                -1 === a.indexOf(n) && a.push(n);
+                            } else -1 === t.indexOf(i[0]) && t.push(i[0]);
+                            e.tokenizer = "(" + (a.length > 0 ? a.join("|") + "|" : "") + t.join("+|") + ")+?|.", 
+                            e.tokenizer = new RegExp(e.tokenizer, "g");
+                        }
+                        return e.tokenizer;
+                    }
+                    function g(e, t, a) {
+                        if (void 0 === e.rawday || !isFinite(e.rawday) && new Date(e.date.getFullYear(), isFinite(e.rawmonth) ? e.month : e.date.getMonth() + 1, 0).getDate() >= e.day || "29" == e.day && !Number.isFinite(e.rawyear) || new Date(e.date.getFullYear(), isFinite(e.rawmonth) ? e.month : e.date.getMonth() + 1, 0).getDate() >= e.day) return t;
+                        if ("29" == e.day) {
+                            var i = P(t.pos, a);
+                            if ("yyyy" === i.targetMatch[0] && t.pos - i.targetMatchIndex == 2) return t.remove = t.pos + 1, 
+                            t;
+                        } else if ("02" == e.month && "30" == e.day && void 0 !== t.c) return e.day = "03", 
+                        e.date.setDate(3), e.date.setMonth(1), t.insert = [ {
+                            pos: t.pos,
+                            c: "0"
+                        }, {
+                            pos: t.pos + 1,
+                            c: t.c
+                        } ], t.caret = o.seekNext.call(this, t.pos + 1), t;
+                        return !1;
+                    }
+                    function k(e, t, a, i) {
+                        var n, o, s = "";
+                        for (m(a).lastIndex = 0; n = m(a).exec(e); ) {
+                            if (void 0 === t) if (o = v(n)) s += "(" + o[0] + ")"; else switch (n[0]) {
+                              case "[":
+                                s += "(";
+                                break;
+
+                              case "]":
+                                s += ")?";
+                                break;
+
+                              default:
+                                s += (0, r.default)(n[0]);
+                            } else if (o = v(n)) if (!0 !== i && o[3]) s += o[3].call(t.date); else o[2] ? s += t["raw" + o[2]] : s += n[0]; else s += n[0];
+                        }
+                        return s;
+                    }
+                    function y(e, t, a) {
+                        for (e = String(e), t = t || 2; e.length < t; ) e = a ? e + "0" : "0" + e;
+                        return e;
+                    }
+                    function b(e, t, a) {
+                        var i, n, r, o = {
+                            date: new Date(1, 0, 1)
+                        }, l = e;
+                        function u(e, t, a) {
+                            if (e[i] = "ampm" === i ? t : t.replace(/[^0-9]/g, "0"), e["raw" + i] = t, void 0 !== r) {
+                                var n = e[i];
+                                ("day" === i && 29 === parseInt(n) || "month" === i && 2 === parseInt(n)) && (29 !== parseInt(e.day) || 2 !== parseInt(e.month) || "" !== e.year && void 0 !== e.year || e.date.setFullYear(2012, 1, 29)), 
+                                "day" === i && 0 === parseInt(n) && (n = 1), "month" === i && (n = parseInt(n)) > 0 && (n -= 1), 
+                                "year" === i && n.length < 4 && (n = y(n, 4, !0)), "" === n || isNaN(n) || r.call(e.date, n), 
+                                "ampm" === i && r.call(e.date, n);
+                            }
+                        }
+                        if ("string" == typeof l) {
+                            for (m(a).lastIndex = 0; n = m(a).exec(t); ) {
+                                var c = new RegExp("\\d+$").exec(n[0]), d = c ? n[0][0] + "x" : n[0], p = void 0;
+                                if (c) {
+                                    var h = m(a).lastIndex, v = P(n.index, a);
+                                    m(a).lastIndex = h, p = l.slice(0, l.indexOf(v.nextMatch[0]));
+                                } else p = l.slice(0, d.length);
+                                Object.prototype.hasOwnProperty.call(f, d) && (i = f[d][2], r = f[d][1], u(o, p)), 
+                                l = l.slice(p.length);
+                            }
+                            return o;
+                        }
+                        if (l && "object" === s(l) && Object.prototype.hasOwnProperty.call(l, "date")) return l;
+                    }
+                    function x(e, t) {
+                        return k(t.inputFormat, {
+                            date: e
+                        }, t);
+                    }
+                    function P(e, t) {
+                        var a, i, n = 0, r = 0;
+                        for (m(t).lastIndex = 0; i = m(t).exec(t.inputFormat); ) {
+                            var o = new RegExp("\\d+$").exec(i[0]);
+                            if ((n += r = o ? parseInt(o[0]) : i[0].length) >= e) {
+                                a = i, i = m(t).exec(t.inputFormat);
+                                break;
+                            }
+                        }
+                        return {
+                            targetMatchIndex: n - r,
+                            nextMatch: i,
+                            targetMatch: a
+                        };
+                    }
+                    i.default.extendAliases({
+                        datetime: {
+                            mask: function(e) {
+                                return e.numericInput = !1, f.S = e.i18n.ordinalSuffix.join("|"), e.inputFormat = d[e.inputFormat] || e.inputFormat, 
+                                e.displayFormat = d[e.displayFormat] || e.displayFormat || e.inputFormat, e.outputFormat = d[e.outputFormat] || e.outputFormat || e.inputFormat, 
+                                e.placeholder = "" !== e.placeholder ? e.placeholder : e.inputFormat.replace(/[[\]]/, ""), 
+                                e.regex = k(e.inputFormat, void 0, e), e.min = b(e.min, e.inputFormat, e), e.max = b(e.max, e.inputFormat, e), 
+                                null;
+                            },
+                            placeholder: "",
+                            inputFormat: "isoDateTime",
+                            displayFormat: void 0,
+                            outputFormat: void 0,
+                            min: null,
+                            max: null,
+                            skipOptionalPartCharacter: "",
+                            i18n: {
+                                dayNames: [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ],
+                                monthNames: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+                                ordinalSuffix: [ "st", "nd", "rd", "th" ]
+                            },
+                            preValidation: function(e, t, a, i, n, r, o, s) {
+                                if (s) return !0;
+                                if (isNaN(a) && e[t] !== a) {
+                                    var l = P(t, n);
+                                    if (l.nextMatch && l.nextMatch[0] === a && l.targetMatch[0].length > 1) {
+                                        var u = f[l.targetMatch[0]][0];
+                                        if (new RegExp(u).test("0" + e[t - 1])) return e[t] = e[t - 1], e[t - 1] = "0", 
+                                        {
+                                            fuzzy: !0,
+                                            buffer: e,
+                                            refreshFromBuffer: {
+                                                start: t - 1,
+                                                end: t + 1
+                                            },
+                                            pos: t + 1
+                                        };
+                                    }
+                                }
+                                return !0;
+                            },
+                            postValidation: function(e, t, a, i, n, r, o, s) {
+                                var l, u;
+                                if (o) return !0;
+                                if (!1 === i && (((l = P(t + 1, n)).targetMatch && l.targetMatchIndex === t && l.targetMatch[0].length > 1 && void 0 !== f[l.targetMatch[0]] || (l = P(t + 2, n)).targetMatch && l.targetMatchIndex === t + 1 && l.targetMatch[0].length > 1 && void 0 !== f[l.targetMatch[0]]) && (u = f[l.targetMatch[0]][0]), 
+                                void 0 !== u && (void 0 !== r.validPositions[t + 1] && new RegExp(u).test(a + "0") ? (e[t] = a, 
+                                e[t + 1] = "0", i = {
+                                    pos: t + 2,
+                                    caret: t
+                                }) : new RegExp(u).test("0" + a) && (e[t] = "0", e[t + 1] = a, i = {
+                                    pos: t + 2
+                                })), !1 === i)) return i;
+                                if (i.fuzzy && (e = i.buffer, t = i.pos), (l = P(t, n)).targetMatch && l.targetMatch[0] && void 0 !== f[l.targetMatch[0]]) {
+                                    u = f[l.targetMatch[0]][0];
+                                    var d = e.slice(l.targetMatchIndex, l.targetMatchIndex + l.targetMatch[0].length);
+                                    !1 === new RegExp(u).test(d.join("")) && 2 === l.targetMatch[0].length && r.validPositions[l.targetMatchIndex] && r.validPositions[l.targetMatchIndex + 1] && (r.validPositions[l.targetMatchIndex + 1].input = "0");
+                                }
+                                var p = i, h = b(e.join(""), n.inputFormat, n);
+                                return p && h.date.getTime() == h.date.getTime() && (n.prefillYear && (p = function(e, t, a) {
+                                    if (e.year !== e.rawyear) {
+                                        var i = c.toString(), n = e.rawyear.replace(/[^0-9]/g, ""), r = i.slice(0, n.length), o = i.slice(n.length);
+                                        if (2 === n.length && n === r) {
+                                            var s = new Date(c, e.month - 1, e.day);
+                                            e.day == s.getDate() && (!a.max || a.max.date.getTime() >= s.getTime()) && (e.date.setFullYear(c), 
+                                            e.year = i, t.insert = [ {
+                                                pos: t.pos + 1,
+                                                c: o[0]
+                                            }, {
+                                                pos: t.pos + 2,
+                                                c: o[1]
+                                            } ]);
+                                        }
+                                    }
+                                    return t;
+                                }(h, p, n)), p = function(e, t, a, i, n) {
+                                    if (!t) return t;
+                                    if (a.min) {
+                                        if (e.rawyear) {
+                                            var r, o = e.rawyear.replace(/[^0-9]/g, ""), s = a.min.year.substr(0, o.length);
+                                            if (o < s) {
+                                                var l = P(t.pos, a);
+                                                if (o = e.rawyear.substr(0, t.pos - l.targetMatchIndex + 1).replace(/[^0-9]/g, "0"), 
+                                                (s = a.min.year.substr(0, o.length)) <= o) return t.remove = l.targetMatchIndex + o.length, 
+                                                t;
+                                                if (o = "yyyy" === l.targetMatch[0] ? e.rawyear.substr(1, 1) : e.rawyear.substr(0, 1), 
+                                                s = a.min.year.substr(2, 1), r = a.max ? a.max.year.substr(2, 1) : o, 1 === o.length && s <= o && o <= r && !0 !== n) return "yyyy" === l.targetMatch[0] ? (t.insert = [ {
+                                                    pos: t.pos + 1,
+                                                    c: o,
+                                                    strict: !0
+                                                } ], t.caret = t.pos + 2, i.validPositions[t.pos].input = a.min.year[1]) : (t.insert = [ {
+                                                    pos: t.pos + 1,
+                                                    c: a.min.year[1],
+                                                    strict: !0
+                                                }, {
+                                                    pos: t.pos + 2,
+                                                    c: o,
+                                                    strict: !0
+                                                } ], t.caret = t.pos + 3, i.validPositions[t.pos].input = a.min.year[0]), t;
+                                                t = !1;
+                                            }
+                                        }
+                                        for (var u in e) -1 === u.indexOf("raw") && e["raw".concat(u)] && (e[u], e["raw".concat(u)]);
+                                        t && e.year && e.year === e.rawyear && a.min.date.getTime() == a.min.date.getTime() && (t = a.min.date.getTime() <= e.date.getTime());
+                                    }
+                                    return t && a.max && a.max.date.getTime() == a.max.date.getTime() && (t = a.max.date.getTime() >= e.date.getTime()), 
+                                    t;
+                                }(h, p = g.call(this, h, p, n), n, r, s)), void 0 !== t && p && i.pos !== t ? {
+                                    buffer: k(n.inputFormat, h, n).split(""),
+                                    refreshFromBuffer: {
+                                        start: t,
+                                        end: i.pos
+                                    },
+                                    pos: i.caret || i.pos
+                                } : p;
+                            },
+                            onKeyDown: function(e, t, a, i) {
+                                e.ctrlKey && e.keyCode === n.default.RIGHT && (this.inputmask._valueSet(x(new Date, i)), 
+                                u(this).trigger("setvalue"));
+                            },
+                            onUnMask: function(e, t, a) {
+                                return t ? k(a.outputFormat, b(e, a.inputFormat, a), a, !0) : t;
+                            },
+                            casing: function(e, t, a, i) {
+                                return 0 == t.nativeDef.indexOf("[ap]") ? e.toLowerCase() : 0 == t.nativeDef.indexOf("[AP]") ? e.toUpperCase() : e;
+                            },
+                            onBeforeMask: function(e, t) {
+                                return "[object Date]" === Object.prototype.toString.call(e) && (e = x(e, t)), e;
+                            },
+                            insertMode: !1,
+                            shiftPositions: !1,
+                            keepStatic: !1,
+                            inputmode: "numeric",
+                            prefillYear: !0
+                        }
+                    });
+                },
+                3851: function(e, t, a) {
+                    var i, n = (i = a(2394)) && i.__esModule ? i : {
+                        default: i
+                    }, r = a(8711), o = a(4713);
+                    n.default.extendDefinitions({
+                        A: {
+                            validator: "[A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]",
+                            casing: "upper"
+                        },
+                        "&": {
+                            validator: "[0-9A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5]",
+                            casing: "upper"
+                        },
+                        "#": {
+                            validator: "[0-9A-Fa-f]",
+                            casing: "upper"
+                        }
+                    });
+                    var s = new RegExp("25[0-5]|2[0-4][0-9]|[01][0-9][0-9]");
+                    function l(e, t, a, i, n) {
+                        return a - 1 > -1 && "." !== t.buffer[a - 1] ? (e = t.buffer[a - 1] + e, e = a - 2 > -1 && "." !== t.buffer[a - 2] ? t.buffer[a - 2] + e : "0" + e) : e = "00" + e, 
+                        s.test(e);
+                    }
+                    n.default.extendAliases({
+                        cssunit: {
+                            regex: "[+-]?[0-9]+\\.?([0-9]+)?(px|em|rem|ex|%|in|cm|mm|pt|pc)"
+                        },
+                        url: {
+                            regex: "(https?|ftp)://.*",
+                            autoUnmask: !1,
+                            keepStatic: !1,
+                            tabThrough: !0
+                        },
+                        ip: {
+                            mask: "i[i[i]].j[j[j]].k[k[k]].l[l[l]]",
+                            definitions: {
+                                i: {
+                                    validator: l
+                                },
+                                j: {
+                                    validator: l
+                                },
+                                k: {
+                                    validator: l
+                                },
+                                l: {
+                                    validator: l
+                                }
+                            },
+                            onUnMask: function(e, t, a) {
+                                return e;
+                            },
+                            inputmode: "numeric"
+                        },
+                        email: {
+                            mask: "*{1,64}[.*{1,64}][.*{1,64}][.*{1,63}]@-{1,63}.-{1,63}[.-{1,63}][.-{1,63}]",
+                            greedy: !1,
+                            casing: "lower",
+                            onBeforePaste: function(e, t) {
+                                return (e = e.toLowerCase()).replace("mailto:", "");
+                            },
+                            definitions: {
+                                "*": {
+                                    validator: "[0-9\uff11-\uff19A-Za-z\u0410-\u044f\u0401\u0451\xc0-\xff\xb5!#$%&'*+/=?^_`{|}~-]"
+                                },
+                                "-": {
+                                    validator: "[0-9A-Za-z-]"
+                                }
+                            },
+                            onUnMask: function(e, t, a) {
+                                return e;
+                            },
+                            inputmode: "email"
+                        },
+                        mac: {
+                            mask: "##:##:##:##:##:##"
+                        },
+                        vin: {
+                            mask: "V{13}9{4}",
+                            definitions: {
+                                V: {
+                                    validator: "[A-HJ-NPR-Za-hj-npr-z\\d]",
+                                    casing: "upper"
+                                }
+                            },
+                            clearIncomplete: !0,
+                            autoUnmask: !0
+                        },
+                        ssn: {
+                            mask: "999-99-9999",
+                            postValidation: function(e, t, a, i, n, s, l) {
+                                var u = o.getMaskTemplate.call(this, !0, r.getLastValidPosition.call(this), !0, !0);
+                                return /^(?!219-09-9999|078-05-1120)(?!666|000|9.{2}).{3}-(?!00).{2}-(?!0{4}).{4}$/.test(u.join(""));
+                            }
+                        }
+                    });
+                },
+                207: function(e, t, a) {
+                    var i = s(a(2394)), n = s(a(4528)), r = s(a(7184)), o = a(8711);
+                    function s(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var l = i.default.dependencyLib;
+                    function u(e, t) {
+                        for (var a = "", n = 0; n < e.length; n++) i.default.prototype.definitions[e.charAt(n)] || t.definitions[e.charAt(n)] || t.optionalmarker[0] === e.charAt(n) || t.optionalmarker[1] === e.charAt(n) || t.quantifiermarker[0] === e.charAt(n) || t.quantifiermarker[1] === e.charAt(n) || t.groupmarker[0] === e.charAt(n) || t.groupmarker[1] === e.charAt(n) || t.alternatormarker === e.charAt(n) ? a += "\\" + e.charAt(n) : a += e.charAt(n);
+                        return a;
+                    }
+                    function c(e, t, a, i) {
+                        if (e.length > 0 && t > 0 && (!a.digitsOptional || i)) {
+                            var n = e.indexOf(a.radixPoint), r = !1;
+                            a.negationSymbol.back === e[e.length - 1] && (r = !0, e.length--), -1 === n && (e.push(a.radixPoint), 
+                            n = e.length - 1);
+                            for (var o = 1; o <= t; o++) isFinite(e[n + o]) || (e[n + o] = "0");
+                        }
+                        return r && e.push(a.negationSymbol.back), e;
+                    }
+                    function f(e, t) {
+                        var a = 0;
+                        if ("+" === e) {
+                            for (a in t.validPositions) ;
+                            a = o.seekNext.call(this, parseInt(a));
+                        }
+                        for (var i in t.tests) if ((i = parseInt(i)) >= a) for (var n = 0, r = t.tests[i].length; n < r; n++) if ((void 0 === t.validPositions[i] || "-" === e) && t.tests[i][n].match.def === e) return i + (void 0 !== t.validPositions[i] && "-" !== e ? 1 : 0);
+                        return a;
+                    }
+                    function d(e, t) {
+                        var a = -1;
+                        for (var i in t.validPositions) {
+                            var n = t.validPositions[i];
+                            if (n && n.match.def === e) {
+                                a = parseInt(i);
+                                break;
+                            }
+                        }
+                        return a;
+                    }
+                    function p(e, t, a, i, n) {
+                        var r = t.buffer ? t.buffer.indexOf(n.radixPoint) : -1, o = (-1 !== r || i && n.jitMasking) && new RegExp(n.definitions[9].validator).test(e);
+                        return n._radixDance && -1 !== r && o && null == t.validPositions[r] ? {
+                            insert: {
+                                pos: r === a ? r + 1 : r,
+                                c: n.radixPoint
+                            },
+                            pos: a
+                        } : o;
+                    }
+                    i.default.extendAliases({
+                        numeric: {
+                            mask: function(e) {
+                                e.repeat = 0, e.groupSeparator === e.radixPoint && e.digits && "0" !== e.digits && ("." === e.radixPoint ? e.groupSeparator = "," : "," === e.radixPoint ? e.groupSeparator = "." : e.groupSeparator = ""), 
+                                " " === e.groupSeparator && (e.skipOptionalPartCharacter = void 0), e.placeholder.length > 1 && (e.placeholder = e.placeholder.charAt(0)), 
+                                "radixFocus" === e.positionCaretOnClick && "" === e.placeholder && (e.positionCaretOnClick = "lvp");
+                                var t = "0", a = e.radixPoint;
+                                !0 === e.numericInput && void 0 === e.__financeInput ? (t = "1", e.positionCaretOnClick = "radixFocus" === e.positionCaretOnClick ? "lvp" : e.positionCaretOnClick, 
+                                e.digitsOptional = !1, isNaN(e.digits) && (e.digits = 2), e._radixDance = !1, a = "," === e.radixPoint ? "?" : "!", 
+                                "" !== e.radixPoint && void 0 === e.definitions[a] && (e.definitions[a] = {}, e.definitions[a].validator = "[" + e.radixPoint + "]", 
+                                e.definitions[a].placeholder = e.radixPoint, e.definitions[a].static = !0, e.definitions[a].generated = !0)) : (e.__financeInput = !1, 
+                                e.numericInput = !0);
+                                var i, n = "[+]";
+                                if (n += u(e.prefix, e), "" !== e.groupSeparator ? (void 0 === e.definitions[e.groupSeparator] && (e.definitions[e.groupSeparator] = {}, 
+                                e.definitions[e.groupSeparator].validator = "[" + e.groupSeparator + "]", e.definitions[e.groupSeparator].placeholder = e.groupSeparator, 
+                                e.definitions[e.groupSeparator].static = !0, e.definitions[e.groupSeparator].generated = !0), 
+                                n += e._mask(e)) : n += "9{+}", void 0 !== e.digits && 0 !== e.digits) {
+                                    var o = e.digits.toString().split(",");
+                                    isFinite(o[0]) && o[1] && isFinite(o[1]) ? n += a + t + "{" + e.digits + "}" : (isNaN(e.digits) || parseInt(e.digits) > 0) && (e.digitsOptional || e.jitMasking ? (i = n + a + t + "{0," + e.digits + "}", 
+                                    e.keepStatic = !0) : n += a + t + "{" + e.digits + "}");
+                                } else e.inputmode = "numeric";
+                                return n += u(e.suffix, e), n += "[-]", i && (n = [ i + u(e.suffix, e) + "[-]", n ]), 
+                                e.greedy = !1, function(e) {
+                                    void 0 === e.parseMinMaxOptions && (null !== e.min && (e.min = e.min.toString().replace(new RegExp((0, r.default)(e.groupSeparator), "g"), ""), "," === e.radixPoint && (e.min = e.min.replace(e.radixPoint, ".")), 
+                                    e.min = isFinite(e.min) ? parseFloat(e.min) : NaN, isNaN(e.min) && (e.min = Number.MIN_VALUE)), 
+                                    null !== e.max && (e.max = e.max.toString().replace(new RegExp((0, r.default)(e.groupSeparator), "g"), ""), 
+                                    "," === e.radixPoint && (e.max = e.max.replace(e.radixPoint, ".")), e.max = isFinite(e.max) ? parseFloat(e.max) : NaN, 
+                                    isNaN(e.max) && (e.max = Number.MAX_VALUE)), e.parseMinMaxOptions = "done");
+                                }(e), n;
+                            },
+                            _mask: function(e) {
+                                return "(" + e.groupSeparator + "999){+|1}";
+                            },
+                            digits: "*",
+                            digitsOptional: !0,
+                            enforceDigitsOnBlur: !1,
+                            radixPoint: ".",
+                            positionCaretOnClick: "radixFocus",
+                            _radixDance: !0,
+                            groupSeparator: "",
+                            allowMinus: !0,
+                            negationSymbol: {
+                                front: "-",
+                                back: ""
+                            },
+                            prefix: "",
+                            suffix: "",
+                            min: null,
+                            max: null,
+                            SetMaxOnOverflow: !1,
+                            step: 1,
+                            inputType: "text",
+                            unmaskAsNumber: !1,
+                            roundingFN: Math.round,
+                            inputmode: "decimal",
+                            shortcuts: {
+                                k: "000",
+                                m: "000000"
+                            },
+                            placeholder: "0",
+                            greedy: !1,
+                            rightAlign: !0,
+                            insertMode: !0,
+                            autoUnmask: !1,
+                            skipOptionalPartCharacter: "",
+                            usePrototypeDefinitions: !1,
+                            definitions: {
+                                0: {
+                                    validator: p
+                                },
+                                1: {
+                                    validator: p,
+                                    definitionSymbol: "9"
+                                },
+                                9: {
+                                    validator: "[0-9\uff10-\uff19\u0660-\u0669\u06f0-\u06f9]",
+                                    definitionSymbol: "*"
+                                },
+                                "+": {
+                                    validator: function(e, t, a, i, n) {
+                                        return n.allowMinus && ("-" === e || e === n.negationSymbol.front);
+                                    }
+                                },
+                                "-": {
+                                    validator: function(e, t, a, i, n) {
+                                        return n.allowMinus && e === n.negationSymbol.back;
+                                    }
+                                }
+                            },
+                            preValidation: function(e, t, a, i, n, r, o, s) {
+                                var l;
+                                if (!1 !== n.__financeInput && a === n.radixPoint) return !1;
+                                if (l = n.shortcuts && n.shortcuts[a]) {
+                                    if (l.length > 1) for (var u = [], c = 0; c < l.length; c++) u.push({
+                                        pos: t + c,
+                                        c: l[c],
+                                        strict: !1
+                                    });
+                                    return {
+                                        insert: u
+                                    };
+                                }
+                                var p = e.indexOf(n.radixPoint), h = t;
+                                if (t = function(e, t, a, i, n) {
+                                    return n._radixDance && n.numericInput && t !== n.negationSymbol.back && e <= a && (a > 0 || t == n.radixPoint) && (void 0 === i.validPositions[e - 1] || i.validPositions[e - 1].input !== n.negationSymbol.back) && (e -= 1), 
+                                    e;
+                                }(t, a, p, r, n), "-" === a || a === n.negationSymbol.front) {
+                                    if (!0 !== n.allowMinus) return !1;
+                                    var v = !1, m = d("+", r), g = d("-", r);
+                                    return -1 !== m && (v = [ m, g ]), !1 !== v ? {
+                                        remove: v,
+                                        caret: h - n.negationSymbol.back.length
+                                    } : {
+                                        insert: [ {
+                                            pos: f.call(this, "+", r),
+                                            c: n.negationSymbol.front,
+                                            fromIsValid: !0
+                                        }, {
+                                            pos: f.call(this, "-", r),
+                                            c: n.negationSymbol.back,
+                                            fromIsValid: void 0
+                                        } ],
+                                        caret: h + n.negationSymbol.back.length
+                                    };
+                                }
+                                if (a === n.groupSeparator) return {
+                                    caret: h
+                                };
+                                if (s) return !0;
+                                if (-1 !== p && !0 === n._radixDance && !1 === i && a === n.radixPoint && void 0 !== n.digits && (isNaN(n.digits) || parseInt(n.digits) > 0) && p !== t) return {
+                                    caret: n._radixDance && t === p - 1 ? p + 1 : p
+                                };
+                                if (!1 === n.__financeInput) if (i) {
+                                    if (n.digitsOptional) return {
+                                        rewritePosition: o.end
+                                    };
+                                    if (!n.digitsOptional) {
+                                        if (o.begin > p && o.end <= p) return a === n.radixPoint ? {
+                                            insert: {
+                                                pos: p + 1,
+                                                c: "0",
+                                                fromIsValid: !0
+                                            },
+                                            rewritePosition: p
+                                        } : {
+                                            rewritePosition: p + 1
+                                        };
+                                        if (o.begin < p) return {
+                                            rewritePosition: o.begin - 1
+                                        };
+                                    }
+                                } else if (!n.showMaskOnHover && !n.showMaskOnFocus && !n.digitsOptional && n.digits > 0 && "" === this.__valueGet.call(this.el)) return {
+                                    rewritePosition: p
+                                };
+                                return {
+                                    rewritePosition: t
+                                };
+                            },
+                            postValidation: function(e, t, a, i, n, r, o) {
+                                if (!1 === i) return i;
+                                if (o) return !0;
+                                if (null !== n.min || null !== n.max) {
+                                    var s = n.onUnMask(e.slice().reverse().join(""), void 0, l.extend({}, n, {
+                                        unmaskAsNumber: !0
+                                    }));
+                                    if (null !== n.min && s < n.min && (s.toString().length > n.min.toString().length || s < 0)) return !1;
+                                    if (null !== n.max && s > n.max) return !!n.SetMaxOnOverflow && {
+                                        refreshFromBuffer: !0,
+                                        buffer: c(n.max.toString().replace(".", n.radixPoint).split(""), n.digits, n).reverse()
+                                    };
+                                }
+                                return i;
+                            },
+                            onUnMask: function(e, t, a) {
+                                if ("" === t && !0 === a.nullable) return t;
+                                var i = e.replace(a.prefix, "");
+                                return i = (i = i.replace(a.suffix, "")).replace(new RegExp((0, r.default)(a.groupSeparator), "g"), ""), 
+                                "" !== a.placeholder.charAt(0) && (i = i.replace(new RegExp(a.placeholder.charAt(0), "g"), "0")), 
+                                a.unmaskAsNumber ? ("" !== a.radixPoint && -1 !== i.indexOf(a.radixPoint) && (i = i.replace(r.default.call(this, a.radixPoint), ".")), 
+                                i = (i = i.replace(new RegExp("^" + (0, r.default)(a.negationSymbol.front)), "-")).replace(new RegExp((0, r.default)(a.negationSymbol.back) + "$"), ""), Number(i)) : i;
+                            },
+                            isComplete: function(e, t) {
+                                var a = (t.numericInput ? e.slice().reverse() : e).join("");
+                                return a = (a = (a = (a = (a = a.replace(new RegExp("^" + (0, r.default)(t.negationSymbol.front)), "-")).replace(new RegExp((0, r.default)(t.negationSymbol.back) + "$"), "")).replace(t.prefix, "")).replace(t.suffix, "")).replace(new RegExp((0, r.default)(t.groupSeparator) + "([0-9]{3})", "g"), "$1"), "," === t.radixPoint && (a = a.replace((0, r.default)(t.radixPoint), ".")), isFinite(a);
+                            },
+                            onBeforeMask: function(e, t) {
+                                var a = t.radixPoint || ",";
+                                isFinite(t.digits) && (t.digits = parseInt(t.digits)), "number" != typeof e && "number" !== t.inputType || "" === a || (e = e.toString().replace(".", a));
+                                var i = "-" === e.charAt(0) || e.charAt(0) === t.negationSymbol.front, n = e.split(a), o = n[0].replace(/[^\-0-9]/g, ""), s = n.length > 1 ? n[1].replace(/[^0-9]/g, "") : "", l = n.length > 1;
+                                e = o + ("" !== s ? a + s : s);
+                                var u = 0;
+                                if ("" !== a && (u = t.digitsOptional ? t.digits < s.length ? t.digits : s.length : t.digits, 
+                                "" !== s || !t.digitsOptional)) {
+                                    var f = Math.pow(10, u || 1);
+                                    e = e.replace((0, r.default)(a), "."), isNaN(parseFloat(e)) || (e = (t.roundingFN(parseFloat(e) * f) / f).toFixed(u)), 
+                                    e = e.toString().replace(".", a);
+                                }
+                                if (0 === t.digits && -1 !== e.indexOf(a) && (e = e.substring(0, e.indexOf(a))), 
+                                null !== t.min || null !== t.max) {
+                                    var d = e.toString().replace(a, ".");
+                                    null !== t.min && d < t.min ? e = t.min.toString().replace(".", a) : null !== t.max && d > t.max && (e = t.max.toString().replace(".", a));
+                                }
+                                return i && "-" !== e.charAt(0) && (e = "-" + e), c(e.toString().split(""), u, t, l).join("");
+                            },
+                            onBeforeWrite: function(e, t, a, i) {
+                                function n(e, t) {
+                                    if (!1 !== i.__financeInput || t) {
+                                        var a = e.indexOf(i.radixPoint);
+                                        -1 !== a && e.splice(a, 1);
+                                    }
+                                    if ("" !== i.groupSeparator) for (;-1 !== (a = e.indexOf(i.groupSeparator)); ) e.splice(a, 1);
+                                    return e;
+                                }
+                                var o, s = function(e, t) {
+                                    var a = new RegExp("(^" + ("" !== t.negationSymbol.front ? (0, r.default)(t.negationSymbol.front) + "?" : "") + (0, r.default)(t.prefix) + ")(.*)(" + (0, r.default)(t.suffix) + ("" != t.negationSymbol.back ? (0, r.default)(t.negationSymbol.back) + "?" : "") + "$)").exec(e.slice().reverse().join("")), i = a ? a[2] : "", n = !1;
+                                    return i && (i = i.split(t.radixPoint.charAt(0))[0], n = new RegExp("^[0" + t.groupSeparator + "]*").exec(i)), 
+                                    !(!n || !(n[0].length > 1 || n[0].length > 0 && n[0].length < i.length)) && n;
+                                }(t, i);
+                                if (s) for (var u = t.join("").lastIndexOf(s[0].split("").reverse().join("")) - (s[0] == s.input ? 0 : 1), f = s[0] == s.input ? 1 : 0, d = s[0].length - f; d > 0; d--) delete this.maskset.validPositions[u + d], 
+                                delete t[u + d];
+                                if (e) switch (e.type) {
+                                  case "blur":
+                                  case "checkval":
+                                    if (null !== i.min) {
+                                        var p = i.onUnMask(t.slice().reverse().join(""), void 0, l.extend({}, i, {
+                                            unmaskAsNumber: !0
+                                        }));
+                                        if (null !== i.min && p < i.min) return {
+                                            refreshFromBuffer: !0,
+                                            buffer: c(i.min.toString().replace(".", i.radixPoint).split(""), i.digits, i).reverse()
+                                        };
+                                    }
+                                    if (t[t.length - 1] === i.negationSymbol.front) {
+                                        var h = new RegExp("(^" + ("" != i.negationSymbol.front ? (0, r.default)(i.negationSymbol.front) + "?" : "") + (0, r.default)(i.prefix) + ")(.*)(" + (0, r.default)(i.suffix) + ("" != i.negationSymbol.back ? (0, r.default)(i.negationSymbol.back) + "?" : "") + "$)").exec(n(t.slice(), !0).reverse().join(""));
+                                        0 == (h ? h[2] : "") && (o = {
+                                            refreshFromBuffer: !0,
+                                            buffer: [ 0 ]
+                                        });
+                                    } else "" !== i.radixPoint && t[0] === i.radixPoint && (o && o.buffer ? o.buffer.shift() : (t.shift(), 
+                                    o = {
+                                        refreshFromBuffer: !0,
+                                        buffer: n(t)
+                                    }));
+                                    if (i.enforceDigitsOnBlur) {
+                                        var v = (o = o || {}) && o.buffer || t.slice().reverse();
+                                        o.refreshFromBuffer = !0, o.buffer = c(v, i.digits, i, !0).reverse();
+                                    }
+                                }
+                                return o;
+                            },
+                            onKeyDown: function(e, t, a, i) {
+                                var r, o = l(this);
+                                if (e.ctrlKey) switch (e.keyCode) {
+                                  case n.default.UP:
+                                    return this.inputmask.__valueSet.call(this, parseFloat(this.inputmask.unmaskedvalue()) + parseInt(i.step)), 
+                                    o.trigger("setvalue"), !1;
+
+                                  case n.default.DOWN:
+                                    return this.inputmask.__valueSet.call(this, parseFloat(this.inputmask.unmaskedvalue()) - parseInt(i.step)), 
+                                    o.trigger("setvalue"), !1;
+                                }
+                                if (!e.shiftKey && (e.keyCode === n.default.DELETE || e.keyCode === n.default.BACKSPACE || e.keyCode === n.default.BACKSPACE_SAFARI) && a.begin !== t.length) {
+                                    if (t[e.keyCode === n.default.DELETE ? a.begin - 1 : a.end] === i.negationSymbol.front) return r = t.slice().reverse(), 
+                                    "" !== i.negationSymbol.front && r.shift(), "" !== i.negationSymbol.back && r.pop(), 
+                                    o.trigger("setvalue", [ r.join(""), a.begin ]), !1;
+                                    if (!0 === i._radixDance) {
+                                        var s = t.indexOf(i.radixPoint);
+                                        if (i.digitsOptional) {
+                                            if (0 === s) return (r = t.slice().reverse()).pop(), o.trigger("setvalue", [ r.join(""), a.begin >= r.length ? r.length : a.begin ]), 
+                                            !1;
+                                        } else if (-1 !== s && (a.begin < s || a.end < s || e.keyCode === n.default.DELETE && a.begin === s)) return a.begin !== a.end || e.keyCode !== n.default.BACKSPACE && e.keyCode !== n.default.BACKSPACE_SAFARI || a.begin++, 
+                                        (r = t.slice().reverse()).splice(r.length - a.begin, a.begin - a.end + 1), r = c(r, i.digits, i).join(""), 
+                                        o.trigger("setvalue", [ r, a.begin >= r.length ? s + 1 : a.begin ]), !1;
+                                    }
+                                }
+                            }
+                        },
+                        currency: {
+                            prefix: "",
+                            groupSeparator: ",",
+                            alias: "numeric",
+                            digits: 2,
+                            digitsOptional: !1
+                        },
+                        decimal: {
+                            alias: "numeric"
+                        },
+                        integer: {
+                            alias: "numeric",
+                            inputmode: "numeric",
+                            digits: 0
+                        },
+                        percentage: {
+                            alias: "numeric",
+                            min: 0,
+                            max: 100,
+                            suffix: " %",
+                            digits: 0,
+                            allowMinus: !1
+                        },
+                        indianns: {
+                            alias: "numeric",
+                            _mask: function(e) {
+                                return "(" + e.groupSeparator + "99){*|1}(" + e.groupSeparator + "999){1|1}";
+                            },
+                            groupSeparator: ",",
+                            radixPoint: ".",
+                            placeholder: "0",
+                            digits: 2,
+                            digitsOptional: !1
+                        }
+                    });
+                },
+                9380: function(e, t, a) {
+                    var i;
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0;
+                    var n = ((i = a(8741)) && i.__esModule ? i : {
+                        default: i
+                    }).default ? window : {};
+                    t.default = n;
+                },
+                7760: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.applyInputValue = c, t.clearOptionalTail = f, t.checkVal = d, t.HandleNativePlaceholder = function(e, t) {
+                        var a = e ? e.inputmask : this;
+                        if (l.ie) {
+                            if (e.inputmask._valueGet() !== t && (e.placeholder !== t || "" === e.placeholder)) {
+                                var i = o.getBuffer.call(a).slice(), n = e.inputmask._valueGet();
+                                if (n !== t) {
+                                    var r = o.getLastValidPosition.call(a);
+                                    -1 === r && n === o.getBufferTemplate.call(a).join("") ? i = [] : -1 !== r && f.call(a, i), 
+                                    p(e, i);
+                                }
+                            }
+                        } else e.placeholder !== t && (e.placeholder = t, "" === e.placeholder && e.removeAttribute("placeholder"));
+                    }, t.unmaskedvalue = function(e) {
+                        var t = e ? e.inputmask : this, a = t.opts, i = t.maskset;
+                        if (e) {
+                            if (void 0 === e.inputmask) return e.value;
+                            e.inputmask && e.inputmask.refreshValue && c(e, e.inputmask._valueGet(!0));
+                        }
+                        var n = [], r = i.validPositions;
+                        for (var s in r) r[s] && r[s].match && (1 != r[s].match.static || Array.isArray(i.metadata) && !0 !== r[s].generatedInput) && n.push(r[s].input);
+                        var l = 0 === n.length ? "" : (t.isRTL ? n.reverse() : n).join("");
+                        if ("function" == typeof a.onUnMask) {
+                            var u = (t.isRTL ? o.getBuffer.call(t).slice().reverse() : o.getBuffer.call(t)).join("");
+                            l = a.onUnMask.call(t, u, l, a);
+                        }
+                        return l;
+                    }, t.writeBuffer = p;
+                    var i, n = (i = a(4528)) && i.__esModule ? i : {
+                        default: i
+                    }, r = a(4713), o = a(8711), s = a(7215), l = a(9845), u = a(6030);
+                    function c(e, t) {
+                        var a = e ? e.inputmask : this, i = a.opts;
+                        e.inputmask.refreshValue = !1, "function" == typeof i.onBeforeMask && (t = i.onBeforeMask.call(a, t, i) || t), 
+                        d(e, !0, !1, t = t.toString().split("")), a.undoValue = a._valueGet(!0), (i.clearMaskOnLostFocus || i.clearIncomplete) && e.inputmask._valueGet() === o.getBufferTemplate.call(a).join("") && -1 === o.getLastValidPosition.call(a) && e.inputmask._valueSet("");
+                    }
+                    function f(e) {
+                        e.length = 0;
+                        for (var t, a = r.getMaskTemplate.call(this, !0, 0, !0, void 0, !0); void 0 !== (t = a.shift()); ) e.push(t);
+                        return e;
+                    }
+                    function d(e, t, a, i, n) {
+                        var l = e ? e.inputmask : this, c = l.maskset, f = l.opts, d = l.dependencyLib, h = i.slice(), v = "", m = -1, g = void 0, k = f.skipOptionalPartCharacter;
+                        f.skipOptionalPartCharacter = "", o.resetMaskSet.call(l), c.tests = {}, m = f.radixPoint ? o.determineNewCaretPosition.call(l, {
+                            begin: 0,
+                            end: 0
+                        }, !1, !1 === f.__financeInput ? "radixFocus" : void 0).begin : 0, c.p = m, l.caretPos = {
+                            begin: m
+                        };
+                        var y = [], b = l.caretPos;
+                        if (h.forEach((function(e, t) {
+                            if (void 0 !== e) {
+                                var i = new d.Event("_checkval");
+                                i.which = e.toString().charCodeAt(0), v += e;
+                                var n = o.getLastValidPosition.call(l, void 0, !0);
+                                !function(e, t) {
+                                    for (var a = r.getMaskTemplate.call(l, !0, 0).slice(e, o.seekNext.call(l, e, !1, !1)).join("").replace(/'/g, ""), i = a.indexOf(t); i > 0 && " " === a[i - 1]; ) i--;
+                                    var n = 0 === i && !o.isMask.call(l, e) && (r.getTest.call(l, e).match.nativeDef === t.charAt(0) || !0 === r.getTest.call(l, e).match.static && r.getTest.call(l, e).match.nativeDef === "'" + t.charAt(0) || " " === r.getTest.call(l, e).match.nativeDef && (r.getTest.call(l, e + 1).match.nativeDef === t.charAt(0) || !0 === r.getTest.call(l, e + 1).match.static && r.getTest.call(l, e + 1).match.nativeDef === "'" + t.charAt(0)));
+                                    if (!n && i > 0 && !o.isMask.call(l, e, !1, !0)) {
+                                        var s = o.seekNext.call(l, e);
+                                        l.caretPos.begin < s && (l.caretPos = {
+                                            begin: s
+                                        });
+                                    }
+                                    return n;
+                                }(m, v) ? (g = u.EventHandlers.keypressEvent.call(l, i, !0, !1, a, l.caretPos.begin)) && (m = l.caretPos.begin + 1, 
+                                v = "") : g = u.EventHandlers.keypressEvent.call(l, i, !0, !1, a, n + 1), g ? (void 0 !== g.pos && c.validPositions[g.pos] && !0 === c.validPositions[g.pos].match.static && void 0 === c.validPositions[g.pos].alternation && (y.push(g.pos), 
+                                l.isRTL || (g.forwardPosition = g.pos + 1)), p.call(l, void 0, o.getBuffer.call(l), g.forwardPosition, i, !1), 
+                                l.caretPos = {
+                                    begin: g.forwardPosition,
+                                    end: g.forwardPosition
+                                }, b = l.caretPos) : void 0 === c.validPositions[t] && h[t] === r.getPlaceholder.call(l, t) && o.isMask.call(l, t, !0) ? l.caretPos.begin++ : l.caretPos = b;
+                            }
+                        })), y.length > 0) {
+                            var x, P, E = o.seekNext.call(l, -1, void 0, !1);
+                            if (!s.isComplete.call(l, o.getBuffer.call(l)) && y.length <= E || s.isComplete.call(l, o.getBuffer.call(l)) && y.length > 0 && y.length !== E && 0 === y[0]) for (var S = E; void 0 !== (x = y.shift()); ) {
+                                var _ = new d.Event("_checkval");
+                                if ((P = c.validPositions[x]).generatedInput = !0, _.which = P.input.charCodeAt(0), 
+                                (g = u.EventHandlers.keypressEvent.call(l, _, !0, !1, a, S)) && void 0 !== g.pos && g.pos !== x && c.validPositions[g.pos] && !0 === c.validPositions[g.pos].match.static) y.push(g.pos); else if (!g) break;
+                                S++;
+                            }
+                        }
+                        t && p.call(l, e, o.getBuffer.call(l), g ? g.forwardPosition : l.caretPos.begin, n || new d.Event("checkval"), n && "input" === n.type && l.undoValue !== l._valueGet(!0)), 
+                        f.skipOptionalPartCharacter = k;
+                    }
+                    function p(e, t, a, i, r) {
+                        var l = e ? e.inputmask : this, u = l.opts, c = l.dependencyLib;
+                        if (i && "function" == typeof u.onBeforeWrite) {
+                            var f = u.onBeforeWrite.call(l, i, t, a, u);
+                            if (f) {
+                                if (f.refreshFromBuffer) {
+                                    var d = f.refreshFromBuffer;
+                                    s.refreshFromBuffer.call(l, !0 === d ? d : d.start, d.end, f.buffer || t), t = o.getBuffer.call(l, !0);
+                                }
+                                void 0 !== a && (a = void 0 !== f.caret ? f.caret : a);
+                            }
+                        }
+                        if (void 0 !== e && (e.inputmask._valueSet(t.join("")), void 0 === a || void 0 !== i && "blur" === i.type || o.caret.call(l, e, a, void 0, void 0, void 0 !== i && "keydown" === i.type && (i.keyCode === n.default.DELETE || i.keyCode === n.default.BACKSPACE)), 
+                        !0 === r)) {
+                            var p = c(e), h = e.inputmask._valueGet();
+                            e.inputmask.skipInputEvent = !0, p.trigger("input"), setTimeout((function() {
+                                h === o.getBufferTemplate.call(l).join("") ? p.trigger("cleared") : !0 === s.isComplete.call(l, t) && p.trigger("complete");
+                            }), 0);
+                        }
+                    }
+                },
+                2394: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = void 0, a(7149), a(3194);
+                    var i = a(157), n = m(a(4963)), r = m(a(9380)), o = a(2391), s = a(4713), l = a(8711), u = a(7215), c = a(7760), f = a(9716), d = m(a(7392)), p = m(a(3976)), h = m(a(8741));
+                    function v(e) {
+                        return (v = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+                            return typeof e;
+                        } : function(e) {
+                            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
+                        })(e);
+                    }
+                    function m(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var g = r.default.document, k = "_inputmask_opts";
+                    function y(e, t, a) {
+                        if (h.default) {
+                            if (!(this instanceof y)) return new y(e, t, a);
+                            this.dependencyLib = n.default, this.el = void 0, this.events = {}, this.maskset = void 0, 
+                            !0 !== a && ("[object Object]" === Object.prototype.toString.call(e) ? t = e : (t = t || {}, 
+                            e && (t.alias = e)), this.opts = n.default.extend(!0, {}, this.defaults, t), this.noMasksCache = t && void 0 !== t.definitions, 
+                            this.userOptions = t || {}, b(this.opts.alias, t, this.opts)), this.refreshValue = !1, 
+                            this.undoValue = void 0, this.$el = void 0, this.skipKeyPressEvent = !1, this.skipInputEvent = !1, 
+                            this.validationEvent = !1, this.ignorable = !1, this.maxLength, this.mouseEnter = !1, 
+                            this.originalPlaceholder = void 0, this.isComposing = !1;
+                        }
+                    }
+                    function b(e, t, a) {
+                        var i = y.prototype.aliases[e];
+                        return i ? (i.alias && b(i.alias, void 0, a), n.default.extend(!0, a, i), n.default.extend(!0, a, t), 
+                        !0) : (null === a.mask && (a.mask = e), !1);
+                    }
+                    y.prototype = {
+                        dataAttribute: "data-inputmask",
+                        defaults: p.default,
+                        definitions: d.default,
+                        aliases: {},
+                        masksCache: {},
+                        get isRTL() {
+                            return this.opts.isRTL || this.opts.numericInput;
+                        },
+                        mask: function(e) {
+                            var t = this;
+                            return "string" == typeof e && (e = g.getElementById(e) || g.querySelectorAll(e)), 
+                            (e = e.nodeName ? [ e ] : Array.isArray(e) ? e : Array.from(e)).forEach((function(e, a) {
+                                var s = n.default.extend(!0, {}, t.opts);
+                                if (function(e, t, a, i) {
+                                    function o(t, n) {
+                                        var o = "" === i ? t : i + "-" + t;
+                                        null !== (n = void 0 !== n ? n : e.getAttribute(o)) && ("string" == typeof n && (0 === t.indexOf("on") ? n = r.default[n] : "false" === n ? n = !1 : "true" === n && (n = !0)), 
+                                        a[t] = n);
+                                    }
+                                    if (!0 === t.importDataAttributes) {
+                                        var s, l, u, c, f = e.getAttribute(i);
+                                        if (f && "" !== f && (f = f.replace(/'/g, '"'), l = JSON.parse("{" + f + "}")), 
+                                        l) for (c in u = void 0, l) if ("alias" === c.toLowerCase()) {
+                                            u = l[c];
+                                            break;
+                                        }
+                                        for (s in o("alias", u), a.alias && b(a.alias, a, t), t) {
+                                            if (l) for (c in u = void 0, l) if (c.toLowerCase() === s.toLowerCase()) {
+                                                u = l[c];
+                                                break;
+                                            }
+                                            o(s, u);
+                                        }
+                                    }
+                                    n.default.extend(!0, t, a), ("rtl" === e.dir || t.rightAlign) && (e.style.textAlign = "right");
+                                    ("rtl" === e.dir || t.numericInput) && (e.dir = "ltr", e.removeAttribute("dir"), 
+                                    t.isRTL = !0);
+                                    return Object.keys(a).length;
+                                }(e, s, n.default.extend(!0, {}, t.userOptions), t.dataAttribute)) {
+                                    var l = (0, o.generateMaskSet)(s, t.noMasksCache);
+                                    void 0 !== l && (void 0 !== e.inputmask && (e.inputmask.opts.autoUnmask = !0, e.inputmask.remove()), 
+                                    e.inputmask = new y(void 0, void 0, !0), e.inputmask.opts = s, e.inputmask.noMasksCache = t.noMasksCache, 
+                                    e.inputmask.userOptions = n.default.extend(!0, {}, t.userOptions), e.inputmask.el = e, 
+                                    e.inputmask.$el = (0, n.default)(e), e.inputmask.maskset = l, n.default.data(e, k, t.userOptions), 
+                                    i.mask.call(e.inputmask));
+                                }
+                            })), e && e[0] && e[0].inputmask || this;
+                        },
+                        option: function(e, t) {
+                            return "string" == typeof e ? this.opts[e] : "object" === v(e) ? (n.default.extend(this.userOptions, e), 
+                            this.el && !0 !== t && this.mask(this.el), this) : void 0;
+                        },
+                        unmaskedvalue: function(e) {
+                            if (this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache), 
+                            void 0 === this.el || void 0 !== e) {
+                                var t = ("function" == typeof this.opts.onBeforeMask && this.opts.onBeforeMask.call(this, e, this.opts) || e).split("");
+                                c.checkVal.call(this, void 0, !1, !1, t), "function" == typeof this.opts.onBeforeWrite && this.opts.onBeforeWrite.call(this, void 0, l.getBuffer.call(this), 0, this.opts);
+                            }
+                            return c.unmaskedvalue.call(this, this.el);
+                        },
+                        remove: function() {
+                            if (this.el) {
+                                n.default.data(this.el, k, null);
+                                var e = this.opts.autoUnmask ? (0, c.unmaskedvalue)(this.el) : this._valueGet(this.opts.autoUnmask);
+                                e !== l.getBufferTemplate.call(this).join("") ? this._valueSet(e, this.opts.autoUnmask) : this._valueSet(""), 
+                                f.EventRuler.off(this.el), Object.getOwnPropertyDescriptor && Object.getPrototypeOf ? Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this.el), "value") && this.__valueGet && Object.defineProperty(this.el, "value", {
+                                    get: this.__valueGet,
+                                    set: this.__valueSet,
+                                    configurable: !0
+                                }) : g.__lookupGetter__ && this.el.__lookupGetter__("value") && this.__valueGet && (this.el.__defineGetter__("value", this.__valueGet), 
+                                this.el.__defineSetter__("value", this.__valueSet)), this.el.inputmask = void 0;
+                            }
+                            return this.el;
+                        },
+                        getemptymask: function() {
+                            return this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache), 
+                            l.getBufferTemplate.call(this).join("");
+                        },
+                        hasMaskedValue: function() {
+                            return !this.opts.autoUnmask;
+                        },
+                        isComplete: function() {
+                            return this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache), 
+                            u.isComplete.call(this, l.getBuffer.call(this));
+                        },
+                        getmetadata: function() {
+                            if (this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache), 
+                            Array.isArray(this.maskset.metadata)) {
+                                var e = s.getMaskTemplate.call(this, !0, 0, !1).join("");
+                                return this.maskset.metadata.forEach((function(t) {
+                                    return t.mask !== e || (e = t, !1);
+                                })), e;
+                            }
+                            return this.maskset.metadata;
+                        },
+                        isValid: function(e) {
+                            if (this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache), 
+                            e) {
+                                var t = ("function" == typeof this.opts.onBeforeMask && this.opts.onBeforeMask.call(this, e, this.opts) || e).split("");
+                                c.checkVal.call(this, void 0, !0, !1, t);
+                            } else e = this.isRTL ? l.getBuffer.call(this).slice().reverse().join("") : l.getBuffer.call(this).join("");
+                            for (var a = l.getBuffer.call(this), i = l.determineLastRequiredPosition.call(this), n = a.length - 1; n > i && !l.isMask.call(this, n); n--) ;
+                            return a.splice(i, n + 1 - i), u.isComplete.call(this, a) && e === (this.isRTL ? l.getBuffer.call(this).slice().reverse().join("") : l.getBuffer.call(this).join(""));
+                        },
+                        format: function(e, t) {
+                            this.maskset = this.maskset || (0, o.generateMaskSet)(this.opts, this.noMasksCache);
+                            var a = ("function" == typeof this.opts.onBeforeMask && this.opts.onBeforeMask.call(this, e, this.opts) || e).split("");
+                            c.checkVal.call(this, void 0, !0, !1, a);
+                            var i = this.isRTL ? l.getBuffer.call(this).slice().reverse().join("") : l.getBuffer.call(this).join("");
+                            return t ? {
+                                value: i,
+                                metadata: this.getmetadata()
+                            } : i;
+                        },
+                        setValue: function(e) {
+                            this.el && (0, n.default)(this.el).trigger("setvalue", [ e ]);
+                        },
+                        analyseMask: o.analyseMask
+                    }, y.extendDefaults = function(e) {
+                        n.default.extend(!0, y.prototype.defaults, e);
+                    }, y.extendDefinitions = function(e) {
+                        n.default.extend(!0, y.prototype.definitions, e);
+                    }, y.extendAliases = function(e) {
+                        n.default.extend(!0, y.prototype.aliases, e);
+                    }, y.format = function(e, t, a) {
+                        return y(t).format(e, a);
+                    }, y.unmask = function(e, t) {
+                        return y(t).unmaskedvalue(e);
+                    }, y.isValid = function(e, t) {
+                        return y(t).isValid(e);
+                    }, y.remove = function(e) {
+                        "string" == typeof e && (e = g.getElementById(e) || g.querySelectorAll(e)), (e = e.nodeName ? [ e ] : e).forEach((function(e) {
+                            e.inputmask && e.inputmask.remove();
+                        }));
+                    }, y.setValue = function(e, t) {
+                        "string" == typeof e && (e = g.getElementById(e) || g.querySelectorAll(e)), (e = e.nodeName ? [ e ] : e).forEach((function(e) {
+                            e.inputmask ? e.inputmask.setValue(t) : (0, n.default)(e).trigger("setvalue", [ t ]);
+                        }));
+                    }, y.dependencyLib = n.default, r.default.Inputmask = y;
+                    var x = y;
+                    t.default = x;
+                },
+                5296: function(e, t, a) {
+                    function i(e) {
+                        return (i = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+                            return typeof e;
+                        } : function(e) {
+                            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
+                        })(e);
+                    }
+                    var n = p(a(9380)), r = p(a(2394)), o = p(a(8741));
+                    function s(e, t) {
+                        return !t || "object" !== i(t) && "function" != typeof t ? function(e) {
+                            if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                            return e;
+                        }(e) : t;
+                    }
+                    function l(e) {
+                        var t = "function" == typeof Map ? new Map : void 0;
+                        return (l = function(e) {
+                            if (null === e || (a = e, -1 === Function.toString.call(a).indexOf("[native code]"))) return e;
+                            var a;
+                            if ("function" != typeof e) throw new TypeError("Super expression must either be null or a function");
+                            if (void 0 !== t) {
+                                if (t.has(e)) return t.get(e);
+                                t.set(e, i);
+                            }
+                            function i() {
+                                return u(e, arguments, d(this).constructor);
+                            }
+                            return i.prototype = Object.create(e.prototype, {
+                                constructor: {
+                                    value: i,
+                                    enumerable: !1,
+                                    writable: !0,
+                                    configurable: !0
+                                }
+                            }), f(i, e);
+                        })(e);
+                    }
+                    function u(e, t, a) {
+                        return (u = c() ? Reflect.construct : function(e, t, a) {
+                            var i = [ null ];
+                            i.push.apply(i, t);
+                            var n = new (Function.bind.apply(e, i));
+                            return a && f(n, a.prototype), n;
+                        }).apply(null, arguments);
+                    }
+                    function c() {
+                        if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+                        if (Reflect.construct.sham) return !1;
+                        if ("function" == typeof Proxy) return !0;
+                        try {
+                            return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], (function() {}))), 
+                            !0;
+                        } catch (e) {
+                            return !1;
+                        }
+                    }
+                    function f(e, t) {
+                        return (f = Object.setPrototypeOf || function(e, t) {
+                            return e.__proto__ = t, e;
+                        })(e, t);
+                    }
+                    function d(e) {
+                        return (d = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
+                            return e.__proto__ || Object.getPrototypeOf(e);
+                        })(e);
+                    }
+                    function p(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                    var h = n.default.document;
+                    if (o.default && h && h.head && h.head.attachShadow && n.default.customElements && void 0 === n.default.customElements.get("input-mask")) {
+                        var v = function(e) {
+                            !function(e, t) {
+                                if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function");
+                                e.prototype = Object.create(t && t.prototype, {
+                                    constructor: {
+                                        value: e,
+                                        writable: !0,
+                                        configurable: !0
+                                    }
+                                }), t && f(e, t);
+                            }(n, e);
+                            var t, a, i = (t = n, a = c(), function() {
+                                var e, i = d(t);
+                                if (a) {
+                                    var n = d(this).constructor;
+                                    e = Reflect.construct(i, arguments, n);
+                                } else e = i.apply(this, arguments);
+                                return s(this, e);
+                            });
+                            function n() {
+                                var e;
+                                !function(e, t) {
+                                    if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+                                }(this, n);
+                                var t = (e = i.call(this)).getAttributeNames(), a = e.attachShadow({
+                                    mode: "closed"
+                                }), o = h.createElement("input");
+                                for (var s in o.type = "text", a.appendChild(o), t) Object.prototype.hasOwnProperty.call(t, s) && o.setAttribute(t[s], e.getAttribute(t[s]));
+                                var l = new r.default;
+                                return l.dataAttribute = "", l.mask(o), o.inputmask.shadowRoot = a, e;
+                            }
+                            return n;
+                        }(l(HTMLElement));
+                        n.default.customElements.define("input-mask", v);
+                    }
+                },
+                2391: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.generateMaskSet = function(e, t) {
+                        var a;
+                        function n(e, a, n) {
+                            var r, o, s = !1;
+                            if (null !== e && "" !== e || ((s = null !== n.regex) ? e = (e = n.regex).replace(/^(\^)(.*)(\$)$/, "$2") : (s = !0, 
+                            e = ".*")), 1 === e.length && !1 === n.greedy && 0 !== n.repeat && (n.placeholder = ""), 
+                            n.repeat > 0 || "*" === n.repeat || "+" === n.repeat) {
+                                var l = "*" === n.repeat ? 0 : "+" === n.repeat ? 1 : n.repeat;
+                                e = n.groupmarker[0] + e + n.groupmarker[1] + n.quantifiermarker[0] + l + "," + n.repeat + n.quantifiermarker[1];
+                            }
+                            return o = s ? "regex_" + n.regex : n.numericInput ? e.split("").reverse().join("") : e, 
+                            !1 !== n.keepStatic && (o = "ks_" + o), void 0 === Inputmask.prototype.masksCache[o] || !0 === t ? (r = {
+                                mask: e,
+                                maskToken: Inputmask.prototype.analyseMask(e, s, n),
+                                validPositions: {},
+                                _buffer: void 0,
+                                buffer: void 0,
+                                tests: {},
+                                excludes: {},
+                                metadata: a,
+                                maskLength: void 0,
+                                jitOffset: {}
+                            }, !0 !== t && (Inputmask.prototype.masksCache[o] = r, r = i.default.extend(!0, {}, Inputmask.prototype.masksCache[o]))) : r = i.default.extend(!0, {}, Inputmask.prototype.masksCache[o]), 
+                            r;
+                        }
+                        "function" == typeof e.mask && (e.mask = e.mask(e));
+                        if (Array.isArray(e.mask)) {
+                            if (e.mask.length > 1) {
+                                null === e.keepStatic && (e.keepStatic = !0);
+                                var r = e.groupmarker[0];
+                                return (e.isRTL ? e.mask.reverse() : e.mask).forEach((function(t) {
+                                    r.length > 1 && (r += e.groupmarker[1] + e.alternatormarker + e.groupmarker[0]), 
+                                    void 0 !== t.mask && "function" != typeof t.mask ? r += t.mask : r += t;
+                                })), n(r += e.groupmarker[1], e.mask, e);
+                            }
+                            e.mask = e.mask.pop();
+                        }
+                        null === e.keepStatic && (e.keepStatic = !1);
+                        a = e.mask && void 0 !== e.mask.mask && "function" != typeof e.mask.mask ? n(e.mask.mask, e.mask, e) : n(e.mask, e.mask, e);
+                        return a;
+                    }, t.analyseMask = function(e, t, a) {
+                        var i, r, o, s, l, u, c = /(?:[?*+]|\{[0-9+*]+(?:,[0-9+*]*)?(?:\|[0-9+*]*)?\})|[^.?*+^${[]()|\\]+|./g, f = /\[\^?]?(?:[^\\\]]+|\\[\S\s]?)*]?|\\(?:0(?:[0-3][0-7]{0,2}|[4-7][0-7]?)?|[1-9][0-9]*|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|c[A-Za-z]|[\S\s]?)|\((?:\?[:=!]?)?|(?:[?*+]|\{[0-9]+(?:,[0-9]*)?\})\??|[^.?*+^${[()|\\]+|./g, d = !1, p = new n.default, h = [], v = [], m = !1;
+                        function g(e, i, n) {
+                            n = void 0 !== n ? n : e.matches.length;
+                            var r = e.matches[n - 1];
+                            if (t) 0 === i.indexOf("[") || d && /\\d|\\s|\\w]/i.test(i) || "." === i ? e.matches.splice(n++, 0, {
+                                fn: new RegExp(i, a.casing ? "i" : ""),
+                                static: !1,
+                                optionality: !1,
+                                newBlockMarker: void 0 === r ? "master" : r.def !== i,
+                                casing: null,
+                                def: i,
+                                placeholder: void 0,
+                                nativeDef: i
+                            }) : (d && (i = i[i.length - 1]), i.split("").forEach((function(t, i) {
+                                r = e.matches[n - 1], e.matches.splice(n++, 0, {
+                                    fn: /[a-z]/i.test(a.staticDefinitionSymbol || t) ? new RegExp("[" + (a.staticDefinitionSymbol || t) + "]", a.casing ? "i" : "") : null,
+                                    static: !0,
+                                    optionality: !1,
+                                    newBlockMarker: void 0 === r ? "master" : r.def !== t && !0 !== r.static,
+                                    casing: null,
+                                    def: a.staticDefinitionSymbol || t,
+                                    placeholder: void 0 !== a.staticDefinitionSymbol ? t : void 0,
+                                    nativeDef: (d ? "'" : "") + t
+                                });
+                            }))), d = !1; else {
+                                var o = a.definitions && a.definitions[i] || a.usePrototypeDefinitions && Inputmask.prototype.definitions[i];
+                                o && !d ? e.matches.splice(n++, 0, {
+                                    fn: o.validator ? "string" == typeof o.validator ? new RegExp(o.validator, a.casing ? "i" : "") : new function() {
+                                        this.test = o.validator;
+                                    } : new RegExp("."),
+                                    static: o.static || !1,
+                                    optionality: !1,
+                                    newBlockMarker: void 0 === r ? "master" : r.def !== (o.definitionSymbol || i),
+                                    casing: o.casing,
+                                    def: o.definitionSymbol || i,
+                                    placeholder: o.placeholder,
+                                    nativeDef: i,
+                                    generated: o.generated
+                                }) : (e.matches.splice(n++, 0, {
+                                    fn: /[a-z]/i.test(a.staticDefinitionSymbol || i) ? new RegExp("[" + (a.staticDefinitionSymbol || i) + "]", a.casing ? "i" : "") : null,
+                                    static: !0,
+                                    optionality: !1,
+                                    newBlockMarker: void 0 === r ? "master" : r.def !== i && !0 !== r.static,
+                                    casing: null,
+                                    def: a.staticDefinitionSymbol || i,
+                                    placeholder: void 0 !== a.staticDefinitionSymbol ? i : void 0,
+                                    nativeDef: (d ? "'" : "") + i
+                                }), d = !1);
+                            }
+                        }
+                        function k() {
+                            if (h.length > 0) {
+                                if (g(s = h[h.length - 1], r), s.isAlternator) {
+                                    l = h.pop();
+                                    for (var e = 0; e < l.matches.length; e++) l.matches[e].isGroup && (l.matches[e].isGroup = !1);
+                                    h.length > 0 ? (s = h[h.length - 1]).matches.push(l) : p.matches.push(l);
+                                }
+                            } else g(p, r);
+                        }
+                        function y(e) {
+                            var t = new n.default(!0);
+                            return t.openGroup = !1, t.matches = e, t;
+                        }
+                        function b() {
+                            if ((o = h.pop()).openGroup = !1, void 0 !== o) if (h.length > 0) {
+                                if ((s = h[h.length - 1]).matches.push(o), s.isAlternator) {
+                                    l = h.pop();
+                                    for (var e = 0; e < l.matches.length; e++) l.matches[e].isGroup = !1, l.matches[e].alternatorGroup = !1;
+                                    h.length > 0 ? (s = h[h.length - 1]).matches.push(l) : p.matches.push(l);
+                                }
+                            } else p.matches.push(o); else k();
+                        }
+                        function x(e) {
+                            var t = e.pop();
+                            return t.isQuantifier && (t = y([ e.pop(), t ])), t;
+                        }
+                        t && (a.optionalmarker[0] = void 0, a.optionalmarker[1] = void 0);
+                        for (;i = t ? f.exec(e) : c.exec(e); ) {
+                            if (r = i[0], t) switch (r.charAt(0)) {
+                              case "?":
+                                r = "{0,1}";
+                                break;
+
+                              case "+":
+                              case "*":
+                                r = "{" + r + "}";
+                                break;
+
+                              case "|":
+                                if (0 === h.length) {
+                                    var P = y(p.matches);
+                                    P.openGroup = !0, h.push(P), p.matches = [], m = !0;
+                                }
+                            }
+                            if (d) k(); else switch (r.charAt(0)) {
+                              case "$":
+                              case "^":
+                                t || k();
+                                break;
+
+                              case "(?=":
+                              case "(?!":
+                              case "(?<=":
+                              case "(?<!":
+                                h.push(new n.default(!0));
+                                break;
+
+                              case a.escapeChar:
+                                d = !0, t && k();
+                                break;
+
+                              case a.optionalmarker[1]:
+                              case a.groupmarker[1]:
+                                b();
+                                break;
+
+                              case a.optionalmarker[0]:
+                                h.push(new n.default(!1, !0));
+                                break;
+
+                              case a.groupmarker[0]:
+                                h.push(new n.default(!0));
+                                break;
+
+                              case a.quantifiermarker[0]:
+                                var E = new n.default(!1, !1, !0), S = (r = r.replace(/[{}]/g, "")).split("|"), _ = S[0].split(","), M = isNaN(_[0]) ? _[0] : parseInt(_[0]), w = 1 === _.length ? M : isNaN(_[1]) ? _[1] : parseInt(_[1]), O = isNaN(S[1]) ? S[1] : parseInt(S[1]);
+                                "*" !== M && "+" !== M || (M = "*" === w ? 0 : 1), E.quantifier = {
+                                    min: M,
+                                    max: w,
+                                    jit: O
+                                };
+                                var T = h.length > 0 ? h[h.length - 1].matches : p.matches;
+                                if ((i = T.pop()).isAlternator) {
+                                    T.push(i), T = i.matches;
+                                    var C = new n.default(!0), A = T.pop();
+                                    T.push(C), T = C.matches, i = A;
+                                }
+                                i.isGroup || (i = y([ i ])), T.push(i), T.push(E);
+                                break;
+
+                              case a.alternatormarker:
+                                if (h.length > 0) {
+                                    var D = (s = h[h.length - 1]).matches[s.matches.length - 1];
+                                    u = s.openGroup && (void 0 === D.matches || !1 === D.isGroup && !1 === D.isAlternator) ? h.pop() : x(s.matches);
+                                } else u = x(p.matches);
+                                if (u.isAlternator) h.push(u); else if (u.alternatorGroup ? (l = h.pop(), u.alternatorGroup = !1) : l = new n.default(!1, !1, !1, !0), 
+                                l.matches.push(u), h.push(l), u.openGroup) {
+                                    u.openGroup = !1;
+                                    var B = new n.default(!0);
+                                    B.alternatorGroup = !0, h.push(B);
+                                }
+                                break;
+
+                              default:
+                                k();
+                            }
+                        }
+                        m && b();
+                        for (;h.length > 0; ) o = h.pop(), p.matches.push(o);
+                        p.matches.length > 0 && (!function e(i) {
+                            i && i.matches && i.matches.forEach((function(n, r) {
+                                var o = i.matches[r + 1];
+                                (void 0 === o || void 0 === o.matches || !1 === o.isQuantifier) && n && n.isGroup && (n.isGroup = !1, 
+                                t || (g(n, a.groupmarker[0], 0), !0 !== n.openGroup && g(n, a.groupmarker[1]))), 
+                                e(n);
+                            }));
+                        }(p), v.push(p));
+                        (a.numericInput || a.isRTL) && function e(t) {
+                            for (var i in t.matches = t.matches.reverse(), t.matches) if (Object.prototype.hasOwnProperty.call(t.matches, i)) {
+                                var n = parseInt(i);
+                                if (t.matches[i].isQuantifier && t.matches[n + 1] && t.matches[n + 1].isGroup) {
+                                    var r = t.matches[i];
+                                    t.matches.splice(i, 1), t.matches.splice(n + 1, 0, r);
+                                }
+                                void 0 !== t.matches[i].matches ? t.matches[i] = e(t.matches[i]) : t.matches[i] = ((o = t.matches[i]) === a.optionalmarker[0] ? o = a.optionalmarker[1] : o === a.optionalmarker[1] ? o = a.optionalmarker[0] : o === a.groupmarker[0] ? o = a.groupmarker[1] : o === a.groupmarker[1] && (o = a.groupmarker[0]), 
+                                o);
+                            }
+                            var o;
+                            return t;
+                        }(v[0]);
+                        return v;
+                    };
+                    var i = r(a(4963)), n = r(a(9695));
+                    function r(e) {
+                        return e && e.__esModule ? e : {
+                            default: e
+                        };
+                    }
+                },
+                157: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.mask = function() {
+                        var e = this, t = this.opts, a = this.el, i = this.dependencyLib;
+                        s.EventRuler.off(a);
+                        var f = function(t, a) {
+                            "textarea" !== t.tagName.toLowerCase() && a.ignorables.push(n.default.ENTER);
+                            var l = t.getAttribute("type"), u = "input" === t.tagName.toLowerCase() && a.supportsInputType.includes(l) || t.isContentEditable || "textarea" === t.tagName.toLowerCase();
+                            if (!u) if ("input" === t.tagName.toLowerCase()) {
+                                var c = document.createElement("input");
+                                c.setAttribute("type", l), u = "text" === c.type, c = null;
+                            } else u = "partial";
+                            return !1 !== u ? function(t) {
+                                var n, l;
+                                function u() {
+                                    return this.inputmask ? this.inputmask.opts.autoUnmask ? this.inputmask.unmaskedvalue() : -1 !== r.getLastValidPosition.call(e) || !0 !== a.nullable ? (this.inputmask.shadowRoot || this.ownerDocument).activeElement === this && a.clearMaskOnLostFocus ? (e.isRTL ? o.clearOptionalTail.call(e, r.getBuffer.call(e).slice()).reverse() : o.clearOptionalTail.call(e, r.getBuffer.call(e).slice())).join("") : n.call(this) : "" : n.call(this);
+                                }
+                                function c(e) {
+                                    l.call(this, e), this.inputmask && (0, o.applyInputValue)(this, e);
+                                }
+                                if (!t.inputmask.__valueGet) {
+                                    if (!0 !== a.noValuePatching) {
+                                        if (Object.getOwnPropertyDescriptor) {
+                                            var f = Object.getPrototypeOf ? Object.getOwnPropertyDescriptor(Object.getPrototypeOf(t), "value") : void 0;
+                                            f && f.get && f.set ? (n = f.get, l = f.set, Object.defineProperty(t, "value", {
+                                                get: u,
+                                                set: c,
+                                                configurable: !0
+                                            })) : "input" !== t.tagName.toLowerCase() && (n = function() {
+                                                return this.textContent;
+                                            }, l = function(e) {
+                                                this.textContent = e;
+                                            }, Object.defineProperty(t, "value", {
+                                                get: u,
+                                                set: c,
+                                                configurable: !0
+                                            }));
+                                        } else document.__lookupGetter__ && t.__lookupGetter__("value") && (n = t.__lookupGetter__("value"), 
+                                        l = t.__lookupSetter__("value"), t.__defineGetter__("value", u), t.__defineSetter__("value", c));
+                                        t.inputmask.__valueGet = n, t.inputmask.__valueSet = l;
+                                    }
+                                    t.inputmask._valueGet = function(t) {
+                                        return e.isRTL && !0 !== t ? n.call(this.el).split("").reverse().join("") : n.call(this.el);
+                                    }, t.inputmask._valueSet = function(t, a) {
+                                        l.call(this.el, null == t ? "" : !0 !== a && e.isRTL ? t.split("").reverse().join("") : t);
+                                    }, void 0 === n && (n = function() {
+                                        return this.value;
+                                    }, l = function(e) {
+                                        this.value = e;
+                                    }, function(t) {
+                                        if (i.valHooks && (void 0 === i.valHooks[t] || !0 !== i.valHooks[t].inputmaskpatch)) {
+                                            var n = i.valHooks[t] && i.valHooks[t].get ? i.valHooks[t].get : function(e) {
+                                                return e.value;
+                                            }, s = i.valHooks[t] && i.valHooks[t].set ? i.valHooks[t].set : function(e, t) {
+                                                return e.value = t, e;
+                                            };
+                                            i.valHooks[t] = {
+                                                get: function(t) {
+                                                    if (t.inputmask) {
+                                                        if (t.inputmask.opts.autoUnmask) return t.inputmask.unmaskedvalue();
+                                                        var i = n(t);
+                                                        return -1 !== r.getLastValidPosition.call(e, void 0, void 0, t.inputmask.maskset.validPositions) || !0 !== a.nullable ? i : "";
+                                                    }
+                                                    return n(t);
+                                                },
+                                                set: function(e, t) {
+                                                    var a = s(e, t);
+                                                    return e.inputmask && (0, o.applyInputValue)(e, t), a;
+                                                },
+                                                inputmaskpatch: !0
+                                            };
+                                        }
+                                    }(t.type), function(t) {
+                                        s.EventRuler.on(t, "mouseenter", (function() {
+                                            var t = this.inputmask._valueGet(!0);
+                                            t !== (e.isRTL ? r.getBuffer.call(e).reverse() : r.getBuffer.call(e)).join("") && (0, o.applyInputValue)(this, t);
+                                        }));
+                                    }(t));
+                                }
+                            }(t) : t.inputmask = void 0, u;
+                        }(a, t);
+                        if (!1 !== f) {
+                            e.originalPlaceholder = a.placeholder, e.maxLength = void 0 !== a ? a.maxLength : void 0, 
+                            -1 === e.maxLength && (e.maxLength = void 0), "inputMode" in a && null === a.getAttribute("inputmode") && (a.inputMode = t.inputmode, 
+                            a.setAttribute("inputmode", t.inputmode)), !0 === f && (t.showMaskOnFocus = t.showMaskOnFocus && -1 === [ "cc-number", "cc-exp" ].indexOf(a.autocomplete), 
+                            l.iphone && (t.insertModeVisual = !1), s.EventRuler.on(a, "submit", c.EventHandlers.submitEvent), 
+                            s.EventRuler.on(a, "reset", c.EventHandlers.resetEvent), s.EventRuler.on(a, "blur", c.EventHandlers.blurEvent), 
+                            s.EventRuler.on(a, "focus", c.EventHandlers.focusEvent), s.EventRuler.on(a, "invalid", c.EventHandlers.invalidEvent), 
+                            s.EventRuler.on(a, "click", c.EventHandlers.clickEvent), s.EventRuler.on(a, "mouseleave", c.EventHandlers.mouseleaveEvent), 
+                            s.EventRuler.on(a, "mouseenter", c.EventHandlers.mouseenterEvent), s.EventRuler.on(a, "paste", c.EventHandlers.pasteEvent), 
+                            s.EventRuler.on(a, "cut", c.EventHandlers.cutEvent), s.EventRuler.on(a, "complete", t.oncomplete), 
+                            s.EventRuler.on(a, "incomplete", t.onincomplete), s.EventRuler.on(a, "cleared", t.oncleared), 
+                            !0 !== t.inputEventOnly && (s.EventRuler.on(a, "keydown", c.EventHandlers.keydownEvent), 
+                            s.EventRuler.on(a, "keypress", c.EventHandlers.keypressEvent), s.EventRuler.on(a, "keyup", c.EventHandlers.keyupEvent)), 
+                            (l.mobile || t.inputEventOnly) && a.removeAttribute("maxLength"), s.EventRuler.on(a, "input", c.EventHandlers.inputFallBackEvent), 
+                            s.EventRuler.on(a, "compositionend", c.EventHandlers.compositionendEvent)), s.EventRuler.on(a, "setvalue", c.EventHandlers.setValueEvent), 
+                            r.getBufferTemplate.call(e).join(""), e.undoValue = e._valueGet(!0);
+                            var d = (a.inputmask.shadowRoot || a.ownerDocument).activeElement;
+                            if ("" !== a.inputmask._valueGet(!0) || !1 === t.clearMaskOnLostFocus || d === a) {
+                                (0, o.applyInputValue)(a, a.inputmask._valueGet(!0), t);
+                                var p = r.getBuffer.call(e).slice();
+                                !1 === u.isComplete.call(e, p) && t.clearIncomplete && r.resetMaskSet.call(e), t.clearMaskOnLostFocus && d !== a && (-1 === r.getLastValidPosition.call(e) ? p = [] : o.clearOptionalTail.call(e, p)), 
+                                (!1 === t.clearMaskOnLostFocus || t.showMaskOnFocus && d === a || "" !== a.inputmask._valueGet(!0)) && (0, o.writeBuffer)(a, p), d === a && r.caret.call(e, a, r.seekNext.call(e, r.getLastValidPosition.call(e)));
+                            }
+                        }
+                    };
+                    var i, n = (i = a(4528)) && i.__esModule ? i : {
+                        default: i
+                    }, r = a(8711), o = a(7760), s = a(9716), l = a(9845), u = a(7215), c = a(6030);
+                },
+                9695: function(e, t) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.default = function(e, t, a, i) {
+                        this.matches = [], this.openGroup = e || !1, this.alternatorGroup = !1, this.isGroup = e || !1, 
+                        this.isOptional = t || !1, this.isQuantifier = a || !1, this.isAlternator = i || !1, 
+                        this.quantifier = {
+                            min: 1,
+                            max: 1
+                        };
+                    };
+                },
+                3194: function() {
+                    Array.prototype.includes || Object.defineProperty(Array.prototype, "includes", {
+                        value: function(e, t) {
+                            if (null == this) throw new TypeError('"this" is null or not defined');
+                            var a = Object(this), i = a.length >>> 0;
+                            if (0 === i) return !1;
+                            for (var n = 0 | t, r = Math.max(n >= 0 ? n : i - Math.abs(n), 0); r < i; ) {
+                                if (a[r] === e) return !0;
+                                r++;
+                            }
+                            return !1;
+                        }
+                    });
+                },
+                7149: function() {
+                    function e(t) {
+                        return (e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+                            return typeof e;
+                        } : function(e) {
+                            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
+                        })(t);
+                    }
+                    "function" != typeof Object.getPrototypeOf && (Object.getPrototypeOf = "object" === e("test".__proto__) ? function(e) {
+                        return e.__proto__;
+                    } : function(e) {
+                        return e.constructor.prototype;
+                    });
+                },
+                8711: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.caret = function(e, t, a, i, n) {
+                        var r, o = this, s = this.opts;
+                        if (void 0 === t) return "selectionStart" in e && "selectionEnd" in e ? (t = e.selectionStart, 
+                        a = e.selectionEnd) : window.getSelection ? (r = window.getSelection().getRangeAt(0)).commonAncestorContainer.parentNode !== e && r.commonAncestorContainer !== e || (t = r.startOffset, 
+                        a = r.endOffset) : document.selection && document.selection.createRange && (r = document.selection.createRange(), 
+                        t = 0 - r.duplicate().moveStart("character", -e.inputmask._valueGet().length), a = t + r.text.length), 
+                        {
+                            begin: i ? t : u.call(o, t),
+                            end: i ? a : u.call(o, a)
+                        };
+                        if (Array.isArray(t) && (a = o.isRTL ? t[0] : t[1], t = o.isRTL ? t[1] : t[0]), 
+                        void 0 !== t.begin && (a = o.isRTL ? t.begin : t.end, t = o.isRTL ? t.end : t.begin), 
+                        "number" == typeof t) {
+                            t = i ? t : u.call(o, t), a = "number" == typeof (a = i ? a : u.call(o, a)) ? a : t;
+                            var l = parseInt(((e.ownerDocument.defaultView || window).getComputedStyle ? (e.ownerDocument.defaultView || window).getComputedStyle(e, null) : e.currentStyle).fontSize) * a;
+                            if (e.scrollLeft = l > e.scrollWidth ? l : 0, e.inputmask.caretPos = {
+                                begin: t,
+                                end: a
+                            }, s.insertModeVisual && !1 === s.insertMode && t === a && (n || a++), e === (e.inputmask.shadowRoot || e.ownerDocument).activeElement) if ("setSelectionRange" in e) e.setSelectionRange(t, a); else if (window.getSelection) {
+                                if (r = document.createRange(), void 0 === e.firstChild || null === e.firstChild) {
+                                    var c = document.createTextNode("");
+                                    e.appendChild(c);
+                                }
+                                r.setStart(e.firstChild, t < e.inputmask._valueGet().length ? t : e.inputmask._valueGet().length), 
+                                r.setEnd(e.firstChild, a < e.inputmask._valueGet().length ? a : e.inputmask._valueGet().length), 
+                                r.collapse(!0);
+                                var f = window.getSelection();
+                                f.removeAllRanges(), f.addRange(r);
+                            } else e.createTextRange && ((r = e.createTextRange()).collapse(!0), r.moveEnd("character", a), 
+                            r.moveStart("character", t), r.select());
+                        }
+                    }, t.determineLastRequiredPosition = function(e) {
+                        var t, a, r = this, s = this.maskset, l = this.dependencyLib, u = i.getMaskTemplate.call(r, !0, o.call(r), !0, !0), c = u.length, f = o.call(r), d = {}, p = s.validPositions[f], h = void 0 !== p ? p.locator.slice() : void 0;
+                        for (t = f + 1; t < u.length; t++) a = i.getTestTemplate.call(r, t, h, t - 1), h = a.locator.slice(), 
+                        d[t] = l.extend(!0, {}, a);
+                        var v = p && void 0 !== p.alternation ? p.locator[p.alternation] : void 0;
+                        for (t = c - 1; t > f && (((a = d[t]).match.optionality || a.match.optionalQuantifier && a.match.newBlockMarker || v && (v !== d[t].locator[p.alternation] && 1 != a.match.static || !0 === a.match.static && a.locator[p.alternation] && n.checkAlternationMatch.call(r, a.locator[p.alternation].toString().split(","), v.toString().split(",")) && "" !== i.getTests.call(r, t)[0].def)) && u[t] === i.getPlaceholder.call(r, t, a.match)); t--) c--;
+                        return e ? {
+                            l: c,
+                            def: d[c] ? d[c].match : void 0
+                        } : c;
+                    }, t.determineNewCaretPosition = function(e, t, a) {
+                        var n = this, u = this.maskset, c = this.opts;
+                        t && (n.isRTL ? e.end = e.begin : e.begin = e.end);
+                        if (e.begin === e.end) {
+                            switch (a = a || c.positionCaretOnClick) {
+                              case "none":
+                                break;
+
+                              case "select":
+                                e = {
+                                    begin: 0,
+                                    end: r.call(n).length
+                                };
+                                break;
+
+                              case "ignore":
+                                e.end = e.begin = l.call(n, o.call(n));
+                                break;
+
+                              case "radixFocus":
+                                if (function(e) {
+                                    if ("" !== c.radixPoint && 0 !== c.digits) {
+                                        var t = u.validPositions;
+                                        if (void 0 === t[e] || t[e].input === i.getPlaceholder.call(n, e)) {
+                                            if (e < l.call(n, -1)) return !0;
+                                            var a = r.call(n).indexOf(c.radixPoint);
+                                            if (-1 !== a) {
+                                                for (var o in t) if (t[o] && a < o && t[o].input !== i.getPlaceholder.call(n, o)) return !1;
+                                                return !0;
+                                            }
+                                        }
+                                    }
+                                    return !1;
+                                }(e.begin)) {
+                                    var f = r.call(n).join("").indexOf(c.radixPoint);
+                                    e.end = e.begin = c.numericInput ? l.call(n, f) : f;
+                                    break;
+                                }
+
+                              default:
+                                var d = e.begin, p = o.call(n, d, !0), h = l.call(n, -1 !== p || s.call(n, 0) ? p : -1);
+                                if (d <= h) e.end = e.begin = s.call(n, d, !1, !0) ? d : l.call(n, d); else {
+                                    var v = u.validPositions[p], m = i.getTestTemplate.call(n, h, v ? v.match.locator : void 0, v), g = i.getPlaceholder.call(n, h, m.match);
+                                    if ("" !== g && r.call(n)[h] !== g && !0 !== m.match.optionalQuantifier && !0 !== m.match.newBlockMarker || !s.call(n, h, c.keepStatic, !0) && m.match.def === g) {
+                                        var k = l.call(n, h);
+                                        (d >= k || d === h) && (h = k);
+                                    }
+                                    e.end = e.begin = h;
+                                }
+                            }
+                            return e;
+                        }
+                    }, t.getBuffer = r, t.getBufferTemplate = function() {
+                        var e = this.maskset;
+                        void 0 === e._buffer && (e._buffer = i.getMaskTemplate.call(this, !1, 1), void 0 === e.buffer && (e.buffer = e._buffer.slice()));
+                        return e._buffer;
+                    }, t.getLastValidPosition = o, t.isMask = s, t.resetMaskSet = function(e) {
+                        var t = this.maskset;
+                        t.buffer = void 0, !0 !== e && (t.validPositions = {}, t.p = 0);
+                    }, t.seekNext = l, t.seekPrevious = function(e, t) {
+                        var a = this, n = e - 1;
+                        if (e <= 0) return 0;
+                        for (;n > 0 && (!0 === t && (!0 !== i.getTest.call(a, n).match.newBlockMarker || !s.call(a, n, void 0, !0)) || !0 !== t && !s.call(a, n, void 0, !0)); ) n--;
+                        return n;
+                    }, t.translatePosition = u;
+                    var i = a(4713), n = a(7215);
+                    function r(e) {
+                        var t = this.maskset;
+                        return void 0 !== t.buffer && !0 !== e || (t.buffer = i.getMaskTemplate.call(this, !0, o.call(this), !0), 
+                        void 0 === t._buffer && (t._buffer = t.buffer.slice())), t.buffer;
+                    }
+                    function o(e, t, a) {
+                        var i = this.maskset, n = -1, r = -1, o = a || i.validPositions;
+                        for (var s in void 0 === e && (e = -1), o) {
+                            var l = parseInt(s);
+                            o[l] && (t || !0 !== o[l].generatedInput) && (l <= e && (n = l), l >= e && (r = l));
+                        }
+                        return -1 === n || n == e ? r : -1 == r || e - n < r - e ? n : r;
+                    }
+                    function s(e, t, a) {
+                        var n = this, r = this.maskset, o = i.getTestTemplate.call(n, e).match;
+                        if ("" === o.def && (o = i.getTest.call(n, e).match), !0 !== o.static) return o.fn;
+                        if (!0 === a && void 0 !== r.validPositions[e] && !0 !== r.validPositions[e].generatedInput) return !0;
+                        if (!0 !== t && e > -1) {
+                            if (a) {
+                                var s = i.getTests.call(n, e);
+                                return s.length > 1 + ("" === s[s.length - 1].match.def ? 1 : 0);
+                            }
+                            var l = i.determineTestTemplate.call(n, e, i.getTests.call(n, e)), u = i.getPlaceholder.call(n, e, l.match);
+                            return l.match.def !== u;
+                        }
+                        return !1;
+                    }
+                    function l(e, t, a) {
+                        var n = this;
+                        void 0 === a && (a = !0);
+                        for (var r = e + 1; "" !== i.getTest.call(n, r).match.def && (!0 === t && (!0 !== i.getTest.call(n, r).match.newBlockMarker || !s.call(n, r, void 0, !0)) || !0 !== t && !s.call(n, r, void 0, a)); ) r++;
+                        return r;
+                    }
+                    function u(e) {
+                        var t = this.opts, a = this.el;
+                        return !this.isRTL || "number" != typeof e || t.greedy && "" === t.placeholder || !a || (e = Math.abs(this._valueGet().length - e)), 
+                        e;
+                    }
+                },
+                4713: function(e, t) {
+                    function a(e, t) {
+                        var a = (null != e.alternation ? e.mloc[i(e)] : e.locator).join("");
+                        if ("" !== a) for (;a.length < t; ) a += "0";
+                        return a;
+                    }
+                    function i(e) {
+                        var t = e.locator[e.alternation];
+                        return "string" == typeof t && t.length > 0 && (t = t.split(",")[0]), void 0 !== t ? t.toString() : "";
+                    }
+                    function n(e, t, a) {
+                        var i = this.opts, n = this.maskset;
+                        if (void 0 !== (t = t || s.call(this, e).match).placeholder || !0 === a) return "function" == typeof t.placeholder ? t.placeholder(i) : t.placeholder;
+                        if (!0 === t.static) {
+                            if (e > -1 && void 0 === n.validPositions[e]) {
+                                var r, o = u.call(this, e), l = [];
+                                if (o.length > 1 + ("" === o[o.length - 1].match.def ? 1 : 0)) for (var c = 0; c < o.length; c++) if ("" !== o[c].match.def && !0 !== o[c].match.optionality && !0 !== o[c].match.optionalQuantifier && (!0 === o[c].match.static || void 0 === r || !1 !== o[c].match.fn.test(r.match.def, n, e, !0, i)) && (l.push(o[c]), 
+                                !0 === o[c].match.static && (r = o[c]), l.length > 1 && /[0-9a-bA-Z]/.test(l[0].match.def))) return i.placeholder.charAt(e % i.placeholder.length);
+                            }
+                            return t.def;
+                        }
+                        return i.placeholder.charAt(e % i.placeholder.length);
+                    }
+                    function r(e, t, a) {
+                        return this.maskset.validPositions[e] || o.call(this, e, u.call(this, e, t ? t.slice() : t, a));
+                    }
+                    function o(e, t) {
+                        var i = this.opts;
+                        e = e > 0 ? e - 1 : 0;
+                        for (var n, r, o, l = a(s.call(this, e)), u = 0; u < t.length; u++) {
+                            var c = t[u];
+                            n = a(c, l.length);
+                            var f = Math.abs(n - l);
+                            (void 0 === r || "" !== n && f < r || o && !i.greedy && o.match.optionality && "master" === o.match.newBlockMarker && (!c.match.optionality || !c.match.newBlockMarker) || o && o.match.optionalQuantifier && !c.match.optionalQuantifier) && (r = f, 
+                            o = c);
+                        }
+                        return o;
+                    }
+                    function s(e, t) {
+                        var a = this.maskset;
+                        return a.validPositions[e] ? a.validPositions[e] : (t || u.call(this, e))[0];
+                    }
+                    function l(e, t, a) {
+                        function i(e) {
+                            for (var t, a = [], i = -1, n = 0, r = e.length; n < r; n++) if ("-" === e.charAt(n)) for (t = e.charCodeAt(n + 1); ++i < t; ) a.push(String.fromCharCode(i)); else i = e.charCodeAt(n), 
+                            a.push(e.charAt(n));
+                            return a.join("");
+                        }
+                        return e.match.def === t.match.nativeDef || !(!(a.regex || e.match.fn instanceof RegExp && t.match.fn instanceof RegExp) || !0 === e.match.static || !0 === t.match.static) && -1 !== i(t.match.fn.toString().replace(/[[\]/]/g, "")).indexOf(i(e.match.fn.toString().replace(/[[\]/]/g, "")));
+                    }
+                    function u(e, t, a) {
+                        var i, n = this, r = this.dependencyLib, s = this.maskset, u = this.opts, c = this.el, f = s.maskToken, d = t ? a : 0, p = t ? t.slice() : [ 0 ], h = [], v = !1, m = t ? t.join("") : "";
+                        function g(t, a, n, r) {
+                            function o(n, r, f) {
+                                function p(e, t) {
+                                    var a = 0 === t.matches.indexOf(e);
+                                    return a || t.matches.every((function(i, n) {
+                                        return !0 === i.isQuantifier ? a = p(e, t.matches[n - 1]) : Object.prototype.hasOwnProperty.call(i, "matches") && (a = p(e, i)), 
+                                        !a;
+                                    })), a;
+                                }
+                                function k(e, t, a) {
+                                    var i, n;
+                                    if ((s.tests[e] || s.validPositions[e]) && (s.tests[e] || [ s.validPositions[e] ]).every((function(e, r) {
+                                        if (e.mloc[t]) return i = e, !1;
+                                        var o = void 0 !== a ? a : e.alternation, s = void 0 !== e.locator[o] ? e.locator[o].toString().indexOf(t) : -1;
+                                        return (void 0 === n || s < n) && -1 !== s && (i = e, n = s), !0;
+                                    })), i) {
+                                        var r = i.locator[i.alternation];
+                                        return (i.mloc[t] || i.mloc[r] || i.locator).slice((void 0 !== a ? a : i.alternation) + 1);
+                                    }
+                                    return void 0 !== a ? k(e, t) : void 0;
+                                }
+                                function y(e, t) {
+                                    var a = e.alternation, i = void 0 === t || a === t.alternation && -1 === e.locator[a].toString().indexOf(t.locator[a]);
+                                    if (!i && a > t.alternation) for (var n = t.alternation; n < a; n++) if (e.locator[n] !== t.locator[n]) {
+                                        a = n, i = !0;
+                                        break;
+                                    }
+                                    if (i) {
+                                        e.mloc = e.mloc || {};
+                                        var r = e.locator[a];
+                                        if (void 0 !== r) {
+                                            if ("string" == typeof r && (r = r.split(",")[0]), void 0 === e.mloc[r] && (e.mloc[r] = e.locator.slice()), 
+                                            void 0 !== t) {
+                                                for (var o in t.mloc) "string" == typeof o && (o = o.split(",")[0]), void 0 === e.mloc[o] && (e.mloc[o] = t.mloc[o]);
+                                                e.locator[a] = Object.keys(e.mloc).join(",");
+                                            }
+                                            return !0;
+                                        }
+                                        e.alternation = void 0;
+                                    }
+                                    return !1;
+                                }
+                                function b(e, t) {
+                                    if (e.locator.length !== t.locator.length) return !1;
+                                    for (var a = e.alternation + 1; a < e.locator.length; a++) if (e.locator[a] !== t.locator[a]) return !1;
+                                    return !0;
+                                }
+                                if (d > e + u._maxTestPos) throw "Inputmask: There is probably an error in your mask definition or in the code. Create an issue on github with an example of the mask you are using. " + s.mask;
+                                if (d === e && void 0 === n.matches) return h.push({
+                                    match: n,
+                                    locator: r.reverse(),
+                                    cd: m,
+                                    mloc: {}
+                                }), !0;
+                                if (void 0 !== n.matches) {
+                                    if (n.isGroup && f !== n) {
+                                        if (n = o(t.matches[t.matches.indexOf(n) + 1], r, f)) return !0;
+                                    } else if (n.isOptional) {
+                                        var x = n, P = h.length;
+                                        if (n = g(n, a, r, f)) {
+                                            if (h.forEach((function(e, t) {
+                                                t >= P && (e.match.optionality = !0);
+                                            })), i = h[h.length - 1].match, void 0 !== f || !p(i, x)) return !0;
+                                            v = !0, d = e;
+                                        }
+                                    } else if (n.isAlternator) {
+                                        var E, S = n, _ = [], M = h.slice(), w = r.length, O = !1, T = a.length > 0 ? a.shift() : -1;
+                                        if (-1 === T || "string" == typeof T) {
+                                            var C, A = d, D = a.slice(), B = [];
+                                            if ("string" == typeof T) B = T.split(","); else for (C = 0; C < S.matches.length; C++) B.push(C.toString());
+                                            if (void 0 !== s.excludes[e]) {
+                                                for (var j = B.slice(), R = 0, L = s.excludes[e].length; R < L; R++) {
+                                                    var I = s.excludes[e][R].toString().split(":");
+                                                    r.length == I[1] && B.splice(B.indexOf(I[0]), 1);
+                                                }
+                                                0 === B.length && (delete s.excludes[e], B = j);
+                                            }
+                                            (!0 === u.keepStatic || isFinite(parseInt(u.keepStatic)) && A >= u.keepStatic) && (B = B.slice(0, 1));
+                                            for (var F = 0; F < B.length; F++) {
+                                                C = parseInt(B[F]), h = [], a = "string" == typeof T && k(d, C, w) || D.slice();
+                                                var N = S.matches[C];
+                                                if (N && o(N, [ C ].concat(r), f)) n = !0; else if (0 === F && (O = !0), N && N.matches && N.matches.length > S.matches[0].matches.length) break;
+                                                E = h.slice(), d = A, h = [];
+                                                for (var V = 0; V < E.length; V++) {
+                                                    var G = E[V], H = !1;
+                                                    G.match.jit = G.match.jit || O, G.alternation = G.alternation || w, y(G);
+                                                    for (var K = 0; K < _.length; K++) {
+                                                        var U = _[K];
+                                                        if ("string" != typeof T || void 0 !== G.alternation && B.includes(G.locator[G.alternation].toString())) {
+                                                            if (G.match.nativeDef === U.match.nativeDef) {
+                                                                H = !0, y(U, G);
+                                                                break;
+                                                            }
+                                                            if (l(G, U, u)) {
+                                                                y(G, U) && (H = !0, _.splice(_.indexOf(U), 0, G));
+                                                                break;
+                                                            }
+                                                            if (l(U, G, u)) {
+                                                                y(U, G);
+                                                                break;
+                                                            }
+                                                            if (Q = U, !0 === (W = G).match.static && !0 !== Q.match.static && Q.match.fn.test(W.match.def, s, e, !1, u, !1)) {
+                                                                b(G, U) || void 0 !== c.inputmask.userOptions.keepStatic ? y(G, U) && (H = !0, _.splice(_.indexOf(U), 0, G)) : u.keepStatic = !0;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    H || _.push(G);
+                                                }
+                                            }
+                                            h = M.concat(_), d = e, v = h.length > 0, n = _.length > 0, a = D.slice();
+                                        } else n = o(S.matches[T] || t.matches[T], [ T ].concat(r), f);
+                                        if (n) return !0;
+                                    } else if (n.isQuantifier && f !== t.matches[t.matches.indexOf(n) - 1]) for (var $ = n, z = a.length > 0 ? a.shift() : 0; z < (isNaN($.quantifier.max) ? z + 1 : $.quantifier.max) && d <= e; z++) {
+                                        var q = t.matches[t.matches.indexOf($) - 1];
+                                        if (n = o(q, [ z ].concat(r), q)) {
+                                            if ((i = h[h.length - 1].match).optionalQuantifier = z >= $.quantifier.min, i.jit = (z + 1) * (q.matches.indexOf(i) + 1) > $.quantifier.jit, 
+                                            i.optionalQuantifier && p(i, q)) {
+                                                v = !0, d = e;
+                                                break;
+                                            }
+                                            return i.jit && (s.jitOffset[e] = q.matches.length - q.matches.indexOf(i)), !0;
+                                        }
+                                    } else if (n = g(n, a, r, f)) return !0;
+                                } else d++;
+                                var W, Q;
+                            }
+                            for (var f = a.length > 0 ? a.shift() : 0; f < t.matches.length; f++) if (!0 !== t.matches[f].isQuantifier) {
+                                var p = o(t.matches[f], [ f ].concat(n), r);
+                                if (p && d === e) return p;
+                                if (d > e) break;
+                            }
+                        }
+                        if (e > -1) {
+                            if (void 0 === t) {
+                                for (var k, y = e - 1; void 0 === (k = s.validPositions[y] || s.tests[y]) && y > -1; ) y--;
+                                void 0 !== k && y > -1 && (p = function(e, t) {
+                                    var a, i = [];
+                                    return Array.isArray(t) || (t = [ t ]), t.length > 0 && (void 0 === t[0].alternation || !0 === u.keepStatic ? 0 === (i = o.call(n, e, t.slice()).locator.slice()).length && (i = t[0].locator.slice()) : t.forEach((function(e) {
+                                        "" !== e.def && (0 === i.length ? (a = e.alternation, i = e.locator.slice()) : e.locator[a] && -1 === i[a].toString().indexOf(e.locator[a]) && (i[a] += "," + e.locator[a]));
+                                    }))), i;
+                                }(y, k), m = p.join(""), d = y);
+                            }
+                            if (s.tests[e] && s.tests[e][0].cd === m) return s.tests[e];
+                            for (var b = p.shift(); b < f.length; b++) {
+                                if (g(f[b], p, [ b ]) && d === e || d > e) break;
+                            }
+                        }
+                        return (0 === h.length || v) && h.push({
+                            match: {
+                                fn: null,
+                                static: !0,
+                                optionality: !1,
+                                casing: null,
+                                def: "",
+                                placeholder: ""
+                            },
+                            locator: [],
+                            mloc: {},
+                            cd: m
+                        }), void 0 !== t && s.tests[e] ? r.extend(!0, [], h) : (s.tests[e] = r.extend(!0, [], h), 
+                        s.tests[e]);
+                    }
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.determineTestTemplate = o, t.getDecisionTaker = i, t.getMaskTemplate = function(e, t, a, i, s) {
+                        var l = this, c = this.opts, f = this.maskset, d = c.greedy;
+                        s && (c.greedy = !1);
+                        t = t || 0;
+                        var p, h, v, m, g = [], k = 0;
+                        do {
+                            if (!0 === e && f.validPositions[k]) v = s && !0 === f.validPositions[k].match.optionality && void 0 === f.validPositions[k + 1] && (!0 === f.validPositions[k].generatedInput || f.validPositions[k].input == c.skipOptionalPartCharacter && k > 0) ? o.call(l, k, u.call(l, k, p, k - 1)) : f.validPositions[k], 
+                            h = v.match, p = v.locator.slice(), g.push(!0 === a ? v.input : !1 === a ? h.nativeDef : n.call(l, k, h)); else {
+                                v = r.call(l, k, p, k - 1), h = v.match, p = v.locator.slice();
+                                var y = !0 !== i && (!1 !== c.jitMasking ? c.jitMasking : h.jit);
+                                (m = (m && h.static && h.def !== c.groupSeparator && null === h.fn || f.validPositions[k - 1] && h.static && h.def !== c.groupSeparator && null === h.fn) && f.tests[k] && 1 === f.tests[k].length) || !1 === y || void 0 === y || "number" == typeof y && isFinite(y) && y > k ? g.push(!1 === a ? h.nativeDef : n.call(l, k, h)) : m = !1;
+                            }
+                            k++;
+                        } while (!0 !== h.static || "" !== h.def || t > k);
+                        "" === g[g.length - 1] && g.pop();
+                        !1 === a && void 0 !== f.maskLength || (f.maskLength = k - 1);
+                        return c.greedy = d, g;
+                    }, t.getPlaceholder = n, t.getTest = s, t.getTests = u, t.getTestTemplate = r, t.isSubsetOf = l;
+                },
+                7215: function(e, t, a) {
+                    Object.defineProperty(t, "__esModule", {
+                        value: !0
+                    }), t.alternate = l, t.checkAlternationMatch = function(e, t, a) {
+                        for (var i, n = this.opts.greedy ? t : t.slice(0, 1), r = !1, o = void 0 !== a ? a.split(",") : [], s = 0; s < o.length; s++) -1 !== (i = e.indexOf(o[s])) && e.splice(i, 1);
+                        for (var l = 0; l < e.length; l++) if (n.includes(e[l])) {
+                            r = !0;
+                            break;
+                        }
+                        return r;
+                    }, t.isComplete = c, t.isValid = f, t.refreshFromBuffer = p, t.revalidateMask = v, 
+                    t.handleRemove = function(e, t, a, i, s) {
+                        var u = this, c = this.maskset, f = this.opts;
+                        if ((f.numericInput || u.isRTL) && (t === r.default.BACKSPACE ? t = r.default.DELETE : t === r.default.DELETE && (t = r.default.BACKSPACE), 
+                        u.isRTL)) {
+                            var d = a.end;
+                            a.end = a.begin, a.begin = d;
+                        }
+                        var p, h = o.getLastValidPosition.call(u, void 0, !0);
+                        a.end >= o.getBuffer.call(u).length && h >= a.end && (a.end = h + 1);
+                        t === r.default.BACKSPACE ? a.end - a.begin < 1 && (a.begin = o.seekPrevious.call(u, a.begin)) : t === r.default.DELETE && a.begin === a.end && (a.end = o.isMask.call(u, a.end, !0, !0) ? a.end + 1 : o.seekNext.call(u, a.end) + 1);
+                        if (!1 !== (p = v.call(u, a))) {
+                            if (!0 !== i && !1 !== f.keepStatic || null !== f.regex && -1 !== n.getTest.call(u, a.begin).match.def.indexOf("|")) {
+                                var m = l.call(u, !0);
+                                if (m) {
+                                    var g = void 0 !== m.caret ? m.caret : m.pos ? o.seekNext.call(u, m.pos.begin ? m.pos.begin : m.pos) : o.getLastValidPosition.call(u, -1, !0);
+                                    (t !== r.default.DELETE || a.begin > g) && a.begin;
+                                }
+                            }
+                            !0 !== i && (c.p = t === r.default.DELETE ? a.begin + p : a.begin, c.p = o.determineNewCaretPosition.call(u, {
+                                begin: c.p,
+                                end: c.p
+                            }, !1).begin);
+                        }
+                    };
+                    var i, n = a(4713), r = (i = a(4528)) && i.__esModule ? i : {
+                        default: i
+                    }, o = a(8711), s = a(6030);
+                    function l(e, t, a, i, r, s) {
+                        var u, c, d, p, h, v, m, g, k, y, b, x = this, P = this.dependencyLib, E = this.opts, S = x.maskset, _ = P.extend(!0, {}, S.validPositions), M = P.extend(!0, {}, S.tests), w = !1, O = !1, T = void 0 !== r ? r : o.getLastValidPosition.call(x);
+                        if (s && (y = s.begin, b = s.end, s.begin > s.end && (y = s.end, b = s.begin)), 
+                        -1 === T && void 0 === r) u = 0, c = (p = n.getTest.call(x, u)).alternation; else for (;T >= 0; T--) if ((d = S.validPositions[T]) && void 0 !== d.alternation) {
+                            if (p && p.locator[d.alternation] !== d.locator[d.alternation]) break;
+                            u = T, c = S.validPositions[u].alternation, p = d;
+                        }
+                        if (void 0 !== c) {
+                            m = parseInt(u), S.excludes[m] = S.excludes[m] || [], !0 !== e && S.excludes[m].push((0, n.getDecisionTaker)(p) + ":" + p.alternation);
+                            var C = [], A = -1;
+                            for (h = m; h < o.getLastValidPosition.call(x, void 0, !0) + 1; h++) -1 === A && e <= h && void 0 !== t && (C.push(t), 
+                            A = C.length - 1), (v = S.validPositions[h]) && !0 !== v.generatedInput && (void 0 === s || h < y || h >= b) && C.push(v.input), 
+                            delete S.validPositions[h];
+                            for (-1 === A && void 0 !== t && (C.push(t), A = C.length - 1); void 0 !== S.excludes[m] && S.excludes[m].length < 10; ) {
+                                for (S.tests = {}, o.resetMaskSet.call(x, !0), w = !0, h = 0; h < C.length && (g = w.caret || o.getLastValidPosition.call(x, void 0, !0) + 1, 
+                                k = C[h], w = f.call(x, g, k, !1, i, !0)); h++) h === A && (O = w), 1 == e && w && (O = {
+                                    caretPos: h
+                                });
+                                if (w) break;
+                                if (o.resetMaskSet.call(x), p = n.getTest.call(x, m), S.validPositions = P.extend(!0, {}, _), 
+                                S.tests = P.extend(!0, {}, M), !S.excludes[m]) {
+                                    O = l.call(x, e, t, a, i, m - 1, s);
+                                    break;
+                                }
+                                var D = (0, n.getDecisionTaker)(p);
+                                if (-1 !== S.excludes[m].indexOf(D + ":" + p.alternation)) {
+                                    O = l.call(x, e, t, a, i, m - 1, s);
+                                    break;
+                                }
+                                for (S.excludes[m].push(D + ":" + p.alternation), h = m; h < o.getLastValidPosition.call(x, void 0, !0) + 1; h++) delete S.validPositions[h];
+                            }
+                        }
+                        return O && !1 === E.keepStatic || delete S.excludes[m], O;
+                    }
+                    function u(e, t, a) {
+                        var i = this.opts, n = this.maskset;
+                        switch (i.casing || t.casing) {
+                          case "upper":
+                            e = e.toUpperCase();
+                            break;
+
+                          case "lower":
+                            e = e.toLowerCase();
+                            break;
+
+                          case "title":
+                            var o = n.validPositions[a - 1];
+                            e = 0 === a || o && o.input === String.fromCharCode(r.default.SPACE) ? e.toUpperCase() : e.toLowerCase();
+                            break;
+
+                          default:
+                            if ("function" == typeof i.casing) {
+                                var s = Array.prototype.slice.call(arguments);
+                                s.push(n.validPositions), e = i.casing.apply(this, s);
+                            }
+                        }
+                        return e;
+                    }
+                    function c(e) {
+                        var t = this, a = this.opts, i = this.maskset;
+                        if ("function" == typeof a.isComplete) return a.isComplete(e, a);
+                        if ("*" !== a.repeat) {
+                            var r = !1, s = o.determineLastRequiredPosition.call(t, !0), l = o.seekPrevious.call(t, s.l);
+                            if (void 0 === s.def || s.def.newBlockMarker || s.def.optionality || s.def.optionalQuantifier) {
+                                r = !0;
+                                for (var u = 0; u <= l; u++) {
+                                    var c = n.getTestTemplate.call(t, u).match;
+                                    if (!0 !== c.static && void 0 === i.validPositions[u] && !0 !== c.optionality && !0 !== c.optionalQuantifier || !0 === c.static && e[u] !== n.getPlaceholder.call(t, u, c)) {
+                                        r = !1;
+                                        break;
+                                    }
+                                }
+                            }
+                            return r;
+                        }
+                    }
+                    function f(e, t, a, i, r, s, d) {
+                        var m = this, g = this.dependencyLib, k = this.opts, y = m.maskset;
+                        function b(e) {
+                            return m.isRTL ? e.begin - e.end > 1 || e.begin - e.end == 1 : e.end - e.begin > 1 || e.end - e.begin == 1;
+                        }
+                        a = !0 === a;
+                        var x = e;
+                        function P(e) {
+                            if (void 0 !== e) {
+                                if (void 0 !== e.remove && (Array.isArray(e.remove) || (e.remove = [ e.remove ]), 
+                                e.remove.sort((function(e, t) {
+                                    return t.pos - e.pos;
+                                })).forEach((function(e) {
+                                    v.call(m, {
+                                        begin: e,
+                                        end: e + 1
+                                    });
+                                })), e.remove = void 0), void 0 !== e.insert && (Array.isArray(e.insert) || (e.insert = [ e.insert ]), 
+                                e.insert.sort((function(e, t) {
+                                    return e.pos - t.pos;
+                                })).forEach((function(e) {
+                                    "" !== e.c && f.call(m, e.pos, e.c, void 0 === e.strict || e.strict, void 0 !== e.fromIsValid ? e.fromIsValid : i);
+                                })), e.insert = void 0), e.refreshFromBuffer && e.buffer) {
+                                    var t = e.refreshFromBuffer;
+                                    p.call(m, !0 === t ? t : t.start, t.end, e.buffer), e.refreshFromBuffer = void 0;
+                                }
+                                void 0 !== e.rewritePosition && (x = e.rewritePosition, e = !0);
+                            }
+                            return e;
+                        }
+                        function E(t, a, r) {
+                            var s = !1;
+                            return n.getTests.call(m, t).every((function(l, c) {
+                                var f = l.match;
+                                if (o.getBuffer.call(m, !0), !1 !== (s = (!f.jit || void 0 !== y.validPositions[o.seekPrevious.call(m, t)]) && (null != f.fn ? f.fn.test(a, y, t, r, k, b(e)) : (a === f.def || a === k.skipOptionalPartCharacter) && "" !== f.def && {
+                                    c: n.getPlaceholder.call(m, t, f, !0) || f.def,
+                                    pos: t
+                                }))) {
+                                    var d = void 0 !== s.c ? s.c : a, p = t;
+                                    return d = d === k.skipOptionalPartCharacter && !0 === f.static ? n.getPlaceholder.call(m, t, f, !0) || f.def : d, 
+                                    !0 !== (s = P(s)) && void 0 !== s.pos && s.pos !== t && (p = s.pos), !0 !== s && void 0 === s.pos && void 0 === s.c ? !1 : (!1 === v.call(m, e, g.extend({}, l, {
+                                        input: u.call(m, d, f, p)
+                                    }), i, p) && (s = !1), !1);
+                                }
+                                return !0;
+                            })), s;
+                        }
+                        void 0 !== e.begin && (x = m.isRTL ? e.end : e.begin);
+                        var S = !0, _ = g.extend(!0, {}, y.validPositions);
+                        if (!1 === k.keepStatic && void 0 !== y.excludes[x] && !0 !== r && !0 !== i) for (var M = x; M < (m.isRTL ? e.begin : e.end); M++) void 0 !== y.excludes[M] && (y.excludes[M] = void 0, 
+                        delete y.tests[M]);
+                        if ("function" == typeof k.preValidation && !0 !== i && !0 !== s && (S = P(S = k.preValidation.call(m, o.getBuffer.call(m), x, t, b(e), k, y, e, a || r))), 
+                        !0 === S) {
+                            if (S = E(x, t, a), (!a || !0 === i) && !1 === S && !0 !== s) {
+                                var w = y.validPositions[x];
+                                if (!w || !0 !== w.match.static || w.match.def !== t && t !== k.skipOptionalPartCharacter) {
+                                    if (k.insertMode || void 0 === y.validPositions[o.seekNext.call(m, x)] || e.end > x) {
+                                        var O = !1;
+                                        if (y.jitOffset[x] && void 0 === y.validPositions[o.seekNext.call(m, x)] && !1 !== (S = f.call(m, x + y.jitOffset[x], t, !0, !0)) && (!0 !== r && (S.caret = x), 
+                                        O = !0), e.end > x && (y.validPositions[x] = void 0), !O && !o.isMask.call(m, x, k.keepStatic && 0 === x)) for (var T = x + 1, C = o.seekNext.call(m, x, !1, 0 !== x); T <= C; T++) if (!1 !== (S = E(T, t, a))) {
+                                            S = h.call(m, x, void 0 !== S.pos ? S.pos : T) || S, x = T;
+                                            break;
+                                        }
+                                    }
+                                } else S = {
+                                    caret: o.seekNext.call(m, x)
+                                };
+                            }
+                            !1 !== S || !k.keepStatic || !c.call(m, o.getBuffer.call(m)) && 0 !== x || a || !0 === r ? b(e) && y.tests[x] && y.tests[x].length > 1 && k.keepStatic && !a && !0 !== r && (S = l.call(m, !0)) : S = l.call(m, x, t, a, i, void 0, e), 
+                            !0 === S && (S = {
+                                pos: x
+                            });
+                        }
+                        if ("function" == typeof k.postValidation && !0 !== i && !0 !== s) {
+                            var A = k.postValidation.call(m, o.getBuffer.call(m, !0), void 0 !== e.begin ? m.isRTL ? e.end : e.begin : e, t, S, k, y, a, d);
+                            void 0 !== A && (S = !0 === A ? S : A);
+                        }
+                        S && void 0 === S.pos && (S.pos = x), !1 === S || !0 === s ? (o.resetMaskSet.call(m, !0), 
+                        y.validPositions = g.extend(!0, {}, _)) : h.call(m, void 0, x, !0);
+                        var D = P(S);
+                        void 0 !== m.maxLength && (o.getBuffer.call(m).length > m.maxLength && !i && (o.resetMaskSet.call(m, !0), 
+                        y.validPositions = g.extend(!0, {}, _), D = !1));
+                        return D;
+                    }
+                    function d(e, t, a) {
+                        for (var i = this.maskset, r = !1, o = n.getTests.call(this, e), s = 0; s < o.length; s++) {
+                            if (o[s].match && (o[s].match.nativeDef === t.match[a.shiftPositions ? "def" : "nativeDef"] && (!a.shiftPositions || !t.match.static) || o[s].match.nativeDef === t.match.nativeDef || a.regex && !o[s].match.static && o[s].match.fn.test(t.input))) {
+                                r = !0;
+                                break;
+                            }
+                            if (o[s].match && o[s].match.def === t.match.nativeDef) {
+                                r = void 0;
+                                break;
+                            }
+                        }
+                        return !1 === r && void 0 !== i.jitOffset[e] && (r = d.call(this, e + i.jitOffset[e], t, a)), 
+                        r;
+                    }
+                    function p(e, t, a) {
+                        var i, n, r = this, l = this.maskset, u = this.opts, c = this.dependencyLib, f = u.skipOptionalPartCharacter, d = r.isRTL ? a.slice().reverse() : a;
+                        if (u.skipOptionalPartCharacter = "", !0 === e) o.resetMaskSet.call(r), l.tests = {}, 
+                        e = 0, t = a.length, n = o.determineNewCaretPosition.call(r, {
+                            begin: 0,
+                            end: 0
+                        }, !1).begin; else {
+                            for (i = e; i < t; i++) delete l.validPositions[i];
+                            n = e;
+                        }
+                        var p = new c.Event("keypress");
+                        for (i = e; i < t; i++) {
+                            p.which = d[i].toString().charCodeAt(0), r.ignorable = !1;
+                            var h = s.EventHandlers.keypressEvent.call(r, p, !0, !1, !1, n);
+                            !1 !== h && void 0 !== h && (n = h.forwardPosition);
+                        }
+                        u.skipOptionalPartCharacter = f;
+                    }
+                    function h(e, t, a) {
+                        var i = this, r = this.maskset, s = this.dependencyLib;
+                        if (void 0 === e) for (e = t - 1; e > 0 && !r.validPositions[e]; e--) ;
+                        for (var l = e; l < t; l++) {
+                            if (void 0 === r.validPositions[l] && !o.isMask.call(i, l, !1)) if (0 == l ? n.getTest.call(i, l) : r.validPositions[l - 1]) {
+                                var u = n.getTests.call(i, l).slice();
+                                "" === u[u.length - 1].match.def && u.pop();
+                                var c, d = n.determineTestTemplate.call(i, l, u);
+                                if (d && (!0 !== d.match.jit || "master" === d.match.newBlockMarker && (c = r.validPositions[l + 1]) && !0 === c.match.optionalQuantifier) && ((d = s.extend({}, d, {
+                                    input: n.getPlaceholder.call(i, l, d.match, !0) || d.match.def
+                                })).generatedInput = !0, v.call(i, l, d, !0), !0 !== a)) {
+                                    var p = r.validPositions[t].input;
+                                    return r.validPositions[t] = void 0, f.call(i, t, p, !0, !0);
+                                }
+                            }
+                        }
+                    }
+                    function v(e, t, a, i) {
+                        var r = this, s = this.maskset, l = this.opts, u = this.dependencyLib;
+                        function c(e, t, a) {
+                            var i = t[e];
+                            if (void 0 !== i && !0 === i.match.static && !0 !== i.match.optionality && (void 0 === t[0] || void 0 === t[0].alternation)) {
+                                var n = a.begin <= e - 1 ? t[e - 1] && !0 === t[e - 1].match.static && t[e - 1] : t[e - 1], r = a.end > e + 1 ? t[e + 1] && !0 === t[e + 1].match.static && t[e + 1] : t[e + 1];
+                                return n && r;
+                            }
+                            return !1;
+                        }
+                        var p = 0, h = void 0 !== e.begin ? e.begin : e, v = void 0 !== e.end ? e.end : e, m = !0;
+                        if (e.begin > e.end && (h = e.end, v = e.begin), i = void 0 !== i ? i : h, h !== v || l.insertMode && void 0 !== s.validPositions[i] && void 0 === a || void 0 === t) {
+                            var g, k = u.extend(!0, {}, s.validPositions), y = o.getLastValidPosition.call(r, void 0, !0);
+                            for (s.p = h, g = y; g >= h; g--) delete s.validPositions[g], void 0 === t && delete s.tests[g + 1];
+                            var b, x, P = i, E = P;
+                            for (t && (s.validPositions[i] = u.extend(!0, {}, t), E++, P++), g = t ? v : v - 1; g <= y; g++) {
+                                if (void 0 !== (b = k[g]) && !0 !== b.generatedInput && (g >= v || g >= h && c(g, k, {
+                                    begin: h,
+                                    end: v
+                                }))) {
+                                    for (;"" !== n.getTest.call(r, E).match.def; ) {
+                                        if (!1 !== (x = d.call(r, E, b, l)) || "+" === b.match.def) {
+                                            "+" === b.match.def && o.getBuffer.call(r, !0);
+                                            var S = f.call(r, E, b.input, "+" !== b.match.def, !0);
+                                            if (m = !1 !== S, P = (S.pos || E) + 1, !m && x) break;
+                                        } else m = !1;
+                                        if (m) {
+                                            void 0 === t && b.match.static && g === e.begin && p++;
+                                            break;
+                                        }
+                                        if (!m && E > s.maskLength) break;
+                                        E++;
+                                    }
+                                    "" == n.getTest.call(r, E).match.def && (m = !1), E = P;
+                                }
+                                if (!m) break;
+                            }
+                            if (!m) return s.validPositions = u.extend(!0, {}, k), o.resetMaskSet.call(r, !0), 
+                            !1;
+                        } else t && n.getTest.call(r, i).match.cd === t.match.cd && (s.validPositions[i] = u.extend(!0, {}, t));
+                        return o.resetMaskSet.call(r, !0), p;
+                    }
+                }
+            }, t = {};
+            function a(i) {
+                var n = t[i];
+                if (void 0 !== n) return n.exports;
+                var r = t[i] = {
+                    exports: {}
+                };
+                return e[i](r, r.exports, a), r.exports;
+            }
+            var i = {};
+            return function() {
+                var e, t = i;
+                Object.defineProperty(t, "__esModule", {
+                    value: !0
+                }), t.default = void 0, a(3851), a(219), a(207), a(5296);
+                var n = ((e = a(2394)) && e.__esModule ? e : {
+                    default: e
+                }).default;
+                t.default = n;
+            }(), i;
+        }();
+    }));
+    });
+
+    var Inputmask$1 = /*@__PURE__*/getDefaultExportFromCjs(inputmask);
+
     /* src\components\form\input\TextInput.svelte generated by Svelte v3.42.4 */
+    const file$L = "src\\components\\form\\input\\TextInput.svelte";
 
-    const file$I = "src\\components\\form\\input\\TextInput.svelte";
-
-    function create_fragment$K(ctx) {
+    function create_fragment$N(ctx) {
     	let input;
     	let input_class_value;
+    	let input_data_inputmask_value;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
     			input = element("input");
-    			attr_dev(input, "class", input_class_value = "form-control input-sm " + (/*$$props*/ ctx[8].class || ''));
-    			attr_dev(input, "name", /*name*/ ctx[3]);
+    			attr_dev(input, "class", input_class_value = "form-control input-sm " + (/*$$props*/ ctx[9].class || ''));
     			attr_dev(input, "type", "text");
+    			attr_dev(input, "data-inputmask", input_data_inputmask_value = /*inputMask*/ ctx[8] || "");
     			attr_dev(input, "id", /*id*/ ctx[2]);
+    			attr_dev(input, "name", /*name*/ ctx[3]);
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[4]);
     			attr_dev(input, "pattern", /*pattern*/ ctx[5]);
     			input.readOnly = /*readonly*/ ctx[6];
     			input.disabled = /*disabled*/ ctx[7];
-    			add_location(input, file$I, 16, 0, 339);
+    			add_location(input, file$L, 21, 0, 467);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input, anchor);
-    			/*input_binding*/ ctx[11](input);
-    			set_input_value(input, /*value*/ ctx[0]);
+    			/*input_binding*/ ctx[12](input);
+    			set_input_value(input, /*value*/ ctx[1]);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[12]),
-    					listen_dev(input, "keypress", /*keypress_handler*/ ctx[10], false, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[13]),
+    					listen_dev(input, "keypress", /*keypress_handler*/ ctx[11], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*$$props*/ 256 && input_class_value !== (input_class_value = "form-control input-sm " + (/*$$props*/ ctx[8].class || ''))) {
+    			if (dirty & /*$$props*/ 512 && input_class_value !== (input_class_value = "form-control input-sm " + (/*$$props*/ ctx[9].class || ''))) {
     				attr_dev(input, "class", input_class_value);
     			}
 
-    			if (dirty & /*name*/ 8) {
-    				attr_dev(input, "name", /*name*/ ctx[3]);
+    			if (dirty & /*inputMask*/ 256 && input_data_inputmask_value !== (input_data_inputmask_value = /*inputMask*/ ctx[8] || "")) {
+    				attr_dev(input, "data-inputmask", input_data_inputmask_value);
     			}
 
     			if (dirty & /*id*/ 4) {
     				attr_dev(input, "id", /*id*/ ctx[2]);
+    			}
+
+    			if (dirty & /*name*/ 8) {
+    				attr_dev(input, "name", /*name*/ ctx[3]);
     			}
 
     			if (dirty & /*placeholder*/ 16) {
@@ -2195,15 +5045,15 @@ var app = (function (jQuery) {
     				prop_dev(input, "disabled", /*disabled*/ ctx[7]);
     			}
 
-    			if (dirty & /*value*/ 1 && input.value !== /*value*/ ctx[0]) {
-    				set_input_value(input, /*value*/ ctx[0]);
+    			if (dirty & /*value*/ 2 && input.value !== /*value*/ ctx[1]) {
+    				set_input_value(input, /*value*/ ctx[1]);
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(input);
-    			/*input_binding*/ ctx[11](null);
+    			/*input_binding*/ ctx[12](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -2211,7 +5061,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$K.name,
+    		id: create_fragment$N.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2220,7 +5070,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$K($$self, $$props, $$invalidate) {
+    function instance$N($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TextInput', slots, []);
     	let { id = "" } = $$props;
@@ -2230,6 +5080,7 @@ var app = (function (jQuery) {
     	let { pattern = null } = $$props;
     	let { readonly = false } = $$props;
     	let { disabled = false } = $$props;
+    	let { inputMask = null } = $$props;
     	let { inputElement = null } = $$props;
 
     	function isValid() {
@@ -2243,28 +5094,30 @@ var app = (function (jQuery) {
     	function input_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			inputElement = $$value;
-    			$$invalidate(1, inputElement);
+    			$$invalidate(0, inputElement);
     		});
     	}
 
     	function input_input_handler() {
     		value = this.value;
-    		$$invalidate(0, value);
+    		$$invalidate(1, value);
     	}
 
     	$$self.$$set = $$new_props => {
-    		$$invalidate(8, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+    		$$invalidate(9, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
     		if ('id' in $$new_props) $$invalidate(2, id = $$new_props.id);
-    		if ('value' in $$new_props) $$invalidate(0, value = $$new_props.value);
+    		if ('value' in $$new_props) $$invalidate(1, value = $$new_props.value);
     		if ('name' in $$new_props) $$invalidate(3, name = $$new_props.name);
     		if ('placeholder' in $$new_props) $$invalidate(4, placeholder = $$new_props.placeholder);
     		if ('pattern' in $$new_props) $$invalidate(5, pattern = $$new_props.pattern);
     		if ('readonly' in $$new_props) $$invalidate(6, readonly = $$new_props.readonly);
     		if ('disabled' in $$new_props) $$invalidate(7, disabled = $$new_props.disabled);
-    		if ('inputElement' in $$new_props) $$invalidate(1, inputElement = $$new_props.inputElement);
+    		if ('inputMask' in $$new_props) $$invalidate(8, inputMask = $$new_props.inputMask);
+    		if ('inputElement' in $$new_props) $$invalidate(0, inputElement = $$new_props.inputElement);
     	};
 
     	$$self.$capture_state = () => ({
+    		Inputmask: Inputmask$1,
     		id,
     		value,
     		name,
@@ -2272,37 +5125,46 @@ var app = (function (jQuery) {
     		pattern,
     		readonly,
     		disabled,
+    		inputMask,
     		inputElement,
     		isValid
     	});
 
     	$$self.$inject_state = $$new_props => {
-    		$$invalidate(8, $$props = assign(assign({}, $$props), $$new_props));
+    		$$invalidate(9, $$props = assign(assign({}, $$props), $$new_props));
     		if ('id' in $$props) $$invalidate(2, id = $$new_props.id);
-    		if ('value' in $$props) $$invalidate(0, value = $$new_props.value);
+    		if ('value' in $$props) $$invalidate(1, value = $$new_props.value);
     		if ('name' in $$props) $$invalidate(3, name = $$new_props.name);
     		if ('placeholder' in $$props) $$invalidate(4, placeholder = $$new_props.placeholder);
     		if ('pattern' in $$props) $$invalidate(5, pattern = $$new_props.pattern);
     		if ('readonly' in $$props) $$invalidate(6, readonly = $$new_props.readonly);
     		if ('disabled' in $$props) $$invalidate(7, disabled = $$new_props.disabled);
-    		if ('inputElement' in $$props) $$invalidate(1, inputElement = $$new_props.inputElement);
+    		if ('inputMask' in $$props) $$invalidate(8, inputMask = $$new_props.inputMask);
+    		if ('inputElement' in $$props) $$invalidate(0, inputElement = $$new_props.inputElement);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*inputElement*/ 1) {
+    			inputElement && Inputmask$1().mask(inputElement);
+    		}
+    	};
+
     	$$props = exclude_internal_props($$props);
 
     	return [
-    		value,
     		inputElement,
+    		value,
     		id,
     		name,
     		placeholder,
     		pattern,
     		readonly,
     		disabled,
+    		inputMask,
     		$$props,
     		isValid,
     		keypress_handler,
@@ -2315,23 +5177,24 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$K, create_fragment$K, safe_not_equal, {
+    		init(this, options, instance$N, create_fragment$N, safe_not_equal, {
     			id: 2,
-    			value: 0,
+    			value: 1,
     			name: 3,
     			placeholder: 4,
     			pattern: 5,
     			readonly: 6,
     			disabled: 7,
-    			inputElement: 1,
-    			isValid: 9
+    			inputMask: 8,
+    			inputElement: 0,
+    			isValid: 10
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TextInput",
     			options,
-    			id: create_fragment$K.name
+    			id: create_fragment$N.name
     		});
     	}
 
@@ -2391,6 +5254,14 @@ var app = (function (jQuery) {
     		throw new Error("<TextInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
+    	get inputMask() {
+    		throw new Error("<TextInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set inputMask(value) {
+    		throw new Error("<TextInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
     	get inputElement() {
     		throw new Error("<TextInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
@@ -2400,7 +5271,7 @@ var app = (function (jQuery) {
     	}
 
     	get isValid() {
-    		return this.$$.ctx[9];
+    		return this.$$.ctx[10];
     	}
 
     	set isValid(value) {
@@ -2410,9 +5281,9 @@ var app = (function (jQuery) {
 
     /* src\components\form\structure\Label.svelte generated by Svelte v3.42.4 */
 
-    const file$H = "src\\components\\form\\structure\\Label.svelte";
+    const file$K = "src\\components\\form\\structure\\Label.svelte";
 
-    function create_fragment$J(ctx) {
+    function create_fragment$M(ctx) {
     	let label;
     	let label_class_value;
     	let current;
@@ -2425,7 +5296,7 @@ var app = (function (jQuery) {
     			if (default_slot) default_slot.c();
     			attr_dev(label, "class", label_class_value = /*$$props*/ ctx[1].class || '');
     			attr_dev(label, "for", /*inputId*/ ctx[0]);
-    			add_location(label, file$H, 4, 0, 46);
+    			add_location(label, file$K, 4, 0, 46);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2480,7 +5351,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$J.name,
+    		id: create_fragment$M.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2489,7 +5360,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$J($$self, $$props, $$invalidate) {
+    function instance$M($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Label', slots, ['default']);
     	let { inputId } = $$props;
@@ -2518,13 +5389,13 @@ var app = (function (jQuery) {
     class Label extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$J, create_fragment$J, safe_not_equal, { inputId: 0 });
+    		init(this, options, instance$M, create_fragment$M, safe_not_equal, { inputId: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Label",
     			options,
-    			id: create_fragment$J.name
+    			id: create_fragment$M.name
     		});
 
     		const { ctx } = this.$$;
@@ -2544,69 +5415,114 @@ var app = (function (jQuery) {
     	}
     }
 
-    /* src\components\form\input\CheckboxInput.svelte generated by Svelte v3.42.4 */
-    const file$G = "src\\components\\form\\input\\CheckboxInput.svelte";
+    /* src\components\form\input\Checkbox.svelte generated by Svelte v3.42.4 */
 
-    function create_fragment$I(ctx) {
+    const file$J = "src\\components\\form\\input\\Checkbox.svelte";
+
+    function create_fragment$L(ctx) {
+    	let div;
     	let input;
-    	let input_class_value;
+    	let t;
+    	let div_class_value;
+    	let current;
     	let mounted;
     	let dispose;
+    	const default_slot_template = /*#slots*/ ctx[8].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[7], null);
 
     	const block = {
     		c: function create() {
+    			div = element("div");
     			input = element("input");
-    			attr_dev(input, "class", input_class_value = "form-check-input " + (/*$$props*/ ctx[4].class || ""));
+    			t = space();
+    			if (default_slot) default_slot.c();
     			attr_dev(input, "type", "checkbox");
+    			input.disabled = /*disabled*/ ctx[4];
     			attr_dev(input, "id", /*id*/ ctx[1]);
     			input.__value = /*value*/ ctx[2];
     			input.value = input.__value;
     			attr_dev(input, "name", /*name*/ ctx[3]);
-    			add_location(input, file$G, 23, 0, 543);
+    			add_location(input, file$J, 10, 2, 247);
+    			attr_dev(div, "class", div_class_value = "icheck-" + /*level*/ ctx[5] + " " + (/*$$props*/ ctx[6].class || ''));
+    			add_location(div, file$J, 9, 0, 193);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, input, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input);
     			input.checked = /*checked*/ ctx[0];
+    			append_dev(div, t);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "change", /*input_change_handler*/ ctx[5]),
-    					listen_dev(input, "click", onClick, false, false, false),
-    					listen_dev(input, "keydown", onKeydown, false, false, false)
+    					listen_dev(input, "change", /*input_change_handler*/ ctx[10]),
+    					listen_dev(input, "click", /*click_handler*/ ctx[9], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*$$props*/ 16 && input_class_value !== (input_class_value = "form-check-input " + (/*$$props*/ ctx[4].class || ""))) {
-    				attr_dev(input, "class", input_class_value);
+    			if (!current || dirty & /*disabled*/ 16) {
+    				prop_dev(input, "disabled", /*disabled*/ ctx[4]);
     			}
 
-    			if (dirty & /*id*/ 2) {
+    			if (!current || dirty & /*id*/ 2) {
     				attr_dev(input, "id", /*id*/ ctx[1]);
     			}
 
-    			if (dirty & /*value*/ 4) {
+    			if (!current || dirty & /*value*/ 4) {
     				prop_dev(input, "__value", /*value*/ ctx[2]);
     				input.value = input.__value;
     			}
 
-    			if (dirty & /*name*/ 8) {
+    			if (!current || dirty & /*name*/ 8) {
     				attr_dev(input, "name", /*name*/ ctx[3]);
     			}
 
     			if (dirty & /*checked*/ 1) {
     				input.checked = /*checked*/ ctx[0];
     			}
+
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 128)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[7],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[7])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[7], dirty, null),
+    						null
+    					);
+    				}
+    			}
+
+    			if (!current || dirty & /*level, $$props*/ 96 && div_class_value !== (div_class_value = "icheck-" + /*level*/ ctx[5] + " " + (/*$$props*/ ctx[6].class || ''))) {
+    				attr_dev(div, "class", div_class_value);
+    			}
     		},
-    		i: noop,
-    		o: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(input);
+    			if (detaching) detach_dev(div);
+    			if (default_slot) default_slot.d(detaching);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -2614,7 +5530,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$I.name,
+    		id: create_fragment$L.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2623,26 +5539,19 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function onClick(ev) {
-    	
-    } // setTimeout(() => {
-    //   dispatch("change", ev.target.checked);
-
-    //   ev.target.checked = !ev.target.checked;
-    // }, 0);
-    function onKeydown(ev) {
-    	
-    } // if (!["Enter", " "].includes(ev.keyCode)) return;
-    // dispatch("change", !ev.target.checked);
-
-    function instance$I($$self, $$props, $$invalidate) {
+    function instance$L($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots('CheckboxInput', slots, []);
+    	validate_slots('Checkbox', slots, ['default']);
     	let { checked = false } = $$props;
     	let { id = "" } = $$props;
     	let { value = "" } = $$props;
     	let { name = "" } = $$props;
-    	const dispatch = createEventDispatcher();
+    	let { disabled = false } = $$props;
+    	let { level = "primary" } = $$props;
+
+    	function click_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
 
     	function input_change_handler() {
     		checked = this.checked;
@@ -2650,30 +5559,33 @@ var app = (function (jQuery) {
     	}
 
     	$$self.$$set = $$new_props => {
-    		$$invalidate(4, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+    		$$invalidate(6, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
     		if ('checked' in $$new_props) $$invalidate(0, checked = $$new_props.checked);
     		if ('id' in $$new_props) $$invalidate(1, id = $$new_props.id);
     		if ('value' in $$new_props) $$invalidate(2, value = $$new_props.value);
     		if ('name' in $$new_props) $$invalidate(3, name = $$new_props.name);
+    		if ('disabled' in $$new_props) $$invalidate(4, disabled = $$new_props.disabled);
+    		if ('level' in $$new_props) $$invalidate(5, level = $$new_props.level);
+    		if ('$$scope' in $$new_props) $$invalidate(7, $$scope = $$new_props.$$scope);
     	};
 
     	$$self.$capture_state = () => ({
-    		createEventDispatcher,
     		checked,
     		id,
     		value,
     		name,
-    		dispatch,
-    		onClick,
-    		onKeydown
+    		disabled,
+    		level
     	});
 
     	$$self.$inject_state = $$new_props => {
-    		$$invalidate(4, $$props = assign(assign({}, $$props), $$new_props));
+    		$$invalidate(6, $$props = assign(assign({}, $$props), $$new_props));
     		if ('checked' in $$props) $$invalidate(0, checked = $$new_props.checked);
     		if ('id' in $$props) $$invalidate(1, id = $$new_props.id);
     		if ('value' in $$props) $$invalidate(2, value = $$new_props.value);
     		if ('name' in $$props) $$invalidate(3, name = $$new_props.name);
+    		if ('disabled' in $$props) $$invalidate(4, disabled = $$new_props.disabled);
+    		if ('level' in $$props) $$invalidate(5, level = $$new_props.level);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2681,52 +5593,89 @@ var app = (function (jQuery) {
     	}
 
     	$$props = exclude_internal_props($$props);
-    	return [checked, id, value, name, $$props, input_change_handler];
+
+    	return [
+    		checked,
+    		id,
+    		value,
+    		name,
+    		disabled,
+    		level,
+    		$$props,
+    		$$scope,
+    		slots,
+    		click_handler,
+    		input_change_handler
+    	];
     }
 
-    class CheckboxInput extends SvelteComponentDev {
+    class Checkbox extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$I, create_fragment$I, safe_not_equal, { checked: 0, id: 1, value: 2, name: 3 });
+
+    		init(this, options, instance$L, create_fragment$L, safe_not_equal, {
+    			checked: 0,
+    			id: 1,
+    			value: 2,
+    			name: 3,
+    			disabled: 4,
+    			level: 5
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "CheckboxInput",
+    			tagName: "Checkbox",
     			options,
-    			id: create_fragment$I.name
+    			id: create_fragment$L.name
     		});
     	}
 
     	get checked() {
-    		throw new Error("<CheckboxInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set checked(value) {
-    		throw new Error("<CheckboxInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get id() {
-    		throw new Error("<CheckboxInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set id(value) {
-    		throw new Error("<CheckboxInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get value() {
-    		throw new Error("<CheckboxInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set value(value) {
-    		throw new Error("<CheckboxInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get name() {
-    		throw new Error("<CheckboxInput>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set name(value) {
-    		throw new Error("<CheckboxInput>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get disabled() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set disabled(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get level() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set level(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -2777,9 +5726,9 @@ var app = (function (jQuery) {
 
     /* src\components\form\structure\InputGroup.svelte generated by Svelte v3.42.4 */
 
-    const file$F = "src\\components\\form\\structure\\InputGroup.svelte";
+    const file$I = "src\\components\\form\\structure\\InputGroup.svelte";
 
-    function create_fragment$H(ctx) {
+    function create_fragment$K(ctx) {
     	let div;
     	let div_class_value;
     	let current;
@@ -2791,7 +5740,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (default_slot) default_slot.c();
     			attr_dev(div, "class", div_class_value = "input-group input-group-sm " + (/*$$props*/ ctx[0].class || '') + " svelte-bvg96k");
-    			add_location(div, file$F, 0, 0, 0);
+    			add_location(div, file$I, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2842,7 +5791,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$H.name,
+    		id: create_fragment$K.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2851,7 +5800,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$H($$self, $$props, $$invalidate) {
+    function instance$K($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('InputGroup', slots, ['default']);
 
@@ -2875,20 +5824,20 @@ var app = (function (jQuery) {
     class InputGroup extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$H, create_fragment$H, safe_not_equal, {});
+    		init(this, options, instance$K, create_fragment$K, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "InputGroup",
     			options,
-    			id: create_fragment$H.name
+    			id: create_fragment$K.name
     		});
     	}
     }
 
     /* src\components\form\input\DateRangePicker.svelte generated by Svelte v3.42.4 */
 
-    function create_fragment$G(ctx) {
+    function create_fragment$J(ctx) {
     	let current;
     	const default_slot_template = /*#slots*/ ctx[14].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[13], null);
@@ -2939,7 +5888,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$G.name,
+    		id: create_fragment$J.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2948,7 +5897,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$G($$self, $$props, $$invalidate) {
+    function instance$J($$self, $$props, $$invalidate) {
     	let dateRangePicker;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('DateRangePicker', slots, ['default']);
@@ -3109,7 +6058,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$G, create_fragment$G, safe_not_equal, {
+    		init(this, options, instance$J, create_fragment$J, safe_not_equal, {
     			startDate: 0,
     			endDate: 1,
     			minDate: 2,
@@ -3128,7 +6077,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "DateRangePicker",
     			options,
-    			id: create_fragment$G.name
+    			id: create_fragment$J.name
     		});
     	}
 
@@ -20422,9 +23371,9 @@ var app = (function (jQuery) {
     const TypingDebounceDelay = 300;
 
     /* src\components\form\input\Dropdown.svelte generated by Svelte v3.42.4 */
-    const file$E = "src\\components\\form\\input\\Dropdown.svelte";
+    const file$H = "src\\components\\form\\input\\Dropdown.svelte";
 
-    function create_fragment$F(ctx) {
+    function create_fragment$I(ctx) {
     	let select;
     	let select_class_value;
     	let current;
@@ -20444,7 +23393,7 @@ var app = (function (jQuery) {
     			attr_dev(select, "tabindex", "-1");
     			attr_dev(select, "aria-hidden", "true");
     			if (/*value*/ ctx[0] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[9].call(select));
-    			add_location(select, file$E, 57, 0, 1517);
+    			add_location(select, file$H, 57, 0, 1517);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20517,7 +23466,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$F.name,
+    		id: create_fragment$I.name,
     		type: "component",
     		source: "",
     		ctx
@@ -20526,7 +23475,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$F($$self, $$props, $$invalidate) {
+    function instance$I($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Dropdown', slots, ['default']);
     	let { value = null } = $$props;
@@ -20658,13 +23607,13 @@ var app = (function (jQuery) {
     class Dropdown extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$F, create_fragment$F, safe_not_equal, { value: 0, placeholder: 1, readonly: 2 });
+    		init(this, options, instance$I, create_fragment$I, safe_not_equal, { value: 0, placeholder: 1, readonly: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Dropdown",
     			options,
-    			id: create_fragment$F.name
+    			id: create_fragment$I.name
     		});
     	}
 
@@ -20694,9 +23643,9 @@ var app = (function (jQuery) {
     }
 
     /* src\components\form\input\FileInput.svelte generated by Svelte v3.42.4 */
-    const file$D = "src\\components\\form\\input\\FileInput.svelte";
+    const file$G = "src\\components\\form\\input\\FileInput.svelte";
 
-    function create_fragment$E(ctx) {
+    function create_fragment$H(ctx) {
     	let div;
     	let input;
     	let input_class_value;
@@ -20723,12 +23672,12 @@ var app = (function (jQuery) {
     			attr_dev(input, "pattern", /*pattern*/ ctx[5]);
     			input.readOnly = /*readonly*/ ctx[6];
     			input.multiple = /*multiple*/ ctx[3];
-    			add_location(input, file$D, 27, 2, 599);
+    			add_location(input, file$G, 27, 2, 599);
     			attr_dev(label, "class", "custom-file-label");
     			attr_dev(label, "for", /*id*/ ctx[1]);
-    			add_location(label, file$D, 40, 2, 843);
+    			add_location(label, file$G, 40, 2, 843);
     			attr_dev(div, "class", "custom-file");
-    			add_location(div, file$D, 26, 0, 570);
+    			add_location(div, file$G, 26, 0, 570);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -20823,7 +23772,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$E.name,
+    		id: create_fragment$H.name,
     		type: "component",
     		source: "",
     		ctx
@@ -20832,7 +23781,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$E($$self, $$props, $$invalidate) {
+    function instance$H($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('FileInput', slots, ['default']);
     	let { id = "" } = $$props;
@@ -20934,7 +23883,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$E, create_fragment$E, safe_not_equal, {
+    		init(this, options, instance$H, create_fragment$H, safe_not_equal, {
     			id: 1,
     			value: 0,
     			name: 2,
@@ -20949,7 +23898,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "FileInput",
     			options,
-    			id: create_fragment$E.name
+    			id: create_fragment$H.name
     		});
     	}
 
@@ -21019,9 +23968,9 @@ var app = (function (jQuery) {
     }
 
     /* src\components\form\input\Multiselect.svelte generated by Svelte v3.42.4 */
-    const file$C = "src\\components\\form\\input\\Multiselect.svelte";
+    const file$F = "src\\components\\form\\input\\Multiselect.svelte";
 
-    function create_fragment$D(ctx) {
+    function create_fragment$G(ctx) {
     	let select;
     	let select_class_value;
     	let current;
@@ -21042,7 +23991,7 @@ var app = (function (jQuery) {
     			attr_dev(select, "tabindex", "-1");
     			attr_dev(select, "aria-hidden", "true");
     			if (/*value*/ ctx[0] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[9].call(select));
-    			add_location(select, file$C, 55, 0, 1469);
+    			add_location(select, file$F, 55, 0, 1469);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21115,7 +24064,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$D.name,
+    		id: create_fragment$G.name,
     		type: "component",
     		source: "",
     		ctx
@@ -21124,7 +24073,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$D($$self, $$props, $$invalidate) {
+    function instance$G($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Multiselect', slots, ['default']);
     	let { value = null } = $$props;
@@ -21256,13 +24205,13 @@ var app = (function (jQuery) {
     class Multiselect extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$D, create_fragment$D, safe_not_equal, { value: 0, placeholder: 1, readonly: 2 });
+    		init(this, options, instance$G, create_fragment$G, safe_not_equal, { value: 0, placeholder: 1, readonly: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Multiselect",
     			options,
-    			id: create_fragment$D.name
+    			id: create_fragment$G.name
     		});
     	}
 
@@ -21291,258 +24240,11 @@ var app = (function (jQuery) {
     	}
     }
 
-    /* src\components\form\structure\Checkbox.svelte generated by Svelte v3.42.4 */
-
-    const file$B = "src\\components\\form\\structure\\Checkbox.svelte";
-
-    function create_fragment$C(ctx) {
-    	let div;
-    	let div_class_value;
-    	let current;
-    	const default_slot_template = /*#slots*/ ctx[2].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			if (default_slot) default_slot.c();
-    			attr_dev(div, "class", div_class_value = "form-check " + (/*$$props*/ ctx[0].class || ''));
-    			add_location(div, file$B, 0, 0, 0);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-
-    			if (default_slot) {
-    				default_slot.m(div, null);
-    			}
-
-    			current = true;
-    		},
-    		p: function update(ctx, [dirty]) {
-    			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
-    					update_slot_base(
-    						default_slot,
-    						default_slot_template,
-    						ctx,
-    						/*$$scope*/ ctx[1],
-    						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[1])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[1], dirty, null),
-    						null
-    					);
-    				}
-    			}
-
-    			if (!current || dirty & /*$$props*/ 1 && div_class_value !== (div_class_value = "form-check " + (/*$$props*/ ctx[0].class || ''))) {
-    				attr_dev(div, "class", div_class_value);
-    			}
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(default_slot, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(default_slot, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			if (default_slot) default_slot.d(detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_fragment$C.name,
-    		type: "component",
-    		source: "",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function instance$C($$self, $$props, $$invalidate) {
-    	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots('Checkbox', slots, ['default']);
-
-    	$$self.$$set = $$new_props => {
-    		$$invalidate(0, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
-    		if ('$$scope' in $$new_props) $$invalidate(1, $$scope = $$new_props.$$scope);
-    	};
-
-    	$$self.$inject_state = $$new_props => {
-    		$$invalidate(0, $$props = assign(assign({}, $$props), $$new_props));
-    	};
-
-    	if ($$props && "$$inject" in $$props) {
-    		$$self.$inject_state($$props.$$inject);
-    	}
-
-    	$$props = exclude_internal_props($$props);
-    	return [$$props, $$scope, slots];
-    }
-
-    class Checkbox extends SvelteComponentDev {
-    	constructor(options) {
-    		super(options);
-    		init(this, options, instance$C, create_fragment$C, safe_not_equal, {});
-
-    		dispatch_dev("SvelteRegisterComponent", {
-    			component: this,
-    			tagName: "Checkbox",
-    			options,
-    			id: create_fragment$C.name
-    		});
-    	}
-    }
-
-    /* src\components\form\structure\CheckboxLabel.svelte generated by Svelte v3.42.4 */
-
-    const file$A = "src\\components\\form\\structure\\CheckboxLabel.svelte";
-
-    function create_fragment$B(ctx) {
-    	let label;
-    	let label_class_value;
-    	let current;
-    	const default_slot_template = /*#slots*/ ctx[3].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
-
-    	const block = {
-    		c: function create() {
-    			label = element("label");
-    			if (default_slot) default_slot.c();
-    			attr_dev(label, "class", label_class_value = "form-check-label " + (/*$$props*/ ctx[1].class || ''));
-    			attr_dev(label, "for", /*inputId*/ ctx[0]);
-    			add_location(label, file$A, 4, 0, 46);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, label, anchor);
-
-    			if (default_slot) {
-    				default_slot.m(label, null);
-    			}
-
-    			current = true;
-    		},
-    		p: function update(ctx, [dirty]) {
-    			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 4)) {
-    					update_slot_base(
-    						default_slot,
-    						default_slot_template,
-    						ctx,
-    						/*$$scope*/ ctx[2],
-    						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[2])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[2], dirty, null),
-    						null
-    					);
-    				}
-    			}
-
-    			if (!current || dirty & /*$$props*/ 2 && label_class_value !== (label_class_value = "form-check-label " + (/*$$props*/ ctx[1].class || ''))) {
-    				attr_dev(label, "class", label_class_value);
-    			}
-
-    			if (!current || dirty & /*inputId*/ 1) {
-    				attr_dev(label, "for", /*inputId*/ ctx[0]);
-    			}
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(default_slot, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(default_slot, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(label);
-    			if (default_slot) default_slot.d(detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_fragment$B.name,
-    		type: "component",
-    		source: "",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function instance$B($$self, $$props, $$invalidate) {
-    	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots('CheckboxLabel', slots, ['default']);
-    	let { inputId } = $$props;
-
-    	$$self.$$set = $$new_props => {
-    		$$invalidate(1, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
-    		if ('inputId' in $$new_props) $$invalidate(0, inputId = $$new_props.inputId);
-    		if ('$$scope' in $$new_props) $$invalidate(2, $$scope = $$new_props.$$scope);
-    	};
-
-    	$$self.$capture_state = () => ({ inputId });
-
-    	$$self.$inject_state = $$new_props => {
-    		$$invalidate(1, $$props = assign(assign({}, $$props), $$new_props));
-    		if ('inputId' in $$props) $$invalidate(0, inputId = $$new_props.inputId);
-    	};
-
-    	if ($$props && "$$inject" in $$props) {
-    		$$self.$inject_state($$props.$$inject);
-    	}
-
-    	$$props = exclude_internal_props($$props);
-    	return [inputId, $$props, $$scope, slots];
-    }
-
-    class CheckboxLabel extends SvelteComponentDev {
-    	constructor(options) {
-    		super(options);
-    		init(this, options, instance$B, create_fragment$B, safe_not_equal, { inputId: 0 });
-
-    		dispatch_dev("SvelteRegisterComponent", {
-    			component: this,
-    			tagName: "CheckboxLabel",
-    			options,
-    			id: create_fragment$B.name
-    		});
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-
-    		if (/*inputId*/ ctx[0] === undefined && !('inputId' in props)) {
-    			console.warn("<CheckboxLabel> was created without expected prop 'inputId'");
-    		}
-    	}
-
-    	get inputId() {
-    		throw new Error("<CheckboxLabel>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set inputId(value) {
-    		throw new Error("<CheckboxLabel>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-    }
-
     /* src\components\form\structure\Form.svelte generated by Svelte v3.42.4 */
 
-    const file$z = "src\\components\\form\\structure\\Form.svelte";
+    const file$E = "src\\components\\form\\structure\\Form.svelte";
 
-    function create_fragment$A(ctx) {
+    function create_fragment$F(ctx) {
     	let form_1;
     	let form_1_class_value;
     	let current;
@@ -21557,7 +24259,7 @@ var app = (function (jQuery) {
     			if (default_slot) default_slot.c();
     			attr_dev(form_1, "class", form_1_class_value = /*$$props*/ ctx[2].class || "");
     			toggle_class(form_1, "form-horizontal", /*horizontal*/ ctx[0]);
-    			add_location(form_1, file$z, 7, 0, 117);
+    			add_location(form_1, file$E, 7, 0, 117);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21619,7 +24321,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$A.name,
+    		id: create_fragment$F.name,
     		type: "component",
     		source: "",
     		ctx
@@ -21628,7 +24330,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$A($$self, $$props, $$invalidate) {
+    function instance$F($$self, $$props, $$invalidate) {
     	let formParam;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Form', slots, ['default']);
@@ -21670,13 +24372,13 @@ var app = (function (jQuery) {
     class Form extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$A, create_fragment$A, safe_not_equal, { form: 3, horizontal: 0 });
+    		init(this, options, instance$F, create_fragment$F, safe_not_equal, { form: 3, horizontal: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Form",
     			options,
-    			id: create_fragment$A.name
+    			id: create_fragment$F.name
     		});
 
     		const { ctx } = this.$$;
@@ -21706,9 +24408,9 @@ var app = (function (jQuery) {
 
     /* src\components\form\structure\FormGroup.svelte generated by Svelte v3.42.4 */
 
-    const file$y = "src\\components\\form\\structure\\FormGroup.svelte";
+    const file$D = "src\\components\\form\\structure\\FormGroup.svelte";
 
-    function create_fragment$z(ctx) {
+    function create_fragment$E(ctx) {
     	let div;
     	let div_class_value;
     	let current;
@@ -21721,7 +24423,7 @@ var app = (function (jQuery) {
     			if (default_slot) default_slot.c();
     			attr_dev(div, "class", div_class_value = "form-group " + (/*$$props*/ ctx[1].class || ''));
     			toggle_class(div, "row", /*row*/ ctx[0]);
-    			add_location(div, file$y, 4, 0, 49);
+    			add_location(div, file$D, 4, 0, 49);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21776,7 +24478,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$z.name,
+    		id: create_fragment$E.name,
     		type: "component",
     		source: "",
     		ctx
@@ -21785,7 +24487,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$z($$self, $$props, $$invalidate) {
+    function instance$E($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('FormGroup', slots, ['default']);
     	let { row = false } = $$props;
@@ -21814,13 +24516,13 @@ var app = (function (jQuery) {
     class FormGroup extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$z, create_fragment$z, safe_not_equal, { row: 0 });
+    		init(this, options, instance$E, create_fragment$E, safe_not_equal, { row: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "FormGroup",
     			options,
-    			id: create_fragment$z.name
+    			id: create_fragment$E.name
     		});
     	}
 
@@ -21835,9 +24537,9 @@ var app = (function (jQuery) {
 
     /* src\components\form\structure\InputGroupAppend.svelte generated by Svelte v3.42.4 */
 
-    const file$x = "src\\components\\form\\structure\\InputGroupAppend.svelte";
+    const file$C = "src\\components\\form\\structure\\InputGroupAppend.svelte";
 
-    function create_fragment$y(ctx) {
+    function create_fragment$D(ctx) {
     	let span;
     	let span_class_value;
     	let current;
@@ -21849,7 +24551,7 @@ var app = (function (jQuery) {
     			span = element("span");
     			if (default_slot) default_slot.c();
     			attr_dev(span, "class", span_class_value = "input-group-append " + (/*$$props*/ ctx[0].class || ''));
-    			add_location(span, file$x, 0, 0, 0);
+    			add_location(span, file$C, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21900,7 +24602,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$y.name,
+    		id: create_fragment$D.name,
     		type: "component",
     		source: "",
     		ctx
@@ -21909,7 +24611,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$y($$self, $$props, $$invalidate) {
+    function instance$D($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('InputGroupAppend', slots, ['default']);
 
@@ -21933,20 +24635,131 @@ var app = (function (jQuery) {
     class InputGroupAppend extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$y, create_fragment$y, safe_not_equal, {});
+    		init(this, options, instance$D, create_fragment$D, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "InputGroupAppend",
     			options,
-    			id: create_fragment$y.name
+    			id: create_fragment$D.name
+    		});
+    	}
+    }
+
+    /* src\components\form\structure\InputGroupPrepend.svelte generated by Svelte v3.42.4 */
+
+    const file$B = "src\\components\\form\\structure\\InputGroupPrepend.svelte";
+
+    function create_fragment$C(ctx) {
+    	let span;
+    	let span_class_value;
+    	let current;
+    	const default_slot_template = /*#slots*/ ctx[2].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			if (default_slot) default_slot.c();
+    			attr_dev(span, "class", span_class_value = "input-group-prepend " + (/*$$props*/ ctx[0].class || ''));
+    			add_location(span, file$B, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(span, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[1],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[1])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[1], dirty, null),
+    						null
+    					);
+    				}
+    			}
+
+    			if (!current || dirty & /*$$props*/ 1 && span_class_value !== (span_class_value = "input-group-prepend " + (/*$$props*/ ctx[0].class || ''))) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    			if (default_slot) default_slot.d(detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$C.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$C($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('InputGroupPrepend', slots, ['default']);
+
+    	$$self.$$set = $$new_props => {
+    		$$invalidate(0, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+    		if ('$$scope' in $$new_props) $$invalidate(1, $$scope = $$new_props.$$scope);
+    	};
+
+    	$$self.$inject_state = $$new_props => {
+    		$$invalidate(0, $$props = assign(assign({}, $$props), $$new_props));
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$props = exclude_internal_props($$props);
+    	return [$$props, $$scope, slots];
+    }
+
+    class InputGroupPrepend extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$C, create_fragment$C, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "InputGroupPrepend",
+    			options,
+    			id: create_fragment$C.name
     		});
     	}
     }
 
     /* src\components\structure\Card.svelte generated by Svelte v3.42.4 */
 
-    const file$w = "src\\components\\structure\\Card.svelte";
+    const file$A = "src\\components\\structure\\Card.svelte";
     const get_footer_slot_changes = dirty => ({});
     const get_footer_slot_context = ctx => ({});
     const get_tools_slot_changes = dirty => ({});
@@ -21963,7 +24776,7 @@ var app = (function (jQuery) {
     	let if_block;
     	let div_class_value;
     	let current;
-    	const if_block_creators = [create_if_block_3$1, create_else_block$2];
+    	const if_block_creators = [create_if_block_3$1, create_else_block$3];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -21979,7 +24792,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", div_class_value = "card-header " + (/*$$props*/ ctx[6].headerClass || ''));
-    			add_location(div, file$w, 17, 4, 442);
+    			add_location(div, file$A, 17, 4, 442);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22044,7 +24857,7 @@ var app = (function (jQuery) {
     }
 
     // (21:6) {:else}
-    function create_else_block$2(ctx) {
+    function create_else_block$3(ctx) {
     	let h3;
     	let t;
     	let div;
@@ -22062,9 +24875,9 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (tools_slot) tools_slot.c();
     			attr_dev(h3, "class", "card-title");
-    			add_location(h3, file$w, 21, 8, 588);
+    			add_location(h3, file$A, 21, 8, 588);
     			attr_dev(div, "class", "card-tools pull-right");
-    			add_location(div, file$w, 24, 8, 670);
+    			add_location(div, file$A, 24, 8, 670);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -22135,7 +24948,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$2.name,
+    		id: create_else_block$3.name,
     		type: "else",
     		source: "(21:6) {:else}",
     		ctx
@@ -22203,7 +25016,7 @@ var app = (function (jQuery) {
     }
 
     // (34:2) {#if $$slots.footer}
-    function create_if_block_1$6(ctx) {
+    function create_if_block_1$8(ctx) {
     	let div;
     	let current;
     	const footer_slot_template = /*#slots*/ ctx[9].footer;
@@ -22214,7 +25027,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (footer_slot) footer_slot.c();
     			attr_dev(div, "class", "card-footer");
-    			add_location(div, file$w, 34, 4, 898);
+    			add_location(div, file$A, 34, 4, 898);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22258,7 +25071,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$6.name,
+    		id: create_if_block_1$8.name,
     		type: "if",
     		source: "(34:2) {#if $$slots.footer}",
     		ctx
@@ -22268,7 +25081,7 @@ var app = (function (jQuery) {
     }
 
     // (39:2) {#if loading}
-    function create_if_block$8(ctx) {
+    function create_if_block$a(ctx) {
     	let div;
     	let i;
 
@@ -22277,9 +25090,9 @@ var app = (function (jQuery) {
     			div = element("div");
     			i = element("i");
     			attr_dev(i, "class", "fas fa-2x fa-sync-alt fa-spin");
-    			add_location(i, file$w, 40, 6, 1026);
+    			add_location(i, file$A, 40, 6, 1026);
     			attr_dev(div, "class", "overlay");
-    			add_location(div, file$w, 39, 4, 997);
+    			add_location(div, file$A, 39, 4, 997);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22292,7 +25105,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$8.name,
+    		id: create_if_block$a.name,
     		type: "if",
     		source: "(39:2) {#if loading}",
     		ctx
@@ -22301,7 +25114,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$x(ctx) {
+    function create_fragment$B(ctx) {
     	let div1;
     	let t0;
     	let div0;
@@ -22312,8 +25125,8 @@ var app = (function (jQuery) {
     	let if_block0 = (/*$$slots*/ ctx[7].header || /*$$slots*/ ctx[7].tools || /*$$slots*/ ctx[7].fullHeader) && create_if_block_2$3(ctx);
     	const default_slot_template = /*#slots*/ ctx[9].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[8], null);
-    	let if_block1 = /*$$slots*/ ctx[7].footer && create_if_block_1$6(ctx);
-    	let if_block2 = /*loading*/ ctx[5] && create_if_block$8(ctx);
+    	let if_block1 = /*$$slots*/ ctx[7].footer && create_if_block_1$8(ctx);
+    	let if_block2 = /*loading*/ ctx[5] && create_if_block$a(ctx);
 
     	const block = {
     		c: function create() {
@@ -22328,12 +25141,12 @@ var app = (function (jQuery) {
     			if (if_block2) if_block2.c();
     			attr_dev(div0, "class", "card-body");
     			toggle_class(div0, "no-padding", /*noPadding*/ ctx[4]);
-    			add_location(div0, file$w, 30, 2, 792);
+    			add_location(div0, file$A, 30, 2, 792);
     			attr_dev(div1, "class", div1_class_value = "card card-" + /*color*/ ctx[0] + " " + (/*$$props*/ ctx[6].class || ''));
     			toggle_class(div1, "card-tabs", /*tabs*/ ctx[2]);
     			toggle_class(div1, "card-outline", /*outline*/ ctx[1]);
     			toggle_class(div1, "card-outline-tabs", /*outlineTabs*/ ctx[3]);
-    			add_location(div1, file$w, 10, 0, 216);
+    			add_location(div1, file$A, 10, 0, 216);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -22405,7 +25218,7 @@ var app = (function (jQuery) {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_1$6(ctx);
+    					if_block1 = create_if_block_1$8(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(div1, t2);
@@ -22422,7 +25235,7 @@ var app = (function (jQuery) {
 
     			if (/*loading*/ ctx[5]) {
     				if (if_block2) ; else {
-    					if_block2 = create_if_block$8(ctx);
+    					if_block2 = create_if_block$a(ctx);
     					if_block2.c();
     					if_block2.m(div1, null);
     				}
@@ -22471,7 +25284,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$x.name,
+    		id: create_fragment$B.name,
     		type: "component",
     		source: "",
     		ctx
@@ -22480,7 +25293,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$x($$self, $$props, $$invalidate) {
+    function instance$B($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Card', slots, ['fullHeader','header','tools','default','footer']);
     	const $$slots = compute_slots(slots);
@@ -22545,7 +25358,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$x, create_fragment$x, safe_not_equal, {
+    		init(this, options, instance$B, create_fragment$B, safe_not_equal, {
     			color: 0,
     			outline: 1,
     			tabs: 2,
@@ -22558,7 +25371,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "Card",
     			options,
-    			id: create_fragment$x.name
+    			id: create_fragment$B.name
     		});
     	}
 
@@ -22613,9 +25426,9 @@ var app = (function (jQuery) {
 
     /* src\components\structure\OneColumnNarrow.svelte generated by Svelte v3.42.4 */
 
-    const file$v = "src\\components\\structure\\OneColumnNarrow.svelte";
+    const file$z = "src\\components\\structure\\OneColumnNarrow.svelte";
 
-    function create_fragment$w(ctx) {
+    function create_fragment$A(ctx) {
     	let t;
     	let div;
     	let current;
@@ -22628,7 +25441,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (default_slot) default_slot.c();
     			attr_dev(div, "class", "narrow-column-container");
-    			add_location(div, file$v, 0, 1, 1);
+    			add_location(div, file$z, 0, 1, 1);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -22677,7 +25490,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$w.name,
+    		id: create_fragment$A.name,
     		type: "component",
     		source: "",
     		ctx
@@ -22686,7 +25499,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$w($$self, $$props, $$invalidate) {
+    function instance$A($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('OneColumnNarrow', slots, ['default']);
     	const writable_props = [];
@@ -22705,13 +25518,13 @@ var app = (function (jQuery) {
     class OneColumnNarrow extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$w, create_fragment$w, safe_not_equal, {});
+    		init(this, options, instance$A, create_fragment$A, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "OneColumnNarrow",
     			options,
-    			id: create_fragment$w.name
+    			id: create_fragment$A.name
     		});
     	}
     }
@@ -22722,9 +25535,9 @@ var app = (function (jQuery) {
 
     /* src\components\ui\LteButton.svelte generated by Svelte v3.42.4 */
 
-    const file$u = "src\\components\\ui\\LteButton.svelte";
+    const file$y = "src\\components\\ui\\LteButton.svelte";
 
-    function create_fragment$v(ctx) {
+    function create_fragment$z(ctx) {
     	let button;
     	let button_class_value;
     	let current;
@@ -22762,7 +25575,7 @@ var app = (function (jQuery) {
     			toggle_class(button, "squared", /*squared*/ ctx[10]);
     			toggle_class(button, "disabled", /*disabled*/ ctx[8]);
     			toggle_class(button, "svelte-1gk7eb2", true);
-    			add_location(button, file$u, 16, 0, 340);
+    			add_location(button, file$y, 16, 0, 340);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -22834,7 +25647,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$v.name,
+    		id: create_fragment$z.name,
     		type: "component",
     		source: "",
     		ctx
@@ -22843,7 +25656,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$v($$self, $$props, $$invalidate) {
+    function instance$z($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('LteButton', slots, ['default']);
     	let { color = "default" } = $$props;
@@ -22936,7 +25749,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$v, create_fragment$v, safe_not_equal, {
+    		init(this, options, instance$z, create_fragment$z, safe_not_equal, {
     			color: 0,
     			xsmall: 1,
     			small: 2,
@@ -22954,7 +25767,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "LteButton",
     			options,
-    			id: create_fragment$v.name
+    			id: create_fragment$z.name
     		});
     	}
 
@@ -23048,9 +25861,9 @@ var app = (function (jQuery) {
     }
 
     /* src\components\structure\PageHeader.svelte generated by Svelte v3.42.4 */
-    const file$t = "src\\components\\structure\\PageHeader.svelte";
+    const file$x = "src\\components\\structure\\PageHeader.svelte";
 
-    function get_each_context$7(ctx, list, i) {
+    function get_each_context$8(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[7] = list[i];
     	child_ctx[9] = i;
@@ -23058,7 +25871,7 @@ var app = (function (jQuery) {
     }
 
     // (20:0) {#if currentRoute}
-    function create_if_block$7(ctx) {
+    function create_if_block$9(ctx) {
     	let div3;
     	let div2;
     	let div1;
@@ -23066,7 +25879,7 @@ var app = (function (jQuery) {
     	let h1;
     	let t0;
     	let t1;
-    	let if_block = /*breadcrumbs*/ ctx[2] && /*breadcrumbs*/ ctx[2].length && create_if_block_1$5(ctx);
+    	let if_block = /*breadcrumbs*/ ctx[2] && /*breadcrumbs*/ ctx[2].length && create_if_block_1$7(ctx);
 
     	const block = {
     		c: function create() {
@@ -23078,15 +25891,15 @@ var app = (function (jQuery) {
     			t0 = text(/*title*/ ctx[1]);
     			t1 = space();
     			if (if_block) if_block.c();
-    			add_location(h1, file$t, 29, 10, 1080);
+    			add_location(h1, file$x, 29, 10, 1080);
     			attr_dev(div0, "class", "col-sm-6");
-    			add_location(div0, file$t, 23, 8, 836);
+    			add_location(div0, file$x, 23, 8, 836);
     			attr_dev(div1, "class", "row mb-2");
-    			add_location(div1, file$t, 22, 6, 804);
+    			add_location(div1, file$x, 22, 6, 804);
     			attr_dev(div2, "class", "container-fluid");
-    			add_location(div2, file$t, 21, 4, 767);
+    			add_location(div2, file$x, 21, 4, 767);
     			attr_dev(div3, "class", "content-header");
-    			add_location(div3, file$t, 20, 2, 733);
+    			add_location(div3, file$x, 20, 2, 733);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -23105,7 +25918,7 @@ var app = (function (jQuery) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_1$5(ctx);
+    					if_block = create_if_block_1$7(ctx);
     					if_block.c();
     					if_block.m(div1, null);
     				}
@@ -23122,7 +25935,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$7.name,
+    		id: create_if_block$9.name,
     		type: "if",
     		source: "(20:0) {#if currentRoute}",
     		ctx
@@ -23132,7 +25945,7 @@ var app = (function (jQuery) {
     }
 
     // (35:8) {#if breadcrumbs && breadcrumbs.length}
-    function create_if_block_1$5(ctx) {
+    function create_if_block_1$7(ctx) {
     	let div;
     	let ol;
     	let each_value = /*breadcrumbs*/ ctx[2];
@@ -23140,7 +25953,7 @@ var app = (function (jQuery) {
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$7(get_each_context$7(ctx, each_value, i));
+    		each_blocks[i] = create_each_block$8(get_each_context$8(ctx, each_value, i));
     	}
 
     	const block = {
@@ -23153,9 +25966,9 @@ var app = (function (jQuery) {
     			}
 
     			attr_dev(ol, "class", "breadcrumb float-sm-right");
-    			add_location(ol, file$t, 36, 12, 1237);
+    			add_location(ol, file$x, 36, 12, 1237);
     			attr_dev(div, "class", "col-sm-6");
-    			add_location(div, file$t, 35, 10, 1201);
+    			add_location(div, file$x, 35, 10, 1201);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -23172,12 +25985,12 @@ var app = (function (jQuery) {
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$7(ctx, each_value, i);
+    					const child_ctx = get_each_context$8(ctx, each_value, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks[i] = create_each_block$7(child_ctx);
+    						each_blocks[i] = create_each_block$8(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(ol, null);
     					}
@@ -23198,7 +26011,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$5.name,
+    		id: create_if_block_1$7.name,
     		type: "if",
     		source: "(35:8) {#if breadcrumbs && breadcrumbs.length}",
     		ctx
@@ -23208,7 +26021,7 @@ var app = (function (jQuery) {
     }
 
     // (38:14) {#each breadcrumbs as breadcrumb, i}
-    function create_each_block$7(ctx) {
+    function create_each_block$8(ctx) {
     	let li;
     	let t0_value = /*breadcrumb*/ ctx[7] + "";
     	let t0;
@@ -23221,7 +26034,7 @@ var app = (function (jQuery) {
     			t1 = space();
     			attr_dev(li, "class", "breadcrumb-item");
     			toggle_class(li, "active", /*currentRoute*/ ctx[0].breadcrumb - 1 === /*i*/ ctx[9]);
-    			add_location(li, file$t, 38, 16, 1345);
+    			add_location(li, file$x, 38, 16, 1345);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -23242,7 +26055,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$7.name,
+    		id: create_each_block$8.name,
     		type: "each",
     		source: "(38:14) {#each breadcrumbs as breadcrumb, i}",
     		ctx
@@ -23251,9 +26064,9 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$u(ctx) {
+    function create_fragment$y(ctx) {
     	let if_block_anchor;
-    	let if_block = /*currentRoute*/ ctx[0] && create_if_block$7(ctx);
+    	let if_block = /*currentRoute*/ ctx[0] && create_if_block$9(ctx);
 
     	const block = {
     		c: function create() {
@@ -23272,7 +26085,7 @@ var app = (function (jQuery) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$7(ctx);
+    					if_block = create_if_block$9(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -23291,7 +26104,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$u.name,
+    		id: create_fragment$y.name,
     		type: "component",
     		source: "",
     		ctx
@@ -23300,7 +26113,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$u($$self, $$props, $$invalidate) {
+    function instance$y($$self, $$props, $$invalidate) {
     	let currentRoute;
     	let breadcrumbs;
     	let title;
@@ -23375,22 +26188,22 @@ var app = (function (jQuery) {
     class PageHeader extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$u, create_fragment$u, safe_not_equal, {});
+    		init(this, options, instance$y, create_fragment$y, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "PageHeader",
     			options,
-    			id: create_fragment$u.name
+    			id: create_fragment$y.name
     		});
     	}
     }
 
     /* src\components\structure\navigation\BrandNavLogoSidebar.svelte generated by Svelte v3.42.4 */
 
-    const file$s = "src\\components\\structure\\navigation\\BrandNavLogoSidebar.svelte";
+    const file$w = "src\\components\\structure\\navigation\\BrandNavLogoSidebar.svelte";
 
-    function create_fragment$t(ctx) {
+    function create_fragment$x(ctx) {
     	let a;
     	let img;
     	let img_src_value;
@@ -23404,10 +26217,10 @@ var app = (function (jQuery) {
     			attr_dev(img, "width", "200");
     			set_style(img, "opacity", ".8");
     			attr_dev(img, "class", "svelte-s7wdzp");
-    			add_location(img, file$s, 1, 1, 29);
+    			add_location(img, file$w, 1, 1, 29);
     			attr_dev(a, "href", "#/");
     			attr_dev(a, "class", "logo svelte-s7wdzp");
-    			add_location(a, file$s, 0, 0, 0);
+    			add_location(a, file$w, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23426,7 +26239,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$t.name,
+    		id: create_fragment$x.name,
     		type: "component",
     		source: "",
     		ctx
@@ -23435,7 +26248,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$t($$self, $$props) {
+    function instance$x($$self, $$props) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('BrandNavLogoSidebar', slots, []);
     	const writable_props = [];
@@ -23450,13 +26263,13 @@ var app = (function (jQuery) {
     class BrandNavLogoSidebar extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$t, create_fragment$t, safe_not_equal, {});
+    		init(this, options, instance$x, create_fragment$x, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "BrandNavLogoSidebar",
     			options,
-    			id: create_fragment$t.name
+    			id: create_fragment$x.name
     		});
     	}
     }
@@ -23472,9 +26285,9 @@ var app = (function (jQuery) {
     }
 
     /* src\components\structure\navigation\MobileNavToggle.svelte generated by Svelte v3.42.4 */
-    const file$r = "src\\components\\structure\\navigation\\MobileNavToggle.svelte";
+    const file$v = "src\\components\\structure\\navigation\\MobileNavToggle.svelte";
 
-    function create_fragment$s(ctx) {
+    function create_fragment$w(ctx) {
     	let li;
     	let a;
     	let i;
@@ -23487,14 +26300,14 @@ var app = (function (jQuery) {
     			a = element("a");
     			i = element("i");
     			attr_dev(i, "class", "fas fa-bars");
-    			add_location(i, file$r, 10, 4, 291);
+    			add_location(i, file$v, 10, 4, 291);
     			attr_dev(a, "class", "nav-link");
     			attr_dev(a, "data-widget", "pushmenu");
     			attr_dev(a, "href", "#");
     			attr_dev(a, "role", "button");
-    			add_location(a, file$r, 9, 2, 192);
+    			add_location(a, file$v, 9, 2, 192);
     			attr_dev(li, "class", "nav-item");
-    			add_location(li, file$r, 8, 0, 167);
+    			add_location(li, file$v, 8, 0, 167);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23521,7 +26334,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$s.name,
+    		id: create_fragment$w.name,
     		type: "component",
     		source: "",
     		ctx
@@ -23530,7 +26343,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$s($$self, $$props, $$invalidate) {
+    function instance$w($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MobileNavToggle', slots, []);
 
@@ -23551,22 +26364,22 @@ var app = (function (jQuery) {
     class MobileNavToggle extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$s, create_fragment$s, safe_not_equal, {});
+    		init(this, options, instance$w, create_fragment$w, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "MobileNavToggle",
     			options,
-    			id: create_fragment$s.name
+    			id: create_fragment$w.name
     		});
     	}
     }
 
     /* src\components\structure\navigation\Sidebar.svelte generated by Svelte v3.42.4 */
 
-    const file$q = "src\\components\\structure\\navigation\\Sidebar.svelte";
+    const file$u = "src\\components\\structure\\navigation\\Sidebar.svelte";
 
-    function create_fragment$r(ctx) {
+    function create_fragment$v(ctx) {
     	let aside;
     	let a0;
     	let span;
@@ -23585,6 +26398,12 @@ var app = (function (jQuery) {
     	let i1;
     	let t5;
     	let p1;
+    	let t7;
+    	let li2;
+    	let a3;
+    	let i2;
+    	let t8;
+    	let p2;
 
     	const block = {
     		c: function create() {
@@ -23609,37 +26428,52 @@ var app = (function (jQuery) {
     			t5 = space();
     			p1 = element("p");
     			p1.textContent = "Users";
+    			t7 = space();
+    			li2 = element("li");
+    			a3 = element("a");
+    			i2 = element("i");
+    			t8 = space();
+    			p2 = element("p");
+    			p2.textContent = "Tree";
     			attr_dev(span, "class", "brand-text font-weight-light");
-    			add_location(span, file$q, 6, 4, 315);
+    			add_location(span, file$u, 6, 4, 315);
     			attr_dev(a0, "href", "index3.html");
     			attr_dev(a0, "class", "brand-link");
-    			add_location(a0, file$q, 3, 2, 121);
+    			add_location(a0, file$u, 3, 2, 121);
     			attr_dev(i0, "class", "nav-icon fas fa-tachometer-alt");
-    			add_location(i0, file$q, 18, 12, 792);
-    			add_location(p0, file$q, 19, 12, 850);
+    			add_location(i0, file$u, 18, 12, 792);
+    			add_location(p0, file$u, 19, 12, 850);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "nav-link");
-    			add_location(a1, file$q, 17, 10, 749);
+    			add_location(a1, file$u, 17, 10, 749);
     			attr_dev(li0, "class", "nav-item");
-    			add_location(li0, file$q, 16, 8, 716);
+    			add_location(li0, file$u, 16, 8, 716);
     			attr_dev(i1, "class", "nav-icon fas fa-th");
-    			add_location(i1, file$q, 24, 12, 993);
-    			add_location(p1, file$q, 25, 12, 1039);
+    			add_location(i1, file$u, 24, 12, 993);
+    			add_location(p1, file$u, 25, 12, 1039);
     			attr_dev(a2, "href", "#/users");
     			attr_dev(a2, "class", "nav-link");
-    			add_location(a2, file$q, 23, 10, 944);
+    			add_location(a2, file$u, 23, 10, 944);
     			attr_dev(li1, "class", "nav-item");
-    			add_location(li1, file$q, 22, 8, 911);
+    			add_location(li1, file$u, 22, 8, 911);
+    			attr_dev(i2, "class", "nav-icon fas fa-th");
+    			add_location(i2, file$u, 30, 12, 1173);
+    			add_location(p2, file$u, 31, 12, 1219);
+    			attr_dev(a3, "href", "#/tree");
+    			attr_dev(a3, "class", "nav-link");
+    			add_location(a3, file$u, 29, 10, 1125);
+    			attr_dev(li2, "class", "nav-item");
+    			add_location(li2, file$u, 28, 8, 1092);
     			attr_dev(ul, "class", "nav nav-pills nav-sidebar flex-column");
     			attr_dev(ul, "data-widget", "treeview");
     			attr_dev(ul, "role", "menu");
-    			add_location(ul, file$q, 13, 6, 489);
+    			add_location(ul, file$u, 13, 6, 489);
     			attr_dev(nav, "class", "mt-2");
-    			add_location(nav, file$q, 12, 4, 463);
+    			add_location(nav, file$u, 12, 4, 463);
     			attr_dev(div, "class", "sidebar");
-    			add_location(div, file$q, 10, 2, 409);
+    			add_location(div, file$u, 10, 2, 409);
     			attr_dev(aside, "class", "main-sidebar sidebar-dark-primary elevation-4");
-    			add_location(aside, file$q, 1, 0, 33);
+    			add_location(aside, file$u, 1, 0, 33);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23663,6 +26497,12 @@ var app = (function (jQuery) {
     			append_dev(a2, i1);
     			append_dev(a2, t5);
     			append_dev(a2, p1);
+    			append_dev(ul, t7);
+    			append_dev(ul, li2);
+    			append_dev(li2, a3);
+    			append_dev(a3, i2);
+    			append_dev(a3, t8);
+    			append_dev(a3, p2);
     		},
     		p: noop,
     		i: noop,
@@ -23674,7 +26514,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$r.name,
+    		id: create_fragment$v.name,
     		type: "component",
     		source: "",
     		ctx
@@ -23683,7 +26523,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$r($$self, $$props) {
+    function instance$v($$self, $$props) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Sidebar', slots, []);
     	const writable_props = [];
@@ -23698,21 +26538,21 @@ var app = (function (jQuery) {
     class Sidebar extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$r, create_fragment$r, safe_not_equal, {});
+    		init(this, options, instance$v, create_fragment$v, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Sidebar",
     			options,
-    			id: create_fragment$r.name
+    			id: create_fragment$v.name
     		});
     	}
     }
 
     /* src\components\structure\navigation\UserDropdownMenu.svelte generated by Svelte v3.42.4 */
-    const file$p = "src\\components\\structure\\navigation\\UserDropdownMenu.svelte";
+    const file$t = "src\\components\\structure\\navigation\\UserDropdownMenu.svelte";
 
-    function create_fragment$q(ctx) {
+    function create_fragment$u(ctx) {
     	let li;
     	let a0;
     	let span0;
@@ -23852,97 +26692,97 @@ var app = (function (jQuery) {
     			a4 = element("a");
     			a4.textContent = "See All Messages";
     			attr_dev(span0, "class", "d-none d-md-inline");
-    			add_location(span0, file$p, 58, 2, 1435);
+    			add_location(span0, file$t, 58, 2, 1435);
     			attr_dev(i0, "class", "fas fa-user");
-    			add_location(i0, file$p, 60, 3, 1530);
+    			add_location(i0, file$t, 60, 3, 1530);
     			attr_dev(span1, "class", "d-inline d-md-none");
-    			add_location(span1, file$p, 59, 2, 1492);
+    			add_location(span1, file$t, 59, 2, 1492);
     			attr_dev(a0, "class", "nav-link");
     			attr_dev(a0, "data-toggle", "dropdown");
     			attr_dev(a0, "href", "#");
-    			add_location(a0, file$p, 57, 1, 1379);
+    			add_location(a0, file$t, 57, 1, 1379);
     			if (!src_url_equal(img0.src, img0_src_value = "dist/img/user1-128x128.jpg")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "User Avatar");
     			attr_dev(img0, "class", "img-size-50 mr-3 img-circle");
-    			add_location(img0, file$p, 67, 4, 1737);
+    			add_location(img0, file$t, 67, 4, 1737);
     			attr_dev(i1, "class", "fas fa-star");
-    			add_location(i1, file$p, 71, 52, 1971);
+    			add_location(i1, file$t, 71, 52, 1971);
     			attr_dev(span2, "class", "float-right text-sm text-danger");
-    			add_location(span2, file$p, 71, 6, 1925);
+    			add_location(span2, file$t, 71, 6, 1925);
     			attr_dev(h30, "class", "dropdown-item-title");
-    			add_location(h30, file$p, 69, 5, 1866);
+    			add_location(h30, file$t, 69, 5, 1866);
     			attr_dev(p0, "class", "text-sm");
-    			add_location(p0, file$p, 73, 5, 2024);
+    			add_location(p0, file$t, 73, 5, 2024);
     			attr_dev(i2, "class", "far fa-clock mr-1");
-    			add_location(i2, file$p, 74, 35, 2111);
+    			add_location(i2, file$t, 74, 35, 2111);
     			attr_dev(p1, "class", "text-sm text-muted");
-    			add_location(p1, file$p, 74, 5, 2081);
+    			add_location(p1, file$t, 74, 5, 2081);
     			attr_dev(div0, "class", "media-body");
-    			add_location(div0, file$p, 68, 4, 1835);
+    			add_location(div0, file$t, 68, 4, 1835);
     			attr_dev(div1, "class", "media");
-    			add_location(div1, file$p, 66, 3, 1712);
+    			add_location(div1, file$t, 66, 3, 1712);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "dropdown-item");
-    			add_location(a1, file$p, 64, 2, 1646);
+    			add_location(a1, file$t, 64, 2, 1646);
     			attr_dev(div2, "class", "dropdown-divider");
-    			add_location(div2, file$p, 79, 2, 2220);
+    			add_location(div2, file$t, 79, 2, 2220);
     			if (!src_url_equal(img1.src, img1_src_value = "dist/img/user8-128x128.jpg")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "User Avatar");
     			attr_dev(img1, "class", "img-size-50 img-circle mr-3");
-    			add_location(img1, file$p, 83, 4, 2351);
+    			add_location(img1, file$t, 83, 4, 2351);
     			attr_dev(i3, "class", "fas fa-star");
-    			add_location(i3, file$p, 87, 51, 2584);
+    			add_location(i3, file$t, 87, 51, 2584);
     			attr_dev(span3, "class", "float-right text-sm text-muted");
-    			add_location(span3, file$p, 87, 6, 2539);
+    			add_location(span3, file$t, 87, 6, 2539);
     			attr_dev(h31, "class", "dropdown-item-title");
-    			add_location(h31, file$p, 85, 5, 2480);
+    			add_location(h31, file$t, 85, 5, 2480);
     			attr_dev(p2, "class", "text-sm");
-    			add_location(p2, file$p, 89, 5, 2637);
+    			add_location(p2, file$t, 89, 5, 2637);
     			attr_dev(i4, "class", "far fa-clock mr-1");
-    			add_location(i4, file$p, 90, 35, 2719);
+    			add_location(i4, file$t, 90, 35, 2719);
     			attr_dev(p3, "class", "text-sm text-muted");
-    			add_location(p3, file$p, 90, 5, 2689);
+    			add_location(p3, file$t, 90, 5, 2689);
     			attr_dev(div3, "class", "media-body");
-    			add_location(div3, file$p, 84, 4, 2449);
+    			add_location(div3, file$t, 84, 4, 2449);
     			attr_dev(div4, "class", "media");
-    			add_location(div4, file$p, 82, 3, 2326);
+    			add_location(div4, file$t, 82, 3, 2326);
     			attr_dev(a2, "href", "#");
     			attr_dev(a2, "class", "dropdown-item");
-    			add_location(a2, file$p, 80, 2, 2260);
+    			add_location(a2, file$t, 80, 2, 2260);
     			attr_dev(div5, "class", "dropdown-divider");
-    			add_location(div5, file$p, 95, 2, 2828);
+    			add_location(div5, file$t, 95, 2, 2828);
     			if (!src_url_equal(img2.src, img2_src_value = "dist/img/user3-128x128.jpg")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "alt", "User Avatar");
     			attr_dev(img2, "class", "img-size-50 img-circle mr-3");
-    			add_location(img2, file$p, 99, 4, 2959);
+    			add_location(img2, file$t, 99, 4, 2959);
     			attr_dev(i5, "class", "fas fa-star");
-    			add_location(i5, file$p, 103, 53, 3197);
+    			add_location(i5, file$t, 103, 53, 3197);
     			attr_dev(span4, "class", "float-right text-sm text-warning");
-    			add_location(span4, file$p, 103, 6, 3150);
+    			add_location(span4, file$t, 103, 6, 3150);
     			attr_dev(h32, "class", "dropdown-item-title");
-    			add_location(h32, file$p, 101, 5, 3088);
+    			add_location(h32, file$t, 101, 5, 3088);
     			attr_dev(p4, "class", "text-sm");
-    			add_location(p4, file$p, 105, 5, 3250);
+    			add_location(p4, file$t, 105, 5, 3250);
     			attr_dev(i6, "class", "far fa-clock mr-1");
-    			add_location(i6, file$p, 106, 35, 3331);
+    			add_location(i6, file$t, 106, 35, 3331);
     			attr_dev(p5, "class", "text-sm text-muted");
-    			add_location(p5, file$p, 106, 5, 3301);
+    			add_location(p5, file$t, 106, 5, 3301);
     			attr_dev(div6, "class", "media-body");
-    			add_location(div6, file$p, 100, 4, 3057);
+    			add_location(div6, file$t, 100, 4, 3057);
     			attr_dev(div7, "class", "media");
-    			add_location(div7, file$p, 98, 3, 2934);
+    			add_location(div7, file$t, 98, 3, 2934);
     			attr_dev(a3, "href", "#");
     			attr_dev(a3, "class", "dropdown-item");
-    			add_location(a3, file$p, 96, 2, 2868);
+    			add_location(a3, file$t, 96, 2, 2868);
     			attr_dev(div8, "class", "dropdown-divider");
-    			add_location(div8, file$p, 111, 2, 3440);
+    			add_location(div8, file$t, 111, 2, 3440);
     			attr_dev(a4, "href", "#");
     			attr_dev(a4, "class", "dropdown-item dropdown-footer");
-    			add_location(a4, file$p, 112, 2, 3480);
+    			add_location(a4, file$t, 112, 2, 3480);
     			attr_dev(div9, "class", "dropdown-menu dropdown-menu-lg dropdown-menu-right");
-    			add_location(div9, file$p, 63, 1, 1578);
+    			add_location(div9, file$t, 63, 1, 1578);
     			attr_dev(li, "class", "nav-item dropdown");
-    			add_location(li, file$p, 56, 0, 1346);
+    			add_location(li, file$t, 56, 0, 1346);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24025,7 +26865,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$q.name,
+    		id: create_fragment$u.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24034,7 +26874,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$q($$self, $$props, $$invalidate) {
+    function instance$u($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UserDropdownMenu', slots, []);
     	let { displayName = "Neznámý" } = $$props;
@@ -24080,13 +26920,13 @@ var app = (function (jQuery) {
     class UserDropdownMenu extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$q, create_fragment$q, safe_not_equal, { displayName: 0, darkTheme: 1 });
+    		init(this, options, instance$u, create_fragment$u, safe_not_equal, { displayName: 0, darkTheme: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UserDropdownMenu",
     			options,
-    			id: create_fragment$q.name
+    			id: create_fragment$u.name
     		});
     	}
 
@@ -24108,9 +26948,9 @@ var app = (function (jQuery) {
     }
 
     /* src\components\structure\navigation\TopNavigation.svelte generated by Svelte v3.42.4 */
-    const file$o = "src\\components\\structure\\navigation\\TopNavigation.svelte";
+    const file$s = "src\\components\\structure\\navigation\\TopNavigation.svelte";
 
-    function create_fragment$p(ctx) {
+    function create_fragment$t(ctx) {
     	let nav;
     	let ul0;
     	let mobilenavtoggle;
@@ -24190,14 +27030,14 @@ var app = (function (jQuery) {
     			create_component(userdropdownmenu.$$.fragment);
     			attr_dev(a0, "href", "index3.html");
     			attr_dev(a0, "class", "nav-link");
-    			add_location(a0, file$o, 18, 6, 543);
+    			add_location(a0, file$s, 18, 6, 543);
     			attr_dev(li0, "class", "nav-item d-none d-sm-inline-block");
-    			add_location(li0, file$o, 17, 4, 489);
+    			add_location(li0, file$s, 17, 4, 489);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "nav-link");
-    			add_location(a1, file$o, 21, 6, 661);
+    			add_location(a1, file$s, 21, 6, 661);
     			attr_dev(li1, "class", "nav-item d-none d-sm-inline-block");
-    			add_location(li1, file$o, 20, 4, 607);
+    			add_location(li1, file$s, 20, 4, 607);
     			attr_dev(a2, "class", "nav-link dropdown-toggle");
     			attr_dev(a2, "href", "#");
     			attr_dev(a2, "id", "navbarDropdown");
@@ -24205,45 +27045,45 @@ var app = (function (jQuery) {
     			attr_dev(a2, "data-toggle", "dropdown");
     			attr_dev(a2, "aria-haspopup", "true");
     			attr_dev(a2, "aria-expanded", "false");
-    			add_location(a2, file$o, 24, 6, 756);
+    			add_location(a2, file$s, 24, 6, 756);
     			attr_dev(a3, "class", "dropdown-item");
     			attr_dev(a3, "href", "#");
-    			add_location(a3, file$o, 36, 8, 1076);
+    			add_location(a3, file$s, 36, 8, 1076);
     			attr_dev(a4, "class", "dropdown-item");
     			attr_dev(a4, "href", "#");
-    			add_location(a4, file$o, 37, 8, 1127);
+    			add_location(a4, file$s, 37, 8, 1127);
     			attr_dev(div0, "class", "dropdown-divider");
-    			add_location(div0, file$o, 38, 8, 1182);
+    			add_location(div0, file$s, 38, 8, 1182);
     			attr_dev(a5, "class", "dropdown-item");
     			attr_dev(a5, "href", "#");
-    			add_location(a5, file$o, 39, 8, 1224);
+    			add_location(a5, file$s, 39, 8, 1224);
     			attr_dev(div1, "class", "dropdown-menu");
     			attr_dev(div1, "aria-labelledby", "navbarDropdown");
-    			add_location(div1, file$o, 35, 6, 1006);
+    			add_location(div1, file$s, 35, 6, 1006);
     			attr_dev(li2, "class", "nav-item dropdown");
-    			add_location(li2, file$o, 23, 4, 718);
+    			add_location(li2, file$s, 23, 4, 718);
     			attr_dev(ul0, "class", "navbar-nav");
-    			add_location(ul0, file$o, 14, 2, 433);
+    			add_location(ul0, file$s, 14, 2, 433);
     			attr_dev(input, "class", "form-control form-control-navbar");
     			attr_dev(input, "type", "search");
     			attr_dev(input, "placeholder", "Search");
     			attr_dev(input, "aria-label", "Search");
-    			add_location(input, file$o, 47, 6, 1418);
+    			add_location(input, file$s, 47, 6, 1418);
     			attr_dev(i, "class", "fas fa-search");
-    			add_location(i, file$o, 50, 10, 1630);
+    			add_location(i, file$s, 50, 10, 1630);
     			attr_dev(button, "class", "btn btn-navbar");
     			attr_dev(button, "type", "submit");
-    			add_location(button, file$o, 49, 8, 1573);
+    			add_location(button, file$s, 49, 8, 1573);
     			attr_dev(div2, "class", "input-group-append");
-    			add_location(div2, file$o, 48, 6, 1531);
+    			add_location(div2, file$s, 48, 6, 1531);
     			attr_dev(div3, "class", "input-group input-group-sm");
-    			add_location(div3, file$o, 46, 4, 1370);
+    			add_location(div3, file$s, 46, 4, 1370);
     			attr_dev(form, "class", "form-inline ml-3");
-    			add_location(form, file$o, 45, 2, 1333);
+    			add_location(form, file$s, 45, 2, 1333);
     			attr_dev(ul1, "class", "navbar-nav ml-auto");
-    			add_location(ul1, file$o, 57, 2, 1750);
+    			add_location(ul1, file$s, 57, 2, 1750);
     			attr_dev(nav, "class", "main-header navbar navbar-expand navbar-white navbar-light");
-    			add_location(nav, file$o, 12, 0, 327);
+    			add_location(nav, file$s, 12, 0, 327);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24304,7 +27144,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$p.name,
+    		id: create_fragment$t.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24318,7 +27158,7 @@ var app = (function (jQuery) {
     } // todo: make logout
     // window.location.replace(LogoutPath)
 
-    function instance$p($$self, $$props, $$invalidate) {
+    function instance$t($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TopNavigation', slots, []);
     	const writable_props = [];
@@ -24340,22 +27180,22 @@ var app = (function (jQuery) {
     class TopNavigation extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$p, create_fragment$p, safe_not_equal, {});
+    		init(this, options, instance$t, create_fragment$t, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TopNavigation",
     			options,
-    			id: create_fragment$p.name
+    			id: create_fragment$t.name
     		});
     	}
     }
 
     /* src\components\structure\navigation\tabs\TabItem.svelte generated by Svelte v3.42.4 */
 
-    const file$n = "src\\components\\structure\\navigation\\tabs\\TabItem.svelte";
+    const file$r = "src\\components\\structure\\navigation\\tabs\\TabItem.svelte";
 
-    function create_fragment$o(ctx) {
+    function create_fragment$s(ctx) {
     	let li;
     	let a;
     	let li_class_value;
@@ -24378,10 +27218,10 @@ var app = (function (jQuery) {
     			if (default_slot) default_slot.c();
     			set_attributes(a, a_data);
     			toggle_class(a, "active", /*active*/ ctx[0]);
-    			add_location(a, file$n, 5, 2, 129);
+    			add_location(a, file$r, 5, 2, 129);
     			attr_dev(li, "class", li_class_value = "nav-item " + (/*$$props*/ ctx[1].class || ''));
     			attr_dev(li, "role", "presentation");
-    			add_location(li, file$n, 4, 0, 53);
+    			add_location(li, file$r, 4, 0, 53);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24448,7 +27288,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$o.name,
+    		id: create_fragment$s.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24457,7 +27297,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$o($$self, $$props, $$invalidate) {
+    function instance$s($$self, $$props, $$invalidate) {
     	const omit_props_names = ["active"];
     	let $$restProps = compute_rest_props($$props, omit_props_names);
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -24493,13 +27333,13 @@ var app = (function (jQuery) {
     class TabItem extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$o, create_fragment$o, safe_not_equal, { active: 0 });
+    		init(this, options, instance$s, create_fragment$s, safe_not_equal, { active: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TabItem",
     			options,
-    			id: create_fragment$o.name
+    			id: create_fragment$s.name
     		});
     	}
 
@@ -24514,9 +27354,9 @@ var app = (function (jQuery) {
 
     /* src\components\structure\navigation\tabs\Tabs.svelte generated by Svelte v3.42.4 */
 
-    const file$m = "src\\components\\structure\\navigation\\tabs\\Tabs.svelte";
+    const file$q = "src\\components\\structure\\navigation\\tabs\\Tabs.svelte";
 
-    function create_fragment$n(ctx) {
+    function create_fragment$r(ctx) {
     	let ul;
     	let current;
     	const default_slot_template = /*#slots*/ ctx[1].default;
@@ -24527,7 +27367,7 @@ var app = (function (jQuery) {
     			ul = element("ul");
     			if (default_slot) default_slot.c();
     			attr_dev(ul, "class", "nav nav-tabs");
-    			add_location(ul, file$m, 0, 0, 0);
+    			add_location(ul, file$q, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24574,7 +27414,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$n.name,
+    		id: create_fragment$r.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24583,7 +27423,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$n($$self, $$props, $$invalidate) {
+    function instance$r($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Tabs', slots, ['default']);
     	const writable_props = [];
@@ -24602,22 +27442,22 @@ var app = (function (jQuery) {
     class Tabs extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {});
+    		init(this, options, instance$r, create_fragment$r, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Tabs",
     			options,
-    			id: create_fragment$n.name
+    			id: create_fragment$r.name
     		});
     	}
     }
 
     /* src\components\tables\TableRowFullWidth.svelte generated by Svelte v3.42.4 */
 
-    const file$l = "src\\components\\tables\\TableRowFullWidth.svelte";
+    const file$p = "src\\components\\tables\\TableRowFullWidth.svelte";
 
-    function create_fragment$m(ctx) {
+    function create_fragment$q(ctx) {
     	let tr;
     	let td;
     	let current;
@@ -24630,8 +27470,8 @@ var app = (function (jQuery) {
     			td = element("td");
     			if (default_slot) default_slot.c();
     			attr_dev(td, "colspan", "100");
-    			add_location(td, file$l, 1, 1, 7);
-    			add_location(tr, file$l, 0, 0, 0);
+    			add_location(td, file$p, 1, 1, 7);
+    			add_location(tr, file$p, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24679,7 +27519,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$m.name,
+    		id: create_fragment$q.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24688,7 +27528,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$m($$self, $$props, $$invalidate) {
+    function instance$q($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TableRowFullWidth', slots, ['default']);
     	const writable_props = [];
@@ -24707,29 +27547,29 @@ var app = (function (jQuery) {
     class TableRowFullWidth extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$m, create_fragment$m, safe_not_equal, {});
+    		init(this, options, instance$q, create_fragment$q, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TableRowFullWidth",
     			options,
-    			id: create_fragment$m.name
+    			id: create_fragment$q.name
     		});
     	}
     }
 
     /* src\components\ui\Loader.svelte generated by Svelte v3.42.4 */
 
-    const file$k = "src\\components\\ui\\Loader.svelte";
+    const file$o = "src\\components\\ui\\Loader.svelte";
 
-    function create_fragment$l(ctx) {
+    function create_fragment$p(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "lds-dual-ring center-block svelte-1782crr");
-    			add_location(div, file$k, 0, 0, 0);
+    			add_location(div, file$o, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24747,7 +27587,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$l.name,
+    		id: create_fragment$p.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24756,7 +27596,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$l($$self, $$props) {
+    function instance$p($$self, $$props) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Loader', slots, []);
     	const writable_props = [];
@@ -24771,22 +27611,22 @@ var app = (function (jQuery) {
     class Loader extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$l, create_fragment$l, safe_not_equal, {});
+    		init(this, options, instance$p, create_fragment$p, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Loader",
     			options,
-    			id: create_fragment$l.name
+    			id: create_fragment$p.name
     		});
     	}
     }
 
     /* src\components\tables\LoadingRow.svelte generated by Svelte v3.42.4 */
-    const file$j = "src\\components\\tables\\LoadingRow.svelte";
+    const file$n = "src\\components\\tables\\LoadingRow.svelte";
 
     // (8:0) <TableRowFullWidth>
-    function create_default_slot$8(ctx) {
+    function create_default_slot$a(ctx) {
     	let div1;
     	let div0;
     	let loader;
@@ -24799,10 +27639,10 @@ var app = (function (jQuery) {
     			div0 = element("div");
     			create_component(loader.$$.fragment);
     			attr_dev(div0, "class", "svelte-v3ef3c");
-    			add_location(div0, file$j, 10, 2, 297);
+    			add_location(div0, file$n, 10, 2, 297);
     			attr_dev(div1, "class", "loader-parent svelte-v3ef3c");
     			set_style(div1, "min-height", /*minHeight*/ ctx[0] + "rem");
-    			add_location(div1, file$j, 9, 1, 230);
+    			add_location(div1, file$n, 9, 1, 230);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -24832,7 +27672,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$8.name,
+    		id: create_default_slot$a.name,
     		type: "slot",
     		source: "(8:0) <TableRowFullWidth>",
     		ctx
@@ -24841,13 +27681,13 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$k(ctx) {
+    function create_fragment$o(ctx) {
     	let tablerowfullwidth;
     	let current;
 
     	tablerowfullwidth = new TableRowFullWidth({
     			props: {
-    				$$slots: { default: [create_default_slot$8] },
+    				$$slots: { default: [create_default_slot$a] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -24889,7 +27729,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$k.name,
+    		id: create_fragment$o.name,
     		type: "component",
     		source: "",
     		ctx
@@ -24898,7 +27738,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$k($$self, $$props, $$invalidate) {
+    function instance$o($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('LoadingRow', slots, []);
     	let { minHeight = 8 } = $$props;
@@ -24928,13 +27768,13 @@ var app = (function (jQuery) {
     class LoadingRow extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$k, create_fragment$k, safe_not_equal, { minHeight: 0 });
+    		init(this, options, instance$o, create_fragment$o, safe_not_equal, { minHeight: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "LoadingRow",
     			options,
-    			id: create_fragment$k.name
+    			id: create_fragment$o.name
     		});
     	}
 
@@ -24948,17 +27788,17 @@ var app = (function (jQuery) {
     }
 
     /* src\components\tables\TableEmptyRow.svelte generated by Svelte v3.42.4 */
-    const file$i = "src\\components\\tables\\TableEmptyRow.svelte";
+    const file$m = "src\\components\\tables\\TableEmptyRow.svelte";
 
     // (5:0) <TableRowFullWidth>
-    function create_default_slot$7(ctx) {
+    function create_default_slot$9(ctx) {
     	let h5;
 
     	const block = {
     		c: function create() {
     			h5 = element("h5");
     			h5.textContent = "Žádné položky k zobrazení";
-    			add_location(h5, file$i, 5, 1, 106);
+    			add_location(h5, file$m, 5, 1, 106);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h5, anchor);
@@ -24970,7 +27810,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$7.name,
+    		id: create_default_slot$9.name,
     		type: "slot",
     		source: "(5:0) <TableRowFullWidth>",
     		ctx
@@ -24979,13 +27819,13 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$j(ctx) {
+    function create_fragment$n(ctx) {
     	let tablerowfullwidth;
     	let current;
 
     	tablerowfullwidth = new TableRowFullWidth({
     			props: {
-    				$$slots: { default: [create_default_slot$7] },
+    				$$slots: { default: [create_default_slot$9] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -25027,7 +27867,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$j.name,
+    		id: create_fragment$n.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25036,7 +27876,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$j($$self, $$props, $$invalidate) {
+    function instance$n($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TableEmptyRow', slots, []);
     	const writable_props = [];
@@ -25052,19 +27892,19 @@ var app = (function (jQuery) {
     class TableEmptyRow extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$j, create_fragment$j, safe_not_equal, {});
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TableEmptyRow",
     			options,
-    			id: create_fragment$j.name
+    			id: create_fragment$n.name
     		});
     	}
     }
 
     /* src\components\tables\TableCondensed.svelte generated by Svelte v3.42.4 */
-    const file$h = "src\\components\\tables\\TableCondensed.svelte";
+    const file$l = "src\\components\\tables\\TableCondensed.svelte";
     const get_headers_slot_changes = dirty => ({});
     const get_headers_slot_context = ctx => ({});
 
@@ -25107,7 +27947,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$i(ctx) {
+    function create_fragment$m(ctx) {
     	let table;
     	let thead;
     	let t;
@@ -25128,10 +27968,10 @@ var app = (function (jQuery) {
     			t = space();
     			tbody = element("tbody");
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
-    			add_location(thead, file$h, 5, 2, 145);
-    			add_location(tbody, file$h, 8, 2, 197);
+    			add_location(thead, file$l, 5, 2, 145);
+    			add_location(tbody, file$l, 8, 2, 197);
     			attr_dev(table, "class", table_class_value = "table table-sm data-table " + (/*$$props*/ ctx[0].class || ''));
-    			add_location(table, file$h, 4, 0, 78);
+    			add_location(table, file$l, 4, 0, 78);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -25208,7 +28048,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$i.name,
+    		id: create_fragment$m.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25217,7 +28057,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$i($$self, $$props, $$invalidate) {
+    function instance$m($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('TableCondensed', slots, ['headers','default']);
 
@@ -25243,22 +28083,22 @@ var app = (function (jQuery) {
     class TableCondensed extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {});
+    		init(this, options, instance$m, create_fragment$m, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "TableCondensed",
     			options,
-    			id: create_fragment$i.name
+    			id: create_fragment$m.name
     		});
     	}
     }
 
     /* src\components\ui\Badge.svelte generated by Svelte v3.42.4 */
 
-    const file$g = "src\\components\\ui\\Badge.svelte";
+    const file$k = "src\\components\\ui\\Badge.svelte";
 
-    function create_fragment$h(ctx) {
+    function create_fragment$l(ctx) {
     	let span;
     	let span_class_value;
     	let current;
@@ -25270,7 +28110,7 @@ var app = (function (jQuery) {
     			span = element("span");
     			if (default_slot) default_slot.c();
     			attr_dev(span, "class", span_class_value = "badge " + (/*color*/ ctx[0] && 'bg-' + /*color*/ ctx[0] || '') + " " + (/*$$props*/ ctx[1].classes || ''));
-    			add_location(span, file$g, 4, 0, 47);
+    			add_location(span, file$k, 4, 0, 47);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -25321,7 +28161,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$h.name,
+    		id: create_fragment$l.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25330,7 +28170,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$h($$self, $$props, $$invalidate) {
+    function instance$l($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Badge', slots, ['default']);
     	let { color = "" } = $$props;
@@ -25359,13 +28199,13 @@ var app = (function (jQuery) {
     class Badge extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$h, create_fragment$h, safe_not_equal, { color: 0 });
+    		init(this, options, instance$l, create_fragment$l, safe_not_equal, { color: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Badge",
     			options,
-    			id: create_fragment$h.name
+    			id: create_fragment$l.name
     		});
     	}
 
@@ -25379,17 +28219,17 @@ var app = (function (jQuery) {
     }
 
     /* src\components\ui\LteButtonRefresh.svelte generated by Svelte v3.42.4 */
-    const file$f = "src\\components\\ui\\LteButtonRefresh.svelte";
+    const file$j = "src\\components\\ui\\LteButtonRefresh.svelte";
 
     // (5:0) <LteButton   color="info"   small   on:click  >
-    function create_default_slot$6(ctx) {
+    function create_default_slot$8(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-sync");
-    			add_location(i, file$f, 9, 1, 119);
+    			add_location(i, file$j, 9, 1, 119);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -25401,7 +28241,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$6.name,
+    		id: create_default_slot$8.name,
     		type: "slot",
     		source: "(5:0) <LteButton   color=\\\"info\\\"   small   on:click  >",
     		ctx
@@ -25410,7 +28250,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$g(ctx) {
+    function create_fragment$k(ctx) {
     	let t;
     	let ltebutton;
     	let current;
@@ -25419,7 +28259,7 @@ var app = (function (jQuery) {
     			props: {
     				color: "info",
     				small: true,
-    				$$slots: { default: [create_default_slot$6] },
+    				$$slots: { default: [create_default_slot$8] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -25466,7 +28306,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$g.name,
+    		id: create_fragment$k.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25475,7 +28315,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$g($$self, $$props, $$invalidate) {
+    function instance$k($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('LteButtonRefresh', slots, []);
     	const writable_props = [];
@@ -25495,13 +28335,13 @@ var app = (function (jQuery) {
     class LteButtonRefresh extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {});
+    		init(this, options, instance$k, create_fragment$k, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "LteButtonRefresh",
     			options,
-    			id: create_fragment$g.name
+    			id: create_fragment$k.name
     		});
     	}
     }
@@ -25509,16 +28349,16 @@ var app = (function (jQuery) {
     /* src\components\ui\Pagination.svelte generated by Svelte v3.42.4 */
 
     const { console: console_1$2 } = globals;
-    const file$e = "src\\components\\ui\\Pagination.svelte";
+    const file$i = "src\\components\\ui\\Pagination.svelte";
 
-    function get_each_context$6(ctx, list, i) {
+    function get_each_context$7(ctx, list, i) {
     	const child_ctx = ctx.slice();
     	child_ctx[19] = list[i];
     	return child_ctx;
     }
 
     // (81:2) {#if showEllipsis && visiblePages[0] > 1}
-    function create_if_block_1$4(ctx) {
+    function create_if_block_1$6(ctx) {
     	let li0;
     	let a0;
     	let t1;
@@ -25538,14 +28378,14 @@ var app = (function (jQuery) {
     			a1.textContent = "…";
     			attr_dev(a0, "href", "#");
     			attr_dev(a0, "class", "page-link");
-    			add_location(a0, file$e, 82, 6, 1885);
+    			add_location(a0, file$i, 82, 6, 1885);
     			attr_dev(li0, "class", "page-item");
-    			add_location(li0, file$e, 81, 4, 1855);
+    			add_location(li0, file$i, 81, 4, 1855);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "page-link");
-    			add_location(a1, file$e, 85, 6, 2031);
+    			add_location(a1, file$i, 85, 6, 2031);
     			attr_dev(li1, "class", "page-item disabled");
-    			add_location(li1, file$e, 84, 4, 1992);
+    			add_location(li1, file$i, 84, 4, 1992);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li0, anchor);
@@ -25571,7 +28411,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$4.name,
+    		id: create_if_block_1$6.name,
     		type: "if",
     		source: "(81:2) {#if showEllipsis && visiblePages[0] > 1}",
     		ctx
@@ -25581,7 +28421,7 @@ var app = (function (jQuery) {
     }
 
     // (90:2) {#each visiblePages as visiblePage (visiblePage)}
-    function create_each_block$6(key_1, ctx) {
+    function create_each_block$7(key_1, ctx) {
     	let li;
     	let a;
     	let t_value = /*visiblePage*/ ctx[19] + "";
@@ -25602,10 +28442,10 @@ var app = (function (jQuery) {
     			t = text(t_value);
     			attr_dev(a, "href", "#");
     			attr_dev(a, "class", "page-link");
-    			add_location(a, file$e, 95, 6, 2312);
+    			add_location(a, file$i, 95, 6, 2312);
     			attr_dev(li, "class", "page-item");
     			toggle_class(li, "active", /*visiblePage*/ ctx[19] === /*page*/ ctx[0]);
-    			add_location(li, file$e, 90, 4, 2156);
+    			add_location(li, file$i, 90, 4, 2156);
     			this.first = li;
     		},
     		m: function mount(target, anchor) {
@@ -25635,7 +28475,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block$6.name,
+    		id: create_each_block$7.name,
     		type: "each",
     		source: "(90:2) {#each visiblePages as visiblePage (visiblePage)}",
     		ctx
@@ -25645,7 +28485,7 @@ var app = (function (jQuery) {
     }
 
     // (102:2) {#if showEllipsis && visiblePages[visiblePages.length - 1] < pages}
-    function create_if_block$6(ctx) {
+    function create_if_block$8(ctx) {
     	let li0;
     	let a0;
     	let t1;
@@ -25666,14 +28506,14 @@ var app = (function (jQuery) {
     			t2 = text(/*pages*/ ctx[1]);
     			attr_dev(a0, "href", "#");
     			attr_dev(a0, "class", "page-link");
-    			add_location(a0, file$e, 103, 6, 2517);
+    			add_location(a0, file$i, 103, 6, 2517);
     			attr_dev(li0, "class", "page-item disabled");
-    			add_location(li0, file$e, 102, 4, 2478);
+    			add_location(li0, file$i, 102, 4, 2478);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "page-link");
-    			add_location(a1, file$e, 106, 6, 2608);
+    			add_location(a1, file$i, 106, 6, 2608);
     			attr_dev(li1, "class", "page-item");
-    			add_location(li1, file$e, 105, 4, 2578);
+    			add_location(li1, file$i, 105, 4, 2578);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li0, anchor);
@@ -25702,7 +28542,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$6.name,
+    		id: create_if_block$8.name,
     		type: "if",
     		source: "(102:2) {#if showEllipsis && visiblePages[visiblePages.length - 1] < pages}",
     		ctx
@@ -25711,7 +28551,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$f(ctx) {
+    function create_fragment$j(ctx) {
     	let ul;
     	let li0;
     	let a0;
@@ -25736,19 +28576,19 @@ var app = (function (jQuery) {
     	let ul_class_value;
     	let mounted;
     	let dispose;
-    	let if_block0 = /*showEllipsis*/ ctx[2] && /*visiblePages*/ ctx[3][0] > 1 && create_if_block_1$4(ctx);
+    	let if_block0 = /*showEllipsis*/ ctx[2] && /*visiblePages*/ ctx[3][0] > 1 && create_if_block_1$6(ctx);
     	let each_value = /*visiblePages*/ ctx[3];
     	validate_each_argument(each_value);
     	const get_key = ctx => /*visiblePage*/ ctx[19];
-    	validate_each_keys(ctx, each_value, get_each_context$6, get_key);
+    	validate_each_keys(ctx, each_value, get_each_context$7, get_key);
 
     	for (let i = 0; i < each_value.length; i += 1) {
-    		let child_ctx = get_each_context$6(ctx, each_value, i);
+    		let child_ctx = get_each_context$7(ctx, each_value, i);
     		let key = get_key(child_ctx);
-    		each_1_lookup.set(key, each_blocks[i] = create_each_block$6(key, child_ctx));
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$7(key, child_ctx));
     	}
 
-    	let if_block1 = /*showEllipsis*/ ctx[2] && /*visiblePages*/ ctx[3][/*visiblePages*/ ctx[3].length - 1] < /*pages*/ ctx[1] && create_if_block$6(ctx);
+    	let if_block1 = /*showEllipsis*/ ctx[2] && /*visiblePages*/ ctx[3][/*visiblePages*/ ctx[3].length - 1] < /*pages*/ ctx[1] && create_if_block$8(ctx);
 
     	const block = {
     		c: function create() {
@@ -25779,35 +28619,35 @@ var app = (function (jQuery) {
     			a3 = element("a");
     			i3 = element("i");
     			attr_dev(i0, "class", "fas fa-angle-double-left");
-    			add_location(i0, file$e, 71, 6, 1572);
+    			add_location(i0, file$i, 71, 6, 1572);
     			attr_dev(a0, "href", "#");
     			attr_dev(a0, "class", "page-link");
-    			add_location(a0, file$e, 70, 4, 1482);
+    			add_location(a0, file$i, 70, 4, 1482);
     			attr_dev(li0, "class", "page-item");
-    			add_location(li0, file$e, 69, 2, 1454);
+    			add_location(li0, file$i, 69, 2, 1454);
     			attr_dev(i1, "class", "fas fa-chevron-left");
-    			add_location(i1, file$e, 76, 6, 1750);
+    			add_location(i1, file$i, 76, 6, 1750);
     			attr_dev(a1, "href", "#");
     			attr_dev(a1, "class", "page-link");
-    			add_location(a1, file$e, 75, 4, 1661);
+    			add_location(a1, file$i, 75, 4, 1661);
     			attr_dev(li1, "class", "page-item");
-    			add_location(li1, file$e, 74, 2, 1633);
+    			add_location(li1, file$i, 74, 2, 1633);
     			attr_dev(i2, "class", "fas fa-chevron-right");
-    			add_location(i2, file$e, 114, 6, 2866);
+    			add_location(i2, file$i, 114, 6, 2866);
     			attr_dev(a2, "href", "#");
     			attr_dev(a2, "class", "page-link");
-    			add_location(a2, file$e, 113, 4, 2778);
+    			add_location(a2, file$i, 113, 4, 2778);
     			attr_dev(li2, "class", "page-item");
-    			add_location(li2, file$e, 112, 2, 2750);
+    			add_location(li2, file$i, 112, 2, 2750);
     			attr_dev(i3, "class", "fas fa-angle-double-right");
-    			add_location(i3, file$e, 119, 6, 3040);
+    			add_location(i3, file$i, 119, 6, 3040);
     			attr_dev(a3, "href", "#");
     			attr_dev(a3, "class", "page-link");
-    			add_location(a3, file$e, 118, 4, 2951);
+    			add_location(a3, file$i, 118, 4, 2951);
     			attr_dev(li3, "class", "page-item");
-    			add_location(li3, file$e, 117, 2, 2923);
+    			add_location(li3, file$i, 117, 2, 2923);
     			attr_dev(ul, "class", ul_class_value = "pagination " + (/*$$props*/ ctx[6].class || ''));
-    			add_location(ul, file$e, 68, 0, 1405);
+    			add_location(ul, file$i, 68, 0, 1405);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -25856,7 +28696,7 @@ var app = (function (jQuery) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_1$4(ctx);
+    					if_block0 = create_if_block_1$6(ctx);
     					if_block0.c();
     					if_block0.m(ul, t2);
     				}
@@ -25868,15 +28708,15 @@ var app = (function (jQuery) {
     			if (dirty & /*visiblePages, page, updateCurrentPage*/ 41) {
     				each_value = /*visiblePages*/ ctx[3];
     				validate_each_argument(each_value);
-    				validate_each_keys(ctx, each_value, get_each_context$6, get_key);
-    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, ul, destroy_block, create_each_block$6, t3, get_each_context$6);
+    				validate_each_keys(ctx, each_value, get_each_context$7, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, ul, destroy_block, create_each_block$7, t3, get_each_context$7);
     			}
 
     			if (/*showEllipsis*/ ctx[2] && /*visiblePages*/ ctx[3][/*visiblePages*/ ctx[3].length - 1] < /*pages*/ ctx[1]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block$6(ctx);
+    					if_block1 = create_if_block$8(ctx);
     					if_block1.c();
     					if_block1.m(ul, t4);
     				}
@@ -25907,7 +28747,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$f.name,
+    		id: create_fragment$j.name,
     		type: "component",
     		source: "",
     		ctx
@@ -25916,7 +28756,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$f($$self, $$props, $$invalidate) {
+    function instance$j($$self, $$props, $$invalidate) {
     	let leftBorder;
     	let rightBorder;
     	let visiblePages;
@@ -26072,7 +28912,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, {
+    		init(this, options, instance$j, create_fragment$j, safe_not_equal, {
     			page: 0,
     			pages: 1,
     			visiblePagesCount: 7,
@@ -26083,7 +28923,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "Pagination",
     			options,
-    			id: create_fragment$f.name
+    			id: create_fragment$j.name
     		});
 
     		const { ctx } = this.$$;
@@ -26131,14 +28971,766 @@ var app = (function (jQuery) {
     	}
     }
 
+    function getParentNodePath(nodePath) {
+      return nodePath.substring(0, nodePath.lastIndexOf("."));
+    }
+    function findNestedLtreePath(tree, nodePath) {
+      if (!nodePath)
+        return [];
+      const parents = getLtreeParents(nodePath);
+      return tree.filter((x) => parents.includes(x.nodePath));
+    }
+    function getLtreeParents(nodePath, acc = []) {
+      const parentNodePath = getParentNodePath(nodePath);
+      return !parentNodePath && acc || getLtreeParents(parentNodePath, [parentNodePath, ...acc]);
+    }
+    function nodePathIsChild(nodePath) {
+      return !nodePath || !!(nodePath.match(/\./g) || []).length;
+    }
+
+    /* src\components\ui\TreeView.svelte generated by Svelte v3.42.4 */
+
+    const file$h = "src\\components\\ui\\TreeView.svelte";
+
+    function get_each_context$6(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[20] = list[i];
+    	return child_ctx;
+    }
+
+    const get_default_slot_changes_1 = dirty => ({ node: dirty & /*nodeNested*/ 8388608 });
+    const get_default_slot_context_1 = ctx => ({ node: /*nodeNested*/ ctx[23] });
+    const get_default_slot_changes$1 = dirty => ({ node: dirty & /*parentChildrenTree*/ 128 });
+    const get_default_slot_context$1 = ctx => ({ node: /*node*/ ctx[20] });
+
+    // (73:4) {:else}
+    function create_else_block$2(ctx) {
+    	let hr;
+
+    	const block = {
+    		c: function create() {
+    			hr = element("hr");
+    			attr_dev(hr, "class", "svelte-15eye0e");
+    			add_location(hr, file$h, 73, 5, 2251);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, hr, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(hr);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$2.name,
+    		type: "else",
+    		source: "(73:4) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (64:4) {#if node.hasChildren}
+    function create_if_block_1$5(ctx) {
+    	let span;
+    	let i;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[16](/*node*/ ctx[20]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			i = element("i");
+    			attr_dev(i, "class", "far");
+    			toggle_class(i, "fa-minus-square", /*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])]);
+    			toggle_class(i, "fa-plus-square", !/*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])]);
+    			add_location(i, file$h, 65, 6, 2042);
+    			add_location(span, file$h, 64, 5, 1989);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, i);
+
+    			if (!mounted) {
+    				dispose = listen_dev(span, "click", click_handler, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty & /*$_expansionState, getNodeId, parentChildrenTree*/ 896) {
+    				toggle_class(i, "fa-minus-square", /*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])]);
+    			}
+
+    			if (dirty & /*$_expansionState, getNodeId, parentChildrenTree*/ 896) {
+    				toggle_class(i, "fa-plus-square", !/*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])]);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$5.name,
+    		type: "if",
+    		source: "(64:4) {#if node.hasChildren}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (81:3) {#if $_expansionState[getNodeId(node)] && node.hasChildren}
+    function create_if_block$7(ctx) {
+    	let treeview;
+    	let current;
+
+    	treeview = new TreeView({
+    			props: {
+    				treeId: /*treeId*/ ctx[1],
+    				getId: /*getId*/ ctx[4],
+    				getParentId: /*getParentId*/ ctx[5],
+    				maxExpandedDepth: /*maxExpandedDepth*/ ctx[3],
+    				tree: /*tree*/ ctx[0],
+    				childDepth: /*childDepth*/ ctx[2] + 1,
+    				parentId: /*getId*/ ctx[4](/*node*/ ctx[20]),
+    				$$slots: {
+    					default: [
+    						create_default_slot$7,
+    						({ node: nodeNested }) => ({ 23: nodeNested }),
+    						({ node: nodeNested }) => nodeNested ? 8388608 : 0
+    					]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(treeview.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(treeview, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const treeview_changes = {};
+    			if (dirty & /*treeId*/ 2) treeview_changes.treeId = /*treeId*/ ctx[1];
+    			if (dirty & /*getId*/ 16) treeview_changes.getId = /*getId*/ ctx[4];
+    			if (dirty & /*getParentId*/ 32) treeview_changes.getParentId = /*getParentId*/ ctx[5];
+    			if (dirty & /*maxExpandedDepth*/ 8) treeview_changes.maxExpandedDepth = /*maxExpandedDepth*/ ctx[3];
+    			if (dirty & /*tree*/ 1) treeview_changes.tree = /*tree*/ ctx[0];
+    			if (dirty & /*childDepth*/ 4) treeview_changes.childDepth = /*childDepth*/ ctx[2] + 1;
+    			if (dirty & /*getId, parentChildrenTree*/ 144) treeview_changes.parentId = /*getId*/ ctx[4](/*node*/ ctx[20]);
+
+    			if (dirty & /*$$scope, nodeNested*/ 8519680) {
+    				treeview_changes.$$scope = { dirty, ctx };
+    			}
+
+    			treeview.$set(treeview_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(treeview.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(treeview.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(treeview, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$7.name,
+    		type: "if",
+    		source: "(81:3) {#if $_expansionState[getNodeId(node)] && node.hasChildren}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (83:4) <svelte:self       {treeId}       {getId}       {getParentId}       {maxExpandedDepth}       tree={tree}       childDepth={childDepth + 1}       parentId={getId(node)}       let:node={nodeNested}      >
+    function create_default_slot$7(ctx) {
+    	let current;
+    	const default_slot_template = /*#slots*/ ctx[15].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[17], get_default_slot_context_1);
+
+    	const block = {
+    		c: function create() {
+    			if (default_slot) default_slot.c();
+    		},
+    		m: function mount(target, anchor) {
+    			if (default_slot) {
+    				default_slot.m(target, anchor);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope, nodeNested*/ 8519680)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[17],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[17])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[17], dirty, get_default_slot_changes_1),
+    						get_default_slot_context_1
+    					);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (default_slot) default_slot.d(detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot$7.name,
+    		type: "slot",
+    		source: "(83:4) <svelte:self       {treeId}       {getId}       {getParentId}       {maxExpandedDepth}       tree={tree}       childDepth={childDepth + 1}       parentId={getId(node)}       let:node={nodeNested}      >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (58:1) {#each parentChildrenTree as node (getNodeId(node))}
+    function create_each_block$6(key_1, ctx) {
+    	let li;
+    	let div;
+    	let t0;
+    	let t1;
+    	let show_if = /*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])] && /*node*/ ctx[20].hasChildren;
+    	let t2;
+    	let current;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*node*/ ctx[20].hasChildren) return create_if_block_1$5;
+    		return create_else_block$2;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block0 = current_block_type(ctx);
+    	const default_slot_template = /*#slots*/ ctx[15].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[17], get_default_slot_context$1);
+    	let if_block1 = show_if && create_if_block$7(ctx);
+
+    	const block = {
+    		key: key_1,
+    		first: null,
+    		c: function create() {
+    			li = element("li");
+    			div = element("div");
+    			if_block0.c();
+    			t0 = space();
+    			if (default_slot) default_slot.c();
+    			t1 = space();
+    			if (if_block1) if_block1.c();
+    			t2 = space();
+    			attr_dev(div, "class", "tree-item svelte-15eye0e");
+    			add_location(div, file$h, 62, 3, 1931);
+    			attr_dev(li, "class", "svelte-15eye0e");
+    			toggle_class(li, "is-child", /*isChild*/ ctx[6](/*node*/ ctx[20]));
+    			toggle_class(li, "has-children", /*node*/ ctx[20].hasChildren);
+    			add_location(li, file$h, 58, 2, 1841);
+    			this.first = li;
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, li, anchor);
+    			append_dev(li, div);
+    			if_block0.m(div, null);
+    			append_dev(div, t0);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			append_dev(li, t1);
+    			if (if_block1) if_block1.m(li, null);
+    			append_dev(li, t2);
+    			current = true;
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block0) {
+    				if_block0.p(ctx, dirty);
+    			} else {
+    				if_block0.d(1);
+    				if_block0 = current_block_type(ctx);
+
+    				if (if_block0) {
+    					if_block0.c();
+    					if_block0.m(div, t0);
+    				}
+    			}
+
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope, parentChildrenTree*/ 131200)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[17],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[17])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[17], dirty, get_default_slot_changes$1),
+    						get_default_slot_context$1
+    					);
+    				}
+    			}
+
+    			if (dirty & /*$_expansionState, parentChildrenTree*/ 384) show_if = /*$_expansionState*/ ctx[8][/*getNodeId*/ ctx[9](/*node*/ ctx[20])] && /*node*/ ctx[20].hasChildren;
+
+    			if (show_if) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty & /*$_expansionState, parentChildrenTree*/ 384) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block$7(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(li, t2);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (dirty & /*isChild, parentChildrenTree*/ 192) {
+    				toggle_class(li, "is-child", /*isChild*/ ctx[6](/*node*/ ctx[20]));
+    			}
+
+    			if (dirty & /*parentChildrenTree*/ 128) {
+    				toggle_class(li, "has-children", /*node*/ ctx[20].hasChildren);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			transition_in(if_block1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			transition_out(if_block1);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(li);
+    			if_block0.d();
+    			if (default_slot) default_slot.d(detaching);
+    			if (if_block1) if_block1.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block$6.name,
+    		type: "each",
+    		source: "(58:1) {#each parentChildrenTree as node (getNodeId(node))}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$i(ctx) {
+    	let ul;
+    	let each_blocks = [];
+    	let each_1_lookup = new Map();
+    	let current;
+    	let each_value = /*parentChildrenTree*/ ctx[7];
+    	validate_each_argument(each_value);
+    	const get_key = ctx => /*getNodeId*/ ctx[9](/*node*/ ctx[20]);
+    	validate_each_keys(ctx, each_value, get_each_context$6, get_key);
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		let child_ctx = get_each_context$6(ctx, each_value, i);
+    		let key = get_key(child_ctx);
+    		each_1_lookup.set(key, each_blocks[i] = create_each_block$6(key, child_ctx));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			ul = element("ul");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			attr_dev(ul, "class", "svelte-15eye0e");
+    			toggle_class(ul, "child-menu", /*childDepth*/ ctx[2] > 0);
+    			add_location(ul, file$h, 56, 0, 1744);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, ul, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(ul, null);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*isChild, parentChildrenTree, treeId, getId, getParentId, maxExpandedDepth, tree, childDepth, $$scope, nodeNested, $_expansionState, getNodeId, toggleExpansion*/ 8521727) {
+    				each_value = /*parentChildrenTree*/ ctx[7];
+    				validate_each_argument(each_value);
+    				group_outros();
+    				validate_each_keys(ctx, each_value, get_each_context$6, get_key);
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, ul, outro_and_destroy_block, create_each_block$6, null, get_each_context$6);
+    				check_outros();
+    			}
+
+    			if (dirty & /*childDepth*/ 4) {
+    				toggle_class(ul, "child-menu", /*childDepth*/ ctx[2] > 0);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			for (let i = 0; i < each_value.length; i += 1) {
+    				transition_in(each_blocks[i]);
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				transition_out(each_blocks[i]);
+    			}
+
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(ul);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].d();
+    			}
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$i.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    let _expansionState = writable({}); /* treeNodeId: expanded <boolean> */
+
+    function instance$i($$self, $$props, $$invalidate) {
+    	let parentChildrenTree;
+    	let valuePath;
+    	let parsedMaxExpandedDepth;
+    	let $_expansionState;
+    	validate_store(_expansionState, '_expansionState');
+    	component_subscribe($$self, _expansionState, $$value => $$invalidate(8, $_expansionState = $$value));
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('TreeView', slots, ['default']);
+    	let { tree = null } = $$props;
+    	let { treeId = null } = $$props;
+    	let { value = null } = $$props;
+    	let { childDepth = 0 } = $$props;
+    	let { parentId = null } = $$props;
+    	let { maxExpandedDepth = 0 } = $$props;
+    	let { getId = x => x.nodePath } = $$props;
+    	let { getParentId = x => getParentNodePath(x.nodePath) } = $$props;
+    	let { isChild = x => nodePathIsChild(x.nodePath) } = $$props;
+    	const getNodeId = node => `${treeId}-${getId(node)}`;
+
+    	// $: console.log("Expansion state changed", $_expansionState)
+    	function expandNodes(nodes) {
+    		if (!nodes || !nodes.length) return;
+    		nodes.forEach(x => toggleExpansion(x, true));
+    	}
+
+    	function toggleExpansion(node, setValueTo = null) {
+    		// console.log("Expansioned", node, _expansionState)
+    		const nodeId = getNodeId(node);
+
+    		_expansionState.update(x => ({ ...x, [nodeId]: setValueTo ?? !x[nodeId] }));
+    	}
+
+    	function recomputeExpandedNodes() {
+    		// tree.forEach(x => toggleExpansion(x, false))
+    		// console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
+    		if (childDepth < parsedMaxExpandedDepth) {
+    			expandNodes(parentChildrenTree);
+    		} // console.log("Expand should happen")
+    	}
+
+    	const writable_props = [
+    		'tree',
+    		'treeId',
+    		'value',
+    		'childDepth',
+    		'parentId',
+    		'maxExpandedDepth',
+    		'getId',
+    		'getParentId',
+    		'isChild'
+    	];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<TreeView> was created with unknown prop '${key}'`);
+    	});
+
+    	const click_handler = node => toggleExpansion(node);
+
+    	$$self.$$set = $$props => {
+    		if ('tree' in $$props) $$invalidate(0, tree = $$props.tree);
+    		if ('treeId' in $$props) $$invalidate(1, treeId = $$props.treeId);
+    		if ('value' in $$props) $$invalidate(11, value = $$props.value);
+    		if ('childDepth' in $$props) $$invalidate(2, childDepth = $$props.childDepth);
+    		if ('parentId' in $$props) $$invalidate(12, parentId = $$props.parentId);
+    		if ('maxExpandedDepth' in $$props) $$invalidate(3, maxExpandedDepth = $$props.maxExpandedDepth);
+    		if ('getId' in $$props) $$invalidate(4, getId = $$props.getId);
+    		if ('getParentId' in $$props) $$invalidate(5, getParentId = $$props.getParentId);
+    		if ('isChild' in $$props) $$invalidate(6, isChild = $$props.isChild);
+    		if ('$$scope' in $$props) $$invalidate(17, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		writable,
+    		_expansionState,
+    		findNestedLtreePath,
+    		getParentNodePath,
+    		nodePathIsChild,
+    		tree,
+    		treeId,
+    		value,
+    		childDepth,
+    		parentId,
+    		maxExpandedDepth,
+    		getId,
+    		getParentId,
+    		isChild,
+    		getNodeId,
+    		expandNodes,
+    		toggleExpansion,
+    		recomputeExpandedNodes,
+    		parentChildrenTree,
+    		parsedMaxExpandedDepth,
+    		valuePath,
+    		$_expansionState
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('tree' in $$props) $$invalidate(0, tree = $$props.tree);
+    		if ('treeId' in $$props) $$invalidate(1, treeId = $$props.treeId);
+    		if ('value' in $$props) $$invalidate(11, value = $$props.value);
+    		if ('childDepth' in $$props) $$invalidate(2, childDepth = $$props.childDepth);
+    		if ('parentId' in $$props) $$invalidate(12, parentId = $$props.parentId);
+    		if ('maxExpandedDepth' in $$props) $$invalidate(3, maxExpandedDepth = $$props.maxExpandedDepth);
+    		if ('getId' in $$props) $$invalidate(4, getId = $$props.getId);
+    		if ('getParentId' in $$props) $$invalidate(5, getParentId = $$props.getParentId);
+    		if ('isChild' in $$props) $$invalidate(6, isChild = $$props.isChild);
+    		if ('parentChildrenTree' in $$props) $$invalidate(7, parentChildrenTree = $$props.parentChildrenTree);
+    		if ('parsedMaxExpandedDepth' in $$props) $$invalidate(13, parsedMaxExpandedDepth = $$props.parsedMaxExpandedDepth);
+    		if ('valuePath' in $$props) $$invalidate(14, valuePath = $$props.valuePath);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*tree, parentId, isChild, getParentId*/ 4193) {
+    			$$invalidate(7, parentChildrenTree = (tree || []).filter(x => !parentId ? !isChild(x) : getParentId(x) === parentId));
+    		}
+
+    		if ($$self.$$.dirty & /*tree, value*/ 2049) {
+    			$$invalidate(14, valuePath = findNestedLtreePath(tree, value));
+    		}
+
+    		if ($$self.$$.dirty & /*maxExpandedDepth*/ 8) {
+    			$$invalidate(13, parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0));
+    		}
+
+    		if ($$self.$$.dirty & /*parsedMaxExpandedDepth, childDepth, tree*/ 8197) {
+    			recomputeExpandedNodes();
+    		}
+
+    		if ($$self.$$.dirty & /*valuePath*/ 16384) {
+    			expandNodes(valuePath);
+    		}
+    	};
+
+    	return [
+    		tree,
+    		treeId,
+    		childDepth,
+    		maxExpandedDepth,
+    		getId,
+    		getParentId,
+    		isChild,
+    		parentChildrenTree,
+    		$_expansionState,
+    		getNodeId,
+    		toggleExpansion,
+    		value,
+    		parentId,
+    		parsedMaxExpandedDepth,
+    		valuePath,
+    		slots,
+    		click_handler,
+    		$$scope
+    	];
+    }
+
+    class TreeView extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$i, create_fragment$i, safe_not_equal, {
+    			tree: 0,
+    			treeId: 1,
+    			value: 11,
+    			childDepth: 2,
+    			parentId: 12,
+    			maxExpandedDepth: 3,
+    			getId: 4,
+    			getParentId: 5,
+    			isChild: 6
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "TreeView",
+    			options,
+    			id: create_fragment$i.name
+    		});
+    	}
+
+    	get tree() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set tree(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get treeId() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set treeId(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get value() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set value(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get childDepth() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set childDepth(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get parentId() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set parentId(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get maxExpandedDepth() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set maxExpandedDepth(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get getId() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set getId(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get getParentId() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set getParentId(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get isChild() {
+    		throw new Error("<TreeView>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set isChild(value) {
+    		throw new Error("<TreeView>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
     /* src\routes\Route1.svelte generated by Svelte v3.42.4 */
 
     const { console: console_1$1 } = globals;
 
-    const file$d = "src\\routes\\Route1.svelte";
+    const file$g = "src\\routes\\Route1.svelte";
 
-    // (25:4) <Label class="col-form-label col-sm-3" inputId="name">
-    function create_default_slot_14$1(ctx) {
+    // (22:4) <Label class="col-form-label col-sm-3" inputId="name">
+    function create_default_slot_11$2(ctx) {
     	let t;
 
     	const block = {
@@ -26155,17 +29747,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_14$1.name,
+    		id: create_default_slot_11$2.name,
     		type: "slot",
-    		source: "(25:4) <Label class=\\\"col-form-label col-sm-3\\\" inputId=\\\"name\\\">",
+    		source: "(22:4) <Label class=\\\"col-form-label col-sm-3\\\" inputId=\\\"name\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:10) <LteButton small>
-    function create_default_slot_13$1(ctx) {
+    // (27:10) <LteButton small>
+    function create_default_slot_10$2(ctx) {
     	let t;
 
     	const block = {
@@ -26182,24 +29774,24 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_13$1.name,
+    		id: create_default_slot_10$2.name,
     		type: "slot",
-    		source: "(30:10) <LteButton small>",
+    		source: "(27:10) <LteButton small>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (29:8) <InputGroupAppend>
-    function create_default_slot_12$1(ctx) {
+    // (26:8) <InputGroupAppend>
+    function create_default_slot_9$2(ctx) {
     	let ltebutton;
     	let current;
 
     	ltebutton = new LteButton({
     			props: {
     				small: true,
-    				$$slots: { default: [create_default_slot_13$1] },
+    				$$slots: { default: [create_default_slot_10$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26238,17 +29830,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_12$1.name,
+    		id: create_default_slot_9$2.name,
     		type: "slot",
-    		source: "(29:8) <InputGroupAppend>",
+    		source: "(26:8) <InputGroupAppend>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:6) <InputGroup>
-    function create_default_slot_11$1(ctx) {
+    // (24:6) <InputGroup>
+    function create_default_slot_8$3(ctx) {
     	let textinput;
     	let t;
     	let inputgroupappend;
@@ -26261,7 +29853,7 @@ var app = (function (jQuery) {
 
     	inputgroupappend = new InputGroupAppend({
     			props: {
-    				$$slots: { default: [create_default_slot_12$1] },
+    				$$slots: { default: [create_default_slot_9$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26308,17 +29900,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_11$1.name,
+    		id: create_default_slot_8$3.name,
     		type: "slot",
-    		source: "(27:6) <InputGroup>",
+    		source: "(24:6) <InputGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (24:2) <FormGroup row>
-    function create_default_slot_10$1(ctx) {
+    // (21:2) <FormGroup row>
+    function create_default_slot_7$4(ctx) {
     	let label;
     	let t;
     	let div;
@@ -26329,7 +29921,7 @@ var app = (function (jQuery) {
     			props: {
     				class: "col-form-label col-sm-3",
     				inputId: "name",
-    				$$slots: { default: [create_default_slot_14$1] },
+    				$$slots: { default: [create_default_slot_11$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26337,7 +29929,7 @@ var app = (function (jQuery) {
 
     	inputgroup = new InputGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_11$1] },
+    				$$slots: { default: [create_default_slot_8$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26350,7 +29942,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			create_component(inputgroup.$$.fragment);
     			attr_dev(div, "class", "col-sm-9");
-    			add_location(div, file$d, 25, 4, 495);
+    			add_location(div, file$g, 22, 4, 440);
     		},
     		m: function mount(target, anchor) {
     			mount_component(label, target, anchor);
@@ -26396,180 +29988,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_10$1.name,
+    		id: create_default_slot_7$4.name,
     		type: "slot",
-    		source: "(24:2) <FormGroup row>",
+    		source: "(21:2) <FormGroup row>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (40:8) <CheckboxLabel inputId="agreement">
-    function create_default_slot_9$1(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = text("Agree");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_9$1.name,
-    		type: "slot",
-    		source: "(40:8) <CheckboxLabel inputId=\\\"agreement\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (38:6) <Checkbox>
-    function create_default_slot_8$2(ctx) {
-    	let checkboxinput;
-    	let t;
-    	let checkboxlabel;
-    	let current;
-
-    	checkboxinput = new CheckboxInput({
-    			props: {
-    				id: "agreement",
-    				name: "agreement",
-    				title: "Agreement"
-    			},
-    			$$inline: true
-    		});
-
-    	checkboxlabel = new CheckboxLabel({
-    			props: {
-    				inputId: "agreement",
-    				$$slots: { default: [create_default_slot_9$1] },
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	const block = {
-    		c: function create() {
-    			create_component(checkboxinput.$$.fragment);
-    			t = space();
-    			create_component(checkboxlabel.$$.fragment);
-    		},
-    		m: function mount(target, anchor) {
-    			mount_component(checkboxinput, target, anchor);
-    			insert_dev(target, t, anchor);
-    			mount_component(checkboxlabel, target, anchor);
-    			current = true;
-    		},
-    		p: function update(ctx, dirty) {
-    			const checkboxlabel_changes = {};
-
-    			if (dirty & /*$$scope*/ 2) {
-    				checkboxlabel_changes.$$scope = { dirty, ctx };
-    			}
-
-    			checkboxlabel.$set(checkboxlabel_changes);
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(checkboxinput.$$.fragment, local);
-    			transition_in(checkboxlabel.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(checkboxinput.$$.fragment, local);
-    			transition_out(checkboxlabel.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			destroy_component(checkboxinput, detaching);
-    			if (detaching) detach_dev(t);
-    			destroy_component(checkboxlabel, detaching);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_8$2.name,
-    		type: "slot",
-    		source: "(38:6) <Checkbox>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (36:2) <FormGroup row>
-    function create_default_slot_7$3(ctx) {
-    	let div;
-    	let checkbox;
-    	let current;
-
-    	checkbox = new Checkbox({
-    			props: {
-    				$$slots: { default: [create_default_slot_8$2] },
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			create_component(checkbox.$$.fragment);
-    			attr_dev(div, "class", "offset-sm-3 col-sm-9");
-    			add_location(div, file$d, 36, 4, 759);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(checkbox, div, null);
-    			current = true;
-    		},
-    		p: function update(ctx, dirty) {
-    			const checkbox_changes = {};
-
-    			if (dirty & /*$$scope*/ 2) {
-    				checkbox_changes.$$scope = { dirty, ctx };
-    			}
-
-    			checkbox.$set(checkbox_changes);
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(checkbox.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(checkbox.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			destroy_component(checkbox);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_7$3.name,
-    		type: "slot",
-    		source: "(36:2) <FormGroup row>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (46:4) <Label class="col-form-label col-sm-3" inputId="name">
-    function create_default_slot_6$3(ctx) {
+    // (34:4) <Label class="col-form-label col-sm-3" inputId="name">
+    function create_default_slot_6$4(ctx) {
     	let t;
 
     	const block = {
@@ -26586,17 +30015,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$3.name,
+    		id: create_default_slot_6$4.name,
     		type: "slot",
-    		source: "(46:4) <Label class=\\\"col-form-label col-sm-3\\\" inputId=\\\"name\\\">",
+    		source: "(34:4) <Label class=\\\"col-form-label col-sm-3\\\" inputId=\\\"name\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (49:8) <Dropdown value="">
-    function create_default_slot_5$4(ctx) {
+    // (37:8) <Dropdown value="">
+    function create_default_slot_5$5(ctx) {
     	let option0;
     	let t1;
     	let option1;
@@ -26610,10 +30039,10 @@ var app = (function (jQuery) {
     			option1.textContent = "Option 1";
     			option0.__value = "Option 1";
     			option0.value = option0.__value;
-    			add_location(option0, file$d, 49, 10, 1183);
+    			add_location(option0, file$g, 37, 10, 859);
     			option1.__value = "Option 1";
     			option1.value = option1.__value;
-    			add_location(option1, file$d, 50, 10, 1220);
+    			add_location(option1, file$g, 38, 10, 896);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option0, anchor);
@@ -26629,17 +30058,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$4.name,
+    		id: create_default_slot_5$5.name,
     		type: "slot",
-    		source: "(49:8) <Dropdown value=\\\"\\\">",
+    		source: "(37:8) <Dropdown value=\\\"\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (54:10) <LteButton small>
-    function create_default_slot_4$4(ctx) {
+    // (42:10) <LteButton small>
+    function create_default_slot_4$5(ctx) {
     	let t;
 
     	const block = {
@@ -26656,24 +30085,24 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$4.name,
+    		id: create_default_slot_4$5.name,
     		type: "slot",
-    		source: "(54:10) <LteButton small>",
+    		source: "(42:10) <LteButton small>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (53:8) <InputGroupAppend>
-    function create_default_slot_3$4(ctx) {
+    // (41:8) <InputGroupAppend>
+    function create_default_slot_3$5(ctx) {
     	let ltebutton;
     	let current;
 
     	ltebutton = new LteButton({
     			props: {
     				small: true,
-    				$$slots: { default: [create_default_slot_4$4] },
+    				$$slots: { default: [create_default_slot_4$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26712,17 +30141,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$4.name,
+    		id: create_default_slot_3$5.name,
     		type: "slot",
-    		source: "(53:8) <InputGroupAppend>",
+    		source: "(41:8) <InputGroupAppend>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (48:6) <InputGroup>
-    function create_default_slot_2$4(ctx) {
+    // (36:6) <InputGroup>
+    function create_default_slot_2$5(ctx) {
     	let dropdown;
     	let t;
     	let inputgroupappend;
@@ -26731,7 +30160,7 @@ var app = (function (jQuery) {
     	dropdown = new Dropdown({
     			props: {
     				value: "",
-    				$$slots: { default: [create_default_slot_5$4] },
+    				$$slots: { default: [create_default_slot_5$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26739,7 +30168,7 @@ var app = (function (jQuery) {
 
     	inputgroupappend = new InputGroupAppend({
     			props: {
-    				$$slots: { default: [create_default_slot_3$4] },
+    				$$slots: { default: [create_default_slot_3$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26793,17 +30222,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2$4.name,
+    		id: create_default_slot_2$5.name,
     		type: "slot",
-    		source: "(48:6) <InputGroup>",
+    		source: "(36:6) <InputGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (45:2) <FormGroup row>
-    function create_default_slot_1$4(ctx) {
+    // (33:2) <FormGroup row>
+    function create_default_slot_1$5(ctx) {
     	let label;
     	let t;
     	let div;
@@ -26814,7 +30243,7 @@ var app = (function (jQuery) {
     			props: {
     				class: "col-form-label col-sm-3",
     				inputId: "name",
-    				$$slots: { default: [create_default_slot_6$3] },
+    				$$slots: { default: [create_default_slot_6$4] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26822,7 +30251,7 @@ var app = (function (jQuery) {
 
     	inputgroup = new InputGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_2$4] },
+    				$$slots: { default: [create_default_slot_2$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26835,7 +30264,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			create_component(inputgroup.$$.fragment);
     			attr_dev(div, "class", "col-sm-9");
-    			add_location(div, file$d, 46, 4, 1100);
+    			add_location(div, file$g, 34, 4, 776);
     		},
     		m: function mount(target, anchor) {
     			mount_component(label, target, anchor);
@@ -26881,28 +30310,26 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_1$4.name,
+    		id: create_default_slot_1$5.name,
     		type: "slot",
-    		source: "(45:2) <FormGroup row>",
+    		source: "(33:2) <FormGroup row>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (23:0) <Form horizontal {form}>
-    function create_default_slot$5(ctx) {
+    // (20:0) <Form horizontal {form}>
+    function create_default_slot$6(ctx) {
     	let formgroup0;
-    	let t0;
+    	let t;
     	let formgroup1;
-    	let t1;
-    	let formgroup2;
     	let current;
 
     	formgroup0 = new FormGroup({
     			props: {
     				row: true,
-    				$$slots: { default: [create_default_slot_10$1] },
+    				$$slots: { default: [create_default_slot_7$4] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26911,16 +30338,7 @@ var app = (function (jQuery) {
     	formgroup1 = new FormGroup({
     			props: {
     				row: true,
-    				$$slots: { default: [create_default_slot_7$3] },
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	formgroup2 = new FormGroup({
-    			props: {
-    				row: true,
-    				$$slots: { default: [create_default_slot_1$4] },
+    				$$slots: { default: [create_default_slot_1$5] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -26929,17 +30347,13 @@ var app = (function (jQuery) {
     	const block = {
     		c: function create() {
     			create_component(formgroup0.$$.fragment);
-    			t0 = space();
+    			t = space();
     			create_component(formgroup1.$$.fragment);
-    			t1 = space();
-    			create_component(formgroup2.$$.fragment);
     		},
     		m: function mount(target, anchor) {
     			mount_component(formgroup0, target, anchor);
-    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t, anchor);
     			mount_component(formgroup1, target, anchor);
-    			insert_dev(target, t1, anchor);
-    			mount_component(formgroup2, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -26957,48 +30371,37 @@ var app = (function (jQuery) {
     			}
 
     			formgroup1.$set(formgroup1_changes);
-    			const formgroup2_changes = {};
-
-    			if (dirty & /*$$scope*/ 2) {
-    				formgroup2_changes.$$scope = { dirty, ctx };
-    			}
-
-    			formgroup2.$set(formgroup2_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(formgroup0.$$.fragment, local);
     			transition_in(formgroup1.$$.fragment, local);
-    			transition_in(formgroup2.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(formgroup0.$$.fragment, local);
     			transition_out(formgroup1.$$.fragment, local);
-    			transition_out(formgroup2.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			destroy_component(formgroup0, detaching);
-    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t);
     			destroy_component(formgroup1, detaching);
-    			if (detaching) detach_dev(t1);
-    			destroy_component(formgroup2, detaching);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$5.name,
+    		id: create_default_slot$6.name,
     		type: "slot",
-    		source: "(23:0) <Form horizontal {form}>",
+    		source: "(20:0) <Form horizontal {form}>",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$e(ctx) {
+    function create_fragment$h(ctx) {
     	let form_1;
     	let current;
 
@@ -27006,7 +30409,7 @@ var app = (function (jQuery) {
     			props: {
     				horizontal: true,
     				form: /*form*/ ctx[0],
-    				$$slots: { default: [create_default_slot$5] },
+    				$$slots: { default: [create_default_slot$6] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -27048,7 +30451,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$e.name,
+    		id: create_fragment$h.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27057,7 +30460,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$e($$self, $$props, $$invalidate) {
+    function instance$h($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Route1', slots, []);
     	const { form } = dist.createForm({ onSubmit: async val => console.log(val) });
@@ -27070,15 +30473,12 @@ var app = (function (jQuery) {
     	$$self.$capture_state = () => ({
     		createForm: dist.createForm,
     		FormGroup,
-    		CheckboxInput,
     		TextInput,
-    		Checkbox,
     		Form,
     		InputGroup,
     		InputGroupAppend,
     		Label,
     		LteButton,
-    		CheckboxLabel,
     		Dropdown,
     		form
     	});
@@ -27089,13 +30489,13 @@ var app = (function (jQuery) {
     class Route1 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, {});
+    		init(this, options, instance$h, create_fragment$h, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Route1",
     			options,
-    			id: create_fragment$e.name
+    			id: create_fragment$h.name
     		});
     	}
     }
@@ -27231,9 +30631,9 @@ var app = (function (jQuery) {
 
     /* node_modules\svelte-select\src\Item.svelte generated by Svelte v3.42.4 */
 
-    const file$c = "node_modules\\svelte-select\\src\\Item.svelte";
+    const file$f = "node_modules\\svelte-select\\src\\Item.svelte";
 
-    function create_fragment$d(ctx) {
+    function create_fragment$g(ctx) {
     	let div;
     	let raw_value = /*getOptionLabel*/ ctx[0](/*item*/ ctx[1], /*filterText*/ ctx[2]) + "";
     	let div_class_value;
@@ -27242,7 +30642,7 @@ var app = (function (jQuery) {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", div_class_value = "item " + /*itemClasses*/ ctx[3] + " svelte-3e0qet");
-    			add_location(div, file$c, 78, 0, 1837);
+    			add_location(div, file$f, 78, 0, 1837);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -27266,7 +30666,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$d.name,
+    		id: create_fragment$g.name,
     		type: "component",
     		source: "",
     		ctx
@@ -27275,7 +30675,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$d($$self, $$props, $$invalidate) {
+    function instance$g($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Item', slots, []);
     	let { isActive = false } = $$props;
@@ -27387,7 +30787,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$d, create_fragment$d, safe_not_equal, {
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {
     			isActive: 4,
     			isFirst: 5,
     			isHover: 6,
@@ -27401,7 +30801,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "Item",
     			options,
-    			id: create_fragment$d.name
+    			id: create_fragment$g.name
     		});
     	}
 
@@ -27463,7 +30863,7 @@ var app = (function (jQuery) {
     }
 
     /* node_modules\svelte-select\src\List.svelte generated by Svelte v3.42.4 */
-    const file$b = "node_modules\\svelte-select\\src\\List.svelte";
+    const file$e = "node_modules\\svelte-select\\src\\List.svelte";
 
     function get_each_context$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -27596,7 +30996,7 @@ var app = (function (jQuery) {
     }
 
     // (286:4) {#if isVirtualList}
-    function create_if_block$5(ctx) {
+    function create_if_block$6(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -27609,7 +31009,7 @@ var app = (function (jQuery) {
     				itemHeight: /*itemHeight*/ ctx[8],
     				$$slots: {
     					default: [
-    						create_default_slot$4,
+    						create_default_slot$5,
     						({ item, i }) => ({ 41: item, 42: i }),
     						({ item, i }) => [0, (item ? 1024 : 0) | (i ? 2048 : 0)]
     					]
@@ -27687,7 +31087,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$5.name,
+    		id: create_if_block$6.name,
     		type: "if",
     		source: "(286:4) {#if isVirtualList}",
     		ctx
@@ -27751,7 +31151,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			t = text(/*noOptionsMessage*/ ctx[12]);
     			attr_dev(div, "class", "empty svelte-1uyqfml");
-    			add_location(div, file$b, 332, 16, 10327);
+    			add_location(div, file$e, 332, 16, 10327);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -27824,7 +31224,7 @@ var app = (function (jQuery) {
     			t = space();
     			attr_dev(div, "class", "listItem");
     			attr_dev(div, "tabindex", "-1");
-    			add_location(div, file$b, 313, 16, 9507);
+    			add_location(div, file$e, 313, 16, 9507);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -27909,7 +31309,7 @@ var app = (function (jQuery) {
     }
 
     // (311:12) {#if item.isGroupHeader && !item.isSelectable}
-    function create_if_block_1$3(ctx) {
+    function create_if_block_1$4(ctx) {
     	let div;
     	let t_value = /*getGroupHeaderLabel*/ ctx[7](/*item*/ ctx[41]) + "";
     	let t;
@@ -27919,7 +31319,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "class", "listGroupTitle svelte-1uyqfml");
-    			add_location(div, file$b, 311, 16, 9409);
+    			add_location(div, file$e, 311, 16, 9409);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -27937,7 +31337,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$3.name,
+    		id: create_if_block_1$4.name,
     		type: "if",
     		source: "(311:12) {#if item.isGroupHeader && !item.isSelectable}",
     		ctx
@@ -27952,7 +31352,7 @@ var app = (function (jQuery) {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_1$3, create_else_block_1];
+    	const if_block_creators = [create_if_block_1$4, create_else_block_1];
     	const if_blocks = [];
 
     	function select_block_type_1(ctx, dirty) {
@@ -28027,7 +31427,7 @@ var app = (function (jQuery) {
     }
 
     // (287:8) <svelte:component             this={VirtualList}             {items}             {itemHeight}             let:item             let:i>
-    function create_default_slot$4(ctx) {
+    function create_default_slot$5(ctx) {
     	let div;
     	let switch_instance;
     	let current;
@@ -28071,7 +31471,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (switch_instance) create_component(switch_instance.$$.fragment);
     			attr_dev(div, "class", "listItem");
-    			add_location(div, file$b, 292, 12, 8615);
+    			add_location(div, file$e, 292, 12, 8615);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -28146,7 +31546,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$4.name,
+    		id: create_default_slot$5.name,
     		type: "slot",
     		source: "(287:8) <svelte:component             this={VirtualList}             {items}             {itemHeight}             let:item             let:i>",
     		ctx
@@ -28155,14 +31555,14 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$c(ctx) {
+    function create_fragment$f(ctx) {
     	let div;
     	let current_block_type_index;
     	let if_block;
     	let current;
     	let mounted;
     	let dispose;
-    	const if_block_creators = [create_if_block$5, create_else_block$1];
+    	const if_block_creators = [create_if_block$6, create_else_block$1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -28180,7 +31580,7 @@ var app = (function (jQuery) {
     			attr_dev(div, "class", "listContainer svelte-1uyqfml");
     			attr_dev(div, "style", /*listStyle*/ ctx[14]);
     			toggle_class(div, "virtualList", /*isVirtualList*/ ctx[5]);
-    			add_location(div, file$b, 280, 0, 8319);
+    			add_location(div, file$e, 280, 0, 8319);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28255,7 +31655,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$c.name,
+    		id: create_fragment$f.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28280,7 +31680,7 @@ var app = (function (jQuery) {
     	return item.isGroupHeader && item.isSelectable || item.selectable || !item.hasOwnProperty('selectable'); // Default; if `selectable` was not specified, the object is selectable
     }
 
-    function instance$c($$self, $$props, $$invalidate) {
+    function instance$f($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('List', slots, []);
     	const dispatch = createEventDispatcher();
@@ -28664,8 +32064,8 @@ var app = (function (jQuery) {
     		init(
     			this,
     			options,
-    			instance$c,
-    			create_fragment$c,
+    			instance$f,
+    			create_fragment$f,
     			safe_not_equal,
     			{
     				container: 0,
@@ -28698,7 +32098,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "List",
     			options,
-    			id: create_fragment$c.name
+    			id: create_fragment$f.name
     		});
     	}
 
@@ -28873,9 +32273,9 @@ var app = (function (jQuery) {
 
     /* node_modules\svelte-select\src\Selection.svelte generated by Svelte v3.42.4 */
 
-    const file$a = "node_modules\\svelte-select\\src\\Selection.svelte";
+    const file$d = "node_modules\\svelte-select\\src\\Selection.svelte";
 
-    function create_fragment$b(ctx) {
+    function create_fragment$e(ctx) {
     	let div;
     	let raw_value = /*getSelectionLabel*/ ctx[0](/*item*/ ctx[1]) + "";
 
@@ -28883,7 +32283,7 @@ var app = (function (jQuery) {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "selection svelte-pu1q1n");
-    			add_location(div, file$a, 13, 0, 230);
+    			add_location(div, file$d, 13, 0, 230);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -28903,7 +32303,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$b.name,
+    		id: create_fragment$e.name,
     		type: "component",
     		source: "",
     		ctx
@@ -28912,7 +32312,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$b($$self, $$props, $$invalidate) {
+    function instance$e($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Selection', slots, []);
     	let { getSelectionLabel = undefined } = $$props;
@@ -28945,13 +32345,13 @@ var app = (function (jQuery) {
     class Selection extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, { getSelectionLabel: 0, item: 1 });
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, { getSelectionLabel: 0, item: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Selection",
     			options,
-    			id: create_fragment$b.name
+    			id: create_fragment$e.name
     		});
     	}
 
@@ -28973,7 +32373,7 @@ var app = (function (jQuery) {
     }
 
     /* node_modules\svelte-select\src\MultiSelection.svelte generated by Svelte v3.42.4 */
-    const file$9 = "node_modules\\svelte-select\\src\\MultiSelection.svelte";
+    const file$c = "node_modules\\svelte-select\\src\\MultiSelection.svelte";
 
     function get_each_context$4(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -28983,7 +32383,7 @@ var app = (function (jQuery) {
     }
 
     // (87:8) {#if !isDisabled && !multiFullItemClearable}
-    function create_if_block$4(ctx) {
+    function create_if_block$5(ctx) {
     	let div;
     	let svg;
     	let path;
@@ -29000,7 +32400,7 @@ var app = (function (jQuery) {
     			svg = svg_element("svg");
     			path = svg_element("path");
     			attr_dev(path, "d", "M34.923,37.251L24,26.328L13.077,37.251L9.436,33.61l10.923-10.923L9.436,11.765l3.641-3.641L24,19.047L34.923,8.124 l3.641,3.641L27.641,22.688L38.564,33.61L34.923,37.251z");
-    			add_location(path, file$9, 97, 20, 3027);
+    			add_location(path, file$c, 97, 20, 3027);
     			attr_dev(svg, "width", "100%");
     			attr_dev(svg, "height", "100%");
     			attr_dev(svg, "viewBox", "-2 -2 50 50");
@@ -29008,9 +32408,9 @@ var app = (function (jQuery) {
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "role", "presentation");
     			attr_dev(svg, "class", "svelte-liu9pa");
-    			add_location(svg, file$9, 90, 16, 2775);
+    			add_location(svg, file$c, 90, 16, 2775);
     			attr_dev(div, "class", "multiSelectItem_clear svelte-liu9pa");
-    			add_location(div, file$9, 87, 12, 2647);
+    			add_location(div, file$c, 87, 12, 2647);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29034,7 +32434,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block$5.name,
     		type: "if",
     		source: "(87:8) {#if !isDisabled && !multiFullItemClearable}",
     		ctx
@@ -29053,7 +32453,7 @@ var app = (function (jQuery) {
     	let div1_class_value;
     	let mounted;
     	let dispose;
-    	let if_block = !/*isDisabled*/ ctx[2] && !/*multiFullItemClearable*/ ctx[3] && create_if_block$4(ctx);
+    	let if_block = !/*isDisabled*/ ctx[2] && !/*multiFullItemClearable*/ ctx[3] && create_if_block$5(ctx);
 
     	function click_handler_1(...args) {
     		return /*click_handler_1*/ ctx[7](/*i*/ ctx[11], ...args);
@@ -29067,9 +32467,9 @@ var app = (function (jQuery) {
     			if (if_block) if_block.c();
     			t1 = space();
     			attr_dev(div0, "class", "multiSelectItem_label svelte-liu9pa");
-    			add_location(div0, file$9, 83, 8, 2487);
+    			add_location(div0, file$c, 83, 8, 2487);
     			attr_dev(div1, "class", div1_class_value = "multiSelectItem " + (/*activeValue*/ ctx[1] === /*i*/ ctx[11] ? 'active' : '') + " " + (/*isDisabled*/ ctx[2] ? 'disabled' : '') + " svelte-liu9pa");
-    			add_location(div1, file$9, 77, 4, 2256);
+    			add_location(div1, file$c, 77, 4, 2256);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -29091,7 +32491,7 @@ var app = (function (jQuery) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$4(ctx);
+    					if_block = create_if_block$5(ctx);
     					if_block.c();
     					if_block.m(div1, t1);
     				}
@@ -29123,7 +32523,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$a(ctx) {
+    function create_fragment$d(ctx) {
     	let each_1_anchor;
     	let each_value = /*value*/ ctx[0];
     	validate_each_argument(each_value);
@@ -29186,7 +32586,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$a.name,
+    		id: create_fragment$d.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29195,7 +32595,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$a($$self, $$props, $$invalidate) {
+    function instance$d($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MultiSelection', slots, []);
     	const dispatch = createEventDispatcher();
@@ -29272,7 +32672,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {
+    		init(this, options, instance$d, create_fragment$d, safe_not_equal, {
     			value: 0,
     			activeValue: 1,
     			isDisabled: 2,
@@ -29284,7 +32684,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "MultiSelection",
     			options,
-    			id: create_fragment$a.name
+    			id: create_fragment$d.name
     		});
     	}
 
@@ -29330,7 +32730,7 @@ var app = (function (jQuery) {
     }
 
     /* node_modules\svelte-select\src\VirtualList.svelte generated by Svelte v3.42.4 */
-    const file$8 = "node_modules\\svelte-select\\src\\VirtualList.svelte";
+    const file$b = "node_modules\\svelte-select\\src\\VirtualList.svelte";
 
     function get_each_context$3(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -29394,7 +32794,7 @@ var app = (function (jQuery) {
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
     			t = space();
     			set_custom_element_data(svelte_virtual_list_row, "class", "svelte-g2cagw");
-    			add_location(svelte_virtual_list_row, file$8, 152, 12, 3778);
+    			add_location(svelte_virtual_list_row, file$b, 152, 12, 3778);
     			this.first = svelte_virtual_list_row;
     		},
     		m: function mount(target, anchor) {
@@ -29451,7 +32851,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$9(ctx) {
+    function create_fragment$c(ctx) {
     	let svelte_virtual_list_viewport;
     	let svelte_virtual_list_contents;
     	let each_blocks = [];
@@ -29483,11 +32883,11 @@ var app = (function (jQuery) {
     			set_style(svelte_virtual_list_contents, "padding-top", /*top*/ ctx[6] + "px");
     			set_style(svelte_virtual_list_contents, "padding-bottom", /*bottom*/ ctx[7] + "px");
     			set_custom_element_data(svelte_virtual_list_contents, "class", "svelte-g2cagw");
-    			add_location(svelte_virtual_list_contents, file$8, 148, 4, 3597);
+    			add_location(svelte_virtual_list_contents, file$b, 148, 4, 3597);
     			set_style(svelte_virtual_list_viewport, "height", /*height*/ ctx[0]);
     			set_custom_element_data(svelte_virtual_list_viewport, "class", "svelte-g2cagw");
     			add_render_callback(() => /*svelte_virtual_list_viewport_elementresize_handler*/ ctx[18].call(svelte_virtual_list_viewport));
-    			add_location(svelte_virtual_list_viewport, file$8, 143, 0, 3437);
+    			add_location(svelte_virtual_list_viewport, file$b, 143, 0, 3437);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29565,7 +32965,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$9.name,
+    		id: create_fragment$c.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29574,7 +32974,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$9($$self, $$props, $$invalidate) {
+    function instance$c($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('VirtualList', slots, ['default']);
     	let { items = undefined } = $$props;
@@ -29800,7 +33200,7 @@ var app = (function (jQuery) {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, {
     			items: 11,
     			height: 0,
     			itemHeight: 12,
@@ -29813,7 +33213,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "VirtualList",
     			options,
-    			id: create_fragment$9.name
+    			id: create_fragment$c.name
     		});
     	}
 
@@ -29868,9 +33268,9 @@ var app = (function (jQuery) {
 
     /* node_modules\svelte-select\src\ClearIcon.svelte generated by Svelte v3.42.4 */
 
-    const file$7 = "node_modules\\svelte-select\\src\\ClearIcon.svelte";
+    const file$a = "node_modules\\svelte-select\\src\\ClearIcon.svelte";
 
-    function create_fragment$8(ctx) {
+    function create_fragment$b(ctx) {
     	let svg;
     	let path;
 
@@ -29880,14 +33280,14 @@ var app = (function (jQuery) {
     			path = svg_element("path");
     			attr_dev(path, "fill", "currentColor");
     			attr_dev(path, "d", "M34.923,37.251L24,26.328L13.077,37.251L9.436,33.61l10.923-10.923L9.436,11.765l3.641-3.641L24,19.047L34.923,8.124\n    l3.641,3.641L27.641,22.688L38.564,33.61L34.923,37.251z");
-    			add_location(path, file$7, 8, 4, 141);
+    			add_location(path, file$a, 8, 4, 141);
     			attr_dev(svg, "width", "100%");
     			attr_dev(svg, "height", "100%");
     			attr_dev(svg, "viewBox", "-2 -2 50 50");
     			attr_dev(svg, "focusable", "false");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "role", "presentation");
-    			add_location(svg, file$7, 0, 0, 0);
+    			add_location(svg, file$a, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -29906,7 +33306,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$8.name,
+    		id: create_fragment$b.name,
     		type: "component",
     		source: "",
     		ctx
@@ -29915,7 +33315,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$8($$self, $$props) {
+    function instance$b($$self, $$props) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('ClearIcon', slots, []);
     	const writable_props = [];
@@ -29930,13 +33330,13 @@ var app = (function (jQuery) {
     class ClearIcon extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "ClearIcon",
     			options,
-    			id: create_fragment$8.name
+    			id: create_fragment$b.name
     		});
     	}
     }
@@ -29966,7 +33366,7 @@ var app = (function (jQuery) {
     /* node_modules\svelte-select\src\Select.svelte generated by Svelte v3.42.4 */
 
     const { Object: Object_1, console: console_1 } = globals;
-    const file$6 = "node_modules\\svelte-select\\src\\Select.svelte";
+    const file$9 = "node_modules\\svelte-select\\src\\Select.svelte";
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -29990,9 +33390,9 @@ var app = (function (jQuery) {
     			span1 = element("span");
     			t2 = text(/*ariaContext*/ ctx[32]);
     			attr_dev(span0, "id", "aria-selection");
-    			add_location(span0, file$6, 874, 12, 23719);
+    			add_location(span0, file$9, 874, 12, 23719);
     			attr_dev(span1, "id", "aria-context");
-    			add_location(span1, file$6, 875, 12, 23780);
+    			add_location(span1, file$9, 875, 12, 23780);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span0, anchor);
@@ -30243,7 +33643,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			if (switch_instance) create_component(switch_instance.$$.fragment);
     			attr_dev(div, "class", "selectedItem svelte-b8sh3g");
-    			add_location(div, file$6, 908, 8, 24602);
+    			add_location(div, file$9, 908, 8, 24602);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30339,7 +33739,7 @@ var app = (function (jQuery) {
     			if (switch_instance) create_component(switch_instance.$$.fragment);
     			attr_dev(div, "class", "clearSelect svelte-b8sh3g");
     			attr_dev(div, "aria-hidden", "true");
-    			add_location(div, file$6, 917, 8, 24841);
+    			add_location(div, file$9, 917, 8, 24841);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30424,7 +33824,7 @@ var app = (function (jQuery) {
     			if_block.c();
     			attr_dev(div, "class", "indicator svelte-b8sh3g");
     			attr_dev(div, "aria-hidden", "true");
-    			add_location(div, file$6, 926, 8, 25224);
+    			add_location(div, file$9, 926, 8, 25224);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30470,14 +33870,14 @@ var app = (function (jQuery) {
     			svg = svg_element("svg");
     			path = svg_element("path");
     			attr_dev(path, "d", "M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747\n          3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0\n          1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502\n          0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0\n          0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z");
-    			add_location(path, file$6, 936, 20, 25581);
+    			add_location(path, file$9, 936, 20, 25581);
     			attr_dev(svg, "width", "100%");
     			attr_dev(svg, "height", "100%");
     			attr_dev(svg, "viewBox", "0 0 20 20");
     			attr_dev(svg, "focusable", "false");
     			attr_dev(svg, "aria-hidden", "true");
     			attr_dev(svg, "class", "svelte-b8sh3g");
-    			add_location(svg, file$6, 930, 16, 25371);
+    			add_location(svg, file$9, 930, 16, 25371);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -30554,12 +33954,12 @@ var app = (function (jQuery) {
     			attr_dev(circle, "stroke", "currentColor");
     			attr_dev(circle, "stroke-width", "5");
     			attr_dev(circle, "stroke-miterlimit", "10");
-    			add_location(circle, file$6, 950, 16, 26130);
+    			add_location(circle, file$9, 950, 16, 26130);
     			attr_dev(svg, "class", "spinner_icon svelte-b8sh3g");
     			attr_dev(svg, "viewBox", "25 25 50 50");
-    			add_location(svg, file$6, 949, 12, 26065);
+    			add_location(svg, file$9, 949, 12, 26065);
     			attr_dev(div, "class", "spinner svelte-b8sh3g");
-    			add_location(div, file$6, 948, 8, 26031);
+    			add_location(div, file$9, 948, 8, 26031);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30700,7 +34100,7 @@ var app = (function (jQuery) {
     }
 
     // (974:4) {#if !isMulti || (isMulti && !showMultiSelect)}
-    function create_if_block_1$2(ctx) {
+    function create_if_block_1$3(ctx) {
     	let input_1;
     	let input_1_name_value;
     	let input_1_value_value;
@@ -30716,7 +34116,7 @@ var app = (function (jQuery) {
     			: null;
 
     			attr_dev(input_1, "class", "svelte-b8sh3g");
-    			add_location(input_1, file$6, 974, 8, 26787);
+    			add_location(input_1, file$9, 974, 8, 26787);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input_1, anchor);
@@ -30739,7 +34139,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$2.name,
+    		id: create_if_block_1$3.name,
     		type: "if",
     		source: "(974:4) {#if !isMulti || (isMulti && !showMultiSelect)}",
     		ctx
@@ -30749,7 +34149,7 @@ var app = (function (jQuery) {
     }
 
     // (981:4) {#if isMulti && showMultiSelect}
-    function create_if_block$3(ctx) {
+    function create_if_block$4(ctx) {
     	let each_1_anchor;
     	let each_value = /*value*/ ctx[2];
     	validate_each_argument(each_value);
@@ -30807,7 +34207,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block$4.name,
     		type: "if",
     		source: "(981:4) {#if isMulti && showMultiSelect}",
     		ctx
@@ -30833,7 +34233,7 @@ var app = (function (jQuery) {
     			: null;
 
     			attr_dev(input_1, "class", "svelte-b8sh3g");
-    			add_location(input_1, file$6, 982, 12, 27013);
+    			add_location(input_1, file$9, 982, 12, 27013);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input_1, anchor);
@@ -30865,7 +34265,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$7(ctx) {
+    function create_fragment$a(ctx) {
     	let div;
     	let span;
     	let t0;
@@ -30909,8 +34309,8 @@ var app = (function (jQuery) {
     	let if_block5 = !/*showClearIcon*/ ctx[37] && (/*showIndicator*/ ctx[20] || /*showChevron*/ ctx[19] && !/*value*/ ctx[2] || !/*isSearchable*/ ctx[13] && !/*isDisabled*/ ctx[9] && !/*isWaiting*/ ctx[4] && (/*showSelectedItem*/ ctx[29] && !/*isClearable*/ ctx[15] || !/*showSelectedItem*/ ctx[29])) && create_if_block_4(ctx);
     	let if_block6 = /*isWaiting*/ ctx[4] && create_if_block_3(ctx);
     	let if_block7 = /*listOpen*/ ctx[5] && create_if_block_2$1(ctx);
-    	let if_block8 = (!/*isMulti*/ ctx[7] || /*isMulti*/ ctx[7] && !/*showMultiSelect*/ ctx[35]) && create_if_block_1$2(ctx);
-    	let if_block9 = /*isMulti*/ ctx[7] && /*showMultiSelect*/ ctx[35] && create_if_block$3(ctx);
+    	let if_block8 = (!/*isMulti*/ ctx[7] || /*isMulti*/ ctx[7] && !/*showMultiSelect*/ ctx[35]) && create_if_block_1$3(ctx);
+    	let if_block9 = /*isMulti*/ ctx[7] && /*showMultiSelect*/ ctx[35] && create_if_block$4(ctx);
 
     	const block = {
     		c: function create() {
@@ -30941,17 +34341,17 @@ var app = (function (jQuery) {
     			attr_dev(span, "aria-atomic", "false");
     			attr_dev(span, "aria-relevant", "additions text");
     			attr_dev(span, "class", "a11yText svelte-b8sh3g");
-    			add_location(span, file$6, 868, 4, 23557);
+    			add_location(span, file$9, 868, 4, 23557);
     			set_attributes(input_1, input_1_data);
     			toggle_class(input_1, "svelte-b8sh3g", true);
-    			add_location(input_1, file$6, 897, 4, 24296);
+    			add_location(input_1, file$9, 897, 4, 24296);
     			attr_dev(div, "class", div_class_value = "selectContainer " + /*containerClasses*/ ctx[21] + " svelte-b8sh3g");
     			attr_dev(div, "style", /*containerStyles*/ ctx[11]);
     			toggle_class(div, "hasError", /*hasError*/ ctx[10]);
     			toggle_class(div, "multiSelect", /*isMulti*/ ctx[7]);
     			toggle_class(div, "disabled", /*isDisabled*/ ctx[9]);
     			toggle_class(div, "focused", /*isFocused*/ ctx[1]);
-    			add_location(div, file$6, 859, 0, 23306);
+    			add_location(div, file$9, 859, 0, 23306);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -31170,7 +34570,7 @@ var app = (function (jQuery) {
     				if (if_block8) {
     					if_block8.p(ctx, dirty);
     				} else {
-    					if_block8 = create_if_block_1$2(ctx);
+    					if_block8 = create_if_block_1$3(ctx);
     					if_block8.c();
     					if_block8.m(div, t9);
     				}
@@ -31183,7 +34583,7 @@ var app = (function (jQuery) {
     				if (if_block9) {
     					if_block9.p(ctx, dirty);
     				} else {
-    					if_block9 = create_if_block$3(ctx);
+    					if_block9 = create_if_block$4(ctx);
     					if_block9.c();
     					if_block9.m(div, null);
     				}
@@ -31254,7 +34654,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$7.name,
+    		id: create_fragment$a.name,
     		type: "component",
     		source: "",
     		ctx
@@ -31269,7 +34669,7 @@ var app = (function (jQuery) {
     	});
     }
 
-    function instance$7($$self, $$props, $$invalidate) {
+    function instance$a($$self, $$props, $$invalidate) {
     	let filteredItems;
     	let showSelectedItem;
     	let showClearIcon;
@@ -32363,8 +35763,8 @@ var app = (function (jQuery) {
     		init(
     			this,
     			options,
-    			instance$7,
-    			create_fragment$7,
+    			instance$a,
+    			create_fragment$a,
     			safe_not_equal,
     			{
     				id: 46,
@@ -32435,7 +35835,7 @@ var app = (function (jQuery) {
     			component: this,
     			tagName: "Select",
     			options,
-    			id: create_fragment$7.name
+    			id: create_fragment$a.name
     		});
     	}
 
@@ -32913,10 +36313,10 @@ var app = (function (jQuery) {
     }
 
     /* src\controls\users\UserProfile.svelte generated by Svelte v3.42.4 */
-    const file$5 = "src\\controls\\users\\UserProfile.svelte";
+    const file$8 = "src\\controls\\users\\UserProfile.svelte";
 
-    // (31:8) <Label class="pb-1">
-    function create_default_slot_15(ctx) {
+    // (33:8) <Label class="pb-1">
+    function create_default_slot_21(ctx) {
     	let t;
 
     	const block = {
@@ -32933,17 +36333,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_15.name,
+    		id: create_default_slot_21.name,
     		type: "slot",
-    		source: "(31:8) <Label class=\\\"pb-1\\\">",
+    		source: "(33:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (30:6) <FormGroup>
-    function create_default_slot_14(ctx) {
+    // (32:6) <FormGroup>
+    function create_default_slot_20(ctx) {
     	let label;
     	let t;
     	let textinput;
@@ -32953,7 +36353,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_15] },
+    				$$slots: { default: [create_default_slot_21] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -32987,7 +36387,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33022,17 +36422,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_14.name,
+    		id: create_default_slot_20.name,
     		type: "slot",
-    		source: "(30:6) <FormGroup>",
+    		source: "(32:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (37:8) <Label class="pb-1">
-    function create_default_slot_13(ctx) {
+    // (39:8) <Label class="pb-1">
+    function create_default_slot_19(ctx) {
     	let t;
 
     	const block = {
@@ -33049,17 +36449,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_13.name,
+    		id: create_default_slot_19.name,
     		type: "slot",
-    		source: "(37:8) <Label class=\\\"pb-1\\\">",
+    		source: "(39:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (36:6) <FormGroup>
-    function create_default_slot_12(ctx) {
+    // (38:6) <FormGroup>
+    function create_default_slot_18(ctx) {
     	let label;
     	let t;
     	let textinput;
@@ -33069,7 +36469,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_13] },
+    				$$slots: { default: [create_default_slot_19] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33103,7 +36503,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33138,17 +36538,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_12.name,
+    		id: create_default_slot_18.name,
     		type: "slot",
-    		source: "(36:6) <FormGroup>",
+    		source: "(38:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (45:8) <Label class="pb-1">
-    function create_default_slot_11(ctx) {
+    // (47:8) <Label class="pb-1">
+    function create_default_slot_17(ctx) {
     	let t;
 
     	const block = {
@@ -33165,17 +36565,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_11.name,
+    		id: create_default_slot_17.name,
     		type: "slot",
-    		source: "(45:8) <Label class=\\\"pb-1\\\">",
+    		source: "(47:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (46:8) <Dropdown bind:value={user.gender}>
-    function create_default_slot_10(ctx) {
+    // (48:8) <Dropdown bind:value={user.gender}>
+    function create_default_slot_16(ctx) {
     	let option0;
     	let t1;
     	let option1;
@@ -33194,13 +36594,13 @@ var app = (function (jQuery) {
     			option2.textContent = "Other";
     			option0.__value = "male";
     			option0.value = option0.__value;
-    			add_location(option0, file$5, 46, 10, 1103);
+    			add_location(option0, file$8, 48, 10, 1275);
     			option1.__value = "female";
     			option1.value = option1.__value;
-    			add_location(option1, file$5, 47, 10, 1149);
+    			add_location(option1, file$8, 49, 10, 1321);
     			option2.__value = "other";
     			option2.value = option2.__value;
-    			add_location(option2, file$5, 48, 10, 1199);
+    			add_location(option2, file$8, 50, 10, 1371);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option0, anchor);
@@ -33220,17 +36620,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_10.name,
+    		id: create_default_slot_16.name,
     		type: "slot",
-    		source: "(46:8) <Dropdown bind:value={user.gender}>",
+    		source: "(48:8) <Dropdown bind:value={user.gender}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (44:6) <FormGroup>
-    function create_default_slot_9(ctx) {
+    // (46:6) <FormGroup>
+    function create_default_slot_15(ctx) {
     	let label;
     	let t;
     	let dropdown;
@@ -33240,7 +36640,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_11] },
+    				$$slots: { default: [create_default_slot_17] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33251,7 +36651,7 @@ var app = (function (jQuery) {
     	}
 
     	let dropdown_props = {
-    		$$slots: { default: [create_default_slot_10] },
+    		$$slots: { default: [create_default_slot_16] },
     		$$scope: { ctx }
     	};
 
@@ -33277,14 +36677,14 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
     			label.$set(label_changes);
     			const dropdown_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				dropdown_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33316,17 +36716,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9.name,
+    		id: create_default_slot_15.name,
     		type: "slot",
-    		source: "(44:6) <FormGroup>",
+    		source: "(46:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (55:8) <Label class="pb-1">
-    function create_default_slot_8$1(ctx) {
+    // (57:8) <Label class="pb-1">
+    function create_default_slot_14(ctx) {
     	let t;
 
     	const block = {
@@ -33343,20 +36743,64 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8$1.name,
+    		id: create_default_slot_14.name,
     		type: "slot",
-    		source: "(55:8) <Label class=\\\"pb-1\\\">",
+    		source: "(57:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (56:8) <DateRangePicker            startDate={user.birthDay}            singleDatePicker            inputElement={dateRangePickerElement}            on:change={({ detail: { date: d } }) => (user.birthDay = d.format("DD/MM/YYYY"))}          >
-    function create_default_slot_7$2(ctx) {
+    // (65:12) <InputGroupPrepend>
+    function create_default_slot_13$1(ctx) {
+    	let span;
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			i = element("i");
+    			attr_dev(i, "class", "far fa-calendar-alt");
+    			add_location(i, file$8, 66, 16, 1918);
+    			attr_dev(span, "class", "input-group-text");
+    			add_location(span, file$8, 65, 14, 1869);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, i);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_13$1.name,
+    		type: "slot",
+    		source: "(65:12) <InputGroupPrepend>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (64:10) <InputGroup>
+    function create_default_slot_12$1(ctx) {
+    	let inputgroupprepend;
+    	let t;
     	let textinput;
     	let updating_inputElement;
     	let current;
+
+    	inputgroupprepend = new InputGroupPrepend({
+    			props: {
+    				$$slots: { default: [create_default_slot_13$1] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
 
     	function textinput_inputElement_binding(value) {
     		/*textinput_inputElement_binding*/ ctx[6](value);
@@ -33373,13 +36817,24 @@ var app = (function (jQuery) {
 
     	const block = {
     		c: function create() {
+    			create_component(inputgroupprepend.$$.fragment);
+    			t = space();
     			create_component(textinput.$$.fragment);
     		},
     		m: function mount(target, anchor) {
+    			mount_component(inputgroupprepend, target, anchor);
+    			insert_dev(target, t, anchor);
     			mount_component(textinput, target, anchor);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
+    			const inputgroupprepend_changes = {};
+
+    			if (dirty & /*$$scope*/ 1024) {
+    				inputgroupprepend_changes.$$scope = { dirty, ctx };
+    			}
+
+    			inputgroupprepend.$set(inputgroupprepend_changes);
     			const textinput_changes = {};
 
     			if (!updating_inputElement && dirty & /*dateRangePickerElement*/ 2) {
@@ -33392,31 +36847,90 @@ var app = (function (jQuery) {
     		},
     		i: function intro(local) {
     			if (current) return;
+    			transition_in(inputgroupprepend.$$.fragment, local);
     			transition_in(textinput.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
+    			transition_out(inputgroupprepend.$$.fragment, local);
     			transition_out(textinput.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			destroy_component(inputgroupprepend, detaching);
+    			if (detaching) detach_dev(t);
     			destroy_component(textinput, detaching);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$2.name,
+    		id: create_default_slot_12$1.name,
     		type: "slot",
-    		source: "(56:8) <DateRangePicker            startDate={user.birthDay}            singleDatePicker            inputElement={dateRangePickerElement}            on:change={({ detail: { date: d } }) => (user.birthDay = d.format(\\\"DD/MM/YYYY\\\"))}          >",
+    		source: "(64:10) <InputGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (54:6) <FormGroup>
-    function create_default_slot_6$2(ctx) {
+    // (58:8) <DateRangePicker            startDate={user.birthDay}            singleDatePicker            inputElement={dateRangePickerElement}            on:change={({ detail: { date: d } }) => (user.birthDay = d.format("DD/MM/YYYY"))}          >
+    function create_default_slot_11$1(ctx) {
+    	let inputgroup;
+    	let current;
+
+    	inputgroup = new InputGroup({
+    			props: {
+    				$$slots: { default: [create_default_slot_12$1] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(inputgroup.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(inputgroup, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const inputgroup_changes = {};
+
+    			if (dirty & /*$$scope, dateRangePickerElement*/ 1026) {
+    				inputgroup_changes.$$scope = { dirty, ctx };
+    			}
+
+    			inputgroup.$set(inputgroup_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(inputgroup.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(inputgroup.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(inputgroup, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_11$1.name,
+    		type: "slot",
+    		source: "(58:8) <DateRangePicker            startDate={user.birthDay}            singleDatePicker            inputElement={dateRangePickerElement}            on:change={({ detail: { date: d } }) => (user.birthDay = d.format(\\\"DD/MM/YYYY\\\"))}          >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (56:6) <FormGroup>
+    function create_default_slot_10$1(ctx) {
     	let label;
     	let t;
     	let daterangepicker;
@@ -33425,7 +36939,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_8$1] },
+    				$$slots: { default: [create_default_slot_14] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33436,7 +36950,7 @@ var app = (function (jQuery) {
     				startDate: /*user*/ ctx[0].birthDay,
     				singleDatePicker: true,
     				inputElement: /*dateRangePickerElement*/ ctx[1],
-    				$$slots: { default: [create_default_slot_7$2] },
+    				$$slots: { default: [create_default_slot_11$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33459,7 +36973,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33468,7 +36982,7 @@ var app = (function (jQuery) {
     			if (dirty & /*user*/ 1) daterangepicker_changes.startDate = /*user*/ ctx[0].birthDay;
     			if (dirty & /*dateRangePickerElement*/ 2) daterangepicker_changes.inputElement = /*dateRangePickerElement*/ ctx[1];
 
-    			if (dirty & /*$$scope, dateRangePickerElement*/ 514) {
+    			if (dirty & /*$$scope, dateRangePickerElement*/ 1026) {
     				daterangepicker_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33494,17 +37008,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$2.name,
+    		id: create_default_slot_10$1.name,
     		type: "slot",
-    		source: "(54:6) <FormGroup>",
+    		source: "(56:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (70:8) <Label class="pb-1">
-    function create_default_slot_5$3(ctx) {
+    // (79:8) <Label class="pb-1">
+    function create_default_slot_9$1(ctx) {
     	let t;
 
     	const block = {
@@ -33521,17 +37035,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$3.name,
+    		id: create_default_slot_9$1.name,
     		type: "slot",
-    		source: "(70:8) <Label class=\\\"pb-1\\\">",
+    		source: "(79:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (72:8) <FileInput bind:value={user.avatar}>
-    function create_default_slot_4$3(ctx) {
+    // (81:8) <FileInput bind:value={user.avatar}>
+    function create_default_slot_8$2(ctx) {
     	let t;
 
     	const block = {
@@ -33548,17 +37062,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$3.name,
+    		id: create_default_slot_8$2.name,
     		type: "slot",
-    		source: "(72:8) <FileInput bind:value={user.avatar}>",
+    		source: "(81:8) <FileInput bind:value={user.avatar}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (69:6) <FormGroup>
-    function create_default_slot_3$3(ctx) {
+    // (78:6) <FormGroup>
+    function create_default_slot_7$3(ctx) {
     	let label;
     	let t;
     	let fileinput;
@@ -33568,7 +37082,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_5$3] },
+    				$$slots: { default: [create_default_slot_9$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33579,7 +37093,7 @@ var app = (function (jQuery) {
     	}
 
     	let fileinput_props = {
-    		$$slots: { default: [create_default_slot_4$3] },
+    		$$slots: { default: [create_default_slot_8$2] },
     		$$scope: { ctx }
     	};
 
@@ -33605,14 +37119,14 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
     			label.$set(label_changes);
     			const fileinput_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				fileinput_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33644,17 +37158,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$3.name,
+    		id: create_default_slot_7$3.name,
     		type: "slot",
-    		source: "(69:6) <FormGroup>",
+    		source: "(78:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (77:8) <Label class="pb-1">
-    function create_default_slot_2$3(ctx) {
+    // (86:8) <Label class="pb-1">
+    function create_default_slot_6$3(ctx) {
     	let t;
 
     	const block = {
@@ -33671,17 +37185,17 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2$3.name,
+    		id: create_default_slot_6$3.name,
     		type: "slot",
-    		source: "(77:8) <Label class=\\\"pb-1\\\">",
+    		source: "(86:8) <Label class=\\\"pb-1\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (76:6) <FormGroup>
-    function create_default_slot_1$3(ctx) {
+    // (85:6) <FormGroup>
+    function create_default_slot_5$4(ctx) {
     	let label;
     	let t;
     	let div;
@@ -33691,7 +37205,7 @@ var app = (function (jQuery) {
     	label = new Label({
     			props: {
     				class: "pb-1",
-    				$$slots: { default: [create_default_slot_2$3] },
+    				$$slots: { default: [create_default_slot_6$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33713,7 +37227,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			create_component(svelteselect.$$.fragment);
     			attr_dev(div, "class", "svelte-select svelte-4y3phs");
-    			add_location(div, file$5, 84, 8, 2463);
+    			add_location(div, file$8, 93, 8, 2874);
     		},
     		m: function mount(target, anchor) {
     			mount_component(label, target, anchor);
@@ -33725,7 +37239,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			const label_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				label_changes.$$scope = { dirty, ctx };
     			}
 
@@ -33752,17 +37266,247 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_1$3.name,
+    		id: create_default_slot_5$4.name,
     		type: "slot",
-    		source: "(76:6) <FormGroup>",
+    		source: "(85:6) <FormGroup>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (27:0) <Form>
-    function create_default_slot$3(ctx) {
+    // (104:8) <Label class="pb-1">
+    function create_default_slot_4$4(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Phone number");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_4$4.name,
+    		type: "slot",
+    		source: "(104:8) <Label class=\\\"pb-1\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (106:10) <InputGroupPrepend>
+    function create_default_slot_3$4(ctx) {
+    	let span;
+    	let i;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			i = element("i");
+    			attr_dev(i, "class", "fas fa-phone");
+    			add_location(i, file$8, 106, 43, 3244);
+    			attr_dev(span, "class", "input-group-text");
+    			add_location(span, file$8, 106, 12, 3213);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, i);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3$4.name,
+    		type: "slot",
+    		source: "(106:10) <InputGroupPrepend>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (105:8) <InputGroup>
+    function create_default_slot_2$4(ctx) {
+    	let inputgroupprepend;
+    	let t;
+    	let textinput;
+    	let updating_value;
+    	let current;
+
+    	inputgroupprepend = new InputGroupPrepend({
+    			props: {
+    				$$slots: { default: [create_default_slot_3$4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	function textinput_value_binding_2(value) {
+    		/*textinput_value_binding_2*/ ctx[9](value);
+    	}
+
+    	let textinput_props = { inputMask: "'mask': '999 999 999'" };
+
+    	if (/*user*/ ctx[0].phone !== void 0) {
+    		textinput_props.value = /*user*/ ctx[0].phone;
+    	}
+
+    	textinput = new TextInput({ props: textinput_props, $$inline: true });
+    	binding_callbacks.push(() => bind(textinput, 'value', textinput_value_binding_2));
+
+    	const block = {
+    		c: function create() {
+    			create_component(inputgroupprepend.$$.fragment);
+    			t = space();
+    			create_component(textinput.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(inputgroupprepend, target, anchor);
+    			insert_dev(target, t, anchor);
+    			mount_component(textinput, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const inputgroupprepend_changes = {};
+
+    			if (dirty & /*$$scope*/ 1024) {
+    				inputgroupprepend_changes.$$scope = { dirty, ctx };
+    			}
+
+    			inputgroupprepend.$set(inputgroupprepend_changes);
+    			const textinput_changes = {};
+
+    			if (!updating_value && dirty & /*user*/ 1) {
+    				updating_value = true;
+    				textinput_changes.value = /*user*/ ctx[0].phone;
+    				add_flush_callback(() => updating_value = false);
+    			}
+
+    			textinput.$set(textinput_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(inputgroupprepend.$$.fragment, local);
+    			transition_in(textinput.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(inputgroupprepend.$$.fragment, local);
+    			transition_out(textinput.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(inputgroupprepend, detaching);
+    			if (detaching) detach_dev(t);
+    			destroy_component(textinput, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_2$4.name,
+    		type: "slot",
+    		source: "(105:8) <InputGroup>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (103:6) <FormGroup>
+    function create_default_slot_1$4(ctx) {
+    	let label;
+    	let t;
+    	let inputgroup;
+    	let current;
+
+    	label = new Label({
+    			props: {
+    				class: "pb-1",
+    				$$slots: { default: [create_default_slot_4$4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	inputgroup = new InputGroup({
+    			props: {
+    				$$slots: { default: [create_default_slot_2$4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(label.$$.fragment);
+    			t = space();
+    			create_component(inputgroup.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(label, target, anchor);
+    			insert_dev(target, t, anchor);
+    			mount_component(inputgroup, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const label_changes = {};
+
+    			if (dirty & /*$$scope*/ 1024) {
+    				label_changes.$$scope = { dirty, ctx };
+    			}
+
+    			label.$set(label_changes);
+    			const inputgroup_changes = {};
+
+    			if (dirty & /*$$scope, user*/ 1025) {
+    				inputgroup_changes.$$scope = { dirty, ctx };
+    			}
+
+    			inputgroup.$set(inputgroup_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(label.$$.fragment, local);
+    			transition_in(inputgroup.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(label.$$.fragment, local);
+    			transition_out(inputgroup.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(label, detaching);
+    			if (detaching) detach_dev(t);
+    			destroy_component(inputgroup, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_1$4.name,
+    		type: "slot",
+    		source: "(103:6) <FormGroup>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (29:0) <Form>
+    function create_default_slot$4(ctx) {
     	let div2;
     	let div0;
     	let formgroup0;
@@ -33783,11 +37527,15 @@ var app = (function (jQuery) {
     	let t4;
     	let div7;
     	let formgroup5;
+    	let t5;
+    	let div10;
+    	let div9;
+    	let formgroup6;
     	let current;
 
     	formgroup0 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_14] },
+    				$$slots: { default: [create_default_slot_20] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33795,7 +37543,7 @@ var app = (function (jQuery) {
 
     	formgroup1 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_12] },
+    				$$slots: { default: [create_default_slot_18] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33803,7 +37551,7 @@ var app = (function (jQuery) {
 
     	formgroup2 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_9] },
+    				$$slots: { default: [create_default_slot_15] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33811,7 +37559,7 @@ var app = (function (jQuery) {
 
     	formgroup3 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_6$2] },
+    				$$slots: { default: [create_default_slot_10$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33819,7 +37567,7 @@ var app = (function (jQuery) {
 
     	formgroup4 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_3$3] },
+    				$$slots: { default: [create_default_slot_7$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33827,7 +37575,15 @@ var app = (function (jQuery) {
 
     	formgroup5 = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_1$3] },
+    				$$slots: { default: [create_default_slot_5$4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	formgroup6 = new FormGroup({
+    			props: {
+    				$$slots: { default: [create_default_slot_1$4] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -33855,24 +37611,32 @@ var app = (function (jQuery) {
     			t4 = space();
     			div7 = element("div");
     			create_component(formgroup5.$$.fragment);
+    			t5 = space();
+    			div10 = element("div");
+    			div9 = element("div");
+    			create_component(formgroup6.$$.fragment);
     			attr_dev(div0, "class", "col-6");
-    			add_location(div0, file$5, 28, 4, 585);
+    			add_location(div0, file$8, 30, 4, 757);
     			attr_dev(div1, "class", "col-6");
-    			add_location(div1, file$5, 34, 4, 760);
+    			add_location(div1, file$8, 36, 4, 932);
     			attr_dev(div2, "class", "row");
-    			add_location(div2, file$5, 27, 2, 562);
+    			add_location(div2, file$8, 29, 2, 734);
     			attr_dev(div3, "class", "col-6");
-    			add_location(div3, file$5, 42, 4, 964);
+    			add_location(div3, file$8, 44, 4, 1136);
     			attr_dev(div4, "class", "col-6");
-    			add_location(div4, file$5, 52, 4, 1294);
+    			add_location(div4, file$8, 54, 4, 1466);
     			attr_dev(div5, "class", "row");
-    			add_location(div5, file$5, 41, 2, 941);
+    			add_location(div5, file$8, 43, 2, 1113);
     			attr_dev(div6, "class", "col-6");
-    			add_location(div6, file$5, 67, 4, 1789);
+    			add_location(div6, file$8, 76, 4, 2200);
     			attr_dev(div7, "class", "col-6");
-    			add_location(div7, file$5, 74, 4, 1983);
+    			add_location(div7, file$8, 83, 4, 2394);
     			attr_dev(div8, "class", "row");
-    			add_location(div8, file$5, 66, 2, 1766);
+    			add_location(div8, file$8, 75, 2, 2177);
+    			attr_dev(div9, "class", "col-6");
+    			add_location(div9, file$8, 101, 4, 3058);
+    			attr_dev(div10, "class", "row");
+    			add_location(div10, file$8, 100, 2, 3035);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -33895,51 +37659,62 @@ var app = (function (jQuery) {
     			append_dev(div8, t4);
     			append_dev(div8, div7);
     			mount_component(formgroup5, div7, null);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, div10, anchor);
+    			append_dev(div10, div9);
+    			mount_component(formgroup6, div9, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const formgroup0_changes = {};
 
-    			if (dirty & /*$$scope, user*/ 513) {
+    			if (dirty & /*$$scope, user*/ 1025) {
     				formgroup0_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup0.$set(formgroup0_changes);
     			const formgroup1_changes = {};
 
-    			if (dirty & /*$$scope, user*/ 513) {
+    			if (dirty & /*$$scope, user*/ 1025) {
     				formgroup1_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup1.$set(formgroup1_changes);
     			const formgroup2_changes = {};
 
-    			if (dirty & /*$$scope, user*/ 513) {
+    			if (dirty & /*$$scope, user*/ 1025) {
     				formgroup2_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup2.$set(formgroup2_changes);
     			const formgroup3_changes = {};
 
-    			if (dirty & /*$$scope, user, dateRangePickerElement*/ 515) {
+    			if (dirty & /*$$scope, user, dateRangePickerElement*/ 1027) {
     				formgroup3_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup3.$set(formgroup3_changes);
     			const formgroup4_changes = {};
 
-    			if (dirty & /*$$scope, user*/ 513) {
+    			if (dirty & /*$$scope, user*/ 1025) {
     				formgroup4_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup4.$set(formgroup4_changes);
     			const formgroup5_changes = {};
 
-    			if (dirty & /*$$scope*/ 512) {
+    			if (dirty & /*$$scope*/ 1024) {
     				formgroup5_changes.$$scope = { dirty, ctx };
     			}
 
     			formgroup5.$set(formgroup5_changes);
+    			const formgroup6_changes = {};
+
+    			if (dirty & /*$$scope, user*/ 1025) {
+    				formgroup6_changes.$$scope = { dirty, ctx };
+    			}
+
+    			formgroup6.$set(formgroup6_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -33949,6 +37724,7 @@ var app = (function (jQuery) {
     			transition_in(formgroup3.$$.fragment, local);
     			transition_in(formgroup4.$$.fragment, local);
     			transition_in(formgroup5.$$.fragment, local);
+    			transition_in(formgroup6.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
@@ -33958,6 +37734,7 @@ var app = (function (jQuery) {
     			transition_out(formgroup3.$$.fragment, local);
     			transition_out(formgroup4.$$.fragment, local);
     			transition_out(formgroup5.$$.fragment, local);
+    			transition_out(formgroup6.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -33972,27 +37749,30 @@ var app = (function (jQuery) {
     			if (detaching) detach_dev(div8);
     			destroy_component(formgroup4);
     			destroy_component(formgroup5);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(div10);
+    			destroy_component(formgroup6);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$3.name,
+    		id: create_default_slot$4.name,
     		type: "slot",
-    		source: "(27:0) <Form>",
+    		source: "(29:0) <Form>",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$6(ctx) {
+    function create_fragment$9(ctx) {
     	let form;
     	let current;
 
     	form = new Form({
     			props: {
-    				$$slots: { default: [create_default_slot$3] },
+    				$$slots: { default: [create_default_slot$4] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34012,7 +37792,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, [dirty]) {
     			const form_changes = {};
 
-    			if (dirty & /*$$scope, user, dateRangePickerElement*/ 515) {
+    			if (dirty & /*$$scope, user, dateRangePickerElement*/ 1027) {
     				form_changes.$$scope = { dirty, ctx };
     			}
 
@@ -34034,7 +37814,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$6.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -34043,7 +37823,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$6($$self, $$props, $$invalidate) {
+    function instance$9($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UserProfile', slots, []);
 
@@ -34098,6 +37878,13 @@ var app = (function (jQuery) {
     		}
     	}
 
+    	function textinput_value_binding_2(value) {
+    		if ($$self.$$.not_equal(user.phone, value)) {
+    			user.phone = value;
+    			$$invalidate(0, user);
+    		}
+    	}
+
     	$$self.$$set = $$props => {
     		if ('user' in $$props) $$invalidate(0, user = $$props.user);
     	};
@@ -34112,6 +37899,8 @@ var app = (function (jQuery) {
     		Dropdown,
     		FileInput,
     		SvelteSelect: Select,
+    		InputGroup,
+    		InputGroupPrepend,
     		categoryItems,
     		user,
     		dateRangePickerElement
@@ -34135,20 +37924,21 @@ var app = (function (jQuery) {
     		dropdown_value_binding,
     		textinput_inputElement_binding,
     		change_handler,
-    		fileinput_value_binding
+    		fileinput_value_binding,
+    		textinput_value_binding_2
     	];
     }
 
     class UserProfile extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { user: 0 });
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, { user: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UserProfile",
     			options,
-    			id: create_fragment$6.name
+    			id: create_fragment$9.name
     		});
 
     		const { ctx } = this.$$;
@@ -34169,7 +37959,7 @@ var app = (function (jQuery) {
     }
 
     /* src\controls\users\UserOrders.svelte generated by Svelte v3.42.4 */
-    const file$4 = "src\\controls\\users\\UserOrders.svelte";
+    const file$7 = "src\\controls\\users\\UserOrders.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -34178,14 +37968,14 @@ var app = (function (jQuery) {
     }
 
     // (42:16) <LteButton small>
-    function create_default_slot_8(ctx) {
+    function create_default_slot_8$1(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-times");
-    			add_location(i, file$4, 41, 33, 1055);
+    			add_location(i, file$7, 41, 33, 1055);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -34197,7 +37987,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
+    		id: create_default_slot_8$1.name,
     		type: "slot",
     		source: "(42:16) <LteButton small>",
     		ctx
@@ -34207,14 +37997,14 @@ var app = (function (jQuery) {
     }
 
     // (41:14) <InputGroupAppend>
-    function create_default_slot_7$1(ctx) {
+    function create_default_slot_7$2(ctx) {
     	let ltebutton;
     	let current;
 
     	ltebutton = new LteButton({
     			props: {
     				small: true,
-    				$$slots: { default: [create_default_slot_8] },
+    				$$slots: { default: [create_default_slot_8$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34253,7 +38043,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7$1.name,
+    		id: create_default_slot_7$2.name,
     		type: "slot",
     		source: "(41:14) <InputGroupAppend>",
     		ctx
@@ -34263,7 +38053,7 @@ var app = (function (jQuery) {
     }
 
     // (39:12) <InputGroup>
-    function create_default_slot_6$1(ctx) {
+    function create_default_slot_6$2(ctx) {
     	let textinput;
     	let t;
     	let inputgroupappend;
@@ -34276,7 +38066,7 @@ var app = (function (jQuery) {
 
     	inputgroupappend = new InputGroupAppend({
     			props: {
-    				$$slots: { default: [create_default_slot_7$1] },
+    				$$slots: { default: [create_default_slot_7$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34323,7 +38113,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6$1.name,
+    		id: create_default_slot_6$2.name,
     		type: "slot",
     		source: "(39:12) <InputGroup>",
     		ctx
@@ -34333,7 +38123,7 @@ var app = (function (jQuery) {
     }
 
     // (38:10) <OneColumnNarrow>
-    function create_default_slot_5$2(ctx) {
+    function create_default_slot_5$3(ctx) {
     	let inputgroup;
     	let t;
     	let div;
@@ -34342,7 +38132,7 @@ var app = (function (jQuery) {
 
     	inputgroup = new InputGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_6$1] },
+    				$$slots: { default: [create_default_slot_6$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34358,7 +38148,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			create_component(ltebuttonrefresh.$$.fragment);
     			attr_dev(div, "class", "small");
-    			add_location(div, file$4, 44, 12, 1169);
+    			add_location(div, file$7, 44, 12, 1169);
     		},
     		m: function mount(target, anchor) {
     			mount_component(inputgroup, target, anchor);
@@ -34397,7 +38187,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$2.name,
+    		id: create_default_slot_5$3.name,
     		type: "slot",
     		source: "(38:10) <OneColumnNarrow>",
     		ctx
@@ -34407,13 +38197,13 @@ var app = (function (jQuery) {
     }
 
     // (37:8) <FormGroup>
-    function create_default_slot_4$2(ctx) {
+    function create_default_slot_4$3(ctx) {
     	let onecolumnnarrow;
     	let current;
 
     	onecolumnnarrow = new OneColumnNarrow({
     			props: {
-    				$$slots: { default: [create_default_slot_5$2] },
+    				$$slots: { default: [create_default_slot_5$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34452,7 +38242,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$2.name,
+    		id: create_default_slot_4$3.name,
     		type: "slot",
     		source: "(37:8) <FormGroup>",
     		ctx
@@ -34462,13 +38252,13 @@ var app = (function (jQuery) {
     }
 
     // (36:6) <Form horizontal>
-    function create_default_slot_3$2(ctx) {
+    function create_default_slot_3$3(ctx) {
     	let formgroup;
     	let current;
 
     	formgroup = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_4$2] },
+    				$$slots: { default: [create_default_slot_4$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34507,7 +38297,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$2.name,
+    		id: create_default_slot_3$3.name,
     		type: "slot",
     		source: "(36:6) <Form horizontal>",
     		ctx
@@ -34635,14 +38425,14 @@ var app = (function (jQuery) {
     }
 
     // (70:16) <LteButton color="danger" xsmall on:click={() => onDelete(order)}>
-    function create_default_slot_2$2(ctx) {
+    function create_default_slot_2$3(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-trash");
-    			add_location(i, file$4, 70, 18, 1930);
+    			add_location(i, file$7, 70, 18, 1930);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -34654,7 +38444,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2$2.name,
+    		id: create_default_slot_2$3.name,
     		type: "slot",
     		source: "(70:16) <LteButton color=\\\"danger\\\" xsmall on:click={() => onDelete(order)}>",
     		ctx
@@ -34664,7 +38454,7 @@ var app = (function (jQuery) {
     }
 
     // (80:18) <Badge color="primary">
-    function create_default_slot_1$2(ctx) {
+    function create_default_slot_1$3(ctx) {
     	let t_value = /*order*/ ctx[6].status + "";
     	let t;
 
@@ -34685,7 +38475,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_1$2.name,
+    		id: create_default_slot_1$3.name,
     		type: "slot",
     		source: "(80:18) <Badge color=\\\"primary\\\">",
     		ctx
@@ -34725,7 +38515,7 @@ var app = (function (jQuery) {
     			props: {
     				color: "danger",
     				xsmall: true,
-    				$$slots: { default: [create_default_slot_2$2] },
+    				$$slots: { default: [create_default_slot_2$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34736,7 +38526,7 @@ var app = (function (jQuery) {
     	badge = new Badge({
     			props: {
     				color: "primary",
-    				$$slots: { default: [create_default_slot_1$2] },
+    				$$slots: { default: [create_default_slot_1$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -34761,12 +38551,12 @@ var app = (function (jQuery) {
     			create_component(badge.$$.fragment);
     			t7 = space();
     			attr_dev(td0, "class", "actions");
-    			add_location(td0, file$4, 68, 14, 1806);
-    			add_location(td1, file$4, 76, 14, 2190);
-    			add_location(td2, file$4, 77, 14, 2230);
-    			add_location(td3, file$4, 78, 14, 2272);
-    			add_location(td4, file$4, 79, 14, 2315);
-    			add_location(tr, file$4, 67, 12, 1786);
+    			add_location(td0, file$7, 68, 14, 1806);
+    			add_location(td1, file$7, 76, 14, 2190);
+    			add_location(td2, file$7, 77, 14, 2230);
+    			add_location(td3, file$7, 78, 14, 2272);
+    			add_location(td4, file$7, 79, 14, 2315);
+    			add_location(tr, file$7, 67, 12, 1786);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -34877,7 +38667,7 @@ var app = (function (jQuery) {
     }
 
     // (56:6) <TableCondensed>
-    function create_default_slot$2(ctx) {
+    function create_default_slot$3(ctx) {
     	let await_block_anchor;
     	let promise;
     	let current;
@@ -34939,7 +38729,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$2.name,
+    		id: create_default_slot$3.name,
     		type: "slot",
     		source: "(56:6) <TableCondensed>",
     		ctx
@@ -34979,13 +38769,13 @@ var app = (function (jQuery) {
     			th4 = element("th");
     			th4.textContent = "Status";
     			attr_dev(th0, "class", "actions");
-    			add_location(th0, file$4, 57, 10, 1492);
-    			add_location(th1, file$4, 58, 10, 1536);
-    			add_location(th2, file$4, 59, 10, 1566);
-    			add_location(th3, file$4, 60, 10, 1597);
-    			add_location(th4, file$4, 61, 10, 1629);
+    			add_location(th0, file$7, 57, 10, 1492);
+    			add_location(th1, file$7, 58, 10, 1536);
+    			add_location(th2, file$7, 59, 10, 1566);
+    			add_location(th3, file$7, 60, 10, 1597);
+    			add_location(th4, file$7, 61, 10, 1629);
     			attr_dev(tr, "slot", "headers");
-    			add_location(tr, file$4, 56, 8, 1461);
+    			add_location(tr, file$7, 56, 8, 1461);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -35015,7 +38805,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$5(ctx) {
+    function create_fragment$8(ctx) {
     	let div4;
     	let div1;
     	let div0;
@@ -35029,7 +38819,7 @@ var app = (function (jQuery) {
     	form = new Form({
     			props: {
     				horizontal: true,
-    				$$slots: { default: [create_default_slot_3$2] },
+    				$$slots: { default: [create_default_slot_3$3] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -35039,7 +38829,7 @@ var app = (function (jQuery) {
     			props: {
     				$$slots: {
     					headers: [create_headers_slot$1],
-    					default: [create_default_slot$2]
+    					default: [create_default_slot$3]
     				},
     				$$scope: { ctx }
     			},
@@ -35057,15 +38847,15 @@ var app = (function (jQuery) {
     			div2 = element("div");
     			create_component(tablecondensed.$$.fragment);
     			attr_dev(div0, "class", "col-12");
-    			add_location(div0, file$4, 34, 4, 802);
+    			add_location(div0, file$7, 34, 4, 802);
     			attr_dev(div1, "class", "row");
-    			add_location(div1, file$4, 33, 2, 779);
+    			add_location(div1, file$7, 33, 2, 779);
     			attr_dev(div2, "class", "col-12");
-    			add_location(div2, file$4, 54, 4, 1407);
+    			add_location(div2, file$7, 54, 4, 1407);
     			attr_dev(div3, "class", "row");
-    			add_location(div3, file$4, 53, 2, 1384);
+    			add_location(div3, file$7, 53, 2, 1384);
     			attr_dev(div4, "class", "container");
-    			add_location(div4, file$4, 32, 0, 752);
+    			add_location(div4, file$7, 32, 0, 752);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -35117,7 +38907,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$8.name,
     		type: "component",
     		source: "",
     		ctx
@@ -35126,7 +38916,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
+    function instance$8($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UserOrders', slots, []);
     	let { userId = null } = $$props;
@@ -35193,13 +38983,13 @@ var app = (function (jQuery) {
     class UserOrders extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, { userId: 2 });
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { userId: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UserOrders",
     			options,
-    			id: create_fragment$5.name
+    			id: create_fragment$8.name
     		});
     	}
 
@@ -35213,7 +39003,7 @@ var app = (function (jQuery) {
     }
 
     /* src\controls\users\UserDetail.svelte generated by Svelte v3.42.4 */
-    const file$3 = "src\\controls\\users\\UserDetail.svelte";
+    const file$6 = "src\\controls\\users\\UserDetail.svelte";
 
     // (68:36) 
     function create_if_block_2(ctx) {
@@ -35264,7 +39054,7 @@ var app = (function (jQuery) {
     }
 
     // (57:2) {#if currentTab === "profile"}
-    function create_if_block_1$1(ctx) {
+    function create_if_block_1$2(ctx) {
     	let await_block_anchor;
     	let promise;
     	let current;
@@ -35326,7 +39116,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
     		source: "(57:2) {#if currentTab === \\\"profile\\\"}",
     		ctx
@@ -35450,12 +39240,12 @@ var app = (function (jQuery) {
     }
 
     // (35:0) <Card  outline tabs {loading} color="primary" headerClass="p-0 pt-1 border-bottom-0">
-    function create_default_slot_5$1(ctx) {
+    function create_default_slot_5$2(ctx) {
     	let current_block_type_index;
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_1$1, create_if_block_2];
+    	const if_block_creators = [create_if_block_1$2, create_if_block_2];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -35537,7 +39327,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5$1.name,
+    		id: create_default_slot_5$2.name,
     		type: "slot",
     		source: "(35:0) <Card  outline tabs {loading} color=\\\"primary\\\" headerClass=\\\"p-0 pt-1 border-bottom-0\\\">",
     		ctx
@@ -35547,7 +39337,7 @@ var app = (function (jQuery) {
     }
 
     // (39:6) <TabItem active={currentTab === "profile"} on:click={() => (currentTab = "profile")}>
-    function create_default_slot_4$1(ctx) {
+    function create_default_slot_4$2(ctx) {
     	let t;
 
     	const block = {
@@ -35564,7 +39354,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4$1.name,
+    		id: create_default_slot_4$2.name,
     		type: "slot",
     		source: "(39:6) <TabItem active={currentTab === \\\"profile\\\"} on:click={() => (currentTab = \\\"profile\\\")}>",
     		ctx
@@ -35574,7 +39364,7 @@ var app = (function (jQuery) {
     }
 
     // (40:6) <TabItem active={currentTab === "orders"} on:click={() => (currentTab = "orders")}>
-    function create_default_slot_3$1(ctx) {
+    function create_default_slot_3$2(ctx) {
     	let t;
 
     	const block = {
@@ -35591,7 +39381,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3$1.name,
+    		id: create_default_slot_3$2.name,
     		type: "slot",
     		source: "(40:6) <TabItem active={currentTab === \\\"orders\\\"} on:click={() => (currentTab = \\\"orders\\\")}>",
     		ctx
@@ -35601,7 +39391,7 @@ var app = (function (jQuery) {
     }
 
     // (42:8) {#if currentTab === "profile"}
-    function create_if_block$2(ctx) {
+    function create_if_block$3(ctx) {
     	let ltebutton;
     	let current;
 
@@ -35609,7 +39399,7 @@ var app = (function (jQuery) {
     			props: {
     				color: "primary",
     				small: true,
-    				$$slots: { default: [create_default_slot_2$1] },
+    				$$slots: { default: [create_default_slot_2$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -35650,7 +39440,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block$3.name,
     		type: "if",
     		source: "(42:8) {#if currentTab === \\\"profile\\\"}",
     		ctx
@@ -35660,14 +39450,14 @@ var app = (function (jQuery) {
     }
 
     // (43:10) <LteButton color="primary" small on:click={() => dispatch("save")}>
-    function create_default_slot_2$1(ctx) {
+    function create_default_slot_2$2(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-save");
-    			add_location(i, file$3, 43, 12, 1436);
+    			add_location(i, file$6, 43, 12, 1436);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -35679,7 +39469,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2$1.name,
+    		id: create_default_slot_2$2.name,
     		type: "slot",
     		source: "(43:10) <LteButton color=\\\"primary\\\" small on:click={() => dispatch(\\\"save\\\")}>",
     		ctx
@@ -35689,14 +39479,14 @@ var app = (function (jQuery) {
     }
 
     // (48:8) <LteButton color="danger" small on:click={() => dispatch("close")}>
-    function create_default_slot_1$1(ctx) {
+    function create_default_slot_1$2(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-times");
-    			add_location(i, file$3, 48, 10, 1591);
+    			add_location(i, file$6, 48, 10, 1591);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -35708,7 +39498,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_1$1.name,
+    		id: create_default_slot_1$2.name,
     		type: "slot",
     		source: "(48:8) <LteButton color=\\\"danger\\\" small on:click={() => dispatch(\\\"close\\\")}>",
     		ctx
@@ -35718,7 +39508,7 @@ var app = (function (jQuery) {
     }
 
     // (37:4) <Tabs>
-    function create_default_slot$1(ctx) {
+    function create_default_slot$2(ctx) {
     	let li;
     	let h3;
     	let t1;
@@ -35734,7 +39524,7 @@ var app = (function (jQuery) {
     	tabitem0 = new TabItem({
     			props: {
     				active: /*currentTab*/ ctx[2] === "profile",
-    				$$slots: { default: [create_default_slot_4$1] },
+    				$$slots: { default: [create_default_slot_4$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -35745,20 +39535,20 @@ var app = (function (jQuery) {
     	tabitem1 = new TabItem({
     			props: {
     				active: /*currentTab*/ ctx[2] === "orders",
-    				$$slots: { default: [create_default_slot_3$1] },
+    				$$slots: { default: [create_default_slot_3$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
     		});
 
     	tabitem1.$on("click", /*click_handler_1*/ ctx[7]);
-    	let if_block = /*currentTab*/ ctx[2] === "profile" && create_if_block$2(ctx);
+    	let if_block = /*currentTab*/ ctx[2] === "profile" && create_if_block$3(ctx);
 
     	ltebutton = new LteButton({
     			props: {
     				color: "danger",
     				small: true,
-    				$$slots: { default: [create_default_slot_1$1] },
+    				$$slots: { default: [create_default_slot_1$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -35781,11 +39571,11 @@ var app = (function (jQuery) {
     			t4 = space();
     			create_component(ltebutton.$$.fragment);
     			attr_dev(h3, "class", "card-title");
-    			add_location(h3, file$3, 37, 28, 996);
+    			add_location(h3, file$6, 37, 28, 996);
     			attr_dev(li, "class", "pt-2 px-3");
-    			add_location(li, file$3, 37, 6, 974);
+    			add_location(li, file$6, 37, 6, 974);
     			attr_dev(div, "class", "card-tools pull-right ml-auto");
-    			add_location(div, file$3, 40, 6, 1260);
+    			add_location(div, file$6, 40, 6, 1260);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -35827,7 +39617,7 @@ var app = (function (jQuery) {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$2(ctx);
+    					if_block = create_if_block$3(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div, t4);
@@ -35880,7 +39670,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot$1.name,
+    		id: create_default_slot$2.name,
     		type: "slot",
     		source: "(37:4) <Tabs>",
     		ctx
@@ -35896,7 +39686,7 @@ var app = (function (jQuery) {
 
     	tabs = new Tabs({
     			props: {
-    				$$slots: { default: [create_default_slot$1] },
+    				$$slots: { default: [create_default_slot$2] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -35944,7 +39734,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$4(ctx) {
+    function create_fragment$7(ctx) {
     	let card;
     	let current;
 
@@ -35957,7 +39747,7 @@ var app = (function (jQuery) {
     				headerClass: "p-0 pt-1 border-bottom-0",
     				$$slots: {
     					fullHeader: [create_fullHeader_slot],
-    					default: [create_default_slot_5$1]
+    					default: [create_default_slot_5$2]
     				},
     				$$scope: { ctx }
     			},
@@ -36001,7 +39791,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -36010,7 +39800,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$7($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UserDetail', slots, []);
     	const dispatch = createEventDispatcher();
@@ -36100,13 +39890,13 @@ var app = (function (jQuery) {
     class UserDetail extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { userId: 0 });
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { userId: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UserDetail",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$7.name
     		});
     	}
 
@@ -36121,7 +39911,7 @@ var app = (function (jQuery) {
 
     /* src\controls\users\UserList.svelte generated by Svelte v3.42.4 */
 
-    const file$2 = "src\\controls\\users\\UserList.svelte";
+    const file$5 = "src\\controls\\users\\UserList.svelte";
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -36130,14 +39920,14 @@ var app = (function (jQuery) {
     }
 
     // (53:14) <LteButton small>
-    function create_default_slot_7(ctx) {
+    function create_default_slot_7$1(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-times");
-    			add_location(i, file$2, 52, 31, 1264);
+    			add_location(i, file$5, 52, 31, 1264);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -36149,7 +39939,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_7$1.name,
     		type: "slot",
     		source: "(53:14) <LteButton small>",
     		ctx
@@ -36159,14 +39949,14 @@ var app = (function (jQuery) {
     }
 
     // (52:12) <InputGroupAppend>
-    function create_default_slot_6(ctx) {
+    function create_default_slot_6$1(ctx) {
     	let ltebutton;
     	let current;
 
     	ltebutton = new LteButton({
     			props: {
     				small: true,
-    				$$slots: { default: [create_default_slot_7] },
+    				$$slots: { default: [create_default_slot_7$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36205,7 +39995,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_6$1.name,
     		type: "slot",
     		source: "(52:12) <InputGroupAppend>",
     		ctx
@@ -36215,7 +40005,7 @@ var app = (function (jQuery) {
     }
 
     // (50:10) <InputGroup>
-    function create_default_slot_5(ctx) {
+    function create_default_slot_5$1(ctx) {
     	let textinput;
     	let t;
     	let inputgroupappend;
@@ -36228,7 +40018,7 @@ var app = (function (jQuery) {
 
     	inputgroupappend = new InputGroupAppend({
     			props: {
-    				$$slots: { default: [create_default_slot_6] },
+    				$$slots: { default: [create_default_slot_6$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36275,7 +40065,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5.name,
+    		id: create_default_slot_5$1.name,
     		type: "slot",
     		source: "(50:10) <InputGroup>",
     		ctx
@@ -36285,13 +40075,13 @@ var app = (function (jQuery) {
     }
 
     // (49:8) <FormGroup>
-    function create_default_slot_4(ctx) {
+    function create_default_slot_4$1(ctx) {
     	let inputgroup;
     	let current;
 
     	inputgroup = new InputGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_5] },
+    				$$slots: { default: [create_default_slot_5$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36330,7 +40120,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4.name,
+    		id: create_default_slot_4$1.name,
     		type: "slot",
     		source: "(49:8) <FormGroup>",
     		ctx
@@ -36340,13 +40130,13 @@ var app = (function (jQuery) {
     }
 
     // (48:6) <Form horizontal>
-    function create_default_slot_3(ctx) {
+    function create_default_slot_3$1(ctx) {
     	let formgroup;
     	let current;
 
     	formgroup = new FormGroup({
     			props: {
-    				$$slots: { default: [create_default_slot_4] },
+    				$$slots: { default: [create_default_slot_4$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36385,7 +40175,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3.name,
+    		id: create_default_slot_3$1.name,
     		type: "slot",
     		source: "(48:6) <Form horizontal>",
     		ctx
@@ -36395,14 +40185,14 @@ var app = (function (jQuery) {
     }
 
     // (75:14) <LteButton color="danger" xsmall on:click={() => onDelete(user)}>
-    function create_default_slot_2(ctx) {
+    function create_default_slot_2$1(ctx) {
     	let i;
 
     	const block = {
     		c: function create() {
     			i = element("i");
     			attr_dev(i, "class", "fas fa-trash");
-    			add_location(i, file$2, 75, 16, 1944);
+    			add_location(i, file$5, 75, 16, 1944);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, i, anchor);
@@ -36414,7 +40204,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_2.name,
+    		id: create_default_slot_2$1.name,
     		type: "slot",
     		source: "(75:14) <LteButton color=\\\"danger\\\" xsmall on:click={() => onDelete(user)}>",
     		ctx
@@ -36424,7 +40214,7 @@ var app = (function (jQuery) {
     }
 
     // (84:12) {#if expanded}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	let td0;
     	let t0_value = /*user*/ ctx[9].firstName + "";
     	let t0;
@@ -36440,8 +40230,8 @@ var app = (function (jQuery) {
     			t1 = space();
     			td1 = element("td");
     			t2 = text(t2_value);
-    			add_location(td0, file$2, 84, 14, 2255);
-    			add_location(td1, file$2, 85, 14, 2296);
+    			add_location(td0, file$5, 84, 14, 2255);
+    			add_location(td1, file$5, 85, 14, 2296);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, td0, anchor);
@@ -36463,7 +40253,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1.name,
+    		id: create_if_block_1$1.name,
     		type: "if",
     		source: "(84:12) {#if expanded}",
     		ctx
@@ -36496,7 +40286,7 @@ var app = (function (jQuery) {
     			props: {
     				color: "danger",
     				xsmall: true,
-    				$$slots: { default: [create_default_slot_2] },
+    				$$slots: { default: [create_default_slot_2$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36508,7 +40298,7 @@ var app = (function (jQuery) {
     		return /*click_handler_1*/ ctx[5](/*user*/ ctx[9]);
     	}
 
-    	let if_block = /*expanded*/ ctx[1] && create_if_block_1(ctx);
+    	let if_block = /*expanded*/ ctx[1] && create_if_block_1$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -36523,12 +40313,12 @@ var app = (function (jQuery) {
     			if (if_block) if_block.c();
     			t3 = space();
     			attr_dev(td0, "class", "actions");
-    			add_location(td0, file$2, 73, 12, 1825);
+    			add_location(td0, file$5, 73, 12, 1825);
     			attr_dev(a, "href", "#");
-    			add_location(a, file$2, 79, 14, 2065);
+    			add_location(a, file$5, 79, 14, 2065);
     			attr_dev(td1, "class", "title");
-    			add_location(td1, file$2, 78, 12, 2031);
-    			add_location(tr, file$2, 72, 10, 1807);
+    			add_location(td1, file$5, 78, 12, 2031);
+    			add_location(tr, file$5, 72, 10, 1807);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -36563,7 +40353,7 @@ var app = (function (jQuery) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_1(ctx);
+    					if_block = create_if_block_1$1(ctx);
     					if_block.c();
     					if_block.m(tr, t3);
     				}
@@ -36602,7 +40392,7 @@ var app = (function (jQuery) {
     }
 
     // (63:6) <TableCondensed class="user-list {expanded ? 'expanded' : ''}">
-    function create_default_slot_1(ctx) {
+    function create_default_slot_1$1(ctx) {
     	let each_1_anchor;
     	let current;
     	let each_value = /*users*/ ctx[0];
@@ -36688,7 +40478,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_1.name,
+    		id: create_default_slot_1$1.name,
     		type: "slot",
     		source: "(63:6) <TableCondensed class=\\\"user-list {expanded ? 'expanded' : ''}\\\">",
     		ctx
@@ -36698,7 +40488,7 @@ var app = (function (jQuery) {
     }
 
     // (67:10) {#if expanded}
-    function create_if_block$1(ctx) {
+    function create_if_block$2(ctx) {
     	let th0;
     	let t1;
     	let th1;
@@ -36710,8 +40500,8 @@ var app = (function (jQuery) {
     			t1 = space();
     			th1 = element("th");
     			th1.textContent = "Last name";
-    			add_location(th0, file$2, 67, 12, 1681);
-    			add_location(th1, file$2, 68, 12, 1714);
+    			add_location(th0, file$5, 67, 12, 1681);
+    			add_location(th1, file$5, 68, 12, 1714);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, th0, anchor);
@@ -36727,7 +40517,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
     		source: "(67:10) {#if expanded}",
     		ctx
@@ -36743,7 +40533,7 @@ var app = (function (jQuery) {
     	let t1;
     	let th1;
     	let t3;
-    	let if_block = /*expanded*/ ctx[1] && create_if_block$1(ctx);
+    	let if_block = /*expanded*/ ctx[1] && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -36756,10 +40546,10 @@ var app = (function (jQuery) {
     			t3 = space();
     			if (if_block) if_block.c();
     			attr_dev(th0, "class", "actions");
-    			add_location(th0, file$2, 64, 10, 1580);
-    			add_location(th1, file$2, 65, 10, 1624);
+    			add_location(th0, file$5, 64, 10, 1580);
+    			add_location(th1, file$5, 65, 10, 1624);
     			attr_dev(tr, "slot", "headers");
-    			add_location(tr, file$2, 63, 8, 1549);
+    			add_location(tr, file$5, 63, 8, 1549);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -36772,7 +40562,7 @@ var app = (function (jQuery) {
     		p: function update(ctx, dirty) {
     			if (/*expanded*/ ctx[1]) {
     				if (if_block) ; else {
-    					if_block = create_if_block$1(ctx);
+    					if_block = create_if_block$2(ctx);
     					if_block.c();
     					if_block.m(tr, null);
     				}
@@ -36799,7 +40589,7 @@ var app = (function (jQuery) {
     }
 
     // (34:0) <Card outline color="primary">
-    function create_default_slot(ctx) {
+    function create_default_slot$1(ctx) {
     	let div1;
     	let div0;
     	let form;
@@ -36819,7 +40609,7 @@ var app = (function (jQuery) {
     	form = new Form({
     			props: {
     				horizontal: true,
-    				$$slots: { default: [create_default_slot_3] },
+    				$$slots: { default: [create_default_slot_3$1] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -36830,7 +40620,7 @@ var app = (function (jQuery) {
     				class: "user-list " + (/*expanded*/ ctx[1] ? 'expanded' : ''),
     				$$slots: {
     					headers: [create_headers_slot],
-    					default: [create_default_slot_1]
+    					default: [create_default_slot_1$1]
     				},
     				$$scope: { ctx }
     			},
@@ -36867,21 +40657,21 @@ var app = (function (jQuery) {
     			div6 = element("div");
     			create_component(pagination.$$.fragment);
     			attr_dev(div0, "class", "col-12");
-    			add_location(div0, file$2, 46, 4, 1049);
+    			add_location(div0, file$5, 46, 4, 1049);
     			attr_dev(div1, "class", "row");
-    			add_location(div1, file$2, 45, 2, 1026);
+    			add_location(div1, file$5, 45, 2, 1026);
     			attr_dev(div2, "class", "col-12");
-    			add_location(div2, file$2, 61, 4, 1448);
+    			add_location(div2, file$5, 61, 4, 1448);
     			attr_dev(div3, "class", "row");
-    			add_location(div3, file$2, 60, 2, 1425);
+    			add_location(div3, file$5, 60, 2, 1425);
     			attr_dev(div4, "class", "table-status svelte-fsz3r");
-    			add_location(div4, file$2, 95, 6, 2476);
+    			add_location(div4, file$5, 95, 6, 2476);
     			attr_dev(div5, "class", "col-5");
-    			add_location(div5, file$2, 94, 4, 2449);
+    			add_location(div5, file$5, 94, 4, 2449);
     			attr_dev(div6, "class", "col-7");
-    			add_location(div6, file$2, 97, 4, 2555);
+    			add_location(div6, file$5, 97, 4, 2555);
     			attr_dev(div7, "class", "row");
-    			add_location(div7, file$2, 93, 2, 2426);
+    			add_location(div7, file$5, 93, 2, 2426);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -36947,7 +40737,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot.name,
+    		id: create_default_slot$1.name,
     		type: "slot",
     		source: "(34:0) <Card outline color=\\\"primary\\\">",
     		ctx
@@ -36983,7 +40773,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$3(ctx) {
+    function create_fragment$6(ctx) {
     	let card;
     	let current;
 
@@ -36993,7 +40783,7 @@ var app = (function (jQuery) {
     				color: "primary",
     				$$slots: {
     					header: [create_header_slot],
-    					default: [create_default_slot]
+    					default: [create_default_slot$1]
     				},
     				$$scope: { ctx }
     			},
@@ -37036,7 +40826,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$3.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -37045,7 +40835,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$3($$self, $$props, $$invalidate) {
+    function instance$6($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UserList', slots, []);
     	const { setLoading } = getContext("loader");
@@ -37121,13 +40911,13 @@ var app = (function (jQuery) {
     class UserList extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { expanded: 1, users: 0 });
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { expanded: 1, users: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UserList",
     			options,
-    			id: create_fragment$3.name
+    			id: create_fragment$6.name
     		});
 
     		const { ctx } = this.$$;
@@ -37156,10 +40946,10 @@ var app = (function (jQuery) {
     }
 
     /* src\routes\Users.svelte generated by Svelte v3.42.4 */
-    const file$1 = "src\\routes\\Users.svelte";
+    const file$4 = "src\\routes\\Users.svelte";
 
     // (13:2) {#if selectedUserId}
-    function create_if_block(ctx) {
+    function create_if_block$1(ctx) {
     	let div;
     	let userdetail;
     	let current;
@@ -37176,7 +40966,7 @@ var app = (function (jQuery) {
     			div = element("div");
     			create_component(userdetail.$$.fragment);
     			attr_dev(div, "class", "col-6");
-    			add_location(div, file$1, 13, 4, 477);
+    			add_location(div, file$4, 13, 4, 477);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -37205,7 +40995,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block.name,
+    		id: create_if_block$1.name,
     		type: "if",
     		source: "(13:2) {#if selectedUserId}",
     		ctx
@@ -37214,7 +41004,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function create_fragment$2(ctx) {
+    function create_fragment$5(ctx) {
     	let div1;
     	let div0;
     	let userlist;
@@ -37227,7 +41017,7 @@ var app = (function (jQuery) {
     		});
 
     	userlist.$on("edit", /*edit_handler*/ ctx[1]);
-    	let if_block = /*selectedUserId*/ ctx[0] && create_if_block(ctx);
+    	let if_block = /*selectedUserId*/ ctx[0] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -37238,9 +41028,9 @@ var app = (function (jQuery) {
     			if (if_block) if_block.c();
     			toggle_class(div0, "col-12", !/*selectedUserId*/ ctx[0]);
     			toggle_class(div0, "col-6", /*selectedUserId*/ ctx[0]);
-    			add_location(div0, file$1, 9, 2, 267);
+    			add_location(div0, file$4, 9, 2, 267);
     			attr_dev(div1, "class", "row");
-    			add_location(div1, file$1, 8, 0, 246);
+    			add_location(div1, file$4, 8, 0, 246);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -37274,7 +41064,7 @@ var app = (function (jQuery) {
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block(ctx);
+    					if_block = create_if_block$1(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(div1, null);
@@ -37309,7 +41099,7 @@ var app = (function (jQuery) {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -37318,7 +41108,7 @@ var app = (function (jQuery) {
     	return block;
     }
 
-    function instance$2($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Users', slots, []);
     	let selectedUserId = null;
@@ -37352,11 +41142,1614 @@ var app = (function (jQuery) {
     class Users extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Users",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+    }
+
+    /* src\components\form\input\LteSwitch.svelte generated by Svelte v3.42.4 */
+    const file$3 = "src\\components\\form\\input\\LteSwitch.svelte";
+
+    function create_fragment$4(ctx) {
+    	let t0;
+    	let label;
+    	let input;
+    	let t1;
+    	let span;
+    	let span_class_value;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			t0 = space();
+    			label = element("label");
+    			input = element("input");
+    			t1 = space();
+    			span = element("span");
+    			attr_dev(input, "type", "checkbox");
+    			attr_dev(input, "class", "svelte-ujjcta");
+    			add_location(input, file$3, 17, 1, 409);
+    			attr_dev(span, "class", span_class_value = "slider " + /*sliderClasses*/ ctx[1] + " svelte-ujjcta");
+    			add_location(span, file$3, 18, 1, 450);
+    			attr_dev(label, "class", "switch svelte-ujjcta");
+    			add_location(label, file$3, 16, 0, 384);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, label, anchor);
+    			append_dev(label, input);
+    			input.checked = /*checked*/ ctx[0];
+    			append_dev(label, t1);
+    			append_dev(label, span);
+
+    			if (!mounted) {
+    				dispose = listen_dev(input, "change", /*input_change_handler*/ ctx[4]);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*checked*/ 1) {
+    				input.checked = /*checked*/ ctx[0];
+    			}
+
+    			if (dirty & /*sliderClasses*/ 2 && span_class_value !== (span_class_value = "slider " + /*sliderClasses*/ ctx[1] + " svelte-ujjcta")) {
+    				attr_dev(span, "class", span_class_value);
+    			}
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(label);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$4($$self, $$props, $$invalidate) {
+    	let sliderClasses;
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('LteSwitch', slots, []);
+    	const dispatch = createEventDispatcher();
+    	let { checked = false } = $$props;
+    	let { checkedClass = "" } = $$props;
+    	let { uncheckedClass = "" } = $$props;
+    	const writable_props = ['checked', 'checkedClass', 'uncheckedClass'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<LteSwitch> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_change_handler() {
+    		checked = this.checked;
+    		$$invalidate(0, checked);
+    	}
+
+    	$$self.$$set = $$props => {
+    		if ('checked' in $$props) $$invalidate(0, checked = $$props.checked);
+    		if ('checkedClass' in $$props) $$invalidate(2, checkedClass = $$props.checkedClass);
+    		if ('uncheckedClass' in $$props) $$invalidate(3, uncheckedClass = $$props.uncheckedClass);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		createEventDispatcher,
+    		dispatch,
+    		checked,
+    		checkedClass,
+    		uncheckedClass,
+    		sliderClasses
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('checked' in $$props) $$invalidate(0, checked = $$props.checked);
+    		if ('checkedClass' in $$props) $$invalidate(2, checkedClass = $$props.checkedClass);
+    		if ('uncheckedClass' in $$props) $$invalidate(3, uncheckedClass = $$props.uncheckedClass);
+    		if ('sliderClasses' in $$props) $$invalidate(1, sliderClasses = $$props.sliderClasses);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*checked, checkedClass, uncheckedClass*/ 13) {
+    			$$invalidate(1, sliderClasses = checked && checkedClass || uncheckedClass);
+    		}
+    	};
+
+    	return [checked, sliderClasses, checkedClass, uncheckedClass, input_change_handler];
+    }
+
+    class LteSwitch extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+    			checked: 0,
+    			checkedClass: 2,
+    			uncheckedClass: 3
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "LteSwitch",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+
+    	get checked() {
+    		throw new Error("<LteSwitch>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set checked(value) {
+    		throw new Error("<LteSwitch>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get checkedClass() {
+    		throw new Error("<LteSwitch>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set checkedClass(value) {
+    		throw new Error("<LteSwitch>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get uncheckedClass() {
+    		throw new Error("<LteSwitch>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set uncheckedClass(value) {
+    		throw new Error("<LteSwitch>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\components\form\input\Radio.svelte generated by Svelte v3.42.4 */
+
+    const file$2 = "src\\components\\form\\input\\Radio.svelte";
+
+    function create_fragment$3(ctx) {
+    	let div;
+    	let input;
+    	let t;
+    	let div_class_value;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	const default_slot_template = /*#slots*/ ctx[8].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[7], null);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			input = element("input");
+    			t = space();
+    			if (default_slot) default_slot.c();
+    			attr_dev(input, "type", "radio");
+    			input.disabled = /*disabled*/ ctx[4];
+    			attr_dev(input, "id", /*id*/ ctx[1]);
+    			input.__value = /*value*/ ctx[2];
+    			input.value = input.__value;
+    			attr_dev(input, "name", /*name*/ ctx[3]);
+    			/*$$binding_groups*/ ctx[11][0].push(input);
+    			add_location(input, file$2, 10, 2, 237);
+    			attr_dev(div, "class", div_class_value = "icheck-" + /*level*/ ctx[5] + " " + (/*$$props*/ ctx[6].class || ''));
+    			add_location(div, file$2, 9, 0, 183);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input);
+    			input.checked = input.__value === /*group*/ ctx[0];
+    			append_dev(div, t);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_handler*/ ctx[10]),
+    					listen_dev(input, "click", /*click_handler*/ ctx[9], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (!current || dirty & /*disabled*/ 16) {
+    				prop_dev(input, "disabled", /*disabled*/ ctx[4]);
+    			}
+
+    			if (!current || dirty & /*id*/ 2) {
+    				attr_dev(input, "id", /*id*/ ctx[1]);
+    			}
+
+    			if (!current || dirty & /*value*/ 4) {
+    				prop_dev(input, "__value", /*value*/ ctx[2]);
+    				input.value = input.__value;
+    			}
+
+    			if (!current || dirty & /*name*/ 8) {
+    				attr_dev(input, "name", /*name*/ ctx[3]);
+    			}
+
+    			if (dirty & /*group*/ 1) {
+    				input.checked = input.__value === /*group*/ ctx[0];
+    			}
+
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 128)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[7],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[7])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[7], dirty, null),
+    						null
+    					);
+    				}
+    			}
+
+    			if (!current || dirty & /*level, $$props*/ 96 && div_class_value !== (div_class_value = "icheck-" + /*level*/ ctx[5] + " " + (/*$$props*/ ctx[6].class || ''))) {
+    				attr_dev(div, "class", div_class_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			/*$$binding_groups*/ ctx[11][0].splice(/*$$binding_groups*/ ctx[11][0].indexOf(input), 1);
+    			if (default_slot) default_slot.d(detaching);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$3.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$3($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Radio', slots, ['default']);
+    	let { id = "" } = $$props;
+    	let { value = "" } = $$props;
+    	let { name = "" } = $$props;
+    	let { disabled = false } = $$props;
+    	let { group } = $$props;
+    	let { level = "primary" } = $$props;
+    	const $$binding_groups = [[]];
+
+    	function click_handler(event) {
+    		bubble.call(this, $$self, event);
+    	}
+
+    	function input_change_handler() {
+    		group = this.__value;
+    		$$invalidate(0, group);
+    	}
+
+    	$$self.$$set = $$new_props => {
+    		$$invalidate(6, $$props = assign(assign({}, $$props), exclude_internal_props($$new_props)));
+    		if ('id' in $$new_props) $$invalidate(1, id = $$new_props.id);
+    		if ('value' in $$new_props) $$invalidate(2, value = $$new_props.value);
+    		if ('name' in $$new_props) $$invalidate(3, name = $$new_props.name);
+    		if ('disabled' in $$new_props) $$invalidate(4, disabled = $$new_props.disabled);
+    		if ('group' in $$new_props) $$invalidate(0, group = $$new_props.group);
+    		if ('level' in $$new_props) $$invalidate(5, level = $$new_props.level);
+    		if ('$$scope' in $$new_props) $$invalidate(7, $$scope = $$new_props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => ({ id, value, name, disabled, group, level });
+
+    	$$self.$inject_state = $$new_props => {
+    		$$invalidate(6, $$props = assign(assign({}, $$props), $$new_props));
+    		if ('id' in $$props) $$invalidate(1, id = $$new_props.id);
+    		if ('value' in $$props) $$invalidate(2, value = $$new_props.value);
+    		if ('name' in $$props) $$invalidate(3, name = $$new_props.name);
+    		if ('disabled' in $$props) $$invalidate(4, disabled = $$new_props.disabled);
+    		if ('group' in $$props) $$invalidate(0, group = $$new_props.group);
+    		if ('level' in $$props) $$invalidate(5, level = $$new_props.level);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$props = exclude_internal_props($$props);
+
+    	return [
+    		group,
+    		id,
+    		value,
+    		name,
+    		disabled,
+    		level,
+    		$$props,
+    		$$scope,
+    		slots,
+    		click_handler,
+    		input_change_handler,
+    		$$binding_groups
+    	];
+    }
+
+    class Radio extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
+    			id: 1,
+    			value: 2,
+    			name: 3,
+    			disabled: 4,
+    			group: 0,
+    			level: 5
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Radio",
+    			options,
+    			id: create_fragment$3.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*group*/ ctx[0] === undefined && !('group' in props)) {
+    			console.warn("<Radio> was created without expected prop 'group'");
+    		}
+    	}
+
+    	get id() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set id(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get value() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set value(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get name() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set name(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get disabled() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set disabled(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get group() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set group(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get level() {
+    		throw new Error("<Radio>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set level(value) {
+    		throw new Error("<Radio>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* src\routes\Tree.svelte generated by Svelte v3.42.4 */
+    const file$1 = "src\\routes\\Tree.svelte";
+
+    // (39:4) {#if showTree}
+    function create_if_block(ctx) {
+    	let treeview;
+    	let current;
+
+    	treeview = new TreeView({
+    			props: {
+    				tree: /*filteredTree*/ ctx[3],
+    				maxExpandedDepth: "3",
+    				$$slots: {
+    					default: [
+    						create_default_slot_13,
+    						({ node }) => ({ 10: node }),
+    						({ node }) => node ? 1024 : 0
+    					]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(treeview.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(treeview, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const treeview_changes = {};
+    			if (dirty & /*filteredTree*/ 8) treeview_changes.tree = /*filteredTree*/ ctx[3];
+
+    			if (dirty & /*$$scope, node, showCheckboxes*/ 3074) {
+    				treeview_changes.$$scope = { dirty, ctx };
+    			}
+
+    			treeview.$set(treeview_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(treeview.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(treeview.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(treeview, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(39:4) {#if showTree}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (41:8) {#if showCheckboxes}
+    function create_if_block_1(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Checkbox");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(41:8) {#if showCheckboxes}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (40:6) <TreeView tree={filteredTree} maxExpandedDepth="3" let:node>
+    function create_default_slot_13(ctx) {
+    	let t0;
+    	let t1_value = /*node*/ ctx[10].title + "";
+    	let t1;
+    	let if_block = /*showCheckboxes*/ ctx[1] && create_if_block_1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			t0 = space();
+    			t1 = text(t1_value);
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t1, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*showCheckboxes*/ ctx[1]) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_1(ctx);
+    					if_block.c();
+    					if_block.m(t0.parentNode, t0);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (dirty & /*node*/ 1024 && t1_value !== (t1_value = /*node*/ ctx[10].title + "")) set_data_dev(t1, t1_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_13.name,
+    		type: "slot",
+    		source: "(40:6) <TreeView tree={filteredTree} maxExpandedDepth=\\\"3\\\" let:node>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (51:8) <Label inputId="show-checkboxes">
+    function create_default_slot_12(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Show checkboxes");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_12.name,
+    		type: "slot",
+    		source: "(51:8) <Label inputId=\\\"show-checkboxes\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (50:6) <Checkbox level="danger" name="show-checkboxes" id="show-checkboxes" bind:checked={showCheckboxes}>
+    function create_default_slot_11(ctx) {
+    	let label;
+    	let current;
+
+    	label = new Label({
+    			props: {
+    				inputId: "show-checkboxes",
+    				$$slots: { default: [create_default_slot_12] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(label.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(label, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const label_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				label_changes.$$scope = { dirty, ctx };
+    			}
+
+    			label.$set(label_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(label.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(label.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(label, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_11.name,
+    		type: "slot",
+    		source: "(50:6) <Checkbox level=\\\"danger\\\" name=\\\"show-checkboxes\\\" id=\\\"show-checkboxes\\\" bind:checked={showCheckboxes}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (49:4) <FormGroup>
+    function create_default_slot_10(ctx) {
+    	let checkbox;
+    	let updating_checked;
+    	let current;
+
+    	function checkbox_checked_binding(value) {
+    		/*checkbox_checked_binding*/ ctx[4](value);
+    	}
+
+    	let checkbox_props = {
+    		level: "danger",
+    		name: "show-checkboxes",
+    		id: "show-checkboxes",
+    		$$slots: { default: [create_default_slot_11] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*showCheckboxes*/ ctx[1] !== void 0) {
+    		checkbox_props.checked = /*showCheckboxes*/ ctx[1];
+    	}
+
+    	checkbox = new Checkbox({ props: checkbox_props, $$inline: true });
+    	binding_callbacks.push(() => bind(checkbox, 'checked', checkbox_checked_binding));
+
+    	const block = {
+    		c: function create() {
+    			create_component(checkbox.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(checkbox, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const checkbox_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				checkbox_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_checked && dirty & /*showCheckboxes*/ 2) {
+    				updating_checked = true;
+    				checkbox_changes.checked = /*showCheckboxes*/ ctx[1];
+    				add_flush_callback(() => updating_checked = false);
+    			}
+
+    			checkbox.$set(checkbox_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(checkbox.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(checkbox.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(checkbox, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_10.name,
+    		type: "slot",
+    		source: "(49:4) <FormGroup>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (57:71) <Label inputId="hide1">
+    function create_default_slot_9(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Hide 1");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_9.name,
+    		type: "slot",
+    		source: "(57:71) <Label inputId=\\\"hide1\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (57:8) <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}>
+    function create_default_slot_8(ctx) {
+    	let label;
+    	let current;
+
+    	label = new Label({
+    			props: {
+    				inputId: "hide1",
+    				$$slots: { default: [create_default_slot_9] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(label.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(label, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const label_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				label_changes.$$scope = { dirty, ctx };
+    			}
+
+    			label.$set(label_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(label.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(label.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(label, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_8.name,
+    		type: "slot",
+    		source: "(57:8) <Radio id=\\\"hide1\\\" bind:group={hideGroup} name=\\\"hide\\\" value={1}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (56:6) <Checkbox>
+    function create_default_slot_7(ctx) {
+    	let radio;
+    	let updating_group;
+    	let current;
+
+    	function radio_group_binding(value) {
+    		/*radio_group_binding*/ ctx[5](value);
+    	}
+
+    	let radio_props = {
+    		id: "hide1",
+    		name: "hide",
+    		value: 1,
+    		$$slots: { default: [create_default_slot_8] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*hideGroup*/ ctx[0] !== void 0) {
+    		radio_props.group = /*hideGroup*/ ctx[0];
+    	}
+
+    	radio = new Radio({ props: radio_props, $$inline: true });
+    	binding_callbacks.push(() => bind(radio, 'group', radio_group_binding));
+
+    	const block = {
+    		c: function create() {
+    			create_component(radio.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(radio, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const radio_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				radio_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_group && dirty & /*hideGroup*/ 1) {
+    				updating_group = true;
+    				radio_changes.group = /*hideGroup*/ ctx[0];
+    				add_flush_callback(() => updating_group = false);
+    			}
+
+    			radio.$set(radio_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(radio.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(radio.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(radio, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_7.name,
+    		type: "slot",
+    		source: "(56:6) <Checkbox>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (61:10) <Label inputId="hide2">
+    function create_default_slot_6(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Hide 2");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_6.name,
+    		type: "slot",
+    		source: "(61:10) <Label inputId=\\\"hide2\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (60:8) <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}>
+    function create_default_slot_5(ctx) {
+    	let label;
+    	let current;
+
+    	label = new Label({
+    			props: {
+    				inputId: "hide2",
+    				$$slots: { default: [create_default_slot_6] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(label.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(label, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const label_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				label_changes.$$scope = { dirty, ctx };
+    			}
+
+    			label.$set(label_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(label.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(label.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(label, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_5.name,
+    		type: "slot",
+    		source: "(60:8) <Radio id=\\\"hide2\\\" level=\\\"warning\\\" bind:group={hideGroup} name=\\\"hide\\\" value={2}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (59:6) <Checkbox>
+    function create_default_slot_4(ctx) {
+    	let radio;
+    	let updating_group;
+    	let current;
+
+    	function radio_group_binding_1(value) {
+    		/*radio_group_binding_1*/ ctx[6](value);
+    	}
+
+    	let radio_props = {
+    		id: "hide2",
+    		level: "warning",
+    		name: "hide",
+    		value: 2,
+    		$$slots: { default: [create_default_slot_5] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*hideGroup*/ ctx[0] !== void 0) {
+    		radio_props.group = /*hideGroup*/ ctx[0];
+    	}
+
+    	radio = new Radio({ props: radio_props, $$inline: true });
+    	binding_callbacks.push(() => bind(radio, 'group', radio_group_binding_1));
+
+    	const block = {
+    		c: function create() {
+    			create_component(radio.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(radio, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const radio_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				radio_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_group && dirty & /*hideGroup*/ 1) {
+    				updating_group = true;
+    				radio_changes.group = /*hideGroup*/ ctx[0];
+    				add_flush_callback(() => updating_group = false);
+    			}
+
+    			radio.$set(radio_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(radio.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(radio.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(radio, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_4.name,
+    		type: "slot",
+    		source: "(59:6) <Checkbox>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (66:10) <Label inputId="hide3">
+    function create_default_slot_3(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Hide 3");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3.name,
+    		type: "slot",
+    		source: "(66:10) <Label inputId=\\\"hide3\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (65:8) <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}>
+    function create_default_slot_2(ctx) {
+    	let label;
+    	let current;
+
+    	label = new Label({
+    			props: {
+    				inputId: "hide3",
+    				$$slots: { default: [create_default_slot_3] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(label.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(label, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const label_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				label_changes.$$scope = { dirty, ctx };
+    			}
+
+    			label.$set(label_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(label.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(label.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(label, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_2.name,
+    		type: "slot",
+    		source: "(65:8) <Radio id=\\\"hide3\\\" level=\\\"danger\\\" bind:group={hideGroup} name=\\\"hide\\\" value={3}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (64:6) <Checkbox>
+    function create_default_slot_1(ctx) {
+    	let radio;
+    	let updating_group;
+    	let current;
+
+    	function radio_group_binding_2(value) {
+    		/*radio_group_binding_2*/ ctx[7](value);
+    	}
+
+    	let radio_props = {
+    		id: "hide3",
+    		level: "danger",
+    		name: "hide",
+    		value: 3,
+    		$$slots: { default: [create_default_slot_2] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*hideGroup*/ ctx[0] !== void 0) {
+    		radio_props.group = /*hideGroup*/ ctx[0];
+    	}
+
+    	radio = new Radio({ props: radio_props, $$inline: true });
+    	binding_callbacks.push(() => bind(radio, 'group', radio_group_binding_2));
+
+    	const block = {
+    		c: function create() {
+    			create_component(radio.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(radio, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const radio_changes = {};
+
+    			if (dirty & /*$$scope*/ 2048) {
+    				radio_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_group && dirty & /*hideGroup*/ 1) {
+    				updating_group = true;
+    				radio_changes.group = /*hideGroup*/ ctx[0];
+    				add_flush_callback(() => updating_group = false);
+    			}
+
+    			radio.$set(radio_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(radio.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(radio.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(radio, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_1.name,
+    		type: "slot",
+    		source: "(64:6) <Checkbox>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (55:4) <FormGroup>
+    function create_default_slot(ctx) {
+    	let checkbox0;
+    	let t0;
+    	let checkbox1;
+    	let t1;
+    	let checkbox2;
+    	let current;
+
+    	checkbox0 = new Checkbox({
+    			props: {
+    				$$slots: { default: [create_default_slot_7] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	checkbox1 = new Checkbox({
+    			props: {
+    				$$slots: { default: [create_default_slot_4] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	checkbox2 = new Checkbox({
+    			props: {
+    				$$slots: { default: [create_default_slot_1] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(checkbox0.$$.fragment);
+    			t0 = space();
+    			create_component(checkbox1.$$.fragment);
+    			t1 = space();
+    			create_component(checkbox2.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(checkbox0, target, anchor);
+    			insert_dev(target, t0, anchor);
+    			mount_component(checkbox1, target, anchor);
+    			insert_dev(target, t1, anchor);
+    			mount_component(checkbox2, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const checkbox0_changes = {};
+
+    			if (dirty & /*$$scope, hideGroup*/ 2049) {
+    				checkbox0_changes.$$scope = { dirty, ctx };
+    			}
+
+    			checkbox0.$set(checkbox0_changes);
+    			const checkbox1_changes = {};
+
+    			if (dirty & /*$$scope, hideGroup*/ 2049) {
+    				checkbox1_changes.$$scope = { dirty, ctx };
+    			}
+
+    			checkbox1.$set(checkbox1_changes);
+    			const checkbox2_changes = {};
+
+    			if (dirty & /*$$scope, hideGroup*/ 2049) {
+    				checkbox2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			checkbox2.$set(checkbox2_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(checkbox0.$$.fragment, local);
+    			transition_in(checkbox1.$$.fragment, local);
+    			transition_in(checkbox2.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(checkbox0.$$.fragment, local);
+    			transition_out(checkbox1.$$.fragment, local);
+    			transition_out(checkbox2.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(checkbox0, detaching);
+    			if (detaching) detach_dev(t0);
+    			destroy_component(checkbox1, detaching);
+    			if (detaching) detach_dev(t1);
+    			destroy_component(checkbox2, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot.name,
+    		type: "slot",
+    		source: "(55:4) <FormGroup>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$2(ctx) {
+    	let div2;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let formgroup0;
+    	let t1;
+    	let formgroup1;
+    	let t2;
+    	let lteswitch;
+    	let updating_checked;
+    	let current;
+    	let if_block = /*showTree*/ ctx[2] && create_if_block(ctx);
+
+    	formgroup0 = new FormGroup({
+    			props: {
+    				$$slots: { default: [create_default_slot_10] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	formgroup1 = new FormGroup({
+    			props: {
+    				$$slots: { default: [create_default_slot] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	function lteswitch_checked_binding(value) {
+    		/*lteswitch_checked_binding*/ ctx[8](value);
+    	}
+
+    	let lteswitch_props = {
+    		checkedClass: "bg-green",
+    		uncheckedClass: "bg-gray"
+    	};
+
+    	if (/*showTree*/ ctx[2] !== void 0) {
+    		lteswitch_props.checked = /*showTree*/ ctx[2];
+    	}
+
+    	lteswitch = new LteSwitch({ props: lteswitch_props, $$inline: true });
+    	binding_callbacks.push(() => bind(lteswitch, 'checked', lteswitch_checked_binding));
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div0 = element("div");
+    			if (if_block) if_block.c();
+    			t0 = space();
+    			div1 = element("div");
+    			create_component(formgroup0.$$.fragment);
+    			t1 = space();
+    			create_component(formgroup1.$$.fragment);
+    			t2 = space();
+    			create_component(lteswitch.$$.fragment);
+    			attr_dev(div0, "class", "col-3");
+    			add_location(div0, file$1, 37, 2, 1122);
+    			attr_dev(div1, "class", "col-9");
+    			add_location(div1, file$1, 47, 2, 1360);
+    			attr_dev(div2, "class", "row");
+    			add_location(div2, file$1, 36, 0, 1101);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
+    			if (if_block) if_block.m(div0, null);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			mount_component(formgroup0, div1, null);
+    			append_dev(div1, t1);
+    			mount_component(formgroup1, div1, null);
+    			append_dev(div1, t2);
+    			mount_component(lteswitch, div1, null);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*showTree*/ ctx[2]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*showTree*/ 4) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div0, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			const formgroup0_changes = {};
+
+    			if (dirty & /*$$scope, showCheckboxes*/ 2050) {
+    				formgroup0_changes.$$scope = { dirty, ctx };
+    			}
+
+    			formgroup0.$set(formgroup0_changes);
+    			const formgroup1_changes = {};
+
+    			if (dirty & /*$$scope, hideGroup*/ 2049) {
+    				formgroup1_changes.$$scope = { dirty, ctx };
+    			}
+
+    			formgroup1.$set(formgroup1_changes);
+    			const lteswitch_changes = {};
+
+    			if (!updating_checked && dirty & /*showTree*/ 4) {
+    				updating_checked = true;
+    				lteswitch_changes.checked = /*showTree*/ ctx[2];
+    				add_flush_callback(() => updating_checked = false);
+    			}
+
+    			lteswitch.$set(lteswitch_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			transition_in(formgroup0.$$.fragment, local);
+    			transition_in(formgroup1.$$.fragment, local);
+    			transition_in(lteswitch.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			transition_out(formgroup0.$$.fragment, local);
+    			transition_out(formgroup1.$$.fragment, local);
+    			transition_out(lteswitch.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (if_block) if_block.d();
+    			destroy_component(formgroup0);
+    			destroy_component(formgroup1);
+    			destroy_component(lteswitch);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function filter(tree, hide) {
+    	return tree.filter(t => !t.nodePath.startsWith(hide.toString()));
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let filteredTree;
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('Tree', slots, []);
+
+    	const tree = [
+    		{ nodePath: "1", title: "1" },
+    		{ nodePath: "2", title: "2" },
+    		{
+    			nodePath: "3",
+    			title: "3",
+    			hasChildren: true
+    		},
+    		{ nodePath: "3.1", title: "3.1" },
+    		{
+    			nodePath: "3.2",
+    			title: "3.2",
+    			hasChildren: true
+    		},
+    		{
+    			nodePath: "3.2.1",
+    			title: "3.2.1",
+    			hasChildren: true
+    		},
+    		{ nodePath: "3.2.1.1", title: "3.2.1.1" }
+    	];
+
+    	let showCheckboxes = false;
+    	let hideGroup = 1;
+    	let showTree = true;
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Tree> was created with unknown prop '${key}'`);
+    	});
+
+    	function checkbox_checked_binding(value) {
+    		showCheckboxes = value;
+    		$$invalidate(1, showCheckboxes);
+    	}
+
+    	function radio_group_binding(value) {
+    		hideGroup = value;
+    		$$invalidate(0, hideGroup);
+    	}
+
+    	function radio_group_binding_1(value) {
+    		hideGroup = value;
+    		$$invalidate(0, hideGroup);
+    	}
+
+    	function radio_group_binding_2(value) {
+    		hideGroup = value;
+    		$$invalidate(0, hideGroup);
+    	}
+
+    	function lteswitch_checked_binding(value) {
+    		showTree = value;
+    		$$invalidate(2, showTree);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		jquery: jQuery__default['default'],
+    		Checkbox,
+    		LteSwitch,
+    		Radio,
+    		FormGroup,
+    		Label,
+    		TreeView,
+    		tree,
+    		showCheckboxes,
+    		hideGroup,
+    		showTree,
+    		filter,
+    		filteredTree
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('showCheckboxes' in $$props) $$invalidate(1, showCheckboxes = $$props.showCheckboxes);
+    		if ('hideGroup' in $$props) $$invalidate(0, hideGroup = $$props.hideGroup);
+    		if ('showTree' in $$props) $$invalidate(2, showTree = $$props.showTree);
+    		if ('filteredTree' in $$props) $$invalidate(3, filteredTree = $$props.filteredTree);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*hideGroup*/ 1) {
+    			$$invalidate(3, filteredTree = filter(tree, hideGroup));
+    		}
+    	};
+
+    	return [
+    		hideGroup,
+    		showCheckboxes,
+    		showTree,
+    		filteredTree,
+    		checkbox_checked_binding,
+    		radio_group_binding,
+    		radio_group_binding_1,
+    		radio_group_binding_2,
+    		lteswitch_checked_binding
+    	];
+    }
+
+    class Tree extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Tree",
     			options,
     			id: create_fragment$2.name
     		});
@@ -37427,6 +42820,12 @@ var app = (function (jQuery) {
         title: "Users",
         route: "/users",
         breadcrumb: ["Users"]
+      },
+      {
+        name: "Tree",
+        title: "Tree",
+        route: "/tree",
+        breadcrumb: ["Tree"]
       }
     ];
     const Urls = Routes.reduce((acc, x) => {
@@ -37439,6 +42838,7 @@ var app = (function (jQuery) {
     var routes = {
       [Urls.Route1]: Route1,
       [Urls.Users]: Users,
+      [Urls.Tree]: Tree,
       "*": NotFound
     };
 

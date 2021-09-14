@@ -57,10 +57,14 @@
         <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}><Label inputId="hide1">Hide 1</Label></Radio>
       </Checkbox>
       <Checkbox>
-        <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}><Label inputId="hide2">Hide 2</Label></Radio>
+        <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}>
+          <Label inputId="hide2">Hide 2</Label>
+        </Radio>
       </Checkbox>
       <Checkbox>
-        <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}><Label inputId="hide3">Hide 3</Label></Radio>
+        <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}>
+          <Label inputId="hide3">Hide 3</Label>
+        </Radio>
       </Checkbox>
     </FormGroup>
 
