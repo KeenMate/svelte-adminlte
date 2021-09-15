@@ -5,6 +5,6 @@
   $: formParam = form || (() => {});
 </script>
 
-<form use:formParam class:form-horizontal={horizontal} class={$$props.class || ""}>
+<form use:formParam class:form-horizontal={horizontal} class={$$props.class || ""} {...$$restProps}>
   <slot />
 </form>

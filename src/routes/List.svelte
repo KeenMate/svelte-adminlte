@@ -1,8 +1,8 @@
 <script>
   import { sortBy } from "lodash";
   import { Sortable, Plugins } from "@shopify/draggable";
-  import { Card, Callout } from "../components";
-  import LteButton from "../components/ui/LteButton.svelte";
+  import { Card, Callout, LteButton } from "../components";
+  import CreateCarModal from "../controls/list/CreateCarModal.svelte";
 
   let items = [
     {
@@ -29,6 +29,8 @@
 
   let list;
   let sortable;
+
+  let showCreateCar;
 
   $: {
     if (list) {
@@ -92,7 +94,7 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Favorite cars</svelte:fragment>
 
-      <LteButton slot="tools" color="success" small on:click={() => dispatch("close")}>
+      <LteButton slot="tools" color="success" small on:click={() => showCreateCar()}>
         <i class="fas fa-plus" />
       </LteButton>
 
@@ -114,4 +116,6 @@
       </ul>
     </Card>
   </div>
+
+  <CreateCarModal bind:openModal={showCreateCar} on:add={({ detail: d }) => console.log("received new car", d)} />
 </div>

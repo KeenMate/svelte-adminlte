@@ -26,7 +26,7 @@
 	class:squared
 	class:disabled
 	{disabled}
-	{...$$props}
+	{...$$restProps}
 	on:click
 >
 	<slot />
