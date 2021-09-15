@@ -1,7 +1,5 @@
 <script>
-  import jquery from "jquery";
-
-  import { Checkbox } from "../components";
+  import { Checkbox, Card } from "../components";
   import LteSwitch from "../components/form/input/LteSwitch.svelte";
   import Radio from "../components/form/input/Radio.svelte";
   import FormGroup from "../components/form/structure/FormGroup.svelte";
@@ -35,40 +33,47 @@
 </script>
 
 <div class="row">
-  <div class="col-3">
-    {#if showTree}
-      <TreeView tree={filteredTree} maxExpandedDepth="3" let:node>
-        {#if showCheckboxes}
-          Checkbox
-        {/if}
-        {node.title}
-      </TreeView>
-    {/if}
+  <div class="col-5">
+    <Card outline color="primary">
+      <svelte:fragment slot="header">Tree</svelte:fragment>
+      {#if showTree}
+        <TreeView tree={filteredTree} maxExpandedDepth="3" let:node>
+          {#if showCheckboxes}
+            Checkbox
+          {/if}
+          {node.title}
+        </TreeView>
+      {/if}
+    </Card>
   </div>
-  <div class="col-9">
-    <FormGroup>
-      <Checkbox level="danger" name="show-checkboxes" id="show-checkboxes" bind:checked={showCheckboxes}>
-        <Label inputId="show-checkboxes">Show checkboxes</Label>
-      </Checkbox>
-    </FormGroup>
-
-    <FormGroup>
-      <Checkbox>
-        <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}><Label inputId="hide1">Hide 1</Label></Radio>
-      </Checkbox>
-      <Checkbox>
-        <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}>
-          <Label inputId="hide2">Hide 2</Label>
-        </Radio>
-      </Checkbox>
-      <Checkbox>
-        <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}>
-          <Label inputId="hide3">Hide 3</Label>
-        </Radio>
-      </Checkbox>
-    </FormGroup>
-
-    <LteSwitch checkedClass="bg-green" uncheckedClass="bg-gray" bind:checked={showTree} />
+  <div class="col-3">
+    <Card outline color="primary">
+      <svelte:fragment slot="header">Tree options</svelte:fragment>
+      <FormGroup>
+        <Checkbox level="danger" name="show-checkboxes" id="show-checkboxes" bind:checked={showCheckboxes}>
+          <Label inputId="show-checkboxes">Show checkboxes</Label>
+        </Checkbox>
+      </FormGroup>
+      <FormGroup>
+        <Checkbox>
+          <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}><Label inputId="hide1">Hide 1</Label></Radio>
+        </Checkbox>
+        <Checkbox>
+          <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}>
+            <Label inputId="hide2">Hide 2</Label>
+          </Radio>
+        </Checkbox>
+        <Checkbox>
+          <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}>
+            <Label inputId="hide3">Hide 3</Label>
+          </Radio>
+        </Checkbox>
+      </FormGroup>
+      <LteSwitch checkedClass="bg-green" uncheckedClass="bg-gray" bind:checked={showTree} />
+    </Card>
+  </div>
+  <div class="col-4">
+    <Card outline color="primary"><svelte:fragment slot="header">What's this</svelte:fragment></Card>
   </div>
 </div>
 

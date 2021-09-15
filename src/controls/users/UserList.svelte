@@ -21,17 +21,20 @@
   export let users = [];
 
   let page = 1;
+  let loading = false;
 
   fetchUsers();
 
   async function fetchUsers() {
-    setLoading(true);
+    // setLoading(true);
+    loading = true;
     users = await getUsers();
-    setLoading(false);
+    // setLoading(false);
+    loading = false;
   }
 </script>
 
-<Card outline color="primary">
+<Card {loading} outline color="primary">
   <svelte:fragment slot="header">List</svelte:fragment>
 
   <!--<div slot="tools">
@@ -73,7 +76,7 @@
           <tr>
             <td class="actions">
               <LteButton color="danger" xsmall on:click={() => onDelete(user)}>
-                <i class="fas fa-trash" />
+                <i class="fas fa-trash fa-fw" />
               </LteButton>
             </td>
             <td class="title">

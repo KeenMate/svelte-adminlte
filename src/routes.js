@@ -1,6 +1,7 @@
 import Route1 from "./routes/Route1.svelte"
 import Users from "./routes/Users.svelte"
 import Tree from "./routes/Tree.svelte"
+import List from "./routes/List.svelte"
 import NotFound from "./routes/NotFound.svelte"
 
 export const Routes = [
@@ -21,7 +22,13 @@ export const Routes = [
 		title: "Tree",
 		route: "/tree",
 		breadcrumb: ["Tree"]
-	}
+	},
+	{
+		name: "List",
+		title: "List",
+		route: "/list",
+		breadcrumb: ["List"]
+	},
 ]
 
 export const Urls = Routes
@@ -47,6 +54,7 @@ export default {
 	[Urls.Route1]: Route1,
 	[Urls.Users]: Users,
 	[Urls.Tree]: Tree,
+	[Urls.List]: List,
 	// The catch-all route must always be last
 	"*": NotFound
 }

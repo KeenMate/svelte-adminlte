@@ -68,7 +68,7 @@
             <tr>
               <td class="actions">
                 <LteButton color="danger" xsmall on:click={() => onDelete(order)}>
-                  <i class="fas fa-trash" />
+                  <i class="fas fa-trash fa-fw" />
                 </LteButton>
                 <!-- <LteButton color="warning" xsmall on:click={() => onEdit(tenant)}>
                 <i class="fas fa-pen-alt" />

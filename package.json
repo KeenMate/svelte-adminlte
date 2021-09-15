@@ -10,9 +10,11 @@
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.4.1",
+    "@shopify/draggable": "^1.0.0-beta.10",
     "esbuild": "^0.12.24",
     "felte": "^0.8.0",
     "inputmask": "^5.0.6",
+    "lodash": "^4.17.21",
     "postcss": "^8.2.8",
     "rollup": "^2.3.4",
     "rollup-plugin-copy": "^3.4.0",
@@ -34,7 +36,6 @@
     "@uppy/svelte": "^0.1.9",
     "@uppy/xhr-upload": "^1.7.2",
     "ckeditor5-svelte": "^0.0.10",
-    "lodash": "^4.17.21",
     "svelte-spa-router": "^3.1.0"
   },
   "optionalDependencies": {

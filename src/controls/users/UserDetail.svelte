@@ -5,7 +5,6 @@
   import { Card, Tabs, TabItem, Loader, LteButton } from "../../components";
   import UserProfile from "./UserProfile.svelte";
   import UserOrders from "./UserOrders.svelte";
-import { empty } from "svelte/internal";
 
   const dispatch = createEventDispatcher();
   const emptyUser = { userId: "", firstName: "", lastName: "" };
@@ -32,7 +31,7 @@ import { empty } from "svelte/internal";
   }
 </script>
 
-<Card  outline tabs {loading} color="primary" headerClass="p-0 pt-1 border-bottom-0">
+<Card outline tabs {loading} color="primary" headerClass="p-0 pt-1 border-bottom-0">
   <svelte:fragment slot="fullHeader">
     <Tabs>
       <li class="pt-2 px-3"><h3 class="card-title">Detail</h3></li>
@@ -61,7 +60,7 @@ import { empty } from "svelte/internal";
           <Loader />
         </div>
       </div> -->
-      <UserProfile user={emptyUser}/>
+      <UserProfile user={emptyUser} />
     {:then user}
       <UserProfile {user} />
     {/await}
