@@ -40,6 +40,7 @@
           // appendTo: containerSelector,
           constrainDimensions: true,
         },
+        handle: ".draggable-handle",
         swapAnimation: {
           duration: 200,
           easingFunction: "ease-in-out",
@@ -100,7 +101,14 @@
 
       <div bind:this={list} id="draggable-list">
         {#each items as item}
-          <Callout class="draggable-callout" color="info">{item.title}</Callout>
+          <Callout class="draggable-callout" color="info">
+            <div class="d-inline-flex">
+              <div class="draggable-handle text-muted mr-2">
+                <i class="fas fa-grip-vertical" />
+              </div>
+              <p>{item.title}</p>
+            </div>
+          </Callout>
         {/each}
       </div>
     </Card>
@@ -119,3 +127,13 @@
 
   <CreateCarModal bind:openModal={showCreateCar} on:add={({ detail: d }) => console.log("received new car", d)} />
 </div>
+
+<style lang="scss">
+  :global(.draggable--is-dragging) {
+    cursor: grabbing;
+  }
+
+  .draggable-handle {
+    cursor: grab;
+  }
+</style>

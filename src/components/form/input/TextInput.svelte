@@ -9,6 +9,7 @@
   export let readonly = false;
   export let disabled = false;
   export let inputMask = null;
+  export let invalid = false;
 
   export let inputElement = null;
 
@@ -23,6 +24,7 @@
   bind:this={inputElement}
   bind:value
   class="form-control input-sm {$$props.class || ''}"
+  class:is-invalid={invalid}
   type="text"
   data-inputmask={inputMask || ""}
   {id}

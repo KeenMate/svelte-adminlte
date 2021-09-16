@@ -1,10 +1,9 @@
 <script>
   import { createForm } from "felte";
-  import { createValidator } from "@felte/validator-superstruct";
-  import { svelteReporter, ValidationMessage } from '@felte/reporter-svelte';
+  import { validator } from "@felte/validator-zod";
+  import { svelteReporter, ValidationMessage } from "@felte/reporter-svelte";
 
-  import { object, string, size } from "superstruct";
-
+  import * as zod from "zod";
   import { createEventDispatcher } from "svelte";
   import { Modal, LteButton, ModalCloseButton, Form, FormGroup, Label, TextInput } from "../../components";
 
@@ -17,14 +16,14 @@
     show();
   }
 
-  const struct = object({
-    manufacturer: size(string(), 1, Infinity),
-    model: size(string(), 1, Infinity),
+  const schema = zod.object({
+    manufacturer: zod.string().nonempty(),
+    model: zod.string().nonempty(),
   });
 
   const { form } = createForm({
-    extend: [createValidator(), svelteReporter],
-    validateStruct: struct,
+    extend: [validator, svelteReporter],
+    validateSchema: schema,
     onSubmit(values) {
       dispatch("add", values);
       hide();
@@ -38,11 +37,19 @@
   <Form id="add-car" {form}>
     <FormGroup>
       <Label>Manufacturer</Label>
-      <TextInput name="manufacturer" id="manufacturer" />
+      <ValidationMessage for="manufacturer" let:messages>
+        <TextInput invalid={messages} name="manufacturer" id="manufacturer" />
+
+        <span class="error invalid-feedback">{messages}</span>
+      </ValidationMessage>
     </FormGroup>
     <FormGroup>
       <Label>Model</Label>
-      <TextInput name="model" id="model" />
+      <ValidationMessage for="model" let:messages>
+        <TextInput invalid={messages} name="model" id="model" />
+
+        <span class="error invalid-feedback">{messages}</span>
+      </ValidationMessage>
     </FormGroup>
   </Form>
 
