@@ -1,20 +1,23 @@
 <script context="module">
-	import {writable} from "svelte/store"
+	import { writable } from "svelte/store";
 
 	let _expansionState = writable({
 		/* treeNodeId: expanded <boolean> */
-	})
+	});
 </script>
 
 <script>
 	import {findNestedLtreePath, getParentNodePath, nodePathIsChild} from "../../helpers/tree-helpers"
-
+	//required
 	export let tree = null
 	export let treeId = null
+	export let maxExpandedDepth = 0
+	
+	export let selected
+	export let checkboxes = false
 	export let value = null
 	export let childDepth = 0
-	export let parentId = null
-	export let maxExpandedDepth = 0
+	export let parentId = null	
 	export let getId = x => x.nodePath
 	export let getParentId = x => getParentNodePath(x.nodePath)
 	export let isChild = x => nodePathIsChild(x.nodePath)
@@ -26,40 +29,53 @@
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0)
 	$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree)
 	$: expandNodes(valuePath)
+  
 	// $: console.log("Expansion state changed", $_expansionState)
 
 	function expandNodes(nodes) {
-		if (!nodes || !nodes.length)
-			return
+		if (!nodes || !nodes.length) return;
 
-		nodes.forEach(x => toggleExpansion(x, true))
+		nodes.forEach((x) => toggleExpansion(x, true));
 	}
 
 	function toggleExpansion(node, setValueTo = null) {
 		// console.log("Expansioned", node, _expansionState)
-		const nodeId = getNodeId(node)
-		_expansionState.update(x => ({
+		const nodeId = getNodeId(node);
+		_expansionState.update((x) => ({
 			...x,
-			[nodeId]: (setValueTo ?? !x[nodeId])
-		}))
+			[nodeId]: setValueTo ?? !x[nodeId],
+		}));
 	}
+  
 
 	function recomputeExpandedNodes() {
 		// tree.forEach(x => toggleExpansion(x, false))
 		// console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
 		if (childDepth < parsedMaxExpandedDepth) {
-			expandNodes(parentChildrenTree)
+			expandNodes(parentChildrenTree);
 			// console.log("Expand should happen")
 		}
 	}
+
+  function selectionChanged(nodePath) {
+    console.log(nodePath)
+    let arr = selected
+    if( arr.includes(nodePath)){
+      var index = arr.indexOf(nodePath);
+      if (index > -1) {
+      arr.splice(index, 1);
+      }
+    }
+    else{
+      arr.push(nodePath)
+    }
+    selected = arr
+  }
 </script>
 
 <ul class:child-menu={childDepth > 0}>
 	{#each parentChildrenTree as node (getNodeId(node))}
-		<li
-			class:is-child={isChild(node)}
-			class:has-children={node.hasChildren}
-		>
+		<li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
 			<div class="tree-item">
 				{#if node.hasChildren}
 					<span on:click={() => toggleExpansion(node)}>
@@ -67,24 +83,28 @@
 							class="far"
 							class:fa-minus-square={$_expansionState[getNodeId(node)]}
 							class:fa-plus-square={!$_expansionState[getNodeId(node)]}
-						>
-						</i>
+						/>
 					</span>
 				{:else}
 					<hr />
 				{/if}
-
+					{#if checkboxes}
+						<input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
+						selected={selected.includes(node.nodePath)?"checked":""} >
+					{/if}
 				<slot {node} />
 			</div>
 			<!--{@debug node}-->
 			<!--{@debug $_expansionState}-->
 			{#if $_expansionState[getNodeId(node)] && node.hasChildren}
-					<!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
+				<!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
 				<svelte:self
 					{treeId}
 					{getId}
+					{checkboxes}
 					{getParentId}
 					{maxExpandedDepth}
+					bind:selected={selected}
 					tree={tree}
 					childDepth={childDepth + 1}
 					parentId={getId(node)}
@@ -110,9 +130,9 @@
 
 		li
 			&.is-child
-				border-left: gray
-				border-left-style: dotted
-				border-left-width: 1px
+				// border-left: gray
+				// border-left-style: dotted
+				// border-left-width: 1px
 
 
 			&.has-children
@@ -124,7 +144,8 @@
 				column-gap: .8rem
 
 				hr
-					border-top: 1px dotted gray
+					// border-top: 1px dotted gray
+					border: 0px white solid
 					width: 7px
 					margin: 0
 

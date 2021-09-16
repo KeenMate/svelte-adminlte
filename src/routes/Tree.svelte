@@ -21,6 +21,7 @@
 
   $: filteredTree = filter(tree, hideGroup);
 
+  let selected= ["3",]
   let showCheckboxes = false;
   let hideGroup = 1;
   let showTree = true;
@@ -37,10 +38,7 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree</svelte:fragment>
       {#if showTree}
-        <TreeView tree={filteredTree} maxExpandedDepth="3" let:node>
-          {#if showCheckboxes}
-            Checkbox
-          {/if}
+        <TreeView tree={filteredTree} maxExpandedDepth="3" let:node bind:checkboxes={showCheckboxes} bind:selected={selected}>
           {node.title}
         </TreeView>
       {/if}
@@ -73,7 +71,15 @@
     </Card>
   </div>
   <div class="col-4">
-    <Card outline color="primary"><svelte:fragment slot="header">What's this</svelte:fragment></Card>
+    <Card outline color="primary"><svelte:fragment slot="header">Selected</svelte:fragment>
+    <ul>
+
+      {#each selected as s}
+<li>{s}</li>
+      {/each}
+    </ul>
+    
+    </Card>
   </div>
 </div>
 
