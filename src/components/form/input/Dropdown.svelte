@@ -9,6 +9,7 @@
   export let value = null;
   export let placeholder = "";
   export let readonly = false;
+  export let invalid = false;
 
   const dispatch = createEventDispatcher();
 
@@ -24,7 +25,7 @@
   function attachSelectEvent(select$) {
     select$.on("select2:select", (ev) => {
       const selectedValues = Array.from(ev.target.selectedOptions).map((x) => x.value);
-      dispatch("change", selectedValues);
+      dispatch("change", selectedValues[0]);
     });
   }
 
@@ -60,6 +61,7 @@
   bind:value
   {readonly}
   class="form-control select2 select2-hidden-accessible input-sm {$$props.class || ''}"
+  class:is-invalid={invalid}
   data-placeholder={placeholder}
   style="width: 100%;"
   tabindex="-1"

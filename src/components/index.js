@@ -20,6 +20,7 @@ export { default as FileInput } from "./form/input/FileInput.svelte";
 export { default as Multiselect } from "./form/input/Multiselect.svelte";
 export { default as Textarea } from "./form/input/Textarea.svelte";
 export { default as TextInput } from "./form/input/TextInput.svelte";
+export { default as NumberInput } from "./form/input/NumberInput.svelte";
 
 /* [2.2] Form > Structure */
 export { default as Form } from "./form/structure/Form.svelte";

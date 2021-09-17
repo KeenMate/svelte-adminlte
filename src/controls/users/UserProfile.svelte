@@ -120,6 +120,7 @@
     --height: 2.25rem;
     --multiItemBorderRadius: 8px;
     --multiSelectPadding: 0 25px 0 6px;
+    --multiItemPadding: 0 7px 0 7px;
     --multiItemHeight: 26px;
     --multiClearTop: 6px;
     --clearSelectTop: 5px;

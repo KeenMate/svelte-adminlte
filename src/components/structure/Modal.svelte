@@ -4,6 +4,7 @@
 
   export let small = false;
   export let large = false;
+  export let center = false;
 
   let modalElement = null;
 
@@ -21,7 +22,7 @@
 </script>
 
 <div bind:this={modalElement} class="modal fade in">
-  <div class="modal-dialog" class:modal-sm={small} class:modal-lg={large}>
+  <div class="modal-dialog" class:modal-sm={small} class:modal-lg={large} class:modal-dialog-centered={center}>
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">

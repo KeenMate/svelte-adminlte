@@ -1,5 +1,5 @@
 <script>
-  import { sortBy } from "lodash";
+  import { sortBy, maxBy } from "lodash";
   import { Sortable, Plugins } from "@shopify/draggable";
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
@@ -85,6 +85,23 @@
 
     order = order;
   }
+
+  function addCar({ detail: car }) {
+    console.log("adding car", car);
+
+    items.push({ title: car.manufacturer.label });
+    let newIndex = maxBy(order, "currentIndex").currentIndex;
+
+    console.log("new index", newIndex)
+
+    order.push({ currentIndex: newIndex + 1, title: car.manufacturer.label });
+
+    console.log("items", items);
+    console.log("order", order);
+
+    items = items;
+    order = order;
+  }
 </script>
 
 <!-- Favorite cars (top 5) - manufacturer, model -->
@@ -125,15 +142,19 @@
     </Card>
   </div>
 
-  <CreateCarModal bind:openModal={showCreateCar} on:add={({ detail: d }) => console.log("received new car", d)} />
+  <CreateCarModal bind:openModal={showCreateCar} on:add={addCar} />
 </div>
 
 <style lang="scss">
-  :global(.draggable--is-dragging) {
-    cursor: grabbing;
-  }
-
   .draggable-handle {
     cursor: grab;
+  }
+
+  .draggable-handle:active {
+    // cursor: grabbing;
+  }
+
+  :global(.draggable--is-dragging) {
+    cursor: grabbing;
   }
 </style>
