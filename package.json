@@ -22,6 +22,7 @@
     "esbuild": "^0.12.24",
     "felte": "^0.8.0",
     "inputmask": "^5.0.6",
+    "litepicker": "^2.0.11",
     "lodash": "^4.17.21",
     "postcss": "^8.3.6",
     "postcss-import": "^14.0.2",

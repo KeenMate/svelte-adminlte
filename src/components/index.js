@@ -12,7 +12,6 @@ export { default as PhoneField } from "./form/PhoneField.svelte";
 /* [2.1] Form > Input */
 export { default as Checkbox } from "./form/input/Checkbox.svelte";
 export { default as CkEditor } from "./form/input/CkEditor.svelte";
-export { default as DatePicker } from "./form/input/DatePicker.svelte";
 export { default as DateRangePicker } from "./form/input/DateRangePicker.svelte";
 export { default as Dropdown } from "./form/input/Dropdown.svelte";
 export { default as EmailInput } from "./form/input/EmailInput.svelte";

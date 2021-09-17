@@ -38,9 +38,6 @@ const defaultTemplate = async ({
     <title>${title}</title>
 
     <link rel="stylesheet" href="/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/css/select2.min.css">
-    <link rel="stylesheet" href="/css/select2-bootstrap4.min.css">
-    <link rel="stylesheet" href="/css/daterangepicker.min.css">
     <link rel="stylesheet" href="/css/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="/css/adminlte.min.css">
 
@@ -60,9 +57,6 @@ const defaultTemplate = async ({
     </script>
     <!-- Bootstrap 4 -->
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/select2.full.min.js"></script>
-    <script src="/js/moment-with-locales.min.js"></script>
-    <script src="/js/daterangepicker.min.js"></script>
 
     <script defer src="/js/adminlte.min.js"></script>
     ${scripts}
