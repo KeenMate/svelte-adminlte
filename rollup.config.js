@@ -71,18 +71,6 @@ export default {
 			},
 		}),
 
-		html({
-			template: template,
-			publicPath: "/admin-app/"
-		}),
-
-		copy({
-			targets: [
-				// {src: "src/assets/*", dest: "public"}
-				{ src: "./public/admin-app/index.html", dest: "./public/" }
-			]
-		}),
-
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
@@ -105,7 +93,19 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		html({
+			template: template,
+			publicPath: "/admin-app/"
+		}),
+
+		copy({
+			targets: [
+				// {src: "src/assets/*", dest: "public"}
+				{ src: "public/admin-app/index.html", dest: "./public" }
+			]
+		}),
 	],
 	watch: {
 		clearScreen: true
