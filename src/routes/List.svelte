@@ -1,6 +1,7 @@
 <script>
   import { sortBy, maxBy } from "lodash";
-  import { Sortable, Plugins } from "@shopify/draggable";
+  import Sortable from "sortablejs";
+  // import { Sortable, Plugins } from "@shopify/draggable";
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
 
@@ -32,30 +33,28 @@
 
   let showCreateCar;
 
+  const store = {
+    set(sortable) {
+      console.log("sortable set", sortable);
+      console.log("children", sortable.toArray());
+    },
+  };
+
   $: {
     if (list) {
       sortable = new Sortable(list, {
+        store,
         draggable: ".draggable-callout",
-        mirror: {
-          // appendTo: containerSelector,
-          constrainDimensions: true,
-        },
         handle: ".draggable-handle",
-        swapAnimation: {
-          duration: 200,
-          easingFunction: "ease-in-out",
-          horizontal: false,
-        },
-        plugins: [Plugins.SwapAnimation],
+        animation: 150,
+        onEnd: handleDragStop,
       });
-
-      sortable.on("sortable:stop", handleDragStop);
     }
   }
 
   function handleDragStop(event) {
-    let oldIndex = event.data.oldIndex;
-    let newIndex = event.data.newIndex;
+    let oldIndex = event.oldIndex;
+    let newIndex = event.newIndex;
 
     order.map((i) => {
       if (oldIndex < newIndex) {
@@ -92,7 +91,7 @@
     items.push({ title: car.manufacturer.label });
     let newIndex = maxBy(order, "currentIndex").currentIndex;
 
-    console.log("new index", newIndex)
+    console.log("new index", newIndex);
 
     order.push({ currentIndex: newIndex + 1, title: car.manufacturer.label });
 
@@ -117,15 +116,17 @@
       </LteButton>
 
       <div bind:this={list} id="draggable-list">
-        {#each items as item}
-          <Callout class="draggable-callout" color="info">
-            <div class="d-inline-flex">
-              <div class="draggable-handle text-muted mr-2">
-                <i class="fas fa-grip-vertical" />
+        {#each items as item, i}
+          <div data-id={i} class="draggable-callout">
+            <Callout color="info">
+              <div class="d-inline-flex">
+                <div class="draggable-handle text-muted mr-2">
+                  <i class="fas fa-grip-vertical" />
+                </div>
+                <p>{item.title}</p>
               </div>
-              <p>{item.title}</p>
-            </div>
-          </Callout>
+            </Callout>
+          </div>
         {/each}
       </div>
     </Card>
@@ -146,15 +147,15 @@
 </div>
 
 <style lang="scss">
-  .draggable-handle {
-    cursor: grab;
-  }
+  // .draggable-handle {
+  //   cursor: grab;
+  // }
 
-  .draggable-handle:active {
-    // cursor: grabbing;
-  }
+  // .draggable-handle:active {
+  //   // cursor: grabbing;
+  // }
 
-  :global(.draggable--is-dragging) {
-    cursor: grabbing;
-  }
+  // :global(.draggable--is-dragging) {
+  //   cursor: grabbing;
+  // }
 </style>

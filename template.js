@@ -1,9 +1,41 @@
+import { makeHtmlAttributes } from "@rollup/plugin-html";
 
+const defaultTemplate = async ({
+  attributes,
+  files,
+  meta,
+  publicPath,
+  title
+}) => {
+  console.log("Public path", publicPath);
+
+  const scripts = (files.js || [])
+    .map(({ fileName }) => {
+      const attrs = makeHtmlAttributes(attributes.script);
+      return `<script src="${publicPath}${fileName}"${attrs}></script>`;
+    })
+    .join('\n');
+
+  const links = (files.css || [])
+    .map(({ fileName }) => {
+      const attrs = makeHtmlAttributes(attributes.link);
+      return `<link href="${publicPath}${fileName}" rel="stylesheet"${attrs}>`;
+    })
+    .join('\n');
+
+  const metas = meta
+    .map((input) => {
+      const attrs = makeHtmlAttributes(input);
+      return `<meta${attrs}>`;
+    })
+    .join('\n');
+
+  return `
 <!doctype html>
-<html lang="en">
+<html${makeHtmlAttributes(attributes.html)}>
   <head>
-    <meta charset="utf-8">
-    <title>Rollup Bundle</title>
+    ${metas}
+    <title>${title}</title>
 
     <link rel="stylesheet" href="/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/css/select2.min.css">
@@ -12,7 +44,7 @@
     <link rel="stylesheet" href="/css/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="/css/adminlte.min.css">
 
-    <link href="/admin-app/bundle.css" rel="stylesheet">
+    ${links}
   </head>
   <body class="sidebar-mini">
   	<div id="app"></div>
@@ -33,6 +65,9 @@
     <script src="/js/daterangepicker.min.js"></script>
 
     <script defer src="/js/adminlte.min.js"></script>
-    <script src="/admin-app/bundle.js"></script>
+    ${scripts}
   </body>
-</html>
+</html>`;
+};
+
+export default defaultTemplate;

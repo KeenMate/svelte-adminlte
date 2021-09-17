@@ -1,3 +1,7 @@
-admin-app/bundle.js
-admin-app/bundle.js.map
-admin-app/bundle.css
+bundle.*.js
+bundle.*.js.map
+bundle.*.css
+
+bundle.js
+bundle.js.map
+bundle.css

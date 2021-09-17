@@ -2,15 +2,16 @@ import svelte from "rollup-plugin-svelte"
 import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import replace from "@rollup/plugin-replace"
+import html from '@rollup/plugin-html';
 import esbuild from "rollup-plugin-esbuild"
-import css from "rollup-plugin-css-only";
+import postcss from "rollup-plugin-postcss";
 import livereload from 'rollup-plugin-livereload';
-import {terser} from "rollup-plugin-terser"
+import { terser } from "rollup-plugin-terser"
 import copy from "rollup-plugin-copy"
-import sveltePreprocess from "svelte-preprocess"
+import sveltePreprocess from "svelte-preprocess";
+import template from "./template";
 
 const production = process.env.NODE_ENV === "prod"
-
 
 function serve() {
 	let server;
@@ -39,8 +40,9 @@ export default {
 	output: {
 		sourcemap: !production,
 		format: "iife",
-		name: "app",
-		file: "public/admin-app/bundle.js",
+		name: "bundle",
+		dir: "public/admin-app",
+		entryFileNames: production ? "bundle.[hash].js" : "bundle.js",
 		globals: {
 			"jquery": "jQuery",
 			"toastr": "toastr"
@@ -57,16 +59,27 @@ export default {
 				dev: !production
 			},
 			preprocess: sveltePreprocess({
-				emitCss: true
-			})
+				// emitCss: true
+				postcss: true
+			}),
+			onwarn() { }
 		}),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({output: "bundle.css"}),
+		postcss({
+			extract: true,
+			config: {
+				path: "./postcss.config.js",
+			},
+		}),
+
+		html({
+			template: template,
+			publicPath: "/admin-app/"
+		}),
 
 		copy({
 			targets: [
 				// {src: "src/assets/*", dest: "public"}
+				{ src: "./public/admin-app/index.html", dest: "./public/" }
 			]
 		}),
 
@@ -74,7 +87,7 @@ export default {
 			browser: true,
 			dedupe: ['svelte']
 		}),
-		
+
 		commonjs(),
 
 		esbuild({
