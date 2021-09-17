@@ -41,7 +41,7 @@ export default {
 		sourcemap: !production,
 		format: "iife",
 		name: "bundle",
-		dir: "public/admin-app",
+		dir: "public",
 		entryFileNames: production ? "bundle.[hash].js" : "bundle.js",
 		globals: {
 			"jquery": "jQuery",
@@ -97,13 +97,12 @@ export default {
 
 		html({
 			template: template,
-			publicPath: "/admin-app/"
 		}),
 
 		copy({
 			targets: [
 				// {src: "src/assets/*", dest: "public"}
-				{ src: "public/admin-app/index.html", dest: "./public" }
+				// { src: "public/admin-app/index.html", dest: "./public" }
 			]
 		}),
 	],
