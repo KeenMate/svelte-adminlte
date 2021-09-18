@@ -1,9 +1,11 @@
 <script>
   import { sortBy, maxBy } from "lodash";
-  import Sortable from "sortablejs";
+  import { Sortable, MultiDrag } from "sortablejs";
   // import { Sortable, Plugins } from "@shopify/draggable";
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
+
+  Sortable.mount(new MultiDrag());
 
   let items = [
     {
@@ -44,6 +46,9 @@
     if (list) {
       sortable = new Sortable(list, {
         store,
+        multiDrag: true,
+        selectedClass: "draggable-selected",
+        // multiDragKey: "CTRL",
         draggable: ".draggable-callout",
         handle: ".draggable-handle",
         animation: 150,
@@ -158,4 +163,10 @@
   // :global(.draggable--is-dragging) {
   //   cursor: grabbing;
   // }
+
+  :global {
+    .draggable-selected > .callout {
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+  }
 </style>
