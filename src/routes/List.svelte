@@ -152,18 +152,6 @@
 </div>
 
 <style lang="scss">
-  // .draggable-handle {
-  //   cursor: grab;
-  // }
-
-  // .draggable-handle:active {
-  //   // cursor: grabbing;
-  // }
-
-  // :global(.draggable--is-dragging) {
-  //   cursor: grabbing;
-  // }
-
   :global {
     .draggable-selected > .callout {
       background-color: rgba(255, 0, 0, 0.2);
