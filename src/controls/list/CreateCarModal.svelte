@@ -15,6 +15,7 @@
   let show;
   let hide;
   let showErrorAlert = false;
+  let oldManufacturer = "";
 
   const manufacturers = [
     { value: "toyota", label: "Toyota" },
@@ -83,6 +84,13 @@
 
   $: if ($isValid) {
     showErrorAlert = false;
+  }
+
+  $: {
+    if ($data.manufacturer.value != oldManufacturer) {
+      $data.model = "";
+      oldManufacturer = $data.manufacturer.value;
+    }
   }
 
   export function openModal() {
