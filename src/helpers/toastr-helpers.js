@@ -1,4 +1,7 @@
 import toastr from "toastr"
+import { getConfig } from "../config"
+
+let config = getConfig();
 
 toastr.options = {
 	"closeButton": false,
@@ -10,8 +13,8 @@ toastr.options = {
 	"onclick": null,
 	"showDuration": "300",
 	"hideDuration": "1000",
-	"timeOut": "3000",
-	"extendedTimeOut": "1000",
+	"timeOut": config.ToastTimeOut,
+	"extendedTimeOut": config.ToastExtendedTimeOut,
 	"showEasing": "swing",
 	"hideEasing": "linear",
 	"showMethod": "fadeIn",

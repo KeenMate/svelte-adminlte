@@ -1,4 +1,7 @@
 <script>
+  import { onMount } from "svelte";
+  import toastr from "../helpers/toastr-helpers";
+
   import { Checkbox, Card } from "../components";
   import LteSwitch from "../components/form/input/LteSwitch.svelte";
   import Radio from "../components/form/input/Radio.svelte";
@@ -29,7 +32,10 @@
     return tree.filter((t) => !t.nodePath.startsWith(hide.toString()));
   }
 
-  // jquery("[name='my-checkbox']").bootstrapSwitch();
+  onMount(() => {
+    toastr.success("Hello there");
+    console.log("Called toastr", toastr);
+  });
 </script>
 
 <div class="row">

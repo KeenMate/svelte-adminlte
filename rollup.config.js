@@ -6,9 +6,10 @@ import html from '@rollup/plugin-html';
 import esbuild from "rollup-plugin-esbuild"
 import postcss from "rollup-plugin-postcss";
 import livereload from 'rollup-plugin-livereload';
-import { terser } from "rollup-plugin-terser"
 import copy from "rollup-plugin-copy"
 import sveltePreprocess from "svelte-preprocess";
+import dotenv from "rollup-plugin-dotenv";
+
 import template from "./template";
 
 const production = process.env.NODE_ENV === "prod"
@@ -34,7 +35,6 @@ function serve() {
 	};
 }
 
-
 export default {
 	input: "src/main.js",
 	output: {
@@ -45,14 +45,18 @@ export default {
 		entryFileNames: production ? "bundle.[hash].js" : "bundle.js",
 		globals: {
 			"jquery": "jQuery",
-			"toastr": "toastr"
+			// "toastr": "toastr"
 		}
 	},
-	external: ["jquery", "toastr"],
+	external: [
+		"jquery",
+		// "toastr"
+	],
 	plugins: [
-		replace({
-			values: {}
-		}),
+		dotenv(),
+		// replace({
+		// 	values: {}
+		// }),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production

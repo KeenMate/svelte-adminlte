@@ -1,5 +1,6 @@
-import App from "./App.svelte"
+import 'toastr/build/toastr.css';
 
+import App from "./App.svelte"
 
 // import "./assets/overrides.css"
 // import "./assets/loader.css"
