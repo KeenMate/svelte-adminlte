@@ -5,7 +5,7 @@
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
 
-  Sortable.mount(new MultiDrag());
+  // Sortable.mount(new MultiDrag());
 
   let items = [
     {
