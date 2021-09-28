@@ -1,7 +1,13 @@
+
+
 const defaultConfig = {
   ToastTimeOut: process.env.TOAST_TIME_OUT,
   ToastExtendedTimeOut: process.env.TOAST_EXTENDED_TIMEOUT,
-  Foo: "Ahoj"
+  DateFormat: "D",
+  DateTimeFormat: "f",
+  TimeFormat: "t" ,
+  ReverseDateFormat: "yyyy-LL-dd",
+  ReverseDateTimeFormat: "yyyy-LL-dd_HH-mm-ss",
 };
 
 let currentConfig = defaultConfig

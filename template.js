@@ -7,8 +7,6 @@ const defaultTemplate = async ({
   publicPath,
   title
 }) => {
-  console.log("Public path", publicPath);
-
   const scripts = (files.js || [])
     .map(({ fileName }) => {
       const attrs = makeHtmlAttributes(attributes.script);
@@ -39,7 +37,7 @@ const defaultTemplate = async ({
 
     <link rel="stylesheet" href="/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/css/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/css/adminlte.min.css">
+    <!-- <link rel="stylesheet" href="/css/adminlte.min.css"> -->
 
     ${links}
   </head>
@@ -58,7 +56,7 @@ const defaultTemplate = async ({
     <!-- Bootstrap 4 -->
     <script src="/js/bootstrap.bundle.min.js"></script>
 
-    <script defer src="/js/adminlte.min.js"></script>
+    <!-- <script defer src="/js/adminlte.min.js"></script> -->
     ${scripts}
   </body>
 </html>`;

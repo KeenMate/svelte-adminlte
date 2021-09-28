@@ -2,6 +2,7 @@
   import { onMount, setContext } from "svelte";
   import { get } from "svelte/store";
   import Router from "svelte-spa-router";
+  import keymage from "keymage";
 
   import routes from "./routes";
 
@@ -13,6 +14,7 @@
   import PageHeader from "./components/structure/PageHeader.svelte";
   import Sidebar from "./components/structure/navigation/Sidebar.svelte";
   import Loader from "./components/ui/Loader.svelte";
+  import MessageLog from "./controls/modals/MessageLog.svelte";
 
   $: if ($darkTheme) {
     document.body.classList.remove("skin-black");
@@ -31,9 +33,12 @@
 
   onMount(() => {
     applySidebarOpenState();
+
+    keymage("ctrl-0", () => showLog());
   });
 
   let loading = false;
+  let showLog;
 
   setContext("loader", {
     setLoading: (val) => (loading = val),
@@ -57,4 +62,6 @@
       <Router {routes} />
     </div>
   </div>
+
+  <MessageLog bind:show={showLog} />
 </div>

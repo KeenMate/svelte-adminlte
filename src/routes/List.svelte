@@ -1,11 +1,18 @@
 <script>
   import { sortBy, maxBy } from "lodash";
   import { Sortable, MultiDrag } from "sortablejs";
+  import { onMount } from "svelte";
   // import { Sortable, Plugins } from "@shopify/draggable";
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
 
-  // Sortable.mount(new MultiDrag());
+  onMount(() => {
+    try {
+      Sortable.mount(new MultiDrag());
+    } catch (err) {
+      throw err
+    }
+  });
 
   let items = [
     {
