@@ -77,7 +77,7 @@
 
   function deleteSelected(recursiv) {
 	  if(recursiv)
-	  	selected=[]
+	  selected=[]
   }
 
 </script>

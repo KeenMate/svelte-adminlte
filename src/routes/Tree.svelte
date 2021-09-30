@@ -25,7 +25,7 @@
   $: filteredTree = filter(tree, hideGroup);
 
   let selected= ["3",]
-  let showCheckboxes = false;
+  let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
   let recursiv = false
