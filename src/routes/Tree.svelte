@@ -28,6 +28,7 @@
   let showCheckboxes = false;
   let hideGroup = 1;
   let showTree = true;
+  let recursiv = false
 
   function filter(tree, hide) {
     return tree.filter((t) => !t.nodePath.startsWith(hide.toString()));
@@ -44,7 +45,7 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree</svelte:fragment>
       {#if showTree}
-        <TreeView tree={filteredTree} maxExpandedDepth="3" let:node bind:checkboxes={showCheckboxes} bind:selected={selected}>
+        <TreeView  {recursiv} tree={filteredTree} maxExpandedDepth="3" let:node bind:checkboxes={showCheckboxes} bind:selected={selected}>
           {node.title}
         </TreeView>
       {/if}
@@ -56,6 +57,11 @@
       <FormGroup>
         <Checkbox level="danger" name="show-checkboxes" id="show-checkboxes" bind:checked={showCheckboxes}>
           <Label inputId="show-checkboxes">Show checkboxes</Label>
+        </Checkbox>
+      </FormGroup>
+      <FormGroup>
+        <Checkbox level="danger" name="recursive-selection" id="recursive-selection" bind:checked={recursiv}>
+          <Label inputId="recursive-selection">recursive selection</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>

@@ -11,6 +11,8 @@
     findNestedLtreePath,
     getParentNodePath,
     nodePathIsChild,
+	ChangeSelection,
+	hasChildren
   } from "../../helpers/tree-helpers";
   //import Checkbox from "../form/input/Checkbox.svelte";
   //required
@@ -19,6 +21,7 @@
   export let maxExpandedDepth = 0;
 
   export let selected;
+  export let recursiv = false;
   export let checkboxes = false;
   export let value = null;
   export let childDepth = 0;
@@ -36,6 +39,9 @@
   $: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
   $: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
   $: expandNodes(valuePath);
+  $: selected
+  $: deleteSelected(recursiv)
+
 
   // $: console.log("Expansion state changed", $_expansionState)
 
@@ -63,19 +69,17 @@
     }
   }
 
+  //checkboxes
   function selectionChanged(nodePath) {
     console.log(nodePath);
-    let arr = selected;
-    if (arr.includes(nodePath)) {
-      var index = arr.indexOf(nodePath);
-      if (index > -1) {
-        arr.splice(index, 1);
-      }
-    } else {
-      arr.push(nodePath);
-    }
-    selected = arr;
+	selected = ChangeSelection(recursiv,tree,nodePath,selected)
   }
+
+  function deleteSelected(recursiv) {
+	  if(recursiv)
+	  	selected=[]
+  }
+
 </script>
 
 <ul class:child-menu={childDepth > 0}>
@@ -94,15 +98,15 @@
           <hr />
         {/if}
         {#if checkboxes}
-          <!-- <Checkbox
-            selected={selected.includes(node.nodePath)}
-            on:click={() => selectionChanged(node.nodePath)}
-			id={node.nodePath}
-			disabled="false"
-          /> -->
-          <input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
-						checked={(selected.includes(node.nodePath)?"false":"")} >
-        {/if}
+			{#if (recursiv && !hasChildren(tree,node.nodePath)) || (!recursiv)}
+          		<input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
+					checked={(selected.includes(node.nodePath)?"false":"")} >
+						
+			{:else}
+				<input type="checkbox"  id="{node.nodePath}" 
+				onclick="return false;" >
+        	{/if}
+		{/if}
         <slot {node} />
       </div>
       <!--{@debug node}-->
@@ -117,6 +121,7 @@
           {maxExpandedDepth}
           bind:selected
           {tree}
+		  {recursiv}
           childDepth={childDepth + 1}
           parentId={getId(node)}
           let:node={nodeNested}
