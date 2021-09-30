@@ -1,120 +1,131 @@
 <script context="module">
-	import { writable } from "svelte/store";
+  import { writable } from "svelte/store";
 
-	let _expansionState = writable({
-		/* treeNodeId: expanded <boolean> */
-	});
+  let _expansionState = writable({
+    /* treeNodeId: expanded <boolean> */
+  });
 </script>
 
 <script>
-	import {findNestedLtreePath, getParentNodePath, nodePathIsChild} from "../../helpers/tree-helpers"
-	//required
-	export let tree = null
-	export let treeId = null
-	export let maxExpandedDepth = 0
-	
-	export let selected
-	export let checkboxes = false
-	export let value = null
-	export let childDepth = 0
-	export let parentId = null	
-	export let getId = x => x.nodePath
-	export let getParentId = x => getParentNodePath(x.nodePath)
-	export let isChild = x => nodePathIsChild(x.nodePath)
+  import {
+    findNestedLtreePath,
+    getParentNodePath,
+    nodePathIsChild,
+  } from "../../helpers/tree-helpers";
+  //import Checkbox from "../form/input/Checkbox.svelte";
+  //required
+  export let tree = null;
+  export let treeId = null;
+  export let maxExpandedDepth = 0;
 
-	const getNodeId = node => `${treeId}-${getId(node)}`
+  export let selected;
+  export let checkboxes = false;
+  export let value = null;
+  export let childDepth = 0;
+  export let parentId = null;
+  export let getId = (x) => x.nodePath;
+  export let getParentId = (x) => getParentNodePath(x.nodePath);
+  export let isChild = (x) => nodePathIsChild(x.nodePath);
 
-	$: parentChildrenTree = (tree || []).filter(x => !parentId ? !isChild(x) : getParentId(x) === parentId)
-	$: valuePath = findNestedLtreePath(tree, value)
-	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0)
-	$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree)
-	$: expandNodes(valuePath)
-  
-	// $: console.log("Expansion state changed", $_expansionState)
+  const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
-	function expandNodes(nodes) {
-		if (!nodes || !nodes.length) return;
+  $: parentChildrenTree = (tree || []).filter((x) =>
+    !parentId ? !isChild(x) : getParentId(x) === parentId
+  );
+  $: valuePath = findNestedLtreePath(tree, value);
+  $: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
+  $: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
+  $: expandNodes(valuePath);
 
-		nodes.forEach((x) => toggleExpansion(x, true));
-	}
+  // $: console.log("Expansion state changed", $_expansionState)
 
-	function toggleExpansion(node, setValueTo = null) {
-		// console.log("Expansioned", node, _expansionState)
-		const nodeId = getNodeId(node);
-		_expansionState.update((x) => ({
-			...x,
-			[nodeId]: setValueTo ?? !x[nodeId],
-		}));
-	}
-  
+  function expandNodes(nodes) {
+    if (!nodes || !nodes.length) return;
 
-	function recomputeExpandedNodes() {
-		// tree.forEach(x => toggleExpansion(x, false))
-		// console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
-		if (childDepth < parsedMaxExpandedDepth) {
-			expandNodes(parentChildrenTree);
-			// console.log("Expand should happen")
-		}
-	}
+    nodes.forEach((x) => toggleExpansion(x, true));
+  }
+
+  function toggleExpansion(node, setValueTo = null) {
+    // console.log("Expansioned", node, _expansionState)
+    const nodeId = getNodeId(node);
+    _expansionState.update((x) => ({
+      ...x,
+      [nodeId]: setValueTo ?? !x[nodeId],
+    }));
+  }
+
+  function recomputeExpandedNodes() {
+    // tree.forEach(x => toggleExpansion(x, false))
+    // console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
+    if (childDepth < parsedMaxExpandedDepth) {
+      expandNodes(parentChildrenTree);
+      // console.log("Expand should happen")
+    }
+  }
 
   function selectionChanged(nodePath) {
-    console.log(nodePath)
-    let arr = selected
-    if( arr.includes(nodePath)){
+    console.log(nodePath);
+    let arr = selected;
+    if (arr.includes(nodePath)) {
       var index = arr.indexOf(nodePath);
       if (index > -1) {
-      arr.splice(index, 1);
+        arr.splice(index, 1);
       }
+    } else {
+      arr.push(nodePath);
     }
-    else{
-      arr.push(nodePath)
-    }
-    selected = arr
+    selected = arr;
   }
 </script>
 
 <ul class:child-menu={childDepth > 0}>
-	{#each parentChildrenTree as node (getNodeId(node))}
-		<li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
-			<div class="tree-item">
-				{#if node.hasChildren}
-					<span on:click={() => toggleExpansion(node)}>
-						<i
-							class="far"
-							class:fa-minus-square={$_expansionState[getNodeId(node)]}
-							class:fa-plus-square={!$_expansionState[getNodeId(node)]}
-						/>
-					</span>
-				{:else}
-					<hr />
-				{/if}
-					{#if checkboxes}
-						<input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
-						selected={selected.includes(node.nodePath)?"checked":""} >
-					{/if}
-				<slot {node} />
-			</div>
-			<!--{@debug node}-->
-			<!--{@debug $_expansionState}-->
-			{#if $_expansionState[getNodeId(node)] && node.hasChildren}
-				<!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
-				<svelte:self
-					{treeId}
-					{getId}
-					{checkboxes}
-					{getParentId}
-					{maxExpandedDepth}
-					bind:selected={selected}
-					tree={tree}
-					childDepth={childDepth + 1}
-					parentId={getId(node)}
-					let:node={nodeNested}
-				>
-					<slot node={nodeNested} />
-				</svelte:self>
-			{/if}
-		</li>
-	{/each}
+  {#each parentChildrenTree as node (getNodeId(node))}
+    <li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
+      <div class="tree-item">
+        {#if node.hasChildren}
+          <span on:click={() => toggleExpansion(node)}>
+            <i
+              class="far"
+              class:fa-minus-square={$_expansionState[getNodeId(node)]}
+              class:fa-plus-square={!$_expansionState[getNodeId(node)]}
+            />
+          </span>
+        {:else}
+          <hr />
+        {/if}
+        {#if checkboxes}
+          <!-- <Checkbox
+            selected={selected.includes(node.nodePath)}
+            on:click={() => selectionChanged(node.nodePath)}
+			id={node.nodePath}
+			disabled="false"
+          /> -->
+          <input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
+						checked={(selected.includes(node.nodePath)?"false":"")} >
+        {/if}
+        <slot {node} />
+      </div>
+      <!--{@debug node}-->
+      <!--{@debug $_expansionState}-->
+      {#if $_expansionState[getNodeId(node)] && node.hasChildren}
+        <!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
+        <svelte:self
+          {treeId}
+          {getId}
+          {checkboxes}
+          {getParentId}
+          {maxExpandedDepth}
+          bind:selected
+          {tree}
+          childDepth={childDepth + 1}
+          parentId={getId(node)}
+          let:node={nodeNested}
+        >
+          <slot node={nodeNested} />
+        </svelte:self>
+      {/if}
+    </li>
+  {/each}
 </ul>
 
 <style lang="sass">
