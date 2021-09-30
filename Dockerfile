@@ -9,5 +9,3 @@ FROM caddy
 
 WORKDIR /web
 COPY --from=releaser /repo/public/ ./
-
-CMD ["caddy", "file-server", "-root=/web"]

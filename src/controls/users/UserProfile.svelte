@@ -45,17 +45,31 @@
     <div class="col-6">
       <FormGroup>
         <Label class="pb-1">Gender</Label>
-        <Dropdown bind:value={user.gender}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </Dropdown>
+        <SvelteSelect
+          items={[
+            { value: "male", label: "Male" },
+            { value: "female", label: "Female" },
+            { value: "other", label: "Other" },
+          ]}
+        />
       </FormGroup>
     </div>
     <div class="col-6">
       <FormGroup>
         <Label class="pb-1">Birth date</Label>
-        <DateRangePicker
+
+        <DateRangePicker startDate={user.birthDay} inputElement={dateRangePickerElement}>
+          <InputGroup>
+            <InputGroupPrepend>
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt" />
+              </span>
+            </InputGroupPrepend>
+            <TextInput bind:inputElement={dateRangePickerElement} />
+          </InputGroup>
+        </DateRangePicker>
+
+        <!-- <DateRangePicker
           startDate={user.birthDay}
           singleDatePicker
           inputElement={dateRangePickerElement}
@@ -69,7 +83,7 @@
             </InputGroupPrepend>
             <TextInput bind:inputElement={dateRangePickerElement} />
           </InputGroup>
-        </DateRangePicker>
+        </DateRangePicker> -->
       </FormGroup>
     </div>
   </div>
@@ -120,6 +134,7 @@
     --height: 2.25rem;
     --multiItemBorderRadius: 8px;
     --multiSelectPadding: 0 25px 0 6px;
+    --multiItemPadding: 0 7px 0 7px;
     --multiItemHeight: 26px;
     --multiClearTop: 6px;
     --clearSelectTop: 5px;

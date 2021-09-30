@@ -25,7 +25,7 @@
   bind:value
   class="form-control input-sm {$$props.class || ''}"
   class:is-invalid={invalid}
-  type="text"
+  type="number"
   data-inputmask={inputMask || ""}
   {id}
   {name}

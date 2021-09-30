@@ -1,47 +1,36 @@
 <script>
-  import { createForm } from "felte";
+  import LteButton from "../components/ui/LteButton.svelte";
+  import { getConfig, setConfig } from "../config";
 
-  import {
-    FormGroup,
-    TextInput,
-    Form,
-    InputGroup,
-    InputGroupAppend,
-    Label,
-    LteButton,
-    Dropdown,
-  } from "../components";
-
-  const { form } = createForm({
-    onSubmit: async (val) => console.log(val),
-  });
+  import notification from "../providers/notificationProvider";
 </script>
 
-<Form horizontal {form}>
-  <FormGroup row>
-    <Label class="col-form-label col-sm-3" inputId="name">Name</Label>
-    <div class="col-sm-9">
-      <InputGroup>
-        <TextInput id="name" name="name" />
-        <InputGroupAppend>
-          <LteButton small>Go!</LteButton>
-        </InputGroupAppend>
-      </InputGroup>
-    </div>
-  </FormGroup>
+Root
 
-  <FormGroup row>
-    <Label class="col-form-label col-sm-3" inputId="name">Name</Label>
-    <div class="col-sm-9">
-      <InputGroup>
-        <Dropdown value="">
-          <option>Option 1</option>
-          <option>Option 1</option>
-        </Dropdown>
-        <InputGroupAppend>
-          <LteButton small>Go!</LteButton>
-        </InputGroupAppend>
-      </InputGroup>
-    </div>
-  </FormGroup>
-</Form>
+<LteButton
+  on:click={() => {
+    setConfig({ Foo: "Henlo" });
+  }}
+>
+  Set config
+</LteButton>
+
+<LteButton
+  on:click={() => {
+    let arr = null;
+
+    console.log(arr.abc);
+  }}
+>
+  Throw
+</LteButton>
+
+<LteButton
+  on:click={() =>
+    notification.success(
+      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet maximus ex, et lacinia est. Nullam sed orci lectus. Vivamus id arcu mauris. Ut posuere aliquam ex vel elementum. Nam aliquet non nisi sed consectetur. Quisque varius ut magna nec iaculis. Cras volutpat augue pharetra ultricies hendrerit. Ut laoreet convallis dui. Proin dapibus iaculis turpis, in posuere nulla pulvinar id. ",
+      "Notification title"
+    )}
+>
+  Notify me
+</LteButton>

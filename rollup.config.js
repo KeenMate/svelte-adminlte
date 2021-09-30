@@ -2,15 +2,17 @@ import svelte from "rollup-plugin-svelte"
 import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import replace from "@rollup/plugin-replace"
+import html from '@rollup/plugin-html';
 import esbuild from "rollup-plugin-esbuild"
-import css from "rollup-plugin-css-only";
+import postcss from "rollup-plugin-postcss";
 import livereload from 'rollup-plugin-livereload';
-import {terser} from "rollup-plugin-terser"
 import copy from "rollup-plugin-copy"
-import sveltePreprocess from "svelte-preprocess"
+import sveltePreprocess from "svelte-preprocess";
+import dotenv from "rollup-plugin-dotenv";
+
+import template from "./template";
 
 const production = process.env.NODE_ENV === "prod"
-
 
 function serve() {
 	let server;
@@ -33,48 +35,51 @@ function serve() {
 	};
 }
 
-
 export default {
 	input: "src/main.js",
 	output: {
 		sourcemap: !production,
 		format: "iife",
-		name: "app",
-		file: "public/admin-app/bundle.js",
+		name: "bundle",
+		dir: "public",
+		entryFileNames: production ? "bundle.[hash].js" : "bundle.js",
 		globals: {
 			"jquery": "jQuery",
-			"toastr": "toastr"
+			// "toastr": "toastr"
 		}
 	},
-	external: ["jquery", "toastr"],
+	external: [
+		"jquery",
+		// "toastr"
+	],
 	plugins: [
-		replace({
-			values: {}
-		}),
+		dotenv(),
+		// replace({
+		// 	values: {}
+		// }),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
 			},
 			preprocess: sveltePreprocess({
-				emitCss: true
-			})
+				// emitCss: true
+				postcss: true
+			}),
+			onwarn() { }
 		}),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({output: "bundle.css"}),
-
-		copy({
-			targets: [
-				// {src: "src/assets/*", dest: "public"}
-			]
+		postcss({
+			extract: true,
+			config: {
+				path: "./postcss.config.js",
+			},
 		}),
 
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
 		}),
-		
+
 		commonjs(),
 
 		esbuild({
@@ -92,7 +97,18 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		// production && terser(),
+
+		html({
+			template: template,
+		}),
+
+		copy({
+			targets: [
+				// {src: "src/assets/*", dest: "public"}
+				// { src: "public/admin-app/index.html", dest: "./public" }
+			]
+		}),
 	],
 	watch: {
 		clearScreen: true

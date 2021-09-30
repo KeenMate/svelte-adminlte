@@ -1,8 +1,18 @@
 <script>
-  import { sortBy } from "lodash";
-  import { Sortable, Plugins } from "@shopify/draggable";
+  import { sortBy, maxBy } from "lodash";
+  import { Sortable, MultiDrag } from "sortablejs";
+  import { onMount } from "svelte";
+  // import { Sortable, Plugins } from "@shopify/draggable";
   import { Card, Callout, LteButton } from "../components";
   import CreateCarModal from "../controls/list/CreateCarModal.svelte";
+
+  onMount(() => {
+    try {
+      Sortable.mount(new MultiDrag());
+    } catch (err) {
+      throw err
+    }
+  });
 
   let items = [
     {
@@ -32,29 +42,31 @@
 
   let showCreateCar;
 
+  const store = {
+    set(sortable) {
+      console.log("sortable set", sortable);
+      console.log("children", sortable.toArray());
+    },
+  };
+
   $: {
     if (list) {
       sortable = new Sortable(list, {
+        store,
+        multiDrag: true,
+        selectedClass: "draggable-selected",
+        // multiDragKey: "CTRL",
         draggable: ".draggable-callout",
-        mirror: {
-          // appendTo: containerSelector,
-          constrainDimensions: true,
-        },
-        swapAnimation: {
-          duration: 200,
-          easingFunction: "ease-in-out",
-          horizontal: false,
-        },
-        plugins: [Plugins.SwapAnimation],
+        handle: ".draggable-handle",
+        animation: 150,
+        onEnd: handleDragStop,
       });
-
-      sortable.on("sortable:stop", handleDragStop);
     }
   }
 
   function handleDragStop(event) {
-    let oldIndex = event.data.oldIndex;
-    let newIndex = event.data.newIndex;
+    let oldIndex = event.oldIndex;
+    let newIndex = event.newIndex;
 
     order.map((i) => {
       if (oldIndex < newIndex) {
@@ -84,6 +96,23 @@
 
     order = order;
   }
+
+  function addCar({ detail: car }) {
+    console.log("adding car", car);
+
+    items.push({ title: car.manufacturer.label });
+    let newIndex = maxBy(order, "currentIndex").currentIndex;
+
+    console.log("new index", newIndex);
+
+    order.push({ currentIndex: newIndex + 1, title: car.manufacturer.label });
+
+    console.log("items", items);
+    console.log("order", order);
+
+    items = items;
+    order = order;
+  }
 </script>
 
 <!-- Favorite cars (top 5) - manufacturer, model -->
@@ -99,8 +128,17 @@
       </LteButton>
 
       <div bind:this={list} id="draggable-list">
-        {#each items as item}
-          <Callout class="draggable-callout" color="info">{item.title}</Callout>
+        {#each items as item, i}
+          <div data-id={i} class="draggable-callout">
+            <Callout color="info">
+              <div class="d-inline-flex">
+                <div class="draggable-handle text-muted mr-2">
+                  <i class="fas fa-grip-vertical" />
+                </div>
+                <p>{item.title}</p>
+              </div>
+            </Callout>
+          </div>
         {/each}
       </div>
     </Card>
@@ -117,5 +155,13 @@
     </Card>
   </div>
 
-  <CreateCarModal bind:openModal={showCreateCar} on:add={({ detail: d }) => console.log("received new car", d)} />
+  <CreateCarModal bind:openModal={showCreateCar} on:add={addCar} />
 </div>
+
+<style lang="scss">
+  :global {
+    .draggable-selected > .callout {
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+  }
+</style>
