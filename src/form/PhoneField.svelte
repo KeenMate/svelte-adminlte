@@ -24,8 +24,6 @@
   }
 
   function updatePhonePrefix(thePhone) {
-    console.log("Updating phone prefix", thePhone);
-
     if (!thePhone) return "";
 
     const [_, match] = new RegExp(/^(\+\d{1,3})?/).exec(thePhone);

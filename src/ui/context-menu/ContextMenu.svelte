@@ -34,7 +34,6 @@
 	`
 
 	function onBodyClick(_ev) {
-		console.log("Body clicked")
 		if (!contextMenuVisible)
 			return
 

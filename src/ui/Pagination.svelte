@@ -12,9 +12,6 @@
   $: rightBorder = Math.min(page + visiblePagesCount, pages);
   $: visiblePages = visiblePageArray(leftBorder, rightBorder);
 
-  $: console.log("left", leftBorder);
-  $: console.log("right", rightBorder);
-
   function visiblePageArray(leftBorder, rightBorder) {
     const offset = Math.floor((visiblePagesCount - 1) / 2);
     const buffer = [];

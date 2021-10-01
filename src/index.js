@@ -4,6 +4,8 @@ import "admin-lte/build/scss/adminlte.scss";
 import "toastr/build/toastr.css";
 import "admin-lte/dist/js/adminlte";
 
+export { getConfig, setConfig } from "./config";
+
 /* [1] Alerts */
 export { default as BaseAlert } from "./alerts/BaseAlert.svelte";
 export { default as DangerAlert } from "./alerts/DangerAlert.svelte";
@@ -92,3 +94,6 @@ export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte";
 export { default as ContextMenuDivider } from "./ui/context-menu/ContextMenuDivider.svelte";
 export { default as ContextMenuEntry } from "./ui/context-menu/ContextMenuEntry.svelte";
 export { default as ContextMenuLabel } from "./ui/context-menu/ContextMenuLabel.svelte";
+
+/* [7] Toasts */
+export { default as Toastr } from "./toasts/toastr";
