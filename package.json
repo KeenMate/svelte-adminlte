@@ -7,7 +7,6 @@
   },
   "svelte": "src/index.js",
   "module": "dist/index.esm.js",
-  "main": "dist/index.umd.js",
   "files": [
     "src",
     "dist"
