@@ -10,7 +10,7 @@
   import TreeView from "../components/ui/TreeView.svelte";
 
   const tree = [
-    { nodePath: "1", title: "1" },
+    { nodePath: "1", title: "FIRST" },
     { nodePath: "2", title: "2" },
 
     { nodePath: "3", title: "3", hasChildren: true },
@@ -20,6 +20,16 @@
     { nodePath: "3.2.1", title: "3.2.1", hasChildren: true },
 
     { nodePath: "3.2.1.1", title: "3.2.1.1" },
+    { nodePath: "4", title: "1" },
+    { nodePath: "5", title: "2" },
+
+    { nodePath: "6", title: "3", hasChildren: true },
+    { nodePath: "6.1", title: "3.1" },
+    { nodePath: "6.2", title: "3.2", hasChildren: true },
+
+    { nodePath: "6.1.1", title: "3.2.1", hasChildren: true },
+
+    { nodePath: "6.1.1.1", title: "3.2.1.1" },
   ];
 
   $: filteredTree = filter(tree, hideGroup);
