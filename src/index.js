@@ -54,13 +54,13 @@ export { default as PageHeader } from "./structure/PageHeader.svelte";
 export { default as BrandNavLogo } from "./structure/navigation/BrandNavLogo.svelte";
 export { default as BrandNavLogoSidebar } from "./structure/navigation/BrandNavLogoSidebar.svelte";
 export { default as MobileNavToggle } from "./structure/navigation/MobileNavToggle.svelte";
-export { default as NavItem } from "./structure/navigation/NavItem.svelte";
 export { default as Sidebar } from "./structure/navigation/Sidebar.svelte";
+export { default as SidebarNavItem } from "./structure/navigation/NavItem.svelte";
+export { default as TopDropdown } from "./structure/navigation/TopDropdown.svelte";
+export { default as TopDropdownItem } from "./structure/navigation/TopDropdownItem.svelte";
 export { default as TopNavigation } from "./structure/navigation/TopNavigation.svelte";
+export { default as TopNavItem } from "./structure/navigation/TopNavItem.svelte";
 export { default as UserDropdownMenu } from "./structure/navigation/UserDropdownMenu.svelte";
-
-/* [4.1.1] Structure > Navigation > Dropdown */
-export { default as NavDropdown } from "./structure/navigation/dropdown/NavDropdown.svelte";
 
 /* [4.1.2] Structure > Navigation > Tabs */
 export { default as TabItem } from "./structure/navigation/tabs/TabItem.svelte";
