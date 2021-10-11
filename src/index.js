@@ -55,7 +55,7 @@ export { default as BrandNavLogo } from "./structure/navigation/BrandNavLogo.sve
 export { default as BrandNavLogoSidebar } from "./structure/navigation/BrandNavLogoSidebar.svelte";
 export { default as MobileNavToggle } from "./structure/navigation/MobileNavToggle.svelte";
 export { default as Sidebar } from "./structure/navigation/Sidebar.svelte";
-export { default as SidebarNavItem } from "./structure/navigation/NavItem.svelte";
+export { default as SidebarNavItem } from "./structure/navigation/SidebarNavItem.svelte";
 export { default as TopDropdown } from "./structure/navigation/TopDropdown.svelte";
 export { default as TopDropdownItem } from "./structure/navigation/TopDropdownItem.svelte";
 export { default as TopNavigation } from "./structure/navigation/TopNavigation.svelte";
