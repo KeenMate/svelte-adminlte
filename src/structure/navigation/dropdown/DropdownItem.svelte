@@ -4,6 +4,6 @@
   export let disabled = false;
 </script>
 
-<a class="dropdown-item" class:active class:disabled {href} {...$$restProps}>
+<a class="dropdown-item" on:click class:active class:disabled {href} {...$$restProps}>
   <slot />
 </a>
