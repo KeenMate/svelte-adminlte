@@ -56,11 +56,17 @@ export { default as BrandNavLogoSidebar } from "./structure/navigation/BrandNavL
 export { default as MobileNavToggle } from "./structure/navigation/MobileNavToggle.svelte";
 export { default as Sidebar } from "./structure/navigation/Sidebar.svelte";
 export { default as SidebarNavItem } from "./structure/navigation/SidebarNavItem.svelte";
-export { default as TopDropdown } from "./structure/navigation/TopDropdown.svelte";
-export { default as TopDropdownItem } from "./structure/navigation/TopDropdownItem.svelte";
 export { default as TopNavigation } from "./structure/navigation/TopNavigation.svelte";
 export { default as TopNavItem } from "./structure/navigation/TopNavItem.svelte";
 export { default as UserDropdownMenu } from "./structure/navigation/UserDropdownMenu.svelte";
+
+/* [4.1.1] Structure > Navigation > Dropdown */
+export { default as Dropdown } from "./structure/navigation/dropdown/Dropdown.svelte";
+export { default as DropdownButton } from "./structure/navigation/dropdown/DropdownButton.svelte";
+export { default as DropdownDivider } from "./structure/navigation/dropdown/DropdownDivider.svelte";
+export { default as DropdownItem } from "./structure/navigation/dropdown/DropdownItem.svelte";
+export { default as DropdownMenu } from "./structure/navigation/dropdown/DropdownMenu.svelte";
+
 
 /* [4.1.2] Structure > Navigation > Tabs */
 export { default as TabItem } from "./structure/navigation/tabs/TabItem.svelte";
