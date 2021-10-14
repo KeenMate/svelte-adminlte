@@ -4,7 +4,7 @@
 </script>
 
 <li class="nav-item d-none d-sm-inline-block">
-  <a {href} class="nav-link">
+  <a {href} on:click class="nav-link">
     <!-- {#if icon}
       <i class="nav-icon {icon}" />
     {/if} -->
