@@ -1,18 +1,19 @@
-<script context="module">
+<!-- <script context="module">
   import { writable } from "svelte/store";
 
   let _expansionState = writable({
     /* treeNodeId: expanded <boolean> */
   });
-</script>
+</script> -->
 
 <script>
   import {
     findNestedLtreePath,
     getParentNodePath,
     nodePathIsChild,
-	ChangeSelection,
-	hasChildren
+    ChangeSelection,
+    hasChildren,
+    changeExpansion
   } from "../../helpers/tree-helpers";
   //import Checkbox from "../form/input/Checkbox.svelte";
   //required
@@ -20,28 +21,34 @@
   export let treeId = null;
   export let maxExpandedDepth = 0;
 
-  export let selected;
   export let recursiv = false;
   export let checkboxes = false;
-  export let value = null;
+  //export let value = null;
   export let childDepth = 0;
   export let parentId = null;
+
+  export let expandedProperty = "__expanded";
+  export let selectedProperty = "__selected"
+  //export let selectedProperty = "__selected";
+
   export let getId = (x) => x.nodePath;
   export let getParentId = (x) => getParentNodePath(x.nodePath);
   export let isChild = (x) => nodePathIsChild(x.nodePath);
 
   const getNodeId = (node) => `${treeId}-${getId(node)}`;
+  
 
   $: parentChildrenTree = (tree || []).filter((x) =>
     !parentId ? !isChild(x) : getParentId(x) === parentId
   );
-  $: valuePath = findNestedLtreePath(tree, value);
+  
   $: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
-  $: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
-  $: expandNodes(valuePath);
-  $: selected
-  $: deleteSelected(recursiv)
+  //$: valuePath = findNestedLtreePath(tree, value);
+  //$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
+  //$: expandNodes(valuePath);
+  //$: deleteSelected(recursiv);
 
+  $:tree
 
   // $: console.log("Expansion state changed", $_expansionState)
 
@@ -52,12 +59,10 @@
   }
 
   function toggleExpansion(node, setValueTo = null) {
-    // console.log("Expansioned", node, _expansionState)
-    const nodeId = getNodeId(node);
-    _expansionState.update((x) => ({
-      ...x,
-      [nodeId]: setValueTo ?? !x[nodeId],
-    }));
+    
+    const nodeId = getNodeId(node)
+    tree = changeExpansion(tree, node.nodePath,expandedProperty)
+    //console.log("Expansioned", node)
   }
 
   function recomputeExpandedNodes() {
@@ -72,13 +77,9 @@
   //checkboxes
   function selectionChanged(nodePath) {
     console.log(nodePath);
-	selected = ChangeSelection(recursiv,tree,nodePath,selected)
+    tree = ChangeSelection(recursiv, tree, nodePath, selectedProperty);
   }
 
-  function deleteSelected(recursiv) {
-	  if(recursiv)
-	  selected=[]
-  }
 
 </script>
 
@@ -90,28 +91,33 @@
           <span on:click={() => toggleExpansion(node)}>
             <i
               class="far"
-              class:fa-minus-square={$_expansionState[getNodeId(node)]}
-              class:fa-plus-square={!$_expansionState[getNodeId(node)]}
+              class:fa-minus-square={node[expandedProperty]}
+              class:fa-plus-square={node[expandedProperty] != true}
             />
           </span>
         {:else}
-			<span></span>
+          <span />
         {/if}
         {#if checkboxes}
-			{#if (recursiv && !hasChildren(tree,node.nodePath)) || (!recursiv)}
-          		<input type="checkbox"  id="{node.nodePath}" on:change={ () => selectionChanged(node.nodePath)} 
-					checked={(selected.includes(node.nodePath)?"false":"")} >
-						
-			{:else}
-				<input type="checkbox"  id="{node.nodePath}" 
-				onclick="return false;" >
-        	{/if}
-		{/if}
+          {#if (recursiv && !hasChildren(tree, node.nodePath)) || !recursiv}
+            <input
+              type="checkbox"
+              id={getNodeId(node)}
+              on:change={() => selectionChanged(node.nodePath)}
+              checked={node[selectedProperty] ? "false" : ""}
+
+            />
+            <!-- checked={getSelectedState(node) ? "false" : ""} -->
+          {:else}
+            <input type="checkbox" id={node.nodePath} onclick="return false;" />
+          {/if}
+        {/if}
         <slot {node} />
+        
       </div>
       <!--{@debug node}-->
       <!--{@debug $_expansionState}-->
-      {#if $_expansionState[getNodeId(node)] && node.hasChildren}
+      {#if node[expandedProperty] && node.hasChildren}
         <!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
         <svelte:self
           {treeId}
@@ -119,9 +125,8 @@
           {checkboxes}
           {getParentId}
           {maxExpandedDepth}
-          bind:selected
-          {tree}
-		  {recursiv}
+          bind:tree={tree}
+          {recursiv}
           childDepth={childDepth + 1}
           parentId={getId(node)}
           let:node={nodeNested}
@@ -129,12 +134,13 @@
           <slot node={nodeNested} />
         </svelte:self>
       {/if}
-	  {#if !$_expansionState[getNodeId(node)] && node.hasChildren}
-	  	<ul  class:child-menu={childDepth > 0}></ul>
-	  {/if}
+      {#if node[expandedProperty]!= true && node.hasChildren}
+        <ul class:child-menu={childDepth > 0} />
+      {/if}
     </li>
   {/each}
 </ul>
+
 
 <style lang="sass">
 :global
@@ -229,33 +235,3 @@
 
 
 </style>
-<!-- 
-ul
-margin: 0
-list-style: none
-padding-left: 1.2rem
-user-select: none
-
-&.child-menu
-	padding-left: 2.6rem
-
-li
-	&.is-child
-		// border-left: gray
-		// border-left-style: dotted
-		// border-left-width: 1px
-
-
-	&.has-children
-		margin-left: -6px
-
-	.tree-item
-		display: flex
-		align-items: center
-		column-gap: .8rem
-
-		hr
-			// border-top: 1px dotted gray
-			border: 0px white solid
-			width: 7px
-			margin: 0 -->

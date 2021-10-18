@@ -38,11 +38,11 @@ export function nodePathIsChild(nodePath) {
 //--------------
 
 
-export function ChangeSelection(recursively, tree, nodePath, selected) {
+export function ChangeSelection(recursively, tree, nodePath,selectedProperty) {
 	if (!recursively) {
     //non recursively
 
-    return addOrRemoveSelection(selected,nodePath)
+    return addOrRemoveSelection(tree,nodePath,selectedProperty)
 
   } else {
     //recursively
@@ -50,28 +50,39 @@ export function ChangeSelection(recursively, tree, nodePath, selected) {
 	//only allow selection if it doesnt have any children
 	if(!hasChildren(tree,nodePath)){
 
-		return addOrRemoveSelection(selected,nodePath)
+		return addOrRemoveSelection(tree,nodePath,selectedProperty)
 	}
 
 
-	return selected
+	return tree
 
   }
 }
 
-function addOrRemoveSelection(selected,nodePath){
-	if (selected.includes(nodePath)) {
-		var index = selected.indexOf(nodePath);
-		if (index > -1) {
-		  selected.splice(index, 1);
+function addOrRemoveSelection(tree,nodePath,selectedProperty){
+	return tree.map((x)=>{
+		let t = x
+		if(x.nodePath == nodePath){
+			t[selectedProperty] = !x[selectedProperty]  
 		}
-	  } else {
-		selected.push(nodePath);
-	  }
-	return selected;
+		return t;
+	})
+
 }
 
-export function getRecSelStatus(selected,nodePath){
+export function changeExpansion(tree,nodePath,expandedProperty){
+	return tree.map((x)=>{
+		let t = x
+		if(x.nodePath == nodePath){
+			console.log(nodePath)
+			t[expandedProperty] = !x[expandedProperty]  
+		}
+		return t;
+	})
+
+}
+
+export function getRecSelStatus(tree,nodePath){
 	if(selected.includes(node.nodePath))
 		return "selected"
 	

@@ -9,39 +9,67 @@
   import Label from "../components/form/structure/Label.svelte";
   import TreeView from "../components/ui/TreeView.svelte";
 
-  const tree = [
+  let tree = [
     { nodePath: "1", title: "FIRST" },
     { nodePath: "2", title: "2" },
 
-    { nodePath: "3", title: "3", hasChildren: true },
+    { nodePath: "3", title: "3", hasChildren: true, __expanded: true },
     { nodePath: "3.1", title: "3.1" },
-    { nodePath: "3.2", title: "3.2", hasChildren: true },
+    { nodePath: "3.2", title: "3.2", hasChildren: true, __expanded: false },
 
-    { nodePath: "3.2.1", title: "3.2.1", hasChildren: true },
+    {
+      nodePath: "3.2.1",
+      title: "3.2.1",
+      hasChildren: true,
+      __expanded: true,
+      __selected: true,
+      test: "test223",
+    },
 
     { nodePath: "3.2.1.1", title: "3.2.1.1" },
-    { nodePath: "4", title: "1" },
-    { nodePath: "5", title: "2" },
+    { nodePath: "3.3", title: "3.3", hasChildren: true, __expanded: true },
 
-    { nodePath: "6", title: "3", hasChildren: true },
-    { nodePath: "6.1", title: "3.1" },
-    { nodePath: "6.2", title: "3.2", hasChildren: true },
+    {
+      nodePath: "3.3.1",
+      title: "3.3.1",
+      hasChildren: true,
+      __expanded: true,
+      __selected: true,
+    },
+    { nodePath: "3.4", title: "3.4", hasChildren: true, __expanded: true },
 
-    { nodePath: "6.1.1", title: "3.2.1", hasChildren: true },
+    { nodePath: "4", title: "4" },
+    { nodePath: "5", title: "5" },
 
-    { nodePath: "6.1.1.1", title: "3.2.1.1" },
+    { nodePath: "6", title: "6", hasChildren: true },
+    { nodePath: "6.1", title: "6.1" },
+    { nodePath: "6.2", title: "6.2", hasChildren: true },
+
+    { nodePath: "6.2.1", title: "6.2.1", hasChildren: true },
+
+    { nodePath: "6.2.1.1", title: "6.2.1.1" },
+    { nodePath: "7", title: "7" },
   ];
 
   $: filteredTree = filter(tree, hideGroup);
 
-  let selected= ["3",]
   let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
-  let recursiv = false
+  let recursiv = false;
+  
 
   function filter(tree, hide) {
     return tree.filter((t) => !t.nodePath.startsWith(hide.toString()));
+  }
+
+  function deleteSelected() {
+    tree = tree.map((t) => {
+      let x = t;
+      x.__selected = false;
+      return x;
+    });
+
   }
 
   onMount(() => {
@@ -55,7 +83,13 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree</svelte:fragment>
       {#if showTree}
-        <TreeView  {recursiv} tree={filteredTree} maxExpandedDepth="3" let:node bind:checkboxes={showCheckboxes} bind:selected={selected}>
+        <TreeView
+          {recursiv}
+          bind:tree={filteredTree}
+          maxExpandedDepth="4"
+          let:node
+          bind:checkboxes={showCheckboxes}
+        >
           {node.title}
         </TreeView>
       {/if}
@@ -65,42 +99,77 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree options</svelte:fragment>
       <FormGroup>
-        <Checkbox level="danger" name="show-checkboxes" id="show-checkboxes" bind:checked={showCheckboxes}>
+        <Checkbox
+          level="danger"
+          name="show-checkboxes"
+          id="show-checkboxes"
+          bind:checked={showCheckboxes}
+        >
           <Label inputId="show-checkboxes">Show checkboxes</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>
-        <Checkbox level="danger" name="recursive-selection" id="recursive-selection" bind:checked={recursiv}>
+        <Checkbox
+          level="danger"
+          name="recursive-selection"
+          id="recursive-selection"
+          bind:checked={recursiv}
+        >
           <Label inputId="recursive-selection">recursive selection</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>
         <Checkbox>
-          <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}><Label inputId="hide1">Hide 1</Label></Radio>
+          <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}
+            ><Label inputId="hide1">Hide 1</Label></Radio
+          >
         </Checkbox>
         <Checkbox>
-          <Radio id="hide2" level="warning" bind:group={hideGroup} name="hide" value={2}>
+          <Radio
+            id="hide2"
+            level="warning"
+            bind:group={hideGroup}
+            name="hide"
+            value={2}
+          >
             <Label inputId="hide2">Hide 2</Label>
           </Radio>
         </Checkbox>
         <Checkbox>
-          <Radio id="hide3" level="danger" bind:group={hideGroup} name="hide" value={3}>
+          <Radio
+            id="hide3"
+            level="danger"
+            bind:group={hideGroup}
+            name="hide"
+            value={3}
+          >
             <Label inputId="hide3">Hide 3</Label>
           </Radio>
         </Checkbox>
       </FormGroup>
-      <LteSwitch checkedClass="bg-green" uncheckedClass="bg-gray" bind:checked={showTree} />
+      <LteSwitch
+        checkedClass="bg-green"
+        uncheckedClass="bg-gray"
+        bind:checked={showTree}
+      />
     </Card>
   </div>
   <div class="col-4">
-    <Card outline color="primary"><svelte:fragment slot="header">Selected</svelte:fragment>
-    <ul>
-
-      {#each selected as s}
-<li>{s}</li>
-      {/each}
-    </ul>
-    
+    <Card outline color="primary"
+      ><svelte:fragment slot="header">Selected</svelte:fragment>
+      <ul>
+        {#each tree as tr}
+          {#if tr.__selected === true}
+            <li>{tr.nodePath}</li>
+          {/if}
+          <!-- {tr.__selected} - {tr.nodePath} <br/> -->
+        {/each}
+      </ul>
+      <button
+        on:click={() => {
+          tree[1].title = ":)";
+        }}>:)</button
+      ><button on:click={deleteSelected}>delete s</button>
     </Card>
   </div>
 </div>
