@@ -57,6 +57,7 @@
   let hideGroup = 1;
   let showTree = true;
   let recursiv = false;
+  let parent_checkboxes = false;
   
 
   function filter(tree, hide) {
@@ -89,6 +90,7 @@
           maxExpandedDepth="4"
           let:node
           bind:checkboxes={showCheckboxes}
+          bind:parent_checkboxes={parent_checkboxes}
         >
           {node.title}
         </TreeView>
@@ -116,6 +118,16 @@
           bind:checked={recursiv}
         >
           <Label inputId="recursive-selection">recursive selection</Label>
+        </Checkbox>
+      </FormGroup>
+      <FormGroup>
+        <Checkbox
+          level="danger"
+          name="parent_checkboxes"
+          id="parent_checkboxes"
+          bind:checked={parent_checkboxes}
+        >
+          <Label inputId="parent_checkboxes">parent checkboxes</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>

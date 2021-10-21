@@ -47,11 +47,14 @@ export function ChangeSelection(recursively, tree, nodePath,selectedProperty) {
   } else {
     //recursively
 
-	//only allow selection if it doesnt have any children
-	if(!hasChildren(tree,nodePath)){
+		//only allow selection if it doesnt have any children
+		if(!hasChildren(tree,nodePath)){
 
-		return addOrRemoveSelection(tree,nodePath,selectedProperty)
-	}
+			return addOrRemoveSelection(tree,nodePath,selectedProperty)
+		}else{
+			//change state of all children and recompute visualstate
+			
+		}
 
 
 	return tree

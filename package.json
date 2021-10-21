@@ -30,7 +30,7 @@
     "luxon": "^2.0.2",
     "postcss": "^8.3.8",
     "postcss-import": "^14.0.2",
-    "rollup": "^2.57.0",
+    "rollup": "^2.58.0",
     "rollup-plugin-bundle-inject": "^1.0.3",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^3.0.0",
