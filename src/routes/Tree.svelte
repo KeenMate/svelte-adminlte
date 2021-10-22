@@ -21,11 +21,29 @@
       nodePath: "3.2.1",
       title: "3.2.1",
       hasChildren: true,
+      __selected: true,
+      test: "test223",
+    },
+    {
+      nodePath: "3.2.2",
+      title: "3.2.1",
       __expanded: true,
       __selected: true,
       test: "test223",
     },
-
+    {
+      nodePath: "3.2.3",
+      title: "3.2.1",
+      __expanded: true,
+      __selected: true,
+      test: "test223",
+    },
+    {
+      nodePath: "3.2.4",
+      title: "3.2.1",
+      __expanded: true,
+      __selected: true
+    },
     { nodePath: "3.2.1.1", title: "3.2.1.1" },
     { nodePath: "3.3", title: "3.3", hasChildren: true, __expanded: true },
 
@@ -36,19 +54,40 @@
       __expanded: true,
       __selected: true,
     },
-    { nodePath: "3.4", title: "3.4", hasChildren: true, __expanded: true },
+    { nodePath: "3.4", title: "3.4" },
 
     { nodePath: "4", title: "4" },
     { nodePath: "5", title: "5" },
 
     { nodePath: "6", title: "6", hasChildren: true },
-    { nodePath: "6.1", title: "6.1" },
+    { nodePath: "6.1", title: "6.1", hasChildren: true  },
+    { nodePath: "6.1.1", title: "6.2.1"},
+
+    { nodePath: "6.1.2", title: "6.1.2" },
+    { nodePath: "6.1.3", title: "6.1.3" },
     { nodePath: "6.2", title: "6.2", hasChildren: true },
 
     { nodePath: "6.2.1", title: "6.2.1", hasChildren: true },
 
     { nodePath: "6.2.1.1", title: "6.2.1.1" },
+    { nodePath: "6.2.1.2", title: "6.2.1.2" },
+    { nodePath: "6.2.1.3", title: "6.2.1.3" },
+    { nodePath: "6.2.2", title: "6.2.2" },
     { nodePath: "7", title: "7" },
+    { nodePath: "8", title: "6", hasChildren: true },
+    { nodePath: "8.1", title: "6.1", hasChildren: true  },
+    { nodePath: "8.1.1", title: "6.2.1"},
+
+    { nodePath: "8.1.2", title: "6.1.2" },
+    { nodePath: "8.1.3", title: "6.1.3" },
+    { nodePath: "8.2", title: "6.2", hasChildren: true },
+
+    { nodePath: "8.2.1", title: "6.2.1", hasChildren: true },
+
+    { nodePath: "8.2.1.1", title: "6.2.1.1" },
+    { nodePath: "8.2.1.2", title: "6.2.1.2" },
+    { nodePath: "8.2.1.3", title: "6.2.1.3" },
+    { nodePath: "8.2.2", title: "6.2.2" },
   ];
 
   $: filteredTree = filter(tree, hideGroup);
@@ -56,8 +95,8 @@
   let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
-  let recursiv = false;
-  let parent_checkboxes = false;
+  let recursiv = true;
+  let parent_checkboxes = true;
   
 
   function filter(tree, hide) {
@@ -92,7 +131,7 @@
           bind:checkboxes={showCheckboxes}
           bind:parent_checkboxes={parent_checkboxes}
         >
-          {node.title}
+          [{node.nodePath}] ---  {node.title} 
         </TreeView>
       {/if}
     </Card>
@@ -185,40 +224,3 @@
     </Card>
   </div>
 </div>
-
-<!-- <script>
-  import {
-    Form,
-    Checkbox,
-    CheckboxLabel,
-    CheckboxInput,
-    TreeView,
-  } from "../components";
-  const tree = [
-    { nodePath: "1", title: "1" },
-    { nodePath: "2", title: "2" },
-
-    { nodePath: "3", title: "3", hasChildren: true },
-    { nodePath: "3.1", title: "3.1" },
-    { nodePath: "3.2", title: "3.2", hasChildren: true },
-
-    { nodePath: "3.2.1", title: "3.2.1", hasChildren: true },
-
-    { nodePath: "3.2.1.1", title: "3.2.1.1" },
-  ];
-</script>
-
-<div class="row">
-  <div class="col-9">
-    
-  </div>
-  <div class="col-3">
-    <Form>
-      <h2>Konfigurae</h2>
-      <Checkbox>
-        <CheckboxInput id="show" name="show" title="show" />
-        <CheckboxLabel inputId="show">Show</CheckboxLabel>
-      </Checkbox>
-    </Form>
-  </div>
-</div> -->

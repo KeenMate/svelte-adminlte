@@ -13,6 +13,10 @@
 		ChangeSelection,
 		hasChildren,
 		changeExpansion,
+		getParentChildrenTree,
+		ChangeSelectForAllChildren,
+		getVisualState
+		
 	} from "../../helpers/tree-helpers";
 	//import Checkbox from "../form/input/Checkbox.svelte";
 	//required
@@ -31,7 +35,6 @@
 
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
-	//export let selectedProperty = "__selected";
 
 	export let getId = (x) => x.nodePath;
 	export let getParentId = (x) => getParentNodePath(x.nodePath);
@@ -39,17 +42,13 @@
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
-	$: parentChildrenTree = (tree || []).filter((x) =>
-		!parentId ? !isChild(x) : getParentId(x) === parentId
-	);
+	$:parentChildrenTree =  getParentChildrenTree(tree,parentId,isChild,getParentId)
 
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
 	//$: valuePath = findNestedLtreePath(tree, value);
 	//$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
 	//$: expandNodes(valuePath);
 	//$: deleteSelected(recursiv);
-
-	$: tree;
 
 	// $: console.log("Expansion state changed", $_expansionState)
 
@@ -60,9 +59,8 @@
 	}
 
 	function toggleExpansion(node, setValueTo = null) {
-		const nodeId = getNodeId(node);
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
-		//console.log("Expansioned", node)
+		
 	}
 
 	function recomputeExpandedNodes() {
@@ -78,6 +76,10 @@
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
 		tree = ChangeSelection(recursiv, tree, nodePath, selectedProperty);
+	}
+
+	function selectChildren(node,e) { 
+		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked)
 	}
 </script>
 
@@ -97,6 +99,7 @@
 					<span />
 				{/if}
 				{#if checkboxes}
+				
 					{#if recursiv}
 						{#if !hasChildren(tree, node.nodePath)}
 							<input
@@ -104,6 +107,14 @@
 								id={getNodeId(node)}
 								on:change={() => selectionChanged(node.nodePath)}
 								checked={node[selectedProperty] ? "false" : ""}
+							/>
+						{:else if parent_checkboxes}
+							<input
+								type="checkbox"
+								id={node.nodePath}
+								on:click={e =>{ e.preventDefault; selectChildren(node,e)}}
+								checked={node.__visual_state === "true" ? "false" :"" }
+								indeterminate={node.__visual_state === "indeterminate"}
 							/>
 						{:else}
 							<input
@@ -114,11 +125,12 @@
 							/>
 						{/if}
 					{:else}
-						<input
+					<input
 							type="checkbox"
 							id={getNodeId(node)}
 							on:change={() => selectionChanged(node.nodePath)}
 							checked={node[selectedProperty] ? "false" : ""}
+							
 						/>
 					{/if}
 				{/if}
@@ -139,6 +151,7 @@
 					childDepth={childDepth + 1}
 					parentId={getId(node)}
 					let:node={nodeNested}
+					{parent_checkboxes}
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -163,9 +176,8 @@
 			
 			border: 1px dotted black
 			border-width: 0 0 1px 1px
-			&:last-of-type	ul
-				border-left: 1px solid white
-				margin-left: -1px
+			&:last-child	> ul
+				border-left: 1px solid white !important
 			
 			div
 				margin-left: 0
@@ -175,6 +187,7 @@
 				border-top:1px dotted black
 				margin-left: -1px
 				padding-left: 2em
+				border-left: none !important
 			
 		.has-children
 			border-bottom: 0px
