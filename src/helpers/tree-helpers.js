@@ -57,7 +57,7 @@ export function allCHildren(tree, parentId, isChild) {
 //--------------
 
 
-export function ChangeSelection(recursively, tree, nodePath, selectedProperty) {
+export function ChangeSelection(recursively, tree, nodePath,isChild,getParentId, selectedProperty) {
 	if (!recursively) {
 		//non recursively
 
@@ -67,16 +67,13 @@ export function ChangeSelection(recursively, tree, nodePath, selectedProperty) {
 		//recursively
 
 		//only allow selection if it doesnt have any children
-		if (!hasChildren(tree, nodePath)) {
-
-			return addOrRemoveSelection(tree, nodePath, selectedProperty)
-		} else {
-			//change state of all children and recompute visualstate
-
+		tree =  addOrRemoveSelection(tree, nodePath, selectedProperty)
+		if(tree == null){
+			console.log("NULLL")
+			console.log(tree)
 		}
+		return recomputeAllParentVisualState(tree,nodePath,isChild,getParentId,selectedProperty)
 
-
-		return tree
 
 	}
 }
@@ -86,6 +83,7 @@ function addOrRemoveSelection(tree, nodePath, selectedProperty) {
 		let t = x
 		if (x.nodePath == nodePath) {
 			t[selectedProperty] = !x[selectedProperty]
+			t.__visual_state = !x[selectedProperty]
 		}
 		return t;
 	})
@@ -96,24 +94,32 @@ export function changeExpansion(tree, nodePath, expandedProperty) {
 	return tree.map((x) => {
 		let t = x
 		if (x.nodePath == nodePath) {
-			console.log(nodePath)
+			
 			t[expandedProperty] = !x[expandedProperty]
 		}
 		return t;
 	})
 
 }
+
 export function ChangeSelectForAllChildren(tree, parentId, isChild, selectedProperty, changeTo) {
 	tree = tree.map(x => {
+		//changes itself
+		if(parentId == x.nodePath){
+			x = changeSelectedIfNParent(x, selectedProperty, changeTo)
+		}
+
+
 		if (!parentId) {
 			//top level 
 			if (!isChild(x)) {
-				x = changeSelectedIfNParent(x, isChild, selectedProperty, changeTo);
+				x = changeSelectedIfNParent(x, selectedProperty, changeTo);
 			}
 		} else {
+			//if parentId isnt root
 			if (x.nodePath.startsWith(parentId.toString()) && x.nodePath != parentId.toString()) {
 
-				x = changeSelectedIfNParent(x, isChild, selectedProperty, changeTo);
+				x = changeSelectedIfNParent(x, selectedProperty, changeTo);
 			}
 		}
 		return x;
@@ -122,15 +128,18 @@ export function ChangeSelectForAllChildren(tree, parentId, isChild, selectedProp
 }
 
 //changes selectedproperty or visual state depending on 
-function changeSelectedIfNParent(node, isChild, selectedProperty, changeTo) {
-	if (isChild(node.nodePath)) {
+function changeSelectedIfNParent(node, selectedProperty, changeTo) {
+	if (!node.hasChildren) {
 		node[selectedProperty] = changeTo;
+		node.__visual_state = changeTo;
+	}else{
+		node.__visual_state = changeTo;
 	}
 	return node;
 }
 
 export function getVisualState(tree, node, isCHild, getParentId, selectedProperty) {
-	let children = getParentChildrenTree(tree, nodePath, isCHild, getParentId)
+	let children = getParentChildrenTree(tree, node.nodePath, isCHild, getParentId)
 	//if every child is selected or vs=true return true
 	if (children.every(x => {
 		if (x.hasChildren) {
@@ -157,5 +166,24 @@ export function getVisualState(tree, node, isCHild, getParentId, selectedPropert
 
 }
 
-//selects all children
- 
+//changes status of parent of 
+function recomputeAllParentVisualState(tree,nodePath,isChild,getParentId,selectedProperty){
+	let parent = getParentNodePath(nodePath);
+	if(getParentNodePath(parent) != '' ){
+		if(tree == null){
+			console.log("NULLL")
+			console.log(tree)
+		}
+		tree = recomputeAllParentVisualState(tree,parent,isChild,getParentId,selectedProperty)
+	}
+	if(tree == null){
+		console.log("NULLL")
+		console.log(tree)
+	}
+	tree.forEach(x =>{
+		if(x.nodePath == parent)
+			x.__visual_state = getVisualState(tree,x,isChild,getParentId,selectedProperty)
+	})
+
+	return tree;
+}

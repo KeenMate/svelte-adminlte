@@ -10,7 +10,7 @@
   import TreeView from "../components/ui/TreeView.svelte";
 
   let tree = [
-    { nodePath: "1", title: "FIRST" },
+    { nodePath: "1", title: "FIRST" ,__visual_state: "indeterminate"},
     { nodePath: "2", title: "2" },
 
     { nodePath: "3", title: "3", hasChildren: true, __expanded: true },
@@ -131,7 +131,7 @@
           bind:checkboxes={showCheckboxes}
           bind:parent_checkboxes={parent_checkboxes}
         >
-          [{node.nodePath}] ---  {node.title} 
+           {node.__visual_state }[{node.nodePath}] ---  {node.title} 
         </TreeView>
       {/if}
     </Card>

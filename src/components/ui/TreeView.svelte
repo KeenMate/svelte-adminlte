@@ -75,7 +75,8 @@
 	//checkboxes
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
-		tree = ChangeSelection(recursiv, tree, nodePath, selectedProperty);
+		console.log(getParentId)
+		tree = ChangeSelection(recursiv, tree, nodePath,isChild,getParentId, selectedProperty);
 	}
 
 	function selectChildren(node,e) { 
@@ -113,8 +114,8 @@
 								type="checkbox"
 								id={node.nodePath}
 								on:click={e =>{ e.preventDefault; selectChildren(node,e)}}
-								checked={node.__visual_state === "true" ? "false" :"" }
-								indeterminate={node.__visual_state === "indeterminate"}
+								checked={node.__visual_state === "true" ? "false" : ""}
+								indeterminate={node.__visual_state == "indeterminate"}
 							/>
 						{:else}
 							<input
@@ -130,6 +131,7 @@
 							id={getNodeId(node)}
 							on:change={() => selectionChanged(node.nodePath)}
 							checked={node[selectedProperty] ? "false" : ""}
+					
 							
 						/>
 					{/if}
