@@ -21,9 +21,9 @@
       nodePath: "3.2.1",
       title: "3.2.1",
       hasChildren: true,
-      __selected: true,
       test: "test223",
     },
+    { nodePath: "3.2.1.1", title: "3.2.1.1" },
     {
       nodePath: "3.2.2",
       title: "3.2.1",
@@ -44,7 +44,7 @@
       __expanded: true,
       __selected: true
     },
-    { nodePath: "3.2.1.1", title: "3.2.1.1" },
+
     { nodePath: "3.3", title: "3.3", hasChildren: true, __expanded: true },
 
     {
@@ -61,7 +61,7 @@
 
     { nodePath: "6", title: "6", hasChildren: true },
     { nodePath: "6.1", title: "6.1", hasChildren: true  },
-    { nodePath: "6.1.1", title: "6.2.1"},
+    { nodePath: "6.1.1", title: "6.2.1",__selected: true},
 
     { nodePath: "6.1.2", title: "6.1.2" },
     { nodePath: "6.1.3", title: "6.1.3" },
@@ -107,6 +107,7 @@
     tree = tree.map((t) => {
       let x = t;
       x.__selected = false;
+      x.__visual_state = "false";
       return x;
     });
 
@@ -131,7 +132,7 @@
           bind:checkboxes={showCheckboxes}
           bind:parent_checkboxes={parent_checkboxes}
         >
-           {node.__visual_state }[{node.nodePath}] ---  {node.title} 
+          {node.nodePath}
         </TreeView>
       {/if}
     </Card>

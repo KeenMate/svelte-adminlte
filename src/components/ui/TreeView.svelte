@@ -15,9 +15,10 @@
 		changeExpansion,
 		getParentChildrenTree,
 		ChangeSelectForAllChildren,
-		getVisualState
+		computeInitialVisualStates
 		
 	} from "../../helpers/tree-helpers";
+	import { onMount } from "svelte";
 	//import Checkbox from "../form/input/Checkbox.svelte";
 	//required
 	export let tree = null;
@@ -45,6 +46,7 @@
 	$:parentChildrenTree =  getParentChildrenTree(tree,parentId,isChild,getParentId)
 
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
+
 	//$: valuePath = findNestedLtreePath(tree, value);
 	//$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
 	//$: expandNodes(valuePath);
@@ -76,12 +78,15 @@
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
 		console.log(getParentId)
-		tree = ChangeSelection(recursiv, tree, nodePath,isChild,getParentId, selectedProperty);
+		tree = ChangeSelection(recursiv, tree, nodePath,isChild, selectedProperty,getParentId);
 	}
 
 	function selectChildren(node,e) { 
-		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked)
+		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked,getParentId)
 	}
+	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId)
+
+	
 </script>
 
 <ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0}>
@@ -100,7 +105,6 @@
 					<span />
 				{/if}
 				{#if checkboxes}
-				
 					{#if recursiv}
 						{#if !hasChildren(tree, node.nodePath)}
 							<input
@@ -113,8 +117,11 @@
 							<input
 								type="checkbox"
 								id={node.nodePath}
-								on:click={e =>{ e.preventDefault; selectChildren(node,e)}}
-								checked={node.__visual_state === "true" ? "false" : ""}
+								on:click={(e) => {
+									e.preventDefault;
+									selectChildren(node, e);
+								}}
+								checked={node.__visual_state == "true" ? "false" : ""}
 								indeterminate={node.__visual_state == "indeterminate"}
 							/>
 						{:else}
@@ -126,13 +133,11 @@
 							/>
 						{/if}
 					{:else}
-					<input
+						<input
 							type="checkbox"
 							id={getNodeId(node)}
 							on:change={() => selectionChanged(node.nodePath)}
 							checked={node[selectedProperty] ? "false" : ""}
-					
-							
 						/>
 					{/if}
 				{/if}
@@ -188,7 +193,7 @@
 			ul
 				border-top:1px dotted black
 				margin-left: -1px
-				padding-left: 2em
+				padding-left: 1.3em
 				border-left: none !important
 			
 		.has-children
