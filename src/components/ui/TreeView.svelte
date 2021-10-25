@@ -18,10 +18,10 @@
 	export let treeId = null;
 	export let maxExpandedDepth = 0;
 
-	export let recursiv = false;
+	export let recursive = false;
 	export let checkboxes = false;
 	//if true, will show checkboxes to elements with children
-	export let parent_checkboxes = false;
+	export let leafNodeCheckboxesOnly = false;
 
 
 	export let childDepth = 0;
@@ -61,7 +61,7 @@
 	//checkboxes
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
-		tree = ChangeSelection(recursiv, tree, nodePath,isChild, selectedProperty,getParentId);
+		tree = ChangeSelection(recursive, tree, nodePath,isChild, selectedProperty,getParentId);
 	}
 
 	//selectes
@@ -91,7 +91,7 @@
 					<span />
 				{/if}
 				{#if checkboxes}
-					{#if recursiv}
+					{#if recursive}
 						{#if !hasChildren(tree, node.nodePath)}
 							<input
 								type="checkbox"
@@ -99,7 +99,7 @@
 								on:change={() => selectionChanged(node.nodePath)}
 								checked={node[selectedProperty] ? "false" : ""}
 							/>
-						{:else if parent_checkboxes}
+						{:else if !leafNodeCheckboxesOnly}
 							<input
 								type="checkbox"
 								id={getNodeId(node)}
@@ -115,7 +115,7 @@
 								type="checkbox"
 								id={getNodeId(node)}
 								onclick="return false;"
-								class:invisible={!parent_checkboxes}
+								class:invisible={leafNodeCheckboxesOnly}
 							/>
 						{/if}
 					{:else}
@@ -140,11 +140,11 @@
 					{getParentId}
 					{maxExpandedDepth}
 					bind:tree
-					{recursiv}
+					{recursive}
 					childDepth={childDepth + 1}
 					parentId={getId(node)}
 					let:node={nodeNested}
-					{parent_checkboxes}
+					{leafNodeCheckboxesOnly}
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -179,7 +179,7 @@
 			ul
 				border-top:1px dotted black
 				margin-left: -1px
-				padding-left: 0.95em
+				padding-left: 1.25em
 				border-left: none !important
 			
 		.has-children
@@ -192,9 +192,9 @@
 			background: white
 			position: relative
 			top: 0.75em
-			margin-left: 21px
+			margin-left: 26px
 		.div-has-children
-			margin-left: 7px
+			margin-left: 12px
 		.no-arrow
 			padding-left: .5rem
 

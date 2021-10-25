@@ -56,14 +56,14 @@ export function allCHildren(tree, parentId, isChild) {
 //--------------
 
 
-export function ChangeSelection(recursively, tree, nodePath, isChild, selectedProperty, getParentId) {
-	if (!recursively) {
-		//non recursively
+export function ChangeSelection(recursiveely, tree, nodePath, isChild, selectedProperty, getParentId) {
+	if (!recursiveely) {
+		//non recursiveely
 
 		return addOrRemoveSelection(tree, nodePath, selectedProperty)
 
 	} else {
-		//recursively
+		//recursiveely
 
 		//only allow selection if it doesnt have any children
 		tree = addOrRemoveSelection(tree, nodePath, selectedProperty)

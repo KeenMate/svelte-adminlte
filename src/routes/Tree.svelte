@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import toastr from "../helpers/toastr-helpers";
 
-  import { Checkbox, Card } from "../components";
+  import { Checkbox, Card ,LteButton} from "../components";
   import LteSwitch from "../components/form/input/LteSwitch.svelte";
   import Radio from "../components/form/input/Radio.svelte";
   import FormGroup from "../components/form/structure/FormGroup.svelte";
@@ -95,8 +95,8 @@
   let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
-  let recursiv = true;
-  let parent_checkboxes = true;
+  let recursive = true;
+  let leafNodeCheckboxesOnly = false;
   
 
   function filter(tree, hide) {
@@ -125,12 +125,12 @@
       <svelte:fragment slot="header">Tree</svelte:fragment>
       {#if showTree}
         <TreeView
-          {recursiv}
+          {recursive}
           bind:tree={filteredTree}
           maxExpandedDepth="4"
           let:node
           bind:checkboxes={showCheckboxes}
-          bind:parent_checkboxes={parent_checkboxes}
+          bind:leafNodeCheckboxesOnly={leafNodeCheckboxesOnly}
         >
           {node.nodePath}
         </TreeView>
@@ -153,21 +153,21 @@
       <FormGroup>
         <Checkbox
           level="danger"
-          name="recursive-selection"
-          id="recursive-selection"
-          bind:checked={recursiv}
+          name="recursivee-selection"
+          id="recursivee-selection"
+          bind:checked={recursive}
         >
-          <Label inputId="recursive-selection">recursive selection</Label>
+          <Label inputId="recursivee-selection">recursivee selection</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>
         <Checkbox
           level="danger"
-          name="parent_checkboxes"
-          id="parent_checkboxes"
-          bind:checked={parent_checkboxes}
+          name="leafNodeCheckboxesOnly"
+          id="leafNodeCheckboxesOnly"
+          bind:checked={leafNodeCheckboxesOnly}
         >
-          <Label inputId="parent_checkboxes">parent checkboxes</Label>
+          <Label inputId="leafNodeCheckboxesOnly">leaf node checkboxes only</Label>
         </Checkbox>
       </FormGroup>
       <FormGroup>
@@ -217,11 +217,7 @@
           <!-- {tr.__selected} - {tr.nodePath} <br/> -->
         {/each}
       </ul>
-      <button
-        on:click={() => {
-          tree[1].title = ":)";
-        }}>:)</button
-      ><button on:click={deleteSelected}>delete s</button>
+      <LteButton on:click={deleteSelected}>delete selected</LteButton>
     </Card>
   </div>
 </div>
