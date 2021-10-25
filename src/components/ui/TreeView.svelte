@@ -1,10 +1,4 @@
-<!-- <script context="module">
-  import { writable } from "svelte/store";
 
-  let _expansionState = writable({
-    /* treeNodeId: expanded <boolean> */
-  });
-</script> -->
 <script>
 	import {
 		findNestedLtreePath,
@@ -18,8 +12,7 @@
 		computeInitialVisualStates
 		
 	} from "../../helpers/tree-helpers";
-	import { onMount } from "svelte";
-	//import Checkbox from "../form/input/Checkbox.svelte";
+	
 	//required
 	export let tree = null;
 	export let treeId = null;
@@ -30,7 +23,7 @@
 	//if true, will show checkboxes to elements with children
 	export let parent_checkboxes = false;
 
-	//export let value = null;
+
 	export let childDepth = 0;
 	export let parentId = null;
 
@@ -47,16 +40,10 @@
 
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
 
-	//$: valuePath = findNestedLtreePath(tree, value);
-	//$: recomputeExpandedNodes(parsedMaxExpandedDepth, childDepth, tree);
-	//$: expandNodes(valuePath);
-	//$: deleteSelected(recursiv);
-
-	// $: console.log("Expansion state changed", $_expansionState)
-
+	$:console.log(tree);
+	
 	function expandNodes(nodes) {
 		if (!nodes || !nodes.length) return;
-
 		nodes.forEach((x) => toggleExpansion(x, true));
 	}
 
@@ -66,24 +53,23 @@
 	}
 
 	function recomputeExpandedNodes() {
-		// tree.forEach(x => toggleExpansion(x, false))
-		// console.log("max depth", parsedMaxExpandedDepth, "child depth", childDepth, "tree", tree)
 		if (childDepth < parsedMaxExpandedDepth) {
 			expandNodes(parentChildrenTree);
-			// console.log("Expand should happen")
 		}
 	}
 
 	//checkboxes
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
-		console.log(getParentId)
 		tree = ChangeSelection(recursiv, tree, nodePath,isChild, selectedProperty,getParentId);
 	}
 
+	//selectes
 	function selectChildren(node,e) { 
 		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked,getParentId)
 	}
+
+	//computes all visual states when component is first created
 	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId)
 
 	
@@ -116,7 +102,7 @@
 						{:else if parent_checkboxes}
 							<input
 								type="checkbox"
-								id={node.nodePath}
+								id={getNodeId(node)}
 								on:click={(e) => {
 									e.preventDefault;
 									selectChildren(node, e);
@@ -127,7 +113,7 @@
 						{:else}
 							<input
 								type="checkbox"
-								id={node.nodePath}
+								id={getNodeId(node)}
 								onclick="return false;"
 								class:invisible={!parent_checkboxes}
 							/>
@@ -193,7 +179,7 @@
 			ul
 				border-top:1px dotted black
 				margin-left: -1px
-				padding-left: 1.3em
+				padding-left: 0.95em
 				border-left: none !important
 			
 		.has-children
