@@ -1,7 +1,6 @@
 
 <script>
 	import {
-		findNestedLtreePath,
 		getParentNodePath,
 		nodePathIsChild,
 		ChangeSelection,
@@ -9,8 +8,8 @@
 		changeExpansion,
 		getParentChildrenTree,
 		ChangeSelectForAllChildren,
-		computeInitialVisualStates
-		
+		computeInitialVisualStates,
+		searchTree
 	} from "../../helpers/tree-helpers";
 	
 	//required
@@ -23,6 +22,8 @@
 	//if true, will show checkboxes to elements with children
 	export let leafNodeCheckboxesOnly = false;
 
+	export let queryString = "";
+	export let searchParametr = "nodePath"
 
 	export let childDepth = 0;
 	export let parentId = null;
@@ -40,7 +41,6 @@
 
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
 
-	$:console.log(tree);
 	
 	function expandNodes(nodes) {
 		if (!nodes || !nodes.length) return;
@@ -72,7 +72,20 @@
 	//computes all visual states when component is first created
 	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId)
 
-	
+	$:filterTree(queryString)
+
+	function filterTree(queryString) {
+		if(queryString !== undefined && queryString.length > 0){
+			console.log("searching tree with qs:" + queryString)
+			tree = searchTree(tree,filterFunction(queryString),getParentId)
+		
+		}
+	}
+
+	function filterFunction(queryString){
+		return (x) => {console.log( searchParametr)
+			return x[searchParametr.toString] === queryString.toString}
+	}
 </script>
 
 <ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0}>
@@ -115,7 +128,7 @@
 								type="checkbox"
 								id={getNodeId(node)}
 								onclick="return false;"
-								class:invisible={leafNodeCheckboxesOnly}
+								disabled = {true}
 							/>
 						{/if}
 					{:else}

@@ -1,9 +1,4 @@
-//
-// export function intoTree(items) {
-// 	const nodePaths = items.map(x => x.nodePath)
-//
-// }
-//
+
 export function getParentNodePath(nodePath) {
 	return nodePath.substring(0, nodePath.lastIndexOf("."));
 }
@@ -51,9 +46,8 @@ export function allCHildren(tree, parentId, isChild) {
 	});
 	return children;
 }
-//--------------
-//selection
-//--------------
+
+//!! selection
 
 
 export function ChangeSelection(recursiveely, tree, nodePath, isChild, selectedProperty, getParentId) {
@@ -157,7 +151,7 @@ export function getVisualState(tree, node, isChild, selectedProperty, getParentI
 //changes status of parent of 
 function recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId) {
 
-	let parent = getParentNodePath(nodePath);
+	let parent = getParentId(nodePath);
 
 	let newstate;
 	tree.forEach(x => {
@@ -197,4 +191,49 @@ function computeChildrenVisualStates(tree, node, isChild, selectedProperty, getP
 		}
 	})
 	return tree;
+}
+
+
+//!! SEARCHING AND FILTERING
+
+export function searchTree(tree, filterFunction, getParentId) {
+	let result = [], matchingNodes = tree.filter(filterFunction);
+	console.log(filterFunction)
+	console.log("matching nodes length:" + matchingNodes.length)
+	matchingNodes.forEach(node => {
+		result.push(node)
+		result = addParents(tree,result,node,getParentId)
+	})
+	return result
+}
+
+//TODO delete export later
+export function addParents(tree, result, node, getParentId) {
+	let parentsIds = [], parentNodes = []
+	if(result === undefined)
+		result = []
+		console.log(node.nodePath)
+	while (node.nodePath.length > 0) {
+		node.nodePath = getParentId(node)
+		parentsIds.push(node.nodePath );
+	}
+
+	//finds nodes for ids
+	tree.forEach(n => {
+
+		if (parentsIds.some(parentId => {
+			return n.nodePath === parentId
+		})) {
+			parentNodes.push(n);
+		}
+	})
+	//removes duplicate nodePaths
+	parentNodes.forEach(n=>{
+		if((result.findIndex(x=>{return n.nodePath === x.nodePath }) < 0))
+			result.push(n)
+	})
+
+	
+	console.log(result)
+	return result
 }
