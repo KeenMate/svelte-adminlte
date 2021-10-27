@@ -1,3 +1,4 @@
+import { filter } from "lodash";
 
 export function getParentNodePath(nodePath) {
 	return nodePath.substring(0, nodePath.lastIndexOf("."));
@@ -47,10 +48,18 @@ export function allCHildren(tree, parentId, isChild) {
 	return children;
 }
 
+function getAllLeafNodes(tree){
+
+	return tree.filter(x=>{return x.hasChildren == undefined || x.hasChildren == false})
+}
+
+export function joinTrees(filteredTree,tree){
+	return tree.map(tnode => filteredTree.find(fnode => tnode.nodePath === fnode.nodePath) || tnode);
+}
 //!! selection
 
 
-export function ChangeSelection(recursiveely, tree, nodePath, isChild, selectedProperty, getParentId) {
+export function ChangeSelection(recursiveely, tree, nodePath, isChild, selectedProperty, getParentId,filteredTree) {
 	if (!recursiveely) {
 		//non recursiveely
 
@@ -61,7 +70,7 @@ export function ChangeSelection(recursiveely, tree, nodePath, isChild, selectedP
 
 		//only allow selection if it doesnt have any children
 		tree = addOrRemoveSelection(tree, nodePath, selectedProperty)
-		return recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId)
+		return recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId,filteredTree)
 
 
 	}
@@ -91,7 +100,7 @@ export function changeExpansion(tree, nodePath, expandedProperty) {
 
 }
 
-export function ChangeSelectForAllChildren(tree, parentId, isChild, selectedProperty, changeTo, getParentId) {
+export function ChangeSelectForAllChildren(tree, parentId, isChild, selectedProperty, changeTo, getParentId,filteredTree) {
 	tree = tree.map(x => {
 		//changes itself
 		if (parentId == x.nodePath) {
@@ -113,7 +122,7 @@ export function ChangeSelectForAllChildren(tree, parentId, isChild, selectedProp
 		}
 		return x;
 	});
-	tree = recomputeAllParentVisualState(tree, parentId, isChild, selectedProperty, getParentId)
+	tree = recomputeAllParentVisualState(tree, parentId, isChild, selectedProperty, getParentId,filteredTree)
 	return tree;
 }
 
@@ -127,8 +136,8 @@ function changeSelectedIfNParent(node, selectedProperty, changeTo) {
 	return node;
 }
 
-export function getVisualState(tree, node, isChild, selectedProperty, getParentId) {
-	let children = getParentChildrenTree(tree, node.nodePath, isChild, getParentId)
+export function getVisualState(filteredTree, node, isChild, selectedProperty, getParentId) {
+	let children = getParentChildrenTree(filteredTree, node.nodePath, isChild, getParentId)
 	//if every child is selected or vs=true return true
 	if (children.every(x => {
 		return x[selectedProperty] === true || x.__visual_state === "true"
@@ -149,73 +158,88 @@ export function getVisualState(tree, node, isChild, selectedProperty, getParentI
 }
 
 //changes status of parent of 
-function recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId) {
+function recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId,filteredTree) {
 
-	let parent = getParentId(nodePath);
+	let parent = getParentId({nodePath:nodePath});
 
 	let newstate;
-	tree.forEach(x => {
+	filteredTree.forEach(x => {
 		if (x.nodePath == parent) {
-			newstate = getVisualState(tree, x, isChild, selectedProperty, getParentId)
+			newstate = getVisualState(filteredTree, x, isChild, selectedProperty, getParentId)
 			x.__visual_state = newstate;
 			console.log("recomputing" + parent + " ->" + newstate)
 		}
 	})
 	if (getParentNodePath(parent) != '') {
 
-		tree = recomputeAllParentVisualState(tree, parent, isChild, selectedProperty, getParentId)
+		tree = recomputeAllParentVisualState(tree, parent, isChild, selectedProperty, getParentId,filteredTree)
 	}
 	return tree;
 }
 
 //computes visual states for all nodes with children
-export function computeInitialVisualStates(tree, isChild, selectedProperty, getParentId) {
+export function computeInitialVisualStates(tree, isChild, selectedProperty, getParentId,filteredTree) {
 	let rootELements = getParentChildrenTree(tree, null, isChild, getParentId);
 	rootELements.forEach((x) => {
 		if (x.hasChildren == true) {
-			tree = computeChildrenVisualStates(tree, x, isChild, selectedProperty, getParentId)
-			x.__visual_state = getVisualState(tree, x, isChild, selectedProperty, getParentId)
+			tree = computeChildrenVisualStates(tree, x, isChild, selectedProperty, getParentId,filteredTree)
+			x.__visual_state = getVisualState(filteredTree, x, isChild, selectedProperty, getParentId)
 		}
 	})
 	return tree;
 }
 
-function computeChildrenVisualStates(tree, node, isChild, selectedProperty, getParentId) {
+function computeChildrenVisualStates(tree, node, isChild, selectedProperty, getParentId,filteredTree) {
 	let children = getParentChildrenTree(tree, node.nodePath, isChild, getParentId);
 	//foreaches all children if it has children, it calls itself, then it computes __vs => will compute from childern to parent
 	children.forEach(x => {
 		if (x.hasChildren == true) {
 
 			tree = computeChildrenVisualStates(tree, x, isChild, selectedProperty, getParentId)
-			x.__visual_state = getVisualState(tree, x, isChild, selectedProperty, getParentId)
+			x.__visual_state = getVisualState(filteredTree, x, isChild, selectedProperty, getParentId)
 		}
 	})
 	return tree;
 }
 
+export function deleteSelected(tree) {
+	return tree.map((t) => {
+		let x = t;
+		x.__selected = false;
+		x.__visual_state = "false";
+		return x;
+	});
+}
 
 //!! SEARCHING AND FILTERING
 
-export function searchTree(tree, filterFunction, getParentId) {
-	let result = [], matchingNodes = tree.filter(filterFunction);
-	console.log(filterFunction)
-	console.log("matching nodes length:" + matchingNodes.length)
+export function searchTree(tree, filterFunction,recursive) {
+
+	let result = [], matchingNodes = [];
+	if(recursive){
+		matchingNodes =  getAllLeafNodes(tree).filter(filterFunction)
+	}
+	else{
+		matchingNodes = tree.filter(filterFunction)
+	}
+	//console.log("matching nodes length:" + matchingNodes.length)
 	matchingNodes.forEach(node => {
 		result.push(node)
-		result = addParents(tree,result,node,getParentId)
+		result = addParents(tree,result,node)
 	})
+	//console.log(result)
 	return result
 }
 
 //TODO delete export later
-export function addParents(tree, result, node, getParentId) {
+export function addParents(tree, result, node) {
 	let parentsIds = [], parentNodes = []
 	if(result === undefined)
 		result = []
-		console.log(node.nodePath)
-	while (node.nodePath.length > 0) {
-		node.nodePath = getParentId(node)
-		parentsIds.push(node.nodePath );
+	let nodePath = node.nodePath
+	while (nodePath.length > 0) {
+		nodePath = getParentNodePath(nodePath)
+		parentsIds.push(nodePath );
 	}
 
 	//finds nodes for ids
@@ -233,7 +257,6 @@ export function addParents(tree, result, node, getParentId) {
 			result.push(n)
 	})
 
-	
-	console.log(result)
 	return result
 }
+

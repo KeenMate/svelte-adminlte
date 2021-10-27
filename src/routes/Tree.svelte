@@ -2,48 +2,38 @@
   import { onMount } from "svelte";
   import toastr from "../helpers/toastr-helpers";
 
-  import { Checkbox, Card, LteButton,TextInput } from "../components";
-  import LteSwitch from "../components/form/input/LteSwitch.svelte";
-  import Radio from "../components/form/input/Radio.svelte";
-  import FormGroup from "../components/form/structure/FormGroup.svelte";
-  import Label from "../components/form/structure/Label.svelte";
-  import TreeView from "../components/ui/TreeView.svelte";
+  import { Checkbox, Card, LteButton, TextInput ,LteSwitch,Radio,FormGroup,Label,TreeView,TreeViewWSearch} from "../components";
 
-  //FIXME delete when done testing 
-  import { addParents, searchTree } from "../helpers/tree-helpers";
+  //FIXME delete when done testing
+  import { addParents, searchTree ,deleteSelected } from "../helpers/tree-helpers";
 
   let tree = [
-    { nodePath: "1", title: "FIRST", __visual_state: "indeterminate" },
+    { nodePath: "1", title: "1", __visual_state: "indeterminate" },
     { nodePath: "2", title: "2" },
 
     { nodePath: "3", title: "3", hasChildren: true, __expanded: true },
-    { nodePath: "3.1", title: "3.1" },
-    { nodePath: "3.2", title: "3.2", hasChildren: true, __expanded: false },
-
-    {
-      nodePath: "3.2.1",
-      title: "3.2.1",
-      hasChildren: true,
-      test: "test223",
-    },
-    { nodePath: "3.2.1.1", title: "3.2.1.1" },
+    { nodePath: "3.1", title: "Hecarim" },
+    { nodePath: "3.2", 
+    title: "3.2", 
+    hasChildren: true,
+     __expanded: false },
     {
       nodePath: "3.2.2",
-      title: "3.2.1",
+      title: "Visage",
       __expanded: true,
       __selected: true,
       test: "test223",
     },
     {
       nodePath: "3.2.3",
-      title: "3.2.1",
+      title: "Lycan",
       __expanded: true,
       __selected: true,
       test: "test223",
     },
     {
       nodePath: "3.2.4",
-      title: "3.2.1",
+      title: "Bloodseeker",
       __expanded: true,
       __selected: true,
     },
@@ -53,68 +43,57 @@
     {
       nodePath: "3.3.1",
       title: "3.3.1",
-      hasChildren: true,
       __expanded: true,
-      __selected: true,
+      __selected: false,
     },
-    { nodePath: "3.4", title: "3.4" },
+    { nodePath: "3.4", title: "	Omniknight" },
 
-    { nodePath: "4", title: "4" },
-    { nodePath: "5", title: "5" },
+    { nodePath: "4", title: "	Necrophos" },
+    { nodePath: "5", title: "	Underlord" },
 
     { nodePath: "6", title: "6", hasChildren: true },
     { nodePath: "6.1", title: "6.1", hasChildren: true },
-    { nodePath: "6.1.1", title: "6.2.1", __selected: true },
+    { nodePath: "6.1.1", title: "	Death Prophet", __selected: true },
 
-    { nodePath: "6.1.2", title: "6.1.2" },
-    { nodePath: "6.1.3", title: "6.1.3" },
+    { nodePath: "6.1.2", title: "Outworld Destroyer" },
+    { nodePath: "6.1.3", title: "Puck" },
     { nodePath: "6.2", title: "6.2", hasChildren: true },
 
     { nodePath: "6.2.1", title: "6.2.1", hasChildren: true },
 
-    { nodePath: "6.2.1.1", title: "6.2.1.1" },
-    { nodePath: "6.2.1.2", title: "6.2.1.2" },
-    { nodePath: "6.2.1.3", title: "6.2.1.3" },
-    { nodePath: "6.2.2", title: "6.2.2" },
+    { nodePath: "6.2.1.1", title: "Sniper" },
+    { nodePath: "6.2.1.2", title: "	Alchemist" },
+    { nodePath: "6.2.1.3", title: "Mirana" },
+    { nodePath: "6.2.2", title: "Batrider" },
     { nodePath: "7", title: "7" },
-    { nodePath: "8", title: "6", hasChildren: true },
-    { nodePath: "8.1", title: "6.1", hasChildren: true },
-    { nodePath: "8.1.1", title: "6.2.1" },
+    { nodePath: "8", title: "8", hasChildren: true },
+    { nodePath: "8.1", title: "8.1", hasChildren: true },
+    { nodePath: "8.1.1", title: "Night Stalker" },
 
-    { nodePath: "8.1.2", title: "6.1.2" },
-    { nodePath: "8.1.3", title: "6.1.3" },
-    { nodePath: "8.2", title: "6.2", hasChildren: true },
+    { nodePath: "8.1.2", title: "Lycan" },
+    { nodePath: "8.1.3", title: "Troll Warlord" },
+    { nodePath: "8.2", title: "8.2", hasChildren: true },
 
-    { nodePath: "8.2.1", title: "6.2.1", hasChildren: true },
+    { nodePath: "8.2.1", title: "8.2.1", hasChildren: true },
 
-    { nodePath: "8.2.1.1", title: "6.2.1.1" },
-    { nodePath: "8.2.1.2", title: "6.2.1.2" },
-    { nodePath: "8.2.1.3", title: "6.2.1.3" },
-    { nodePath: "8.2.2", title: "6.2.2" },
+    { nodePath: "8.2.1.1", title: "Bane" },
+    { nodePath: "8.2.1.2", title: "Ogre Magi" },
+    { nodePath: "8.2.1.3", title: "Luna" },
+    { nodePath: "8.2.2", title: "Keeper of the Light" },
   ];
 
-  $: filteredTree = filter(tree, hideGroup)
+  $: filteredTree = filter(tree, hideGroup);
+  $:console.log(tree);
 
   let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
   let recursive = true;
   let leafNodeCheckboxesOnly = false;
-  let queryString = "";
 
   function filter(tree, hide) {
-    return tree.filter((t) => !t.nodePath.startsWith(hide.toString()));
+    return tree.filter((t) => !t.nodePath.startsWith(hide.toString()))
   }
-
-  function deleteSelected() {
-    tree = tree.map((t) => {
-      let x = t;
-      x.__selected = false;
-      x.__visual_state = "false";
-      return x;
-    });
-  }
-
   onMount(() => {
     toastr.success("Hello there");
     console.log("Called toastr", toastr);
@@ -126,27 +105,24 @@
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree</svelte:fragment>
       {#if showTree}
-        <TreeView
+        <TreeViewWSearch
           {recursive}
-          bind:tree={filteredTree}
+          bind:filteredTree
+          bind:tree
           maxExpandedDepth="4"
           let:node
           bind:checkboxes={showCheckboxes}
           bind:leafNodeCheckboxesOnly
-          {queryString}
         >
-          {node.nodePath}
-        </TreeView>
+          {node.title}
+        </TreeViewWSearch>
       {/if}
+
     </Card>
   </div>
   <div class="col-3">
     <Card outline color="primary">
       <svelte:fragment slot="header">Tree options</svelte:fragment>
-      <FormGroup>
-        <TextInput bind:value={queryString} id="query_string" placeholder="search"></TextInput>
-        
-      </FormGroup>
       <FormGroup>
         <Checkbox
           level="danger"
@@ -219,14 +195,14 @@
     <Card outline color="primary"
       ><svelte:fragment slot="header">Selected</svelte:fragment>
       <ul>
-        {#each tree as tr}
-          {#if tr.__selected === true}
-            <li>{tr.nodePath}</li>
+        {#each tree as node}
+          {#if node.__selected === true}
+            <li>{node.nodePath} - {node.title}</li>
           {/if}
           <!-- {tr.__selected} - {tr.nodePath} <br/> -->
         {/each}
       </ul>
-      <LteButton on:click={deleteSelected}>delete selected</LteButton>
+      <LteButton on:click={() =>tree = deleteSelected(tree)}>delete selected</LteButton>
       <!-- FIXME delete when done testing-->
       <LteButton
         on:click={() =>
@@ -242,19 +218,14 @@
               },
               { nodePath: "6.2.1" },
             ],
-            { nodePath: "6.2.1.2" },
-            (node) => node.nodePath.substring(0, node.nodePath.lastIndexOf("."))
+            { nodePath: "6.2.1.2" }
           )}>add test</LteButton
       >
       <LteButton
         on:click={() =>
-          searchTree(
-            tree,
-            (x) => {
-              return x.nodePath.includes("3");
-            },
-            (node) => node.nodePath.substring(0, node.nodePath.lastIndexOf("."))
-          )}
+          searchTree(tree, (x) => {
+            return x.nodePath.includes("3");
+          })}
       >
         searchtest</LteButton
       >

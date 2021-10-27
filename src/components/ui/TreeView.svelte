@@ -14,6 +14,9 @@
 	
 	//required
 	export let tree = null;
+	export let filteredTree =[];
+
+
 	export let treeId = null;
 	export let maxExpandedDepth = 0;
 
@@ -21,9 +24,6 @@
 	export let checkboxes = false;
 	//if true, will show checkboxes to elements with children
 	export let leafNodeCheckboxesOnly = false;
-
-	export let queryString = "";
-	export let searchParametr = "nodePath"
 
 	export let childDepth = 0;
 	export let parentId = null;
@@ -37,11 +37,14 @@
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
-	$:parentChildrenTree =  getParentChildrenTree(tree,parentId,isChild,getParentId)
-
+	$:	parentChildrenTree =  getParentChildrenTree(filteredTree === undefined?tree:filteredTree,parentId,isChild,getParentId)
+	$:	ComputeVisualTree(filteredTree)
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
-
 	
+	function ComputeVisualTree(filteredTree) { 
+		tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId,filteredTree)
+	}
+
 	function expandNodes(nodes) {
 		if (!nodes || !nodes.length) return;
 		nodes.forEach((x) => toggleExpansion(x, true));
@@ -61,31 +64,31 @@
 	//checkboxes
 	function selectionChanged(nodePath) {
 		console.log(nodePath);
-		tree = ChangeSelection(recursive, tree, nodePath,isChild, selectedProperty,getParentId);
+		tree = ChangeSelection(recursive, tree, nodePath,isChild, selectedProperty,getParentId,filteredTree);
 	}
 
 	//selectes
 	function selectChildren(node,e) { 
-		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked,getParentId)
+		tree = ChangeSelectForAllChildren(tree,getId(node),isChild,selectedProperty,e.target.checked,getParentId,filteredTree)
 	}
 
 	//computes all visual states when component is first created
-	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId)
+	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId,filteredTree)
 
-	$:filterTree(queryString)
+	// $:filterTree(queryString)
 
-	function filterTree(queryString) {
-		if(queryString !== undefined && queryString.length > 0){
-			console.log("searching tree with qs:" + queryString)
-			tree = searchTree(tree,filterFunction(queryString),getParentId)
+	// function filterTree(queryString) {
+	// 	if(queryString !== undefined && queryString.length > 0){
+	// 		console.log("searching tree with qs:" + queryString)
+	// 		tree = searchTree(tree,filterFunction(queryString),getParentId)
 		
-		}
-	}
+	// 	}
+	// }
 
-	function filterFunction(queryString){
-		return (x) => {console.log( searchParametr)
-			return x[searchParametr.toString] === queryString.toString}
-	}
+	// function filterFunction(queryString){
+	// 	return (x) => {
+	// 		return x[searchParametr].includes(queryString)}
+	// }
 </script>
 
 <ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0}>
@@ -153,6 +156,7 @@
 					{getParentId}
 					{maxExpandedDepth}
 					bind:tree
+					bind:filteredTree
 					{recursive}
 					childDepth={childDepth + 1}
 					parentId={getId(node)}
