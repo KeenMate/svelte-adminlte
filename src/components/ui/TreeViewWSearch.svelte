@@ -1,7 +1,7 @@
 <script>
-  import { FormGroup, TextInput, TreeView } from "../";
+  import { FormGroup, TextInput, TreeView, LteButton,InputGroup,InputGroupAppend} from "../";
 
-  import {searchTree,joinTrees} from "../../helpers/tree-helpers";
+  import {searchTree,changeEveryExpansion} from "../../helpers/tree-helpers";
 
   export let queryString = "";
   export let showInput = true;
@@ -14,9 +14,11 @@
   export let leafNodeCheckboxesOnly = false;
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
-  $:filteredTree = filter(tree,queryString);
-  $:console.log(tree);
+  export let disableOrHide = false;
 
+  let expand= true;
+  $:filteredTree = filter(tree,queryString);
+  $:showInputChanged(showInput)
   function filter(tree,queryString) {
     return searchTree(
       tree,
@@ -29,14 +31,27 @@
     );
   }
 
+  function showInputChanged(showInput) {
+    if(showInput == false){
+      queryString="";
+      filteredTree = tree;
+    }
+  }
 
-  //TODO trochu zlepsit styl
-  //TODO moznost expandovat vsechno v filtered tree
+  function expansionClickHandler() {
+    tree = changeEveryExpansion(tree,expandedProperty,expand);
+    expand = !expand
+  }
 </script>
 
 <FormGroup
   >{#if showInput == true}
+  <InputGroup>
     <TextInput placeholder="type to search" bind:value={queryString}/>
+    <InputGroupAppend>
+    <LteButton on:click={expansionClickHandler}>{#if expand} expand {:else}condense{/if}</LteButton>
+  </InputGroupAppend>
+  </InputGroup>
   {/if}
   {#if (filteredTree || []).length > 0 }
   <TreeView
@@ -49,6 +64,7 @@
     bind:leafNodeCheckboxesOnly
     {expandedProperty}
     {selectedProperty}
+    {disableOrHide}
     let:node={node}
   >
   <slot node={node}/>

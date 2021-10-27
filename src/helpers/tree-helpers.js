@@ -157,7 +157,7 @@ export function getVisualState(filteredTree, node, isChild, selectedProperty, ge
 
 }
 
-//changes status of parent of 
+//changes status of all parents of given nodepath until root 
 function recomputeAllParentVisualState(tree, nodePath, isChild, selectedProperty, getParentId,filteredTree) {
 
 	let parent = getParentId({nodePath:nodePath});
@@ -195,7 +195,7 @@ function computeChildrenVisualStates(tree, node, isChild, selectedProperty, getP
 	children.forEach(x => {
 		if (x.hasChildren == true) {
 
-			tree = computeChildrenVisualStates(tree, x, isChild, selectedProperty, getParentId)
+			tree = computeChildrenVisualStates(tree, x, isChild, selectedProperty, getParentId,filteredTree)
 			x.__visual_state = getVisualState(filteredTree, x, isChild, selectedProperty, getParentId)
 		}
 	})
@@ -231,8 +231,7 @@ export function searchTree(tree, filterFunction,recursive) {
 	return result
 }
 
-//TODO delete export later
-export function addParents(tree, result, node) {
+ function addParents(tree, result, node) {
 	let parentsIds = [], parentNodes = []
 	if(result === undefined)
 		result = []
@@ -260,3 +259,9 @@ export function addParents(tree, result, node) {
 	return result
 }
 
+export function changeEveryExpansion(tree,expandedProperty,changeTo){
+	return 	tree.map((node)=>{
+		node[expandedProperty] = changeTo;
+		return node;
+	})
+}

@@ -3,9 +3,7 @@
   import toastr from "../helpers/toastr-helpers";
 
   import { Checkbox, Card, LteButton, TextInput ,LteSwitch,Radio,FormGroup,Label,TreeView,TreeViewWSearch} from "../components";
-
-  //FIXME delete when done testing
-  import { addParents, searchTree ,deleteSelected } from "../helpers/tree-helpers";
+  import { deleteSelected } from "../helpers/tree-helpers";
 
   let tree = [
     { nodePath: "1", title: "1", __visual_state: "indeterminate" },
@@ -82,18 +80,15 @@
     { nodePath: "8.2.2", title: "Keeper of the Light" },
   ];
 
-  $: filteredTree = filter(tree, hideGroup);
-  $:console.log(tree);
 
   let showCheckboxes = true;
   let hideGroup = 1;
   let showTree = true;
   let recursive = true;
   let leafNodeCheckboxesOnly = false;
+  let search = true;
+  let disableOrHide = false;
 
-  function filter(tree, hide) {
-    return tree.filter((t) => !t.nodePath.startsWith(hide.toString()))
-  }
   onMount(() => {
     toastr.success("Hello there");
     console.log("Called toastr", toastr);
@@ -107,12 +102,13 @@
       {#if showTree}
         <TreeViewWSearch
           {recursive}
-          bind:filteredTree
           bind:tree
-          maxExpandedDepth="4"
+          maxExpandedDepth="5"
           let:node
-          bind:checkboxes={showCheckboxes}
+          bind:showCheckboxes={showCheckboxes}
           bind:leafNodeCheckboxesOnly
+          showInput={search}
+          {disableOrHide}
         >
           {node.title}
         </TreeViewWSearch>
@@ -156,32 +152,21 @@
         </Checkbox>
       </FormGroup>
       <FormGroup>
-        <Checkbox>
-          <Radio id="hide1" bind:group={hideGroup} name="hide" value={1}
-            ><Label inputId="hide1">Hide 1</Label></Radio
-          >
+        <Checkbox
+          name="show-search"
+          id="show-search"
+          bind:checked={search}
+        >
+          <Label inputId="show-search">show search</Label>
         </Checkbox>
-        <Checkbox>
-          <Radio
-            id="hide2"
-            level="warning"
-            bind:group={hideGroup}
-            name="hide"
-            value={2}
-          >
-            <Label inputId="hide2">Hide 2</Label>
-          </Radio>
-        </Checkbox>
-        <Checkbox>
-          <Radio
-            id="hide3"
-            level="danger"
-            bind:group={hideGroup}
-            name="hide"
-            value={3}
-          >
-            <Label inputId="hide3">Hide 3</Label>
-          </Radio>
+      </FormGroup>
+      <FormGroup>
+        <Checkbox
+          name="disable-or-hide"
+          id="disable-or-hide"
+          bind:checked={disableOrHide}
+        >
+          <Label inputId="disable-or-hide">disable or hide</Label>
         </Checkbox>
       </FormGroup>
       <LteSwitch
@@ -203,32 +188,6 @@
         {/each}
       </ul>
       <LteButton on:click={() =>tree = deleteSelected(tree)}>delete selected</LteButton>
-      <!-- FIXME delete when done testing-->
-      <LteButton
-        on:click={() =>
-          addParents(
-            tree,
-            [
-              { nodePath: "6" },
-              {
-                nodePath: "6",
-                title: "6",
-                hasChildren: true,
-                __visual_state: "indeterminate",
-              },
-              { nodePath: "6.2.1" },
-            ],
-            { nodePath: "6.2.1.2" }
-          )}>add test</LteButton
-      >
-      <LteButton
-        on:click={() =>
-          searchTree(tree, (x) => {
-            return x.nodePath.includes("3");
-          })}
-      >
-        searchtest</LteButton
-      >
     </Card>
   </div>
 </div>

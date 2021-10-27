@@ -8,8 +8,7 @@
 		changeExpansion,
 		getParentChildrenTree,
 		ChangeSelectForAllChildren,
-		computeInitialVisualStates,
-		searchTree
+		computeInitialVisualStates
 	} from "../../helpers/tree-helpers";
 	
 	//required
@@ -24,6 +23,8 @@
 	export let checkboxes = false;
 	//if true, will show checkboxes to elements with children
 	export let leafNodeCheckboxesOnly = false;
+	//true = disabel hide = false
+	export let disableOrHide = false
 
 	export let childDepth = 0;
 	export let parentId = null;
@@ -63,7 +64,7 @@
 
 	//checkboxes
 	function selectionChanged(nodePath) {
-		console.log(nodePath);
+		//console.log(nodePath);
 		tree = ChangeSelection(recursive, tree, nodePath,isChild, selectedProperty,getParentId,filteredTree);
 	}
 
@@ -75,20 +76,6 @@
 	//computes all visual states when component is first created
 	tree = computeInitialVisualStates(tree, isChild, selectedProperty,getParentId,filteredTree)
 
-	// $:filterTree(queryString)
-
-	// function filterTree(queryString) {
-	// 	if(queryString !== undefined && queryString.length > 0){
-	// 		console.log("searching tree with qs:" + queryString)
-	// 		tree = searchTree(tree,filterFunction(queryString),getParentId)
-		
-	// 	}
-	// }
-
-	// function filterFunction(queryString){
-	// 	return (x) => {
-	// 		return x[searchParametr].includes(queryString)}
-	// }
 </script>
 
 <ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0}>
@@ -127,12 +114,22 @@
 								indeterminate={node.__visual_state == "indeterminate"}
 							/>
 						{:else}
+						{#if disableOrHide}
 							<input
 								type="checkbox"
 								id={getNodeId(node)}
 								onclick="return false;"
 								disabled = {true}
 							/>
+							{:else}
+
+							<input
+								type="checkbox"
+								id={getNodeId(node)}
+								onclick="return false;"
+								class:invisible={!disableOrHide}	
+							/>
+							{/if}
 						{/if}
 					{:else}
 						<input
@@ -162,6 +159,7 @@
 					parentId={getId(node)}
 					let:node={nodeNested}
 					{leafNodeCheckboxesOnly}
+					{disableOrHide}
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -174,8 +172,15 @@
 </ul>
 
 <style lang="sass">
+	$treeview-lines: dotted black 1px
 :global
 	.treeview
+		padding-left: 1em
+
+		> :first-child
+			border-left	: none
+			padding-left: 1px
+
 		ul, li
 			list-style: none
 			margin: 0
@@ -184,20 +189,20 @@
 			margin-left: 1.5em
 		li
 			
-			border: 1px dotted black
+			border: $treeview-lines
 			border-width: 0 0 1px 1px
 			&:last-child	> ul
-				border-left: 1px solid white !important
+				border-left: 1px solid white 
 			
 			div
 				margin-left: 0
 				
 
 			ul
-				border-top:1px dotted black
+				border-top: $treeview-lines
 				margin-left: -1px
 				padding-left: 1.25em
-				border-left: none !important
+				border-left: none 
 			
 		.has-children
 			border-bottom: 0px
