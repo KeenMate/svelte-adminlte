@@ -20,6 +20,10 @@ export { default as Multiselect } from "./form/input/Multiselect.svelte";
 export { default as Textarea } from "./form/input/Textarea.svelte";
 export { default as TextInput } from "./form/input/TextInput.svelte";
 export { default as NumberInput } from "./form/input/NumberInput.svelte";
+export { default as Radio } from "./form/input/Radio.svelte";
+export { default as LteSwitch } from "./form/input/LteSwitch.svelte";
+
+
 
 /* [2.2] Form > Structure */
 export { default as Form } from "./form/structure/Form.svelte";
@@ -78,6 +82,7 @@ export { default as ModalCloseButton } from "./ui/ModalCloseButton.svelte";
 export { default as Pagination } from "./ui/Pagination.svelte";
 export { default as PasswordStrength } from "./ui/PasswordStrength.svelte";
 export { default as TreeView } from "./ui/TreeView.svelte";
+export { default as TreeViewWSearch } from "./ui/TreeViewWSearch.svelte";
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte";
