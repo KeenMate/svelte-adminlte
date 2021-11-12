@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   /* @font-face {
 	font-family: 'Montserrat';
 	font-style: normal;
@@ -35,6 +35,7 @@
     body {
       padding: 0;
       margin: 0;
+      
     }
   }
 
