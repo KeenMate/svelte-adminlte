@@ -38,6 +38,8 @@ export { default as InputGroup } from "./form/structure/InputGroup.svelte";
 export { default as InputGroupAppend } from "./form/structure/InputGroupAppend.svelte";
 export { default as InputGroupPrepend } from "./form/structure/InputGroupPrepend.svelte";
 export { default as Label } from "./form/structure/Label.svelte";
+export { default as FlexContainer } from "./form/structure/FlexContainer.svelte";
+
 
 /* [3] Shared */
 export { default as PhonePrefixCombo } from "./shared/PhonePrefixCombo.svelte";
