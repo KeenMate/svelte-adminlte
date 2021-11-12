@@ -38,7 +38,7 @@ export { default as InputGroup } from "./form/structure/InputGroup.svelte";
 export { default as InputGroupAppend } from "./form/structure/InputGroupAppend.svelte";
 export { default as InputGroupPrepend } from "./form/structure/InputGroupPrepend.svelte";
 export { default as Label } from "./form/structure/Label.svelte";
-export { default as FlexContainer } from "./form/structure/FlexContainer.svelte";
+
 
 
 /* [3] Shared */
@@ -51,6 +51,7 @@ export { default as KeenFooter } from "./structure/KeenFooter.svelte";
 export { default as Modal } from "./structure/Modal.svelte";
 export { default as OneColumnNarrow } from "./structure/OneColumnNarrow.svelte";
 export { default as PageHeader } from "./structure/PageHeader.svelte";
+export { default as FlexContainer } from "./structure/FlexContainer.svelte";
 
 /* [4.1] Structure > Navigation */
 export { default as BrandNavLogo } from "./structure/navigation/BrandNavLogo.svelte";
