@@ -99,6 +99,7 @@ export { default as ModalCloseButton } from "./ui/ModalCloseButton.svelte";
 export { default as Pagination } from "./ui/Pagination.svelte";
 export { default as PasswordStrength } from "./ui/PasswordStrength.svelte";
 export { default as TreeView } from "./ui/TreeView.svelte";
+export { default as TreeViewWSearch } from "./ui/TreeViewWSearch.svelte";
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte";
