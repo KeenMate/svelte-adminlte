@@ -8,6 +8,7 @@
 	export let value
 	export let disabled = false
 	export let readonly = false
+	export let id = "ckEditorId"
 
 	let editor = DecoupledEditor
 	let editorInstance = null
@@ -44,7 +45,7 @@
 </script>
 
 <main>
-	<div>
+	<div  {id}>
 		<CKEditor
 			bind:editor
 			bind:config={editorConfig}
