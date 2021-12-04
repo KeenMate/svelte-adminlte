@@ -9,7 +9,7 @@
 	export let disabled = false
 	export let readonly = false
 	export let id = "ckEditorId"
-	export let toolbar = {};
+	export let toolbar = null;
 
 	let editor = DecoupledEditor
 	let editorInstance = null
@@ -18,8 +18,9 @@
 	let editorConfig
 
 	$: {
-		const tmpConfig = toolbar;
-
+		const tmpConfig = {};
+		if(toolbar)
+			tmpConfig.toolbar = toolbar
 		if (readonly)
 			tmpConfig.toolbar = {items: []}
 
