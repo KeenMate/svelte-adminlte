@@ -28,7 +28,7 @@
       {/if}
     </div>
   {/if}
-  <div class="card-body" class:no-padding={noPadding}>
+  <div class="card-body" class:p-0={noPadding}>
     <slot />
   </div>
   {#if $$slots.footer}

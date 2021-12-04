@@ -15,6 +15,7 @@ export { default as WarningAlert } from "./alerts/WarningAlert.svelte";
 
 /* [2] Form */
 export { default as PhoneField } from "./form/PhoneField.svelte";
+export { default as LteSwitch } from "./form/LteSwitch.svelte";
 // export { default as UploadModal } from "./form/UploadModal.svelte";
 
 /* [2.1] Form > Input */
@@ -99,6 +100,7 @@ export { default as ModalCloseButton } from "./ui/ModalCloseButton.svelte";
 export { default as Pagination } from "./ui/Pagination.svelte";
 export { default as PasswordStrength } from "./ui/PasswordStrength.svelte";
 export { default as TreeView } from "./ui/TreeView.svelte";
+export { default as TreeViewWSearch } from "./ui/TreeViewWSearch.svelte";
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte";
