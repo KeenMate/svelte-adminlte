@@ -10,6 +10,8 @@
   export let disabled = false;
   export let inputMask = null;
   export let invalid = false;
+  export let min = "";
+  export let max = "";
 
   export let inputElement = null;
 
@@ -33,5 +35,7 @@
   {pattern}
   {readonly}
   {disabled}
+  {min}
+  {max}
   on:keypress
 />

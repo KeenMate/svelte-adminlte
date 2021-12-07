@@ -12,10 +12,18 @@
   $: sliderClasses = checked
 	  && checkedClass
     || uncheckedClass
+
+function change() {
+	dispatch("change", !checked)
+	if(!checked){
+		dispatch("checked", !checked)
+	}
+	dispatch("unchecked", !checked)
+}
 </script>
 
 <label class="switch">
-	<input type="checkbox" bind:checked />
+	<input type="checkbox" bind:checked on:change={change}/>
 	<span class="slider {sliderClasses}"></span>
 </label>
 

@@ -7,6 +7,9 @@
   export let pattern = null;
   export let readonly = false;
   export let disabled = false;
+  export let column = "";
+  export let maxlength = "";
+
 
   let inputElement = null;
 
@@ -19,6 +22,7 @@
   bind:this={inputElement}
   class="form-control input-sm {$$props.class || ''}"
   {rows}
+  {column}
   bind:value
   {name}
   {id}
@@ -26,4 +30,5 @@
   {pattern}
   {readonly}
   {disabled}
+  {maxlength}
 />
