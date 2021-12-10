@@ -3,11 +3,11 @@
   export let value = "";
   export let name = "";
   export let rows = 2;
+  export let columns = "";
   export let placeholder = "";
   export let pattern = null;
   export let readonly = false;
   export let disabled = false;
-  export let column = "";
   export let maxlength = "";
 
 
@@ -22,7 +22,7 @@
   bind:this={inputElement}
   class="form-control input-sm {$$props.class || ''}"
   {rows}
-  {column}
+  {columns}
   bind:value
   {name}
   {id}
