@@ -17,8 +17,9 @@ function change() {
 	dispatch("change", !checked)
 	if(!checked){
 		dispatch("checked", !checked)
-	}
+	}else{
 	dispatch("unchecked", !checked)
+	}
 }
 </script>
 
