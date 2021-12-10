@@ -21,6 +21,7 @@
 <textarea
   bind:this={inputElement}
   class="form-control input-sm {$$props.class || ''}"
+  class:set-cols={cols}
   {rows}
   {cols}
   bind:value
@@ -32,3 +33,8 @@
   {disabled}
   {maxlength}
 />
+<style>
+  .set-cols{
+    width: auto;
+  }
+</style>
