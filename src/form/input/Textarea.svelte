@@ -3,7 +3,7 @@
   export let value = "";
   export let name = "";
   export let rows = 2;
-  export let columns = "";
+  export let cols = "";
   export let placeholder = "";
   export let pattern = null;
   export let readonly = false;
@@ -22,7 +22,7 @@
   bind:this={inputElement}
   class="form-control input-sm {$$props.class || ''}"
   {rows}
-  {columns}
+  {cols}
   bind:value
   {name}
   {id}
