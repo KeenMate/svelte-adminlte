@@ -11,9 +11,9 @@
   export let disabledClass = ""
   export let disabled = false
 
-  $: sliderClasses = disabled ? disabledClass : checked
-	  && checkedClass
-    || uncheckedClass
+  $: sliderClasses = disabled ? disabledClass :( checked
+	  ? checkedClass
+    : uncheckedClass)
 
 function change() {
 	dispatch("change", !checked)
