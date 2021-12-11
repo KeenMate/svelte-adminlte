@@ -17,6 +17,8 @@
   export let disabled = false;
   export let visibleMonths = 2;
   export let columns = 2;
+  export let lockDaysFilter = undefined;
+  export let lockDays = [];
   // export let alwaysShowCalendars = false;
   // export let showCustomRangeLabel = false;
   // export let autoApply = false;
@@ -36,7 +38,8 @@
       numberOfMonths: visibleMonths,
       numberOfColumns: columns,
       // dropdowns: {"minYear":1990,"maxYear":2030,"months":true,"years":true},
-      lockDaysFilter: disabled ? (_) => true : undefined,
+      lockDays:lockDays,
+      lockDaysFilter: disabled ? (_) => true : lockDaysFilter,
     });
   }
 </script>
