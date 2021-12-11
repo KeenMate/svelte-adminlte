@@ -8,8 +8,10 @@
   export let checked = false
   export let checkedClass = ""
   export let uncheckedClass = ""
+  export let disabledClass = ""
+  export let disabled = false
 
-  $: sliderClasses = checked
+  $: sliderClasses = disabled ? disabledClass : checked
 	  && checkedClass
     || uncheckedClass
 
@@ -24,7 +26,7 @@ function change() {
 </script>
 
 <label class="switch">
-	<input type="checkbox" bind:checked on:change={change}/>
+	<input type="checkbox" bind:checked on:change={change} {disabled}/>
 	<span class="slider {sliderClasses}"></span>
 </label>
 
