@@ -280,6 +280,7 @@
   export let expandedProperty = "__expanded";
   export let selectedProperty = "__selected";
   export let disableOrHide = false;
+  export let noDataFoundText = "No data found."
 
   let expand = true;
   $: filteredTree = filter(tree, queryString);
@@ -337,6 +338,6 @@
       <slot {node} />
     </TreeView>
   {:else}
-    <b>zadanemu vyrazu neodpovidaji zadne polozky</b>
+    <b>{noDataFoundText}</b>
   {/if}
 </FormGroup>
