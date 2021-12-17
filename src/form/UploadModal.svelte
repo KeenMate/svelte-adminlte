@@ -8,7 +8,6 @@
 	import "../../../node_modules/@uppy/core/dist/style.css"
 	import "../../../node_modules/@uppy/dashboard/dist/style.css"
 	import toastr from "../../helpers/toastr-helpers"
-	import uppyLocale from "../../constants/uppy-locale"
 
 	const dispatch = createEventDispatcher()
 
@@ -34,7 +33,6 @@
 		.use(XHRUpload, {
 			endpoint,
 			fieldName,
-			locale: uppyLocale,
 			limit: simultaneousUploads
 		})
 
@@ -51,7 +49,6 @@
 	$: uppy.getPlugin("XHRUpload").setOptions({
 		endpoint,
 		fieldName,
-		locale: uppyLocale,
 		limit: simultaneousUploads
 	})
 
