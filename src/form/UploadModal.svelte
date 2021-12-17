@@ -7,7 +7,7 @@
 	import XHRUpload from "@uppy/xhr-upload"
 	import "../../../node_modules/@uppy/core/dist/style.css"
 	import "../../../node_modules/@uppy/dashboard/dist/style.css"
-	import toastr from "../../helpers/toastr-helpers"
+	import toastr from "../toasts/toastr"
 
 	const dispatch = createEventDispatcher()
 
