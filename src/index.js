@@ -16,7 +16,7 @@ export { default as WarningAlert } from "./alerts/WarningAlert.svelte";
 /* [2] Form */
 export { default as PhoneField } from "./form/PhoneField.svelte";
 export { default as LteSwitch } from "./form/LteSwitch.svelte";
-// export { default as UploadModal } from "./form/UploadModal.svelte";
+export { default as UploadModal } from "./form/UploadModal.svelte";
 
 /* [2.1] Form > Input */
 export { default as Checkbox } from "./form/input/Checkbox.svelte";
