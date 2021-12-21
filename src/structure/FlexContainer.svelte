@@ -1,25 +1,15 @@
 <script>
-  export let row = false;
-  export let inline = false;
-  export let collumn = false;
-  export let justifyContent = null;
-  export let alignItems = null;
-  export let wrap = true;
-  export let gap = null;
+	export let row = false;
+	export let inline = false;
+	export let collumn = false;
+	export let justifyContent = null;
+	export let alignItems = null;
+	export let wrap = true;
+
 </script>
 
-<div
-  class:row
-  class="{inline ? 'd-inline-flex' : 'd-flex'} 
-	{justifyContent ? 'justify-content-' + justifyContent : ''} 
-	{alignItems ? 'align-items-' + alignItems : ''}
-	{wrap ? 'flex-wrap' : ''} 
-	{justifyContent ? 'justify-content-' + justifyContent : ''} 
-	{gap ? 'gap-' + gap : ''} 
-	{$$props.class ||''}"
-  class:flex-column={collumn}
->
-  <slot />
+<div class:row={row} class="{inline ? "d-inline-flex" : "d-flex"} {justifyContent ? "justify-content-" + justifyContent : ""} {alignItems ? "align-items-" + alignItems : ""} {wrap ? "flex-wrap": ""}{$$props.class || ''}" class:flex-column={collumn}>
+	<slot />
 </div>
 
 <!-- <style>
