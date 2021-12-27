@@ -8,7 +8,7 @@
 
 </script>
 
-<div class:row={row} class="{inline ? "d-inline-flex" : "d-flex"} {justifyContent ? "justify-content-" + justifyContent : ""} {alignItems ? "align-items-" + alignItems : ""} {wrap ? "flex-wrap": ""}{$$props.class || ''}" class:flex-column={collumn}>
+<div class:row={row} class="{inline ? "d-inline-flex" : "d-flex"} {justifyContent ? "justify-content-" + justifyContent : ""} {alignItems ? "align-items-" + alignItems : ""} {wrap ? "flex-wrap": ""} {$$props.class || ''}" class:flex-column={collumn}>
 	<slot />
 </div>
 
