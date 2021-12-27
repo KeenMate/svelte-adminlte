@@ -9,26 +9,38 @@
   export let phone = "";
 
   let phonePrefix = "";
+  let phoneNumber = "";
 
   $: updatePhonePrefix(phone);
+  $: handleInput(phoneNumber);
 
   function onPhonePrefixChange(ev) {
     const { detail: newPrefix } = ev;
-
-    let thePhone = phone;
-    if (phonePrefix) thePhone = thePhone.substr(phonePrefix.length + 1);
-
-    phonePrefix = newPrefix;
-
-    dispatch("input", `${newPrefix && (newPrefix + " " || "")}${thePhone}`);
+    if (phone != null && phone != "") {
+      phonePrefix = newPrefix;
+      dispatch("input", `${ (phonePrefix + " " || "")}${phoneNumber}`);
+    }
   }
 
   function updatePhonePrefix(thePhone) {
-    if (!thePhone) return "";
+    if (!thePhone) return;
 
     const [_, match] = new RegExp(/^(\+\d{1,3})?/).exec(thePhone);
 
     phonePrefix = match;
+    if(phonePrefix){
+      phoneNumber = thePhone.toString().substr(phonePrefix.length +1,thePhone.length-(phonePrefix.length +1))
+
+    }
+    else{
+      phoneNumber = thePhone;
+    }
+  }
+
+  function handleInput(phonenumber) {
+    phone = `${phonePrefix ? phonePrefix + " " : ""}${phonenumber}`;
+
+    dispatch("input", `${phonePrefix &&  phonePrefix != ""? phonePrefix + " " : ""}${phonenumber}`);
   }
 </script>
 
@@ -42,13 +54,12 @@
     </Label>
 
     <FormInput
-      value={phone}
+      bind:value={phoneNumber}
       name="phone"
       id="phone-number"
       type="tel"
       title="Enter phone in format: +123 123123123"
       placeholder="Your contact phone"
-      on:input
     />
   </div>
 </div>
