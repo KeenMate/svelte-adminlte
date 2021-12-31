@@ -1,8 +1,10 @@
-import "@fortawesome/fontawesome-free/css/all.css";
-import "icheck-bootstrap/icheck-bootstrap.css";
-import "admin-lte/build/scss/adminlte.scss";
-import "toastr/build/toastr.css";
-import "admin-lte/dist/js/adminlte";
+
+// todo: move to dev code
+// import "@fortawesome/fontawesome-free/css/all.css";
+// import "icheck-bootstrap/icheck-bootstrap.css";
+// import "admin-lte/build/scss/adminlte.scss";
+// import "toastr/build/toastr.css";
+// import "admin-lte/dist/js/adminlte";
 
 export { getConfig, setConfig } from "./config";
 

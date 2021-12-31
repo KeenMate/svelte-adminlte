@@ -18,6 +18,9 @@
     "rollup": "^2.3.4",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-svelte": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "icheck-bootstrap": "^3.0.1",
+    "admin-lte": "^3.1.0",
     "sass": "^1.39.2",
     "svelte": "^3.0.0",
     "svelte-preprocess": "^4.6.9",
@@ -25,20 +28,17 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-decoupled-document": "^28.0.0",
-    "@fortawesome/fontawesome-free": "^5.15.4",
     "@uppy/core": "^1.18.1",
     "@uppy/dashboard": "^1.19.1",
     "@uppy/svelte": "^0.1.9",
     "@uppy/xhr-upload": "^1.7.2",
-    "admin-lte": "^3.1.0",
     "ckeditor5-svelte": "^0.0.10",
-    "icheck-bootstrap": "^3.0.1",
     "inputmask": "^5.0.6",
     "litepicker": "^2.0.11",
     "lodash": "^4.17.21",
-    "luxon": "^2.0.2",
-    "sortablejs": "^1.14.0",
-    "svelte-select": "^4.4.1",
+    // "luxon": "^2.0.2",
+    // "sortablejs": "^1.14.0",
+    // "svelte-select": "^4.4.1",
     "toastr": "^2.1.4"
   }
 }
