@@ -6,8 +6,8 @@
 	import Dashboard from "@uppy/dashboard"
 	import XHRUpload from "@uppy/xhr-upload"
 	import toastr from "../toasts/toastr"
-	import "../../../@uppy/core/dist/style.css"
-	import "../../../@uppy/dashboard/dist/style.css"
+	import "@uppy/core/dist/style.css"
+	import "@uppy/dashboard/dist/style.css"
 
 	const dispatch = createEventDispatcher()
 
