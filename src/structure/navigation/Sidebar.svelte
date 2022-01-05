@@ -9,11 +9,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar {sidebarColor} elevation-4">
   <!-- Brand Logo -->
-  <a href="#/" class="brand-link">
-    <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8"> -->
-    <slot name=header></slot>
-  </a>
+  <slot name=header></slot>
 
   <!-- Sidebar -->
   <div class="sidebar">
