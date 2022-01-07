@@ -1,7 +1,9 @@
 <script>
 	import TableRowFullWidth from "./TableRowFullWidth.svelte"
+
+	export let emptyRowText = "No item to show"
 </script>
 
 <TableRowFullWidth>
-	<h5>Žádné položky k zobrazení</h5>
+	<h5>{emptyRowText}</h5>
 </TableRowFullWidth>

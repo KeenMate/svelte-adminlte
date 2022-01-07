@@ -1,5 +1,7 @@
 <script>
   import TableEmptyRow from "./TableEmptyRow.svelte";
+
+  export let emptyRowText;
 </script>
 
 <table class="table table-sm data-table {$$props.class || ''}">
@@ -8,7 +10,7 @@
   </thead>
   <tbody>
     <slot>
-      <TableEmptyRow />
+      <TableEmptyRow emptyRowText={emptyRowText}/>
     </slot>
   </tbody>
 </table>

@@ -1,9 +1,11 @@
 <script>
 	import TableRowFullWidth from "./TableRowFullWidth.svelte"
+
+	export let errorText = "Couldn't load data"
 </script>
 
 <TableRowFullWidth>
 	<h5 class="text-center">
-		Nepodařilo se načíst data
+		{errorText}
 	</h5>
 </TableRowFullWidth>
