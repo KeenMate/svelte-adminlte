@@ -10,6 +10,7 @@
   export let disabled = false;
   export let inputMask = null;
   export let invalid = false;
+  export let maxlength = ""
 
   export let inputElement = null;
 
@@ -33,5 +34,6 @@
   {pattern}
   {readonly}
   {disabled}
+  {maxlength}
   on:keypress
 />

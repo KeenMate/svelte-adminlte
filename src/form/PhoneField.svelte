@@ -60,6 +60,7 @@
       type="tel"
       title="Enter phone in format: +123 123123123"
       placeholder="Your contact phone"
+      maxlength = 9
     />
   </div>
 </div>
