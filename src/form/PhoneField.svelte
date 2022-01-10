@@ -18,7 +18,7 @@
     const { detail: newPrefix } = ev;
     if (phone != null && phone != "") {
       phonePrefix = newPrefix;
-      dispatch("input", `${ (phonePrefix + " " || "")}${phoneNumber}`);
+      dispatch("input", `${(phonePrefix)}${phonePrefix && " "}${phoneNumber}`);
     }
   }
 
