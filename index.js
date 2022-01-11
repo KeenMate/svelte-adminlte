@@ -33,6 +33,7 @@ export { default as Switch } from "./src/form/input/Switch.svelte";
 export { default as Textarea } from "./src/form/input/Textarea.svelte";
 export { default as TextInput } from "./src/form/input/TextInput.svelte";
 export { default as PasswordInput } from "./src/form/input/PasswordInput.svelte";
+export { default as PhoneInput } from "./src/form/input/PhoneInput.svelte";
 
 /* [2.2] Form > Structure */
 export { default as Form } from "./src/form/structure/Form.svelte";
