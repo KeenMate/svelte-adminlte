@@ -41,7 +41,7 @@
     });
   }
 
-  $: picker.on('selected', (ds, de) => dispatch("selected", {start: ds, end: de}));
+  $: picker && picker.on('selected', (ds, de) => dispatch("selected", {start: ds, end: de}));
 </script>
 
 <slot />
