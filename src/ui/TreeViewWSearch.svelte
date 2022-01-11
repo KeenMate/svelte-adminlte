@@ -1,5 +1,5 @@
 <script>
-  import { FormGroup, TextInput, TreeView, LteButton, InputGroup, InputGroupAppend } from "../";
+  import { FormGroup, TextInput, TreeView, LteButton, InputGroup, InputGroupAppend } from "../..";
 
   /* Tree view helpers */
 
