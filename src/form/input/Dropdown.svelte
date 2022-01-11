@@ -72,21 +72,20 @@
 >
 
 <style lang="sass">
-		:global
-			.select2-selection__choice
-				padding: 0 !important
-				padding-left: 20px !important
+	:global
+		.select2-selection__choice
+			padding: 0 !important
+			padding-left: 20px !important
 
-			.select2-selection
-				height: 30px !important
-				padding-top: 4px !important
-				padding-bottom: 4px !important
+		.select2-selection
+			height: 30px !important
+			padding-top: 4px !important
+			padding-bottom: 4px !important
 
-				.select2-selection__arrow
-					height: 24px !important
+			.select2-selection__arrow
+				height: 24px !important
 
-			.select2-results__option
-				padding-top: 4px !important
-				padding-bottom: 4px !important
-
+		.select2-results__option
+			padding-top: 4px !important
+			padding-bottom: 4px !important
 </style>

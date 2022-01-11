@@ -427,65 +427,66 @@
 
 <style lang="sass">
 	$treeview-lines: dotted black 1px
-		:global
-			.treeview
-				padding-left: 1em
 
-				> :first-child
-					border-left: none
-					padding-left: 1px
+	:global
+		.treeview
+			padding-left: 1em
 
-				ul, li
-					list-style: none
-					margin: 0
-					padding: 0
+			> :first-child
+				border-left: none
+				padding-left: 1px
+
+			ul, li
+				list-style: none
+				margin: 0
+				padding: 0
+
+			ul
+				margin-left: 1.5em
+
+			li
+
+				border: $treeview-lines
+				border-width: 0 0 1px 1px
+
+				&:last-child > ul
+					border-left: 1px solid white
+
+				div
+					margin-left: 0
+
 
 				ul
-					margin-left: 1.5em
+					border-top: $treeview-lines
+					margin-left: -1px
+					padding-left: 1.25em
+					border-left: none
 
-				li
+			.has-children
+				border-bottom: 0px
 
-					border: $treeview-lines
-					border-width: 0 0 1px 1px
+			.tree-item
+				display: flex
+				column-gap: 0.4em
+				align-items: center
+				background: white
+				position: relative
+				top: 0.75em
+				margin-left: 26px
 
-					&:last-child > ul
-						border-left: 1px solid white
+			.div-has-children
+				margin-left: 12px
 
-					div
-						margin-left: 0
+			.no-arrow
+				padding-left: .5rem
 
+			.arrow
+				cursor: pointer
+				display: inline-block
 
-					ul
-						border-top: $treeview-lines
-						margin-left: -1px
-						padding-left: 1.25em
-						border-left: none
+			.arrowDown
+				transform: rotate(90deg)
 
-				.has-children
-					border-bottom: 0px
-
-				.tree-item
-					display: flex
-					column-gap: 0.4em
-					align-items: center
-					background: white
-					position: relative
-					top: 0.75em
-					margin-left: 26px
-
-				.div-has-children
-					margin-left: 12px
-
-				.no-arrow
-					padding-left: .5rem
-
-				.arrow
-					cursor: pointer
-					display: inline-block
-
-				.arrowDown
-					transform: rotate(90deg)
-
-				.invisible
-					visibility: none
+			.invisible
+				visibility: none
 </style>

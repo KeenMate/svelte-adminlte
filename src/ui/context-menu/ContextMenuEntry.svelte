@@ -7,7 +7,7 @@
 </div>
 
 <style lang="sass">
-	:global()
+	:global
 		.context-menu-entry
 			padding: .3rem .75rem
 			min-width: 15rem
