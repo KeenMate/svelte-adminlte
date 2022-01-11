@@ -27,4 +27,6 @@
   {readonly}
   {disabled}
   on:keypress
+  on:input
+  on:change
 />

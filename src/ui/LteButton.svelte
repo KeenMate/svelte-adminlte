@@ -14,7 +14,6 @@
 	export let disabled = false
 	export let app = false
 	export let squared = false
-
 </script>
 
 <button

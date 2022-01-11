@@ -33,6 +33,9 @@
   {readonly}
   {disabled}
   {maxlength}
+  on:keypress
+  on:input
+  on:change
 />
 <style>
   .set-cols{

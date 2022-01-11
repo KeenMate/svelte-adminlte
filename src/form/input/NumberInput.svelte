@@ -39,4 +39,6 @@
   {min}
   {max}
   on:keypress
+  on:input
+  on:change
 />

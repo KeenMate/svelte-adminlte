@@ -1,15 +1,15 @@
 <script>
-	import {LteButton} from "../.."
+	import {DropdownButton} from "../.."
 
 	export let text = ""
-	export let color = null
 </script>
 
 <div class="btn-group">
-	<LteButton {color} class="dropdown-toggle" toggle="dropdown">
-		<span>{text}</span>
-		<span class="caret"></span>
-	</LteButton>
+	<slot>
+		<DropdownButton>
+			{text}
+		</DropdownButton>
+	</slot>
 	<ul class="dropdown-menu" role="menu">
 		<slot />
 	</ul>

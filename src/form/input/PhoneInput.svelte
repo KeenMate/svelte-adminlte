@@ -37,4 +37,6 @@
   {disabled}
   {maxlength}
   on:keypress
+  on:input
+  on:change
 />

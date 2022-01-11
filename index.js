@@ -87,6 +87,7 @@ export { default as AutoScroll } from "./src/ui/AutoScroll.svelte";
 export { default as Badge } from "./src/ui/Badge.svelte";
 export { default as BsProgress } from "./src/ui/BsProgress.svelte";
 export { default as ButtonDropdown } from "./src/ui/ButtonDropdown.svelte";
+export { default as DropdownButton } from "./src/ui/DropdownButton.svelte";
 export { default as ButtonDropdownItem } from "./src/ui/ButtonDropdownItem.svelte";
 export { default as Callout } from "./src/ui/Callout.svelte";
 export { default as InfoBox } from "./src/ui/InfoBox.svelte";

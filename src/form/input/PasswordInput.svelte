@@ -21,4 +21,6 @@
   {placeholder}
   {disabled}
   on:keypress
+  on:input
+  on:change
 />
