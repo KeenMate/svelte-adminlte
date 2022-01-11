@@ -7,6 +7,7 @@
 	export let label = "Mobile phone prefix"
 	export let title = "If your country is not specified you can include your phone prefix in phone number"
 	export let placeholder = "Select country"
+  export let size = "sm"
 
 	function onChange(ev) {
 		dispatch("change", ev.target.value)
@@ -14,7 +15,7 @@
 </script>
 
 <label>{label}</label>
-<select {value} class="form-control input-sm" on:change={onChange}>
+<select {value} class="form-control form-control-{size}" on:change={onChange}>
 	<option value="">{placeholder}</option>
 	<option value="+420">🇨🇿 Czechia (+420)</option>
 	<option value="+49">🇩🇪 Germany (+49)</option>
