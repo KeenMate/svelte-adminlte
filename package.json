@@ -5,11 +5,12 @@
   "scripts": {
     "build": "npx rollup -c"
   },
-  "svelte": "src/index.js",
+  "svelte": "index.js",
   "module": "dist/index.esm.js",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",

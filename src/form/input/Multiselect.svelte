@@ -7,6 +7,7 @@
   export let value = null;
   export let placeholder = "";
   export let readonly = false;
+  export let size = "sm"
 
   const dispatch = createEventDispatcher();
   const { TypingDebounceDelay } = getConfig();
@@ -59,7 +60,7 @@
   bind:value
   {readonly}
   multiple
-  class="form-control select2 select2-hidden-accessible input-sm {$$props.class || ''}"
+  class="form-control select2 select2-hidden-accessible form-control-{size} {$$props.class || ''}"
   data-placeholder={placeholder}
   style="width: 100%;"
   tabindex="-1"
