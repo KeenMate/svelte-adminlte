@@ -1,9 +1,7 @@
 <script>
   import Litepicker from "litepicker";
 
-  import { createEventDispatcher, onDestroy } from "svelte";
-  // import jQuery from "jquery";
-  // import { DateRangePickerLocale } from "../../../constants/date";
+  import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
 
@@ -42,6 +40,8 @@
       lockDaysFilter: disabled ? (_) => true : lockDaysFilter,
     });
   }
+
+  $: picker.on('selected', (ds, de) => dispatch("selected", {start: ds, end: de}));
 </script>
 
 <slot />
