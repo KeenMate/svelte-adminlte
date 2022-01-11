@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npx rollup -c"
   },
+  "main": "index.js",
   "svelte": "index.js",
   "module": "dist/index.esm.js",
   "files": [
