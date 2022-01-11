@@ -6,7 +6,7 @@
 </script>
 
 <div class="btn-group">
-	<LteButton type="button" class="btn btn-{color || 'default'} btn-flat dropdown-toggle btn-xs" data-toggle="dropdown">
+	<LteButton {color} class="dropdown-toggle" toggle="dropdown">
 		<span>{text}</span>
 		<span class="caret"></span>
 	</LteButton>

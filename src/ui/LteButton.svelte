@@ -1,5 +1,8 @@
 <script>
 	export let color = "default"
+	export let type = "button"
+	export let toggle = null
+
 
 	export let xsmall = false
 	export let small = false
@@ -15,7 +18,7 @@
 </script>
 
 <button
-	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat btn-sm"
+	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat {$$props.class || ''}"
 	class:btn-xs={xsmall}
 	class:btn-sm={small}
 	class:btn-lg={large}
@@ -25,6 +28,8 @@
 	class:btn-link={link}
 	class:squared
 	class:disabled
+	{type}
+	data-toggle={toggle}
 	{disabled}
 	{...$$restProps}
 	on:click
