@@ -17,13 +17,38 @@
   export let columns = 2;
   export let lockDaysFilter = undefined;
   export let lockDays = [];
-  // export let alwaysShowCalendars = false;
-  // export let showCustomRangeLabel = false;
-  // export let autoApply = false;
-  // export let ranges = undefined;
+
+  export let allowRepick = false;
+  export let autoApply = true;
+  export let autoRefresh = false;
+  export let buttonText = undefined
+  export let delimetr = " - ";
+  export let disallowLockDaysInRange = false;
+  export let dropdowns = {"minYear":1990,"maxYear":null,"months":false,"years":false};
+  export let elementEnd = null;
+  export let firstDay = 1;
+  export let format = "YYYY-MM-DD";
+  export let highlightedDays  = [];
+  export let highlightedDaysFormat = "YYYY-MM-DD";
+  export let inlineMode = false;
+  export let lang = "en-US";
+  export let lockDaysFormat = "YYYY-MM-DD";
+  export let lockDaysInclusivity = "[]";
+  export let maxDays = null;
+  export let minDays = null;
+  export let parentEl = null;
+  export let scrollToDate = true;
+  export let selectBackward = false;
+  export let selectForward = false;
+  export let showTooltip = true;
+  export let showWeekNumbers = false;
+  export let splitView = false;
+  export let switchingMonths  = null;
+  export let tooltipNumber   = null;
+  export let tooltipText   = {"one":"day","other":"days"};
+  export let zIndex   = 9999;
 
   let picker;
-
   $: if (inputElement) {
     picker = new Litepicker({
       element: inputElement,
@@ -35,9 +60,14 @@
       position,
       numberOfMonths: visibleMonths,
       numberOfColumns: columns,
-      // dropdowns: {"minYear":1990,"maxYear":2030,"months":true,"years":true},
       lockDays:lockDays,
       lockDaysFilter: disabled ? (_) => true : lockDaysFilter,
+      allowRepick,autoApply,autoRefresh,buttonText,delimetr,disallowLockDaysInRange,
+      dropdowns,elementEnd,firstDay,format,highlightedDays,highlightedDaysFormat,
+      inlineMode,lang,lockDaysFormat,lockDaysInclusivity,maxDays,minDays,parentEl,
+      scrollToDate,selectBackward,selectForward,showTooltip,showWeekNumbers,
+      splitView,switchingMonths,tooltipNumber,tooltipText,zIndex
+
     });
   }
 
