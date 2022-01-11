@@ -72,6 +72,9 @@
   }
 
   $: picker && picker.on('selected', (ds, de) => dispatch("selected", {start: ds, end: de}));
+  $: picker && picker.on('show', (el) => dispatch("show",el ));
+  $: picker && picker.on('render', (ui) => dispatch("render", ui));
+  $: picker && picker.on('button:apply', (ds, de) => dispatch("apply", {start: ds, end: de}));
 </script>
 
 <slot />
