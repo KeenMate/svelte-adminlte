@@ -18,15 +18,15 @@
 
 <button
 	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat {$$props.class || ''}"
-	class:btn-xs={xsmall}
-	class:btn-sm={small}
-	class:btn-lg={large}
-	class:btn-flat={borderless}
-	class:btn-social={social}
 	class:btn-app={app}
+	class:btn-flat={borderless}
+	class:btn-lg={large}
 	class:btn-link={link}
-	class:squared
+	class:btn-sm={small}
+	class:btn-social={social}
+	class:btn-xs={xsmall}
 	class:disabled
+	class:squared
 	{type}
 	data-toggle={toggle}
 	{disabled}

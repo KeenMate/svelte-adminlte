@@ -1,7 +1,7 @@
 <script>
-  export let inputId;
+	export let inputId
 </script>
 
 <label class="{$$props.class || ''}" for={inputId}>
-  <slot />
+	<slot />
 </label>

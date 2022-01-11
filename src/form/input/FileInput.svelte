@@ -1,42 +1,44 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+	import {createEventDispatcher} from "svelte"
 
-  export let id = "";
-  export let value = "";
-  export let name = "";
-  export let multiple = false;
-  export let placeholder = "";
-  export let pattern = null;
-  export let readonly = false;
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let multiple = false
+	export let placeholder = ""
+	export let pattern = null
+	export let readonly = false
 
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-  let inputElement = null;
+	let inputElement = null
 
-  export function isValid() {
-    return inputElement.validity.valid;
-  }
+	export function isValid() {
+		return inputElement.validity.valid
+	}
 
-  function onInput(ev) {
-    const files = ev.target.files;
+	function onInput(ev) {
+		const files = ev.target.files
 
-    dispatch("input", (!multiple && files && files[0]) || files);
-  }
+		dispatch("input", (!multiple && files && files[0]) || files)
+	}
 </script>
 
 <div class="custom-file">
-  <input
-    bind:this={inputElement}
-    type="file"
-    class="custom-file-input {$$props.class || ''}"
-    bind:value
-    {name}
-    {id}
-    {placeholder}
-    {pattern}
-    {readonly}
-    {multiple}
-    on:input={onInput}
-  />
-  <label class="custom-file-label" for={id}><slot /></label>
+	<input
+		bind:this={inputElement}
+		bind:value
+		class="custom-file-input {$$props.class || ''}"
+		{id}
+		{multiple}
+		{name}
+		on:input={onInput}
+		{pattern}
+		{placeholder}
+		{readonly}
+		type="file"
+	/>
+	<label class="custom-file-label" for={id}>
+		<slot />
+	</label>
 </div>

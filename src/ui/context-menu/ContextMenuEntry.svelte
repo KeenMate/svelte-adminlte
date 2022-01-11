@@ -22,9 +22,11 @@
 			&.danger
 				background-color: #d73925
 				color: white
+
 			&.success
 				background-color: #00a65a
 				color: white
+
 			&.info
 				background-color: #00c0ef
 				color: white

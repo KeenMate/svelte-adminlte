@@ -1,3 +1,3 @@
 <li class="nav-item dropdown" {...$$restProps}>
-  <slot />
+	<slot />
 </li>

@@ -7,12 +7,14 @@
 </script>
 
 <div class="progress">
-	<div class="progress-bar progress-bar-{color}"
+	<div
+		class="progress-bar progress-bar-{color}"
 		role="progressbar"
-		aria-valuenow={value}
-		aria-valuemin={min}
+		style="width: {value}%"
 		aria-valuemax={max}
-		style="width: {value}%">
+		aria-valuemin={min}
+		aria-valuenow={value}
+	>
 	</div>
 </div>
 

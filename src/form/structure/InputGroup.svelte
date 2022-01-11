@@ -1,5 +1,5 @@
 <div class="input-group input-group-sm {$$props.class || ''}">
-  <slot />
+	<slot />
 </div>
 
 <style lang="sass">

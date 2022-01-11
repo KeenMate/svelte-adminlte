@@ -1,14 +1,14 @@
 <script>
-	import {DropdownButton} from "../.."
+	import {ButtonDropdownButton} from "../../index"
 
 	export let text = ""
 </script>
 
 <div class="btn-group">
 	<slot>
-		<DropdownButton>
+		<ButtonDropdownButton>
 			{text}
-		</DropdownButton>
+		</ButtonDropdownButton>
 	</slot>
 	<ul class="dropdown-menu" role="menu">
 		<slot />

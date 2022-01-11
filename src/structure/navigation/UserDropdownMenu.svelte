@@ -1,15 +1,15 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+	import {createEventDispatcher} from "svelte"
 
-  export let displayName = "Neznámý";
-  export let darkTheme = false;
+	export let displayName = "Neznámý"
+	export let darkTheme = false
 
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-  function onToggleTheme(ev) {
-    ev.preventDefault();
-    dispatch("toggleTheme");
-  }
+	function onToggleTheme(ev) {
+		ev.preventDefault()
+		dispatch("toggleTheme")
+	}
 </script>
 
 <!-- <li class="dropdown user user-menu">
@@ -62,7 +62,7 @@
 		</span>
 	</a>
 	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-		<a href="#" class="dropdown-item">
+		<a class="dropdown-item" href="#">
 			<!-- Message Start -->
 			<div class="media">
 				<img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle">
@@ -78,10 +78,10 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider"></div>
-		<a href="#" class="dropdown-item">
+		<a class="dropdown-item" href="#">
 			<!-- Message Start -->
 			<div class="media">
-				<img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+				<img alt="User Avatar" class="img-size-50 img-circle mr-3" src="">
 				<div class="media-body">
 					<h3 class="dropdown-item-title">
 						John Pierce
@@ -94,10 +94,10 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider"></div>
-		<a href="#" class="dropdown-item">
+		<a class="dropdown-item" href="#">
 			<!-- Message Start -->
 			<div class="media">
-				<img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+				<img alt="User Avatar" class="img-size-50 img-circle mr-3" src="">
 				<div class="media-body">
 					<h3 class="dropdown-item-title">
 						Nora Silvester
@@ -110,7 +110,7 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider"></div>
-		<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+		<a class="dropdown-item dropdown-footer" href="#">See All Messages</a>
 	</div>
 </li>
 

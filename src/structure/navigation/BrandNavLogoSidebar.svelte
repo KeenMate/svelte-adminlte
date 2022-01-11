@@ -1,9 +1,9 @@
-<a href="#/" class="logo">
+<a class="logo" href="#/">
 	<img
 		src="/images/logo-ge-cp.svg"
 		alt="Home"
-		width="200"
-		style="opacity: .8">
+		style="opacity: .8"
+		width="200">
 </a>
 
 <style lang="sass">
