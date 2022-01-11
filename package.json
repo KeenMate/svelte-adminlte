@@ -9,7 +9,8 @@
   "module": "dist/index.esm.js",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
