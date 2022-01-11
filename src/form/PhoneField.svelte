@@ -13,12 +13,13 @@
 
   $: updatePhonePrefix(phone);
   $: handleInput(phoneNumber);
+  // $: fullPhoneNumber = `${(phonePrefix)}${phonePrefix && " "}${phoneNumber}`
 
   function onPhonePrefixChange(ev) {
     const { detail: newPrefix } = ev;
     if (phone != null && phone != "") {
       phonePrefix = newPrefix;
-      dispatch("input", `${ (phonePrefix + " " || "")}${phoneNumber}`);
+      dispatch("input", getFullPhoneNumber(phonePrefix, phoneNumber));
     }
   }
 
@@ -37,10 +38,14 @@
     }
   }
 
-  function handleInput(phonenumber) {
-    phone = `${phonePrefix ? phonePrefix + " " : ""}${phonenumber}`;
+  function handleInput(phoneNumber) {
+    phone = `${phonePrefix ? phonePrefix + " " : ""}${phoneNumber}`;
 
-    dispatch("input", `${phonePrefix &&  phonePrefix != ""? phonePrefix + " " : ""}${phonenumber}`);
+    dispatch("input", getFullPhoneNumber(phonePrefix, phoneNumber));
+  }
+
+  function getFullPhoneNumber(prefix, phone) {
+    return `${(prefix)}${prefix && " "}${phone}`
   }
 </script>
 
