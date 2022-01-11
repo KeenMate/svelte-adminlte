@@ -16,7 +16,6 @@ export { default as SuccessAlert } from "./src/alerts/SuccessAlert.svelte";
 export { default as WarningAlert } from "./src/alerts/WarningAlert.svelte";
 
 /* [2] Form */
-export { default as PhoneField } from "./src/form/PhoneField.svelte";
 //export { default as LteSwitch } from "./form/LteSwitch.svelte"; //!use Switch instead
 export { default as UploadModal } from "./src/form/UploadModal.svelte";
 
@@ -42,11 +41,6 @@ export { default as InputGroup } from "./src/form/structure/InputGroup.svelte";
 export { default as InputGroupAppend } from "./src/form/structure/InputGroupAppend.svelte";
 export { default as InputGroupPrepend } from "./src/form/structure/InputGroupPrepend.svelte";
 export { default as Label } from "./src/form/structure/Label.svelte";
-
-
-
-/* [3] Shared */
-export { default as PhonePrefixCombo } from "./src/shared/PhonePrefixCombo.svelte";
 
 /* [4] Structure */
 export { default as BreadcrumbItem } from "./src/structure/BreadcrumbItem.svelte";
