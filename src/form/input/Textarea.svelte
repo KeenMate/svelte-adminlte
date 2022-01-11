@@ -9,6 +9,7 @@
   export let readonly = false;
   export let disabled = false;
   export let maxlength = "";
+  export let size = "sm"
 
 
   let inputElement = null;
@@ -20,7 +21,7 @@
 
 <textarea
   bind:this={inputElement}
-  class="form-control input-sm {$$props.class || ''}"
+  class="form-control form-control-{size} {$$props.class || ''}"
   class:set-cols={cols}
   {rows}
   {cols}

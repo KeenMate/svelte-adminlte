@@ -10,6 +10,7 @@
   export let placeholder = "";
   export let readonly = false;
   export let invalid = false;
+  export let size = "sm"
 
   const dispatch = createEventDispatcher();
 
@@ -60,7 +61,7 @@
   bind:this={selectElement}
   bind:value
   {readonly}
-  class="form-control select2 select2-hidden-accessible input-sm {$$props.class || ''}"
+  class="form-control select2 select2-hidden-accessible form-control-{size} {$$props.class || ''}"
   class:is-invalid={invalid}
   data-placeholder={placeholder}
   style="width: 100%;"
