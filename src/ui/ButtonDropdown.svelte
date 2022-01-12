@@ -5,7 +5,7 @@
 </script>
 
 <div class="btn-group">
-	<slot>
+	<slot name="button">
 		<ButtonDropdownButton>
 			{text}
 		</ButtonDropdownButton>
