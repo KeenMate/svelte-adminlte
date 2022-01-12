@@ -1,7 +1,7 @@
 <script>
-	export let color = "default"
 	export let type = "button"
-	export let toggle = null
+	export let color
+	export let toggle
 
 
 	export let xsmall = false
@@ -27,10 +27,10 @@
 	class:disabled
 	class:squared
 	{type}
-	data-toggle={toggle}
+	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
-	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat {$$props.class || ''}"
+	class="btn btn-{outlined && 'outlined-' || ''}{color || 'default'} btn-flat {$$props.class || ''}"
 	on:click
 >
 	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
