@@ -1,11 +1,8 @@
 <script>
 	import {LteButton} from "../../index"
-
-	export let color = null
 </script>
 
 <LteButton
-	{color}
 	toggle="dropdown"
 	aria-expanded="false"
 	{...$$restProps}
