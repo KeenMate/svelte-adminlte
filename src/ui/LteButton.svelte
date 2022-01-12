@@ -1,7 +1,7 @@
 <script>
 	export let type = "button"
 	export let color = null
-	export let toggle
+	export let toggle = null
 
 
 	export let xsmall = false

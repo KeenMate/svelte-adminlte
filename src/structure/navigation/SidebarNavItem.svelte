@@ -1,7 +1,7 @@
 <script>
 	export let href = "#"
 	export let icon
-	export let active
+	export let active = false
 </script>
 
 <li class="nav-item">
