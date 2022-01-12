@@ -1,16 +1,11 @@
 <script>
-	import {ButtonDropdownButton} from "../../index"
-
-	export let text = ""
+	export let xPlacement
 </script>
 
-<div class="btn-group">
-	<slot name="button">
-		<ButtonDropdownButton>
-			{text}
-		</ButtonDropdownButton>
-	</slot>
-	<ul class="dropdown-menu" role="menu">
-		<slot />
-	</ul>
+<div
+	class="dropdown-menu"
+	role="menu"
+	x-placement={xPlacement || "top-start"}
+>
+	<slot />
 </div>
