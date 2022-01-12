@@ -7,7 +7,7 @@
 	export let value = null
 	export let placeholder = ""
 	export let readonly = false
-	export let size = "sm"
+	export let size
 
 	const dispatch = createEventDispatcher()
 	const {TypingDebounceDelay} = getConfig()
@@ -59,7 +59,7 @@
 	aria-hidden="true"
 	bind:this={selectElement}
 	bind:value
-	class="form-control select2 select2-hidden-accessible form-control-{size} {$$props.class || ''}"
+	class="form-control select2 select2-hidden-accessible form-control-{size || 'md'} {$$props.class || ''}"
 	data-placeholder={placeholder}
 	multiple
 	{readonly}

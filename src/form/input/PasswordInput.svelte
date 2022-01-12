@@ -3,7 +3,7 @@
 	export let value = ""
 	export let name = ""
 	export let placeholder = ""
-	export let size = "sm"
+	export let size
 	export let disabled = false
 	export let invalid = false
 
@@ -14,7 +14,7 @@
 	bind:this={inputElement}
 	bind:value
 	type="password"
-	class="form-control form-control-{size} {$$props.class || ''}"
+	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	{id}
 	{placeholder}

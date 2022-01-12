@@ -10,7 +10,7 @@
 	export let disabled = false
 	export let inputMask = null
 	export let invalid = false
-	export let size = "sm"
+	export let size
 	export let min = ""
 	export let max = ""
 
@@ -26,7 +26,7 @@
 <input
 	bind:this={inputElement}
 	bind:value
-	class="form-control form-control-{size} {$$props.class || ''}"
+	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	data-inputmask={inputMask || ""}
 	type="number"

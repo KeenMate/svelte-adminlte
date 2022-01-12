@@ -6,7 +6,7 @@
 	export let pattern = null
 	export let readonly = false
 	export let disabled = false
-	export let size = "sm"
+	export let size
 
 	export let inputElement = null
 
@@ -19,7 +19,7 @@
 	bind:this={inputElement}
 	bind:value={value}
 	type="email"
-	class="form-control form-control-{size} {$$props.class || ''}"
+	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
 	{disabled}
 	{id}
 	{name}

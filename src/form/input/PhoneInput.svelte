@@ -11,7 +11,7 @@
 	export let inputMask = null
 	export let invalid = false
 	export let maxlength = ""
-	export let size = "sm"
+	export let size
 
 	export let inputElement = null
 
@@ -26,7 +26,7 @@
 	bind:this={inputElement}
 	bind:value
 	type="tel"
-	class="form-control form-control-{size} {$$props.class || ''}"
+	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	data-inputmask={inputMask || ""}
 	{id}

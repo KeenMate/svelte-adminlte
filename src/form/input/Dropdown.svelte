@@ -10,7 +10,7 @@
 	export let placeholder = ""
 	export let readonly = false
 	export let invalid = false
-	export let size = "sm"
+	export let size
 
 	const dispatch = createEventDispatcher()
 
@@ -61,7 +61,7 @@
 	aria-hidden="true"
 	bind:this={selectElement}
 	bind:value
-	class="form-control select2 select2-hidden-accessible form-control-{size} {$$props.class || ''}"
+	class="form-control select2 select2-hidden-accessible form-control-{size || 'md'} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	data-placeholder={placeholder}
 	{readonly}
