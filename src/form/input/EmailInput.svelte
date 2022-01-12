@@ -18,6 +18,7 @@
 <input
 	bind:this={inputElement}
 	bind:value={value}
+	type="email"
 	class="form-control form-control-{size} {$$props.class || ''}"
 	{disabled}
 	{id}
@@ -28,5 +29,4 @@
 	{pattern}
 	{placeholder}
 	{readonly}
-	type="email"
 />

@@ -13,14 +13,14 @@
 <input
 	bind:this={inputElement}
 	bind:value
+	type="password"
 	class="form-control form-control-{size} {$$props.class || ''}"
 	class:is-invalid={invalid}
-	{disabled}
 	{id}
+	{placeholder}
 	{name}
+	{disabled}
 	on:change
 	on:input
 	on:keypress
-	{placeholder}
-	type="password"
 />

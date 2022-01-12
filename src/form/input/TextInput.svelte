@@ -25,6 +25,7 @@
 <input
 	bind:this={inputElement}
 	bind:value
+	type="text"
 	class="form-control form-control-{size} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	data-inputmask={inputMask || ""}
@@ -33,7 +34,6 @@
 	{name}
 	{pattern}
 	{placeholder}
-	type="text"
 	{disabled}
 	{readonly}
 	on:change

@@ -36,7 +36,7 @@
 	on:change
 	on:input
 	on:keypress
-/>
+></textarea>
 <style>
 	.set-cols {
 		width: auto;

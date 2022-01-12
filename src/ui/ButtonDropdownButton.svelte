@@ -4,7 +4,13 @@
 	export let color = null
 </script>
 
-<LteButton class="dropdown-toggle" {color} toggle="dropdown" aria-expanded="false" {...$$restProps}>
+<LteButton
+	{color}
+	toggle="dropdown"
+	aria-expanded="false"
+	{...$$restProps}
+	class="dropdown-toggle {$$props.class || ''}"
+>
 	<slot></slot>
 	<!--<span class="caret"></span>-->
 </LteButton>

@@ -17,7 +17,6 @@
 </script>
 
 <button
-	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat {$$props.class || ''}"
 	class:btn-app={app}
 	class:btn-flat={borderless}
 	class:btn-lg={large}
@@ -31,8 +30,10 @@
 	data-toggle={toggle}
 	{disabled}
 	{...$$restProps}
+	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat {$$props.class || ''}"
 	on:click
 >
+	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
 	<slot />
 </button>
 

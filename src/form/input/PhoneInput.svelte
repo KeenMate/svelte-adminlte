@@ -25,16 +25,16 @@
 <input
 	bind:this={inputElement}
 	bind:value
+	type="tel"
 	class="form-control form-control-{size} {$$props.class || ''}"
 	class:is-invalid={invalid}
 	data-inputmask={inputMask || ""}
-	{disabled}
 	{id}
 	{maxlength}
 	{name}
 	{pattern}
 	{placeholder}
-	type="tel"
+	{disabled}
 	{readonly}
 	on:change
 	on:input

@@ -64,10 +64,10 @@
 	multiple
 	{readonly}
 	style="width: 100%;"
-	tabindex="-1">
-	<slot />
-</select
+	tabindex="-1"
 >
+	<slot />
+</select>
 
 <style lang="sass">
 	:global
