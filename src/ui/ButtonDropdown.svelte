@@ -1,5 +1,5 @@
 <script>
-	export let xPlacement
+	export let xPlacement = null
 </script>
 
 <div

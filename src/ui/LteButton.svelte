@@ -1,6 +1,6 @@
 <script>
 	export let type = "button"
-	export let color
+	export let color = null
 	export let toggle
 
 

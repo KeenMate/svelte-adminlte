@@ -1,10 +1,15 @@
 <script>
 	export let href = "#"
 	export let icon
+	export let active
 </script>
 
 <li class="nav-item">
-	<a class="nav-link" {href}>
+	<a
+		class="nav-link"
+		class:active
+		{href}
+	>
 		{#if icon}
 			<i class="nav-icon {icon}"></i>
 		{/if}
