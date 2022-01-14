@@ -71,10 +71,47 @@
 		})
 	}
 
-	$: picker && picker.on("selected", (ds, de) => dispatch("selected", {start: ds, end: de}))
-	$: picker && picker.on("show", (el) => dispatch("show", el))
-	$: picker && picker.on("render", (ui) => dispatch("render", ui))
-	$: picker && picker.on("button:apply", (ds, de) => dispatch("apply", {start: ds, end: de}))
+	$: picker && picker.on("selected", onSelected)
+	$: picker && picker.on("show", onShow)
+	$: picker && picker.on("render", onRender)
+	$: picker && picker.on("button:apply", onButtonApply)
+
+	function registerEventHandlers(p) {
+		if (!p)
+			return
+
+		p.on("selected", onSelected)
+		p.on("show", onShow)
+		p.on("render", onRender)
+		p.on("button:apply", onButtonApply)
+	}
+
+	function freeEventHandlers(p) {
+		if (!p)
+			return
+
+		p.off("selected", onSelected)
+		p.off("show", onShow)
+		p.off("render", onRender)
+		p.off("button:apply", onButtonApply)
+	}
+
+	function onSelected(ds, de) {
+		dispatch("selected", {start: ds, end: de})
+	}
+
+	function onShow(el) {
+		dispatch("show", el)
+	}
+
+	function onRender(ui) {
+		dispatch("render", ui)
+	}
+
+	function onButtonApply(ds, de) {
+		dispatch("apply", {start: ds, end: de})
+	}
+
 </script>
 
 <slot />
