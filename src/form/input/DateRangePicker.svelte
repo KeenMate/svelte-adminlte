@@ -42,6 +42,7 @@
 	export let selectForward = false
 	export let showTooltip = true
 	export let showWeekNumbers = false
+	export let resetButton = false
 	export let splitView = false
 	export let switchingMonths = null
 	export let tooltipNumber = null
@@ -65,7 +66,7 @@
 			allowRepick, autoApply, autoRefresh, buttonText, delimetr, disallowLockDaysInRange,
 			dropdowns, elementEnd, firstDay, format, highlightedDays, highlightedDaysFormat,
 			inlineMode, lang, lockDaysFormat, lockDaysInclusivity, maxDays, minDays, parentEl,
-			scrollToDate, selectBackward, selectForward, showTooltip, showWeekNumbers,
+			scrollToDate, selectBackward, selectForward, showTooltip, showWeekNumbers, resetButton,
 			splitView, switchingMonths, tooltipNumber, tooltipText, zIndex
 
 		})
