@@ -1,4 +1,8 @@
-<div class="input-group input-group-sm {$$props.class || ''}">
+<script>
+	export let size = "md"
+</script>
+
+<div class="input-group input-group-{size} {$$props.class || ''}">
 	<slot />
 </div>
 
