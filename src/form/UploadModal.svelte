@@ -1,9 +1,10 @@
 <script>
 	import {createEventDispatcher} from "svelte"
+	import toastr from "../toasts/toastr"
+	
 	import {DashboardModal} from "@uppy/svelte"
 	import Uppy from "@uppy/core"
 	import XHRUpload from "@uppy/xhr-upload"
-	import toastr from "../toasts/toastr"
 	import "@uppy/core/dist/style.css"
 	import "@uppy/dashboard/dist/style.css"
 
