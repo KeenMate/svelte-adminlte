@@ -46,7 +46,7 @@
 	}
 </script>
 
-<main>
+<main class="{$$restProps.parentClass}">
 	<div {id}>
 		<CKEditor
 			bind:config={editorConfig}
