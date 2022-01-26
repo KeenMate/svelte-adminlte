@@ -7,6 +7,7 @@
 	export let placeholder = ""
 	export let pattern = null
 	export let readonly = false
+	export let plaintext = false
 	export let disabled = false
 	export let maxlength = ""
 	export let size
@@ -22,7 +23,9 @@
 <textarea
 	bind:this={inputElement}
 	bind:value
-	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class:form-control={!plaintext}
+	class:form-control-plaintext={plaintext}
 	class:set-cols={cols}
 	{id}
 	{maxlength}

@@ -7,6 +7,7 @@
 	export let placeholder = ""
 	export let pattern = null
 	export let readonly = false
+	export let plaintext = false
 	export let disabled = false
 	export let inputMask = null
 	export let invalid = false
@@ -26,7 +27,9 @@
 <input
 	bind:this={inputElement}
 	bind:value
-	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class:form-control={!plaintext}
+	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
 	data-inputmask={inputMask || ""}
 	type="number"
