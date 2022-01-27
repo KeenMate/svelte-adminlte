@@ -1,12 +1,11 @@
-<h1 class="test-class">
-  This is the place for testing components
+<script>
+  import RichTextEditor from "../src/form/input/RichTextEditor.svelte";
+
+</script>
+
+<h1 >
+  Rich text Editor
 
 </h1>
 
-<style>
-  .test-class{
-    color: red;
-    font-weight: bolder;
-  }
-
-</style>
+<RichTextEditor/>

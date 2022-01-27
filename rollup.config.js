@@ -7,17 +7,18 @@ import postcss from "rollup-plugin-postcss";
 const pkg = require("./package.json");
 
 export default {
-  input: pkg.main,
-  output: [
-    { file: pkg.module, format: "es" },
-    // { file: pkg.name, format: "umd", name: "svelte-adminlte" }
-  ],
-  plugins: [
-    svelte({
-      preprocess: sveltePreprocess(),
-    }),
-    resolve(),
-    commonjs(),
-    postcss()
-  ]
-}
+	input: pkg.main,
+	output: [
+		{ file: pkg.module, format: "es" },
+		// { file: pkg.name, format: "umd", name: "svelte-adminlte" }
+	],
+	plugins: [
+		svelte({
+			preprocess: sveltePreprocess(),
+		}),
+		resolve(),
+		commonjs(),
+    postcss(),
+
+	],
+};
