@@ -1,9 +1,9 @@
 <script>
 	import {onMount, createEventDispatcher, onDestroy} from "svelte"
 	import Quill from "quill"
-	// import ImageResize from "quill-image-resize-module"
+  import { imageResize } from 'quill-image-resize';
 	import debounce from "lodash/debounce"
-	// Quill.register("module/imageResize", ImageResize)
+	Quill.register("module/imageResize", imageResize)
 
 	export let value
 	export let theme = "snow"
@@ -24,7 +24,7 @@
 	["link", "image", "video", "formula"],
 	["clean"]
 ];
-	export let TypingDebounceDelay = 250;
+	export let TypingDebounceDelay = 1000;
 
 	const dispatch = createEventDispatcher()
 	const inputDebounce = debounce(val => {
@@ -37,7 +37,7 @@
 	$: config = {
 		theme,
 		modules: {
-			// imageResize: {},
+			imageResize: {},
 			toolbar: DefaultToolbar
 		},
 		...options

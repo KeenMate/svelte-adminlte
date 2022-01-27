@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import sveltePreprocess from "svelte-preprocess";
 import postcss from "rollup-plugin-postcss";
+import inject from '@rollup/plugin-inject';
 
 const pkg = require("./package.json");
 
@@ -19,6 +20,9 @@ export default {
 		resolve(),
 		commonjs(),
     postcss(),
-
+		inject({
+      "window.Quill": 'quill/dist/quill.js',
+			'Quill': 'quill/dist/quill.js',
+    }),
 	],
 };

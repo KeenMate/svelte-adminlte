@@ -1,6 +1,6 @@
 <script>
   import RichTextEditor from "../src/form/input/RichTextEditor.svelte";
-
+  let value = "<h1> HELLO </h1>"
 </script>
 
 <h1 >
@@ -8,4 +8,6 @@
 
 </h1>
 
-<RichTextEditor/>
+<RichTextEditor on:input={e => console.log(e.detail)} bind:value/>
+
+  {value}

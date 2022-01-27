@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import copy from "rollup-plugin-copy";
 import sveltePreprocess from "svelte-preprocess";
+import inject from '@rollup/plugin-inject';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,7 +45,6 @@ export default {
 				// enable run-time checks when not in production
 				dev: !production
 			},
-			postcss: true,
 			preprocess: sveltePreprocess({
 				// emitCss: true
 				postcss: true
@@ -70,6 +70,10 @@ export default {
 				{src: "node_modules/quill/dist/quill.snow.css", dest: "dev/build/css"},
 			]
 		}),
+		inject({
+      "window.Quill": 'quill/dist/quill.js',
+			'Quill': 'quill/dist/quill.js',
+    }),
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
