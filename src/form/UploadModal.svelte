@@ -62,9 +62,9 @@
 	uppy.on("upload-error", (file, error, response) => {
 		dispatch("uploadError", file, error, response)
 	})
-	uppy.on("dashboard:modal-closed", (file, error, response) => {
+	uppy.on("dashboard:modal-closed", () => {
 		open = false
-		dispatch("modalClosed", )
+		dispatch("modalClosed")
 	})
 
 	export function openModal() {
