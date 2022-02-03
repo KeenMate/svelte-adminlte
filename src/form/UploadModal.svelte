@@ -51,30 +51,20 @@
 		limit: simultaneousUploads
 	})
 
-	uppy.on("complete", (result) => {
-		console.log("Upload complete! Upload result: ", result)
-
-		if (!result.failed.length)
-			toastr.success("Nahrání úspěšné")
-		else
-			toastr.error("Nahrávání některých souborů se nezdařilo")
-
-		if (result.successful.length)
-			dispatch("uploadCompleted", result)
+	uppy.on("complete", result => {
+		dispatch("uploadCompleted", result)
 	})
 
 	uppy.on("upload-success", (file, response) => {
-		dispatch("uploadSuccessful", response)
+		dispatch("uploadSuccessful", {file, response})
 		// do something with file and response
 	})
 	uppy.on("upload-error", (file, error, response) => {
-		if (response.status === 409) {
-			console.error("Same filename already exists", file, error, response)
-			toastr.error(`Soubor se názvem '${file.meta.name}' již existuje`)
-		}
+		dispatch("uploadError", file, error, response)
 	})
 	uppy.on("dashboard:modal-closed", (file, error, response) => {
 		open = false
+		dispatch("modalClosed", )
 	})
 
 	export function openModal() {
