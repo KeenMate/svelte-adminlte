@@ -1,4 +1,6 @@
 <script>
+	import Loader from "../ui/Loader.svelte"
+
 	export let color = "default"
 
 	export let outline = false
@@ -38,7 +40,12 @@
 	{/if}
 	{#if loading}
 		<div class="overlay">
-			<i class="fas fa-2x fa-sync-alt fa-spin"></i>
+			<!--<i class="fas fa-2x fa-sync-alt fa-spin"></i>-->
+			<div class="loader-parent" style="height: 100%">
+				<div>
+					<Loader />
+				</div>
+			</div>
 		</div>
 	{/if}
 </div>
