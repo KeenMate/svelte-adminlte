@@ -3,21 +3,26 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import sveltePreprocess from "svelte-preprocess";
 import postcss from "rollup-plugin-postcss";
+import inject from '@rollup/plugin-inject';
 
 const pkg = require("./package.json");
 
 export default {
-  input: pkg.main,
-  output: [
-    { file: pkg.module, format: "es" },
-    // { file: pkg.name, format: "umd", name: "svelte-adminlte" }
-  ],
-  plugins: [
-    svelte({
-      preprocess: sveltePreprocess(),
+	input: pkg.main,
+	output: [
+		{ file: pkg.module, format: "es" },
+		// { file: pkg.name, format: "umd", name: "svelte-adminlte" }
+	],
+	plugins: [
+		svelte({
+			preprocess: sveltePreprocess(),
+		}),
+		resolve(),
+		commonjs(),
+    postcss(),
+		inject({
+      "window.Quill": 'quill/dist/quill.js',
+			'Quill': 'quill/dist/quill.js',
     }),
-    resolve(),
-    commonjs(),
-    postcss()
-  ]
-}
+	],
+};

@@ -4,7 +4,19 @@ import resolve from "@rollup/plugin-node-resolve"
 import livereload from "rollup-plugin-livereload"
 import {terser} from "rollup-plugin-terser"
 import css from "rollup-plugin-css-only"
+import copy from "rollup-plugin-copy";
 import sveltePreprocess from "svelte-preprocess"
+import inject from "@rollup/plugin-inject"
+import sveltePreprocess from "svelte-preprocess"
+import svelte from 'rollup-plugin-svelte';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import livereload from 'rollup-plugin-livereload';
+import { terser } from 'rollup-plugin-terser';
+import css from 'rollup-plugin-css-only';
+import copy from "rollup-plugin-copy";
+import sveltePreprocess from "svelte-preprocess";
+import inject from '@rollup/plugin-inject';
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -41,13 +53,17 @@ export default {
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
-				dev: !production,
+				dev: !production
 			},
-			preprocess: sveltePreprocess(),
+			preprocess: sveltePreprocess({
+				// emitCss: true
+				postcss: true
+			}),
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({output: "bundle.css"}),
+
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
@@ -59,7 +75,15 @@ export default {
 			dedupe: ["svelte"]
 		}),
 		commonjs(),
-
+		copy({
+			targets: [
+				{src: "node_modules/quill/dist/quill.snow.css", dest: "dev/build/css"},
+			]
+		}),
+		inject({
+      "window.Quill": 'quill/dist/quill.js',
+			'Quill': 'quill/dist/quill.js',
+    }),
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
@@ -70,7 +94,8 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
 	],
 	watch: {
 		clearScreen: false

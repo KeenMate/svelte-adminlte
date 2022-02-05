@@ -5,6 +5,7 @@
 	export let placeholder = ""
 	export let pattern = null
 	export let readonly = false
+	export let plaintext = false
 	export let disabled = false
 	export let size
 
@@ -19,7 +20,9 @@
 	bind:this={inputElement}
 	bind:value={value}
 	type="email"
-	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class:form-control={!plaintext}
+	class:form-control-plaintext={plaintext}
 	{disabled}
 	{id}
 	{name}
