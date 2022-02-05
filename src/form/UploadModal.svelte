@@ -1,7 +1,7 @@
 <script>
 	import {createEventDispatcher} from "svelte"
 	import toastr from "../toasts/toastr"
-	
+
 	import {DashboardModal} from "@uppy/svelte"
 	import Uppy from "@uppy/core"
 	import XHRUpload from "@uppy/xhr-upload"
@@ -60,7 +60,7 @@
 		// do something with file and response
 	})
 	uppy.on("upload-error", (file, error, response) => {
-		dispatch("uploadError", file, error, response)
+		dispatch("uploadError", (file, error, response))
 	})
 	uppy.on("dashboard:modal-closed", () => {
 		open = false
