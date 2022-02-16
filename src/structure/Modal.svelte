@@ -6,8 +6,11 @@
 	export let large = false
 	export let xlarge = false
 	export let center = false
+	export let jModalElement
 
 	let modalElement = null
+
+	$: jModalElement = modalElement && jQuery(modalElement)
 
 	export function toggle() {
 		jQuery(modalElement).modal("toggle")
