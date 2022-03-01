@@ -18,9 +18,7 @@
 	})()
 	export let uploadData = {}
 
-	let open = false
-
-	const uppy = new Uppy({
+	export let uppy = new Uppy({
 		restrictions: {
 			maxFileSize,
 			allowedFileTypes
@@ -32,6 +30,8 @@
 			fieldName,
 			limit: simultaneousUploads
 		})
+
+	let open = false
 
 	$: uppy.setMeta(uploadData)
 
