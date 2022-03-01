@@ -18,13 +18,24 @@
 	})()
 	export let uploadData = {}
 
-	export let uppy
+	export const uppy = new Uppy({
+		restrictions: {
+			maxFileSize,
+			allowedFileTypes
+		}
+	})
+		// .use(Dashboard)
+		.use(XHRUpload, {
+			endpoint,
+			fieldName,
+			limit: simultaneousUploads
+		})
 
 	let open = false
 
-	$: uppy?.setMeta(uploadData)
+	$: uppy.setMeta(uploadData)
 
-	$: uppy?.setOptions({
+	$: uppy.setOptions({
 		restrictions: {
 			maxNumberOfFiles,
 			maxFileSize,
@@ -32,7 +43,7 @@
 		}
 	})
 
-	$: uppy?.getPlugin("XHRUpload").setOptions({
+	$: uppy.getPlugin("XHRUpload").setOptions({
 		endpoint,
 		fieldName,
 		limit: simultaneousUploads
@@ -51,19 +62,6 @@
 	})
 
 	function initUppy() {
-		uppy = new Uppy({
-			restrictions: {
-				maxFileSize,
-				allowedFileTypes
-			}
-		})
-			// .use(Dashboard)
-			.use(XHRUpload, {
-				endpoint,
-				fieldName,
-				limit: simultaneousUploads
-			})
-
 		uppy.on("complete", result => {
 			dispatch("uploadCompleted", result)
 		})
