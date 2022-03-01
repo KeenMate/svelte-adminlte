@@ -11,4 +11,5 @@
 		<TableEmptyRow />
 	</slot>
 	</tbody>
+	<slot name="footer"></slot>
 </table>
