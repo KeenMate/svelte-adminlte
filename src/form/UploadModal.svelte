@@ -1,5 +1,5 @@
 <script>
-	import {createEventDispatcher} from "svelte"
+	import {createEventDispatcher, onMount} from "svelte"
 	import {DashboardModal} from "@uppy/svelte"
 	import Uppy from "@uppy/core"
 	import XHRUpload from "@uppy/xhr-upload"
@@ -18,24 +18,13 @@
 	})()
 	export let uploadData = {}
 
-	export let uppy = new Uppy({
-		restrictions: {
-			maxFileSize,
-			allowedFileTypes
-		}
-	})
-		// .use(Dashboard)
-		.use(XHRUpload, {
-			endpoint,
-			fieldName,
-			limit: simultaneousUploads
-		})
+	export let uppy
 
 	let open = false
 
-	$: uppy.setMeta(uploadData)
+	$: uppy?.setMeta(uploadData)
 
-	$: uppy.setOptions({
+	$: uppy?.setOptions({
 		restrictions: {
 			maxNumberOfFiles,
 			maxFileSize,
@@ -43,26 +32,10 @@
 		}
 	})
 
-	$: uppy.getPlugin("XHRUpload").setOptions({
+	$: uppy?.getPlugin("XHRUpload").setOptions({
 		endpoint,
 		fieldName,
 		limit: simultaneousUploads
-	})
-
-	uppy.on("complete", result => {
-		dispatch("uploadCompleted", result)
-	})
-
-	uppy.on("upload-success", (file, response) => {
-		dispatch("uploadSuccessful", {file, response})
-		// do something with file and response
-	})
-	uppy.on("upload-error", (file, error, response) => {
-		dispatch("uploadError", {file, error, response})
-	})
-	uppy.on("dashboard:modal-closed", () => {
-		open = false
-		dispatch("modalClosed")
 	})
 
 	export function openModal() {
@@ -71,6 +44,41 @@
 
 	export function closeModal() {
 		open = false
+	}
+
+	onMount(() => {
+		initUppy()
+	})
+
+	function initUppy() {
+		uppy = new Uppy({
+			restrictions: {
+				maxFileSize,
+				allowedFileTypes
+			}
+		})
+			// .use(Dashboard)
+			.use(XHRUpload, {
+				endpoint,
+				fieldName,
+				limit: simultaneousUploads
+			})
+
+		uppy.on("complete", result => {
+			dispatch("uploadCompleted", result)
+		})
+
+		uppy.on("upload-success", (file, response) => {
+			dispatch("uploadSuccessful", {file, response})
+			// do something with file and response
+		})
+		uppy.on("upload-error", (file, error, response) => {
+			dispatch("uploadError", {file, error, response})
+		})
+		uppy.on("dashboard:modal-closed", () => {
+			open = false
+			dispatch("modalClosed")
+		})
 	}
 </script>
 
