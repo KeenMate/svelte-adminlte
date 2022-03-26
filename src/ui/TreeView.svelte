@@ -62,7 +62,7 @@
 		);
 	}
 
-	//!! selection
+	//* selection
 
 	function ChangeSelection(
 		recursiveely,
@@ -318,13 +318,63 @@
 		});
 	}
 
+	//* drag and drop
+
+	function moveNode(tree, movedNodePath, targetNodePath) {
+		//trying to move parent to child
+		if (targetNodePath.startsWith(movedNodePath)) return;
+
+		let newParrenId = getNextNodeId(tree,targetNodePath)
+
+		tree = tree.map((node) => {
+			//change haschildren to true on target to show plus icon
+			if(node.nodePath == targetNodePath)
+				node.hasChildren = true;
+
+			//move nodes to target
+			if (node.nodePath.startsWith(movedNodePath)) {
+				//replace
+				let newPath = node.nodePath.replace(
+					movedNodePath,
+					targetNodePath + "." + newParrenId
+				);
+
+				console.log(targetNodePath + "|.|" + newParrenId)
+				console.log(node.nodePath + " -> " + newPath);
+				node.nodePath = newPath;
+				return node;
+			}
+
+			return node;
+		});
+
+		return tree;
+	}
+
+	//return biggest value of nodepath number that children are using +1
+	function getNextNodeId(tree,parentPath){
+		let max = 0
+		tree.forEach(
+			node => {
+				let parent = getParentNodePath(node.nodePath)
+				if(parent == parentPath){
+					let num = node.nodePath.substring(parent.length+1)
+
+					if(num > max)
+						max = num
+				}
+			}
+		)
+		console.log(parseInt(max)+1)
+		return (parseInt(max)+1)
+	}
+
 	/* Tree view helpers end */
 
 	//required
 	export let tree = null;
 	export let filteredTree;
 	export let treeId = null;
-
 
 	export let maxExpandedDepth = 0;
 
@@ -348,7 +398,6 @@
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
-
 
 	$: parentChildrenTree = getParentChildrenTree(
 		filteredTree === undefined ? tree : filteredTree,
@@ -418,18 +467,16 @@
 		draggedPath = node.nodePath;
 	}
 	function handleDragDrop(e, node) {
-		let draggedPath = e.dataTransfer.getData("node_id")
-		console.log(draggedPath + " dropped on: "+ node.nodePath);
+		let draggedPath = e.dataTransfer.getData("node_id");
+		console.log(draggedPath + " dropped on: " + node.nodePath);
+		tree = moveNode(tree, draggedPath, node.nodePath);
 		draggedPath = null;
 	}
 	function handleDragOver(e, node) {
-
 		//console.log( draggedPath + "dragged over: "+ node.nodePath)
 
 		//if you arent dropping parent to child allow drop
-		if(!node.nodePath.startsWith(draggedPath))
-			e.preventDefault()
-
+		if (!node.nodePath.startsWith(draggedPath)) e.preventDefault();
 	}
 
 	//computes all visual states when component is first created
@@ -452,8 +499,8 @@
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
 				on:dragover={(e) => handleDragOver(e, node)}
-				on:dragenter ={ (e) => e.preventDefault()}
-				on:dragend={ (e)=> draggedPath = null }
+				on:dragenter={(e) => e.preventDefault()}
+				on:dragend={(e) => (draggedPath = null)}
 			>
 				{#if node.hasChildren}
 					<span on:click={() => toggleExpansion(node)}>
@@ -550,7 +597,7 @@
 			padding-left: 1em
 
 			> :first-child
-				border-left: none
+				//border-left: none
 				padding-left: 1px
 
 			ul, li

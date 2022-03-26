@@ -48,7 +48,7 @@
 
 <Card>
 	<svelte:fragment slot="header">
-		TreeView
+		TreeView drag and drop test
 	</svelte:fragment>
 
 	<TreeView bind:tree treeId="tree"
