@@ -7,16 +7,6 @@ import css from "rollup-plugin-css-only"
 import copy from "rollup-plugin-copy";
 import sveltePreprocess from "svelte-preprocess"
 import inject from "@rollup/plugin-inject"
-import sveltePreprocess from "svelte-preprocess"
-import svelte from 'rollup-plugin-svelte';
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
-import css from 'rollup-plugin-css-only';
-import copy from "rollup-plugin-copy";
-import sveltePreprocess from "svelte-preprocess";
-import inject from '@rollup/plugin-inject';
 
 const production = !process.env.ROLLUP_WATCH
 

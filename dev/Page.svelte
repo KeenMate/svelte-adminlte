@@ -1,32 +1,64 @@
 <script>
 	import {Card} from "../index"
-  import RichTextEditor from "../src/form/input/RichTextEditor.svelte"
+  import TreeView from "../src/ui/TreeView.svelte"
 
-  let value = "<h1> HELLO </h1>"
+	let tree = [
+		{ nodePath: "1", title: "1", __visual_state: "indeterminate" },
+    { nodePath: "2", title: "2" },
+
+    { nodePath: "3", title: "3", hasChildren: true, __expanded: true },
+    { nodePath: "3.1", title: "Hecarim" },
+    { nodePath: "3.2",
+    title: "3.2",
+    hasChildren: true,
+     __expanded: false },
+    {
+      nodePath: "3.2.2",
+      title: "Visage",
+      __expanded: true,
+      __selected: true,
+      test: "test223",
+    },
+    {
+      nodePath: "3.2.3",
+      title: "Lycan",
+      __expanded: true,
+      __selected: true,
+      test: "test223",
+    },
+    {
+      nodePath: "3.2.4",
+      title: "Bloodseeker",
+      __expanded: true,
+      __selected: true,
+    },
+
+    { nodePath: "3.3", title: "3.3", hasChildren: true, __expanded: true },
+
+    {
+      nodePath: "3.3.1",
+      title: "3.3.1",
+      __expanded: true,
+      __selected: false,
+    },
+    { nodePath: "3.4", title: "	Omniknight" },
+
+	]
 </script>
 
-<h1 class="test-class">
-  This is the place for testing components
-
-</h1>
-
-<Card loading>
+<Card>
 	<svelte:fragment slot="header">
-		Loading card
+		TreeView
 	</svelte:fragment>
 
-	<h1>
-		Rich text Editor
-	</h1>
-	<RichTextEditor on:input={e => console.log(e.detail)} bind:value/>
+	<TreeView bind:tree treeId="tree"
+	let:node maxExpandedDepth={4} recursive showCheckboxes bind:filteredTree={tree}>
 
-	{value}
+		{node.title}
+	</TreeView>
 </Card>
 
 <style>
-  .test-class {
-    color: red;
-    font-weight: bolder;
-  }
+
 
 </style>
