@@ -44,17 +44,20 @@
     { nodePath: "3.4", title: "	Omniknight" },
 
 	]
+	let dragAndDrop
 </script>
 
 <Card>
 	<svelte:fragment slot="header">
 		TreeView drag and drop test
+		<input type="checkbox" bind:checked={dragAndDrop} />
 	</svelte:fragment>
+
 
 	<TreeView bind:tree treeId="tree"
 	let:node maxExpandedDepth={4} recursive checkboxes bind:filteredTree={tree}
 	on:selection={e => console.log(e.detail)}
-	on:expansion={e => console.log(e.detail)} >
+	on:expansion={e => console.log(e.detail)} bind:dragAndDrop>
 
 		{node.title}
 	</TreeView>

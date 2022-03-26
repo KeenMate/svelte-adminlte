@@ -22,7 +22,7 @@
 		);
 	}
 
-	function allCHildren(tree, parentId, isChild) {
+	export function allCHildren(tree, parentId, isChild) {
 		let children;
 		children = tree.filter((x) => {
 			if (!parentId) {
@@ -35,7 +35,7 @@
 		return children;
 	}
 
-	function getAllLeafNodes(tree) {
+	export function getAllLeafNodes(tree) {
 		return tree.filter((x) => {
 			return x.hasChildren == undefined || x.hasChildren == false;
 		});
@@ -295,7 +295,7 @@
 		return tree;
 	}
 
-	function deleteSelected(tree) {
+	export function deleteSelected(tree) {
 		return tree.map((t) => {
 			let x = t;
 			x.__selected = false;
@@ -353,12 +353,12 @@
 
 	/* Tree view helpers end */
 
-	//required
+	//! required
 	export let tree = null;
 	export let filteredTree;
 	export let treeId = null;
 
-	export let maxExpandedDepth = 0;
+	export let maxExpandedDepth = 3;
 
 	export let recursive = false;
 	export let checkboxes = false;
@@ -367,10 +367,14 @@
 	//true = disabel hide = false
 	export let disableOrHide = false;
 
+
+	export let dragAndDrop = false
+
 	export let childDepth = 0;
 	export let parentId = null;
 	//path of currently dragged node
 	export let draggedPath = null;
+
 
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
@@ -407,6 +411,8 @@
 
 	function toggleExpansion(node, setValueTo = null) {
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
+
+
 
 		let val = node[expandedProperty]
 		dispatch("expansion", {
@@ -465,6 +471,9 @@
 	}
 
 	function handleDragDrop(e, node) {
+		//should be necesary but just in case
+		if(!dragAndDrop)
+			return
 		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
 
@@ -477,7 +486,7 @@
 
 	function handleDragOver(e, node) {
 		//if you arent dropping parent to child allow drop
-		if (!node.nodePath.startsWith(draggedPath)) e.preventDefault();
+		if (dragAndDrop && !node.nodePath.startsWith(draggedPath)) e.preventDefault();
 	}
 
 	function selectionEvents(node) {
@@ -511,11 +520,11 @@
 			<div
 				class="tree-item"
 				class:div-has-children={node.hasChildren}
-				draggable="true"
+				draggable="{dragAndDrop}"
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
 				on:dragover={(e) => handleDragOver(e, node)}
-				on:dragenter={(e) => e.preventDefault()}
+				on:dragenter={(e) => {e.preventDefault()}}
 				on:dragend={(e) => (draggedPath = null)}
 			>
 				{#if node.hasChildren}
@@ -594,6 +603,7 @@
 					{leafNodeCheckboxesOnly}
 					{disableOrHide}
 					bind:draggedPath
+					bind:dragAndDrop
 					on:selection
 					on:selected
 					on:unselected
