@@ -52,7 +52,9 @@
 	</svelte:fragment>
 
 	<TreeView bind:tree treeId="tree"
-	let:node maxExpandedDepth={4} recursive showCheckboxes bind:filteredTree={tree}>
+	let:node maxExpandedDepth={4} recursive checkboxes bind:filteredTree={tree}
+	on:selection={e => console.log(e.detail)}
+	on:expansion={e => console.log(e.detail)} >
 
 		{node.title}
 	</TreeView>

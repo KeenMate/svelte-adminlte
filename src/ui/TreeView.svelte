@@ -1,5 +1,7 @@
 <script>
+	import { createEventDispatcher } from "svelte";
 	/* Tree view helpers */
+	const dispatch = createEventDispatcher();
 
 	function getParentNodePath(nodePath) {
 		return nodePath.substring(0, nodePath.lastIndexOf("."));
@@ -9,22 +11,6 @@
 		return tree.find((x) => getParentNodePath(x.nodePath) === nodePath);
 	}
 
-	function findNestedLtreePath(tree, nodePath) {
-		if (!nodePath) return [];
-
-		const parents = getLtreeParents(nodePath);
-
-		return tree.filter((x) => parents.includes(x.nodePath));
-	}
-
-	function getLtreeParents(nodePath, acc = []) {
-		const parentNodePath = getParentNodePath(nodePath);
-
-		return (
-			(!parentNodePath && acc) ||
-			getLtreeParents(parentNodePath, [parentNodePath, ...acc])
-		);
-	}
 
 	function nodePathIsChild(nodePath) {
 		return !nodePath || !!(nodePath.match(/\./g) || []).length;
@@ -324,12 +310,11 @@
 		//trying to move parent to child
 		if (targetNodePath.startsWith(movedNodePath)) return;
 
-		let newParrenId = getNextNodeId(tree,targetNodePath)
+		let newParrenId = getNextNodeId(tree, targetNodePath);
 
 		tree = tree.map((node) => {
 			//change haschildren to true on target to show plus icon
-			if(node.nodePath == targetNodePath)
-				node.hasChildren = true;
+			if (node.nodePath == targetNodePath) node.hasChildren = true;
 
 			//move nodes to target
 			if (node.nodePath.startsWith(movedNodePath)) {
@@ -339,7 +324,7 @@
 					targetNodePath + "." + newParrenId
 				);
 
-				console.log(targetNodePath + "|.|" + newParrenId)
+				console.log(targetNodePath + "|.|" + newParrenId);
 				console.log(node.nodePath + " -> " + newPath);
 				node.nodePath = newPath;
 				return node;
@@ -352,21 +337,18 @@
 	}
 
 	//return biggest value of nodepath number that children are using +1
-	function getNextNodeId(tree,parentPath){
-		let max = 0
-		tree.forEach(
-			node => {
-				let parent = getParentNodePath(node.nodePath)
-				if(parent == parentPath){
-					let num = node.nodePath.substring(parent.length+1)
+	function getNextNodeId(tree, parentPath) {
+		let max = 0;
+		tree.forEach((node) => {
+			let parent = getParentNodePath(node.nodePath);
+			if (parent == parentPath) {
+				let num = node.nodePath.substring(parent.length + 1);
 
-					if(num > max)
-						max = num
-				}
+				if (num > max) max = num;
 			}
-		)
-		console.log(parseInt(max)+1)
-		return (parseInt(max)+1)
+		});
+		console.log(parseInt(max) + 1);
+		return parseInt(max) + 1;
 	}
 
 	/* Tree view helpers end */
@@ -425,6 +407,19 @@
 
 	function toggleExpansion(node, setValueTo = null) {
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
+
+		let val = node[expandedProperty]
+		dispatch("expansion", {
+			path: node.nodePath,
+			value: val
+		});
+
+		if(val){
+			dispatch("expanded",node.nodePath)
+		}else{
+			dispatch("closed",node.nodePath)
+
+		}
 	}
 
 	function recomputeExpandedNodes() {
@@ -434,17 +429,18 @@
 	}
 
 	//checkboxes
-	function selectionChanged(nodePath) {
+	function selectionChanged(node) {
 		//console.log(nodePath);
 		tree = ChangeSelection(
 			recursive,
 			tree,
-			nodePath,
+			node.nodePath,
 			isChild,
 			selectedProperty,
 			getParentId,
 			filteredTree
 		);
+		selectionEvents(node)
 	}
 
 	//selectes
@@ -458,6 +454,7 @@
 			getParentId,
 			filteredTree
 		);
+		selectionEvents(node)
 	}
 
 	function handleDragStart(e, node) {
@@ -466,17 +463,36 @@
 		e.dataTransfer.setData("node_id", node.nodePath);
 		draggedPath = node.nodePath;
 	}
+
 	function handleDragDrop(e, node) {
-		let draggedPath = e.dataTransfer.getData("node_id");
+		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
+
+		//moves dragged note to target node
 		tree = moveNode(tree, draggedPath, node.nodePath);
 		draggedPath = null;
-	}
-	function handleDragOver(e, node) {
-		//console.log( draggedPath + "dragged over: "+ node.nodePath)
 
+		dispatch("moved", { moved: draggedPath, to: node.nodePath });
+	}
+
+	function handleDragOver(e, node) {
 		//if you arent dropping parent to child allow drop
 		if (!node.nodePath.startsWith(draggedPath)) e.preventDefault();
+	}
+
+	function selectionEvents(node) {
+		let val  = node[selectedProperty]
+		dispatch("selection", {
+			path: node.nodePath,
+			value: val,
+		});
+		if(val){
+			dispatch("selected",node.nodePath);
+		}else{
+			dispatch("unselected",node.nodePath);
+
+		}
+
 	}
 
 	//computes all visual states when component is first created
@@ -519,7 +535,7 @@
 							<input
 								type="checkbox"
 								id={getNodeId(node)}
-								on:change={() => selectionChanged(node.nodePath)}
+								on:change={() => selectionChanged(node)}
 								checked={node[selectedProperty] ? "false" : ""}
 							/>
 						{:else if !leafNodeCheckboxesOnly}
@@ -552,7 +568,7 @@
 						<input
 							type="checkbox"
 							id={getNodeId(node)}
-							on:change={() => selectionChanged(node.nodePath)}
+							on:change={() => selectionChanged(node)}
 							checked={node[selectedProperty] ? "false" : ""}
 						/>
 					{/if}
@@ -578,6 +594,12 @@
 					{leafNodeCheckboxesOnly}
 					{disableOrHide}
 					bind:draggedPath
+					on:selection
+					on:selected
+					on:unselected
+					on:expansion
+					on:expanded
+					on:closed
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
