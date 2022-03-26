@@ -1,113 +1,116 @@
 <script>
-	import {FormGroup, InputGroup, InputGroupAppend, LteButton, TextInput, TreeView} from "../../index"
+	import {
+		FormGroup,
+		InputGroup,
+		InputGroupAppend,
+		LteButton,
+		TextInput,
+		TreeView,
+	} from "../../index";
 
 	/* Tree view helpers */
 
 	function getParentNodePath(nodePath) {
-		return nodePath.substring(0, nodePath.lastIndexOf("."))
+		return nodePath.substring(0, nodePath.lastIndexOf("."));
 	}
-
-
-
 
 	function getParentChildrenTree(tree, parentId, isChild, getParentId) {
-		return (tree || []).filter((x) => (!parentId ? !isChild(x) : getParentId(x) === parentId))
+		return (tree || []).filter((x) =>
+			!parentId ? !isChild(x) : getParentId(x) === parentId
+		);
 	}
-
-
 
 	function getAllLeafNodes(tree) {
 		return tree.filter((x) => {
-			return x.hasChildren == undefined || x.hasChildren == false
-		})
+			return x.hasChildren == undefined || x.hasChildren == false;
+		});
 	}
 
 	function joinTrees(filteredTree, tree) {
-		return tree.map((tnode) => filteredTree.find((fnode) => tnode.nodePath === fnode.nodePath) || tnode)
+		return tree.map(
+			(tnode) =>
+				filteredTree.find((fnode) => tnode.nodePath === fnode.nodePath) || tnode
+		);
 	}
-
-
-
-
 
 	//!! SEARCHING AND FILTERING
 
 	function searchTree(tree, filterFunction, recursive) {
 		let result = [],
-			matchingNodes = []
+			matchingNodes = [];
 		if (recursive) {
-			matchingNodes = getAllLeafNodes(tree).filter(filterFunction)
+			matchingNodes = getAllLeafNodes(tree).filter(filterFunction);
 		} else {
-			matchingNodes = tree.filter(filterFunction)
+			matchingNodes = tree.filter(filterFunction);
 		}
 		//console.log("matching nodes length:" + matchingNodes.length)
 		matchingNodes.forEach((node) => {
-			result.push(node)
-			result = addParents(tree, result, node)
-		})
+			result.push(node);
+			result = addParents(tree, result, node);
+		});
 		//console.log(result)
-		return result
+		return result;
 	}
 
 	function addParents(tree, result, node) {
 		let parentsIds = [],
-			parentNodes = []
-		if (result === undefined) result = []
-		let nodePath = node.nodePath
+			parentNodes = [];
+		if (result === undefined) result = [];
+		let nodePath = node.nodePath;
 		while (nodePath.length > 0) {
-			nodePath = getParentNodePath(nodePath)
-			parentsIds.push(nodePath)
+			nodePath = getParentNodePath(nodePath);
+			parentsIds.push(nodePath);
 		}
 
 		//finds nodes for ids
 		tree.forEach((n) => {
 			if (
 				parentsIds.some((parentId) => {
-					return n.nodePath === parentId
+					return n.nodePath === parentId;
 				})
 			) {
-				parentNodes.push(n)
+				parentNodes.push(n);
 			}
-		})
+		});
 		//removes duplicate nodePaths
 		parentNodes.forEach((n) => {
 			if (
 				result.findIndex((x) => {
-					return n.nodePath === x.nodePath
+					return n.nodePath === x.nodePath;
 				}) < 0
 			)
-				result.push(n)
-		})
+				result.push(n);
+		});
 
-		return result
+		return result;
 	}
 
 	function changeEveryExpansion(tree, expandedProperty, changeTo) {
 		return tree.map((node) => {
-			node[expandedProperty] = changeTo
-			return node
-		})
+			node[expandedProperty] = changeTo;
+			return node;
+		});
 	}
 
 	/* Tree view helpers end */
 
-	export let queryString = ""
-	export let showInput = true
+	export let queryString = "";
+	export let showInput = true;
 
-	export let tree
-	export let treeId
-	export let maxExpandedDepth = 5
-	export let recursive = true
-	export let showCheckboxes = true
-	export let leafNodeCheckboxesOnly = false
-	export let expandedProperty = "__expanded"
-	export let selectedProperty = "__selected"
-	export let disableOrHide = false
-	export let noDataFoundText = "No data found."
+	export let tree;
+	export let treeId;
+	export let maxExpandedDepth = 5;
+	export let recursive = true;
+	export let showCheckboxes = true;
+	export let leafNodeCheckboxesOnly = false;
+	export let expandedProperty = "__expanded";
+	export let selectedProperty = "__selected";
+	export let disableOrHide = false;
+	export let noDataFoundText = "No data found.";
 
-	let expand = true
-	$: filteredTree = filter(tree, queryString)
-	$: showInputChanged(showInput)
+	let expand = true;
+	$: filteredTree = filter(tree, queryString);
+	$: showInputChanged(showInput);
 
 	function filter(tree, queryString) {
 		return searchTree(
@@ -115,27 +118,26 @@
 			(x) => {
 				return queryString !== undefined || queryString !== ""
 					? x.title.toLowerCase().includes(queryString.toString().toLowerCase())
-					: true
+					: true;
 			},
 			recursive
-		)
+		);
 	}
 
 	function showInputChanged(showInput) {
 		if (showInput == false) {
-			queryString = ""
-			filteredTree = tree
+			queryString = "";
+			filteredTree = tree;
 		}
 	}
 
 	function expansionClickHandler() {
-		tree = changeEveryExpansion(tree, expandedProperty, expand)
-		expand = !expand
+		tree = changeEveryExpansion(tree, expandedProperty, expand);
+		expand = !expand;
 	}
 </script>
 
-<FormGroup
->
+<FormGroup>
 	{#if showInput}
 		<InputGroup>
 			<TextInput placeholder="type to search" bind:value={queryString} />
