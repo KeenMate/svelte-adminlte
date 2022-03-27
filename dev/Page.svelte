@@ -44,7 +44,7 @@
     { nodePath: "3.4", title: "	Omniknight" },
 
 	]
-	let dragAndDrop
+	let dragAndDrop = true
 </script>
 
 <Card>
@@ -59,7 +59,7 @@
 	on:selection={e => console.log(e.detail)}
 	on:expansion={e => console.log(e.detail)} bind:dragAndDrop>
 
-		{node.title}
+		{node.nodePath}
 	</TreeView>
 </Card>
 

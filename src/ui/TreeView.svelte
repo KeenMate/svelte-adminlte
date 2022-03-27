@@ -11,7 +11,6 @@
 		return tree.find((x) => getParentNodePath(x.nodePath) === nodePath);
 	}
 
-
 	function nodePathIsChild(nodePath) {
 		return !nodePath || !!(nodePath.match(/\./g) || []).length;
 	}
@@ -29,7 +28,9 @@
 				//top level
 				return !isChild(x);
 			} else {
-				return x.nodePath.startsWith(parentId.toString());
+				return (
+					x.nodePath.startsWith(parentId.toString()) && x.nodePath != parentId
+				);
 			}
 		});
 		return children;
@@ -306,7 +307,7 @@
 
 	//* drag and drop
 
-	function moveNode(tree, movedNodePath, targetNodePath) {
+	function moveNode(tree, movedNodePath, targetNodePath, isChild) {
 		//trying to move parent to child
 		if (targetNodePath.startsWith(movedNodePath)) return;
 
@@ -314,7 +315,10 @@
 
 		tree = tree.map((node) => {
 			//change haschildren to true on target to show plus icon
-			if (node.nodePath == targetNodePath) node.hasChildren = true;
+			if (node.nodePath == targetNodePath) {
+				node.hasChildren = true;
+				node[expandedProperty] = true;
+			}
 
 			//move nodes to target
 			if (node.nodePath.startsWith(movedNodePath)) {
@@ -323,14 +327,21 @@
 					movedNodePath,
 					targetNodePath + "." + newParrenId
 				);
-
-				console.log(targetNodePath + "|.|" + newParrenId);
 				console.log(node.nodePath + " -> " + newPath);
 				node.nodePath = newPath;
-				return node;
 			}
 
 			return node;
+		});
+
+		tree.forEach((node) => {
+			//check if it has any children left, if not change hasChildren to false
+			if (node.nodePath == getParentNodePath(movedNodePath)) {
+				//hasNoOtherChildren
+				if (!allCHildren(tree, node.nodePath, isChild).length) {
+					node.hasChildren = false;
+				}
+			}
 		});
 
 		return tree;
@@ -367,14 +378,12 @@
 	//true = disabel hide = false
 	export let disableOrHide = false;
 
-
-	export let dragAndDrop = false
+	export let dragAndDrop = false;
 
 	export let childDepth = 0;
 	export let parentId = null;
 	//path of currently dragged node
 	export let draggedPath = null;
-
 
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
@@ -412,19 +421,16 @@
 	function toggleExpansion(node, setValueTo = null) {
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
 
-
-
-		let val = node[expandedProperty]
+		let val = node[expandedProperty];
 		dispatch("expansion", {
 			path: node.nodePath,
-			value: val
+			value: val,
 		});
 
-		if(val){
-			dispatch("expanded",node.nodePath)
-		}else{
-			dispatch("closed",node.nodePath)
-
+		if (val) {
+			dispatch("expanded", node.nodePath);
+		} else {
+			dispatch("closed", node.nodePath);
 		}
 	}
 
@@ -446,7 +452,7 @@
 			getParentId,
 			filteredTree
 		);
-		selectionEvents(node)
+		selectionEvents(node);
 	}
 
 	//selectes
@@ -460,7 +466,7 @@
 			getParentId,
 			filteredTree
 		);
-		selectionEvents(node)
+		selectionEvents(node);
 	}
 
 	function handleDragStart(e, node) {
@@ -472,13 +478,12 @@
 
 	function handleDragDrop(e, node) {
 		//should be necesary but just in case
-		if(!dragAndDrop)
-			return
+		if (!dragAndDrop) return;
 		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
 
 		//moves dragged note to target node
-		tree = moveNode(tree, draggedPath, node.nodePath);
+		tree = moveNode(tree, draggedPath, node.nodePath, isChild);
 		draggedPath = null;
 
 		dispatch("moved", { moved: draggedPath, to: node.nodePath });
@@ -486,22 +491,21 @@
 
 	function handleDragOver(e, node) {
 		//if you arent dropping parent to child allow drop
-		if (dragAndDrop && !node.nodePath.startsWith(draggedPath)) e.preventDefault();
+		if (dragAndDrop && !node.nodePath.startsWith(draggedPath))
+			e.preventDefault();
 	}
 
 	function selectionEvents(node) {
-		let val  = node[selectedProperty]
+		let val = node[selectedProperty];
 		dispatch("selection", {
 			path: node.nodePath,
 			value: val,
 		});
-		if(val){
-			dispatch("selected",node.nodePath);
-		}else{
-			dispatch("unselected",node.nodePath);
-
+		if (val) {
+			dispatch("selected", node.nodePath);
+		} else {
+			dispatch("unselected", node.nodePath);
 		}
-
 	}
 
 	//computes all visual states when component is first created
@@ -520,11 +524,13 @@
 			<div
 				class="tree-item"
 				class:div-has-children={node.hasChildren}
-				draggable="{dragAndDrop}"
+				draggable={dragAndDrop}
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
 				on:dragover={(e) => handleDragOver(e, node)}
-				on:dragenter={(e) => {e.preventDefault()}}
+				on:dragenter={(e) => {
+					e.preventDefault();
+				}}
 				on:dragend={(e) => (draggedPath = null)}
 			>
 				{#if node.hasChildren}
