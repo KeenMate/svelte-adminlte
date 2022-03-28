@@ -387,10 +387,14 @@
 
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
+	export let usecallbackPropery = "__useCallback"
 
 	export let getId = (x) => x.nodePath;
 	export let getParentId = (x) => getParentNodePath(x.nodePath);
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
+
+	//
+	export let expandCallback = null
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
@@ -421,7 +425,14 @@
 	function toggleExpansion(node, setValueTo = null) {
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
 
+
 		let val = node[expandedProperty];
+
+		//trigger callback if it is present and node has useCallbackPropery
+		if(val && expandCallback != null && node[usecallbackPropery]){
+			tree = tree.concat(expandCallback(node))
+		}
+
 		dispatch("expansion", {
 			path: node.nodePath,
 			value: val,
