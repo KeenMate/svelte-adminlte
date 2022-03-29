@@ -328,6 +328,7 @@
 		dontNest,
 		priorityProp
 	) {
+		console.log(dontNest ? "dont nest" : "nest");
 		let parentNodePath = dontNest
 			? getParentNodePath(targetNodePath)
 			: targetNodePath;
@@ -344,13 +345,13 @@
 
 		tree = tree.map((node) => {
 			//change haschildren to true on target to show plus icon
-			if (!dontNest && node.nodePath == parentNodePath) {
+			if (node.nodePath == parentNodePath) {
 				node.hasChildren = true;
 				node[expandedProperty] = true;
 			}
 
 			//move nodes to target
-			if (!dontNest && node.nodePath.startsWith(movedNodePath)) {
+			if (node.nodePath.startsWith(movedNodePath)) {
 				//replace
 
 				let newPath = node.nodePath.replace(movedNodePath, newParrentNodePath);
@@ -359,10 +360,7 @@
 			}
 
 			//if it is moved node and it is moved node
-			if (
-				node.nodePath == newParrentNodePath ||
-				node.nodePath == movedNodePath
-			) {
+			if (node.nodePath == newParrentNodePath) {
 				let newpriority;
 
 				if (dontNest) {
@@ -413,11 +411,9 @@
 			let parent = getParentNodePath(node.nodePath);
 			if (parent == parentPath) {
 				let num = node.nodePath.substring(parent ? parent.length + 1 : 0);
-
-				if (num > max) max = num;
+				if (parseInt(num) >= parseInt(max)) max = num;
 			}
 		});
-		console.log(parseInt(max) + 1);
 		return parseInt(max) + 1;
 	}
 
