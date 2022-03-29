@@ -1,7 +1,10 @@
 <script>
 	import { createEventDispatcher } from "svelte";
-	/* Tree view helpers */
+
 	const dispatch = createEventDispatcher();
+
+	//#region helpers
+	/* Tree view helpers */
 
 	function getParentNodePath(nodePath) {
 		return nodePath.substring(0, nodePath.lastIndexOf("."));
@@ -49,7 +52,25 @@
 		);
 	}
 
-	//* selection
+	function changeExpansion(tree, nodePath, expandedProperty) {
+		return tree.map((x) => {
+			let t = x;
+			if (x.nodePath == nodePath) {
+				t[expandedProperty] = !x[expandedProperty];
+			}
+			return t;
+		});
+	}
+
+	function OrderByPriority(tree, priorityProp) {
+		tree.sort((a, b) => {
+			if (b[priorityProp] > a[priorityProp]) return -1;
+			return 1;
+		});
+		return tree;
+	}
+
+	//#region selection
 
 	function ChangeSelection(
 		recursiveely,
@@ -86,16 +107,6 @@
 			if (x.nodePath == nodePath) {
 				t[selectedProperty] = !x[selectedProperty];
 				t.__visual_state = !x[selectedProperty];
-			}
-			return t;
-		});
-	}
-
-	function changeExpansion(tree, nodePath, expandedProperty) {
-		return tree.map((x) => {
-			let t = x;
-			if (x.nodePath == nodePath) {
-				t[expandedProperty] = !x[expandedProperty];
 			}
 			return t;
 		});
@@ -305,32 +316,68 @@
 		});
 	}
 
+	//#endregion
+
 	//* drag and drop
 
-	function moveNode(tree, movedNodePath, targetNodePath, isChild) {
-		//trying to move parent to child
-		if (targetNodePath.startsWith(movedNodePath)) return;
+	function moveNode(
+		tree,
+		movedNodePath,
+		targetNodePath,
+		isChild,
+		dontNest,
+		priorityProp
+	) {
+		let parentNodePath = dontNest
+			? getParentNodePath(targetNodePath)
+			: targetNodePath;
 
-		let newParrenId = getNextNodeId(tree, targetNodePath);
+		//trying to move parent to child
+		if (parentNodePath.startsWith(movedNodePath)) return;
+
+		let newParrenId = getNextNodeId(tree, parentNodePath);
+		let newParrentNodePath =
+			(parentNodePath ? parentNodePath + "." : "") + newParrenId;
+		let targetNode = tree.find((x) => x.nodePath == targetNodePath);
+
+		console.log("newParrentID: " + newParrenId);
 
 		tree = tree.map((node) => {
 			//change haschildren to true on target to show plus icon
-			if (node.nodePath == targetNodePath) {
+			if (node.nodePath == parentNodePath) {
 				node.hasChildren = true;
 				node[expandedProperty] = true;
 			}
 
 			//move nodes to target
-			if (node.nodePath.startsWith(movedNodePath)) {
+			if (!dontNest && node.nodePath.startsWith(movedNodePath)) {
 				//replace
-				let newPath = node.nodePath.replace(
-					movedNodePath,
-					targetNodePath + "." + newParrenId
-				);
+
+				let newPath = node.nodePath.replace(movedNodePath, newParrentNodePath);
 				console.log(node.nodePath + " -> " + newPath);
 				node.nodePath = newPath;
 			}
 
+			//if it is moved node and it is moved node
+			if (!dontNest && node.nodePath == newParrentNodePath) {
+				let newpriority
+
+				if (dontNest) {
+					console.log(targetNode);
+					//calculate next
+					newpriority = (targetNode[priorityProp] ?? 0) + 1;
+
+
+				} else {
+					//new items always placed first
+					newpriority = 0;
+				}
+				console.log("new priority:" + newpriority);
+
+					InsertPriority(tree, parentNodePath, newpriority, priorityProp);
+
+					node[priorityProp] = newpriority;
+			}
 			return node;
 		});
 
@@ -347,13 +394,25 @@
 		return tree;
 	}
 
+	//increase priority by 1 for every siblink, which priority is hier
+	function InsertPriority(tree, parentNode, insertedPriority, priorityProp) {
+		tree.forEach((n) => {
+			if (
+				parentNode == getParentNodePath(n.nodePath) &&
+				n[priorityProp] >= insertedPriority
+			) {
+				n[priorityProp]++;
+			}
+		});
+	}
+
 	//return biggest value of nodepath number that children are using +1
 	function getNextNodeId(tree, parentPath) {
 		let max = 0;
 		tree.forEach((node) => {
 			let parent = getParentNodePath(node.nodePath);
 			if (parent == parentPath) {
-				let num = node.nodePath.substring(parent.length + 1);
+				let num = node.nodePath.substring(parent ? parent.length + 1 : 0);
 
 				if (num > max) max = num;
 			}
@@ -363,6 +422,8 @@
 	}
 
 	/* Tree view helpers end */
+
+	//#endregion
 
 	//! required
 	export let tree = null;
@@ -387,22 +448,29 @@
 
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
-	export let usecallbackPropery = "__useCallback"
+	export let usecallbackPropery = "__useCallback";
+	export let priorityPropery = "__priority";
 
 	export let getId = (x) => x.nodePath;
 	export let getParentId = (x) => getParentNodePath(x.nodePath);
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
 
 	//
-	export let expandCallback = null
+	export let expandCallback = null;
+	export const timeToNest = 1000;
+
+	let dragenterTimestamp;
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
-	$: parentChildrenTree = getParentChildrenTree(
-		filteredTree === undefined ? tree : filteredTree,
-		parentId,
-		isChild,
-		getParentId
+	$: parentChildrenTree = OrderByPriority(
+		getParentChildrenTree(
+			filteredTree === undefined ? tree : filteredTree,
+			parentId,
+			isChild,
+			getParentId
+		),
+		priorityPropery
 	);
 	$: ComputeVisualTree(filteredTree);
 	$: parsedMaxExpandedDepth = Number(maxExpandedDepth ?? 0);
@@ -417,6 +485,8 @@
 		);
 	}
 
+	//#region expansions
+
 	function expandNodes(nodes) {
 		if (!nodes || !nodes.length) return;
 		nodes.forEach((x) => toggleExpansion(x, true));
@@ -425,12 +495,11 @@
 	function toggleExpansion(node, setValueTo = null) {
 		tree = changeExpansion(tree, node.nodePath, expandedProperty);
 
-
 		let val = node[expandedProperty];
 
 		//trigger callback if it is present and node has useCallbackPropery
-		if(val && expandCallback != null && node[usecallbackPropery]){
-			tree = tree.concat(expandCallback(node))
+		if (val && expandCallback != null && node[usecallbackPropery]) {
+			tree = tree.concat(expandCallback(node));
 		}
 
 		dispatch("expansion", {
@@ -451,6 +520,9 @@
 		}
 	}
 
+	//#endregion
+
+	//#region checkboxes
 	//checkboxes
 	function selectionChanged(node) {
 		//console.log(nodePath);
@@ -480,6 +552,8 @@
 		selectionEvents(node);
 	}
 
+	//#endregion
+
 	function handleDragStart(e, node) {
 		console.log("dragstart from: " + node.nodePath);
 		e.dataTransfer.dropEffect = "move";
@@ -493,8 +567,31 @@
 		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
 
-		//moves dragged note to target node
-		tree = moveNode(tree, draggedPath, node.nodePath, isChild);
+		//if dragenterTimestamp isnt dont nest
+		let lasted = dragenterTimestamp ? new Date() - dragenterTimestamp : 1;
+
+		//check if it should nest or move to same layer
+		if (lasted > timeToNest) {
+			tree = moveNode(
+				tree,
+				draggedPath,
+				node.nodePath,
+				isChild,
+				false,
+				priorityPropery
+			);
+		} else {
+			tree = moveNode(
+				tree,
+				draggedPath,
+				node.nodePath,
+				isChild,
+				true,
+				priorityPropery
+			);
+		}
+
+		dragenterTimestamp = null;
 		draggedPath = null;
 
 		dispatch("moved", { moved: draggedPath, to: node.nodePath });
@@ -519,6 +616,11 @@
 		}
 	}
 
+	function handleDragEnter(e, node) {
+		dragenterTimestamp = new Date();
+		e.preventDefault();
+	}
+
 	//computes all visual states when component is first created
 	tree = computeInitialVisualStates(
 		tree,
@@ -539,9 +641,7 @@
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
 				on:dragover={(e) => handleDragOver(e, node)}
-				on:dragenter={(e) => {
-					e.preventDefault();
-				}}
+				on:dragenter={(e) => handleDragEnter(e, node)}
 				on:dragend={(e) => (draggedPath = null)}
 			>
 				{#if node.hasChildren}

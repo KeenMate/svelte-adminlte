@@ -47,6 +47,13 @@
 			__selected: false,
 		},
 		{ nodePath: "3.4", title: "	Omniknight" },
+		{ nodePath: "4", hasChildren:true,__expanded: true},
+		{ nodePath: "4.1",__priority:0 , title: "test2" },
+		{ nodePath: "4.6",__priority:6 , title: "test3" },
+		{ nodePath: "4.2",__priority:2 , title: "test4" },
+		{ nodePath: "4.3",__priority:3 , title: "test5" },
+		{ nodePath: "4.4",__priority:4 , title: "test6" },
+		{ nodePath: "4.5",__priority:5 , title: "test7" },
 	];
 	let dragAndDrop = true;
 </script>
@@ -75,7 +82,7 @@
 			};
 		}}
 	>
-		{node.nodePath}
+ {node.nodePath} p: {node.__priority} t: {node.title}
 	</TreeView>
 </Card>
 
