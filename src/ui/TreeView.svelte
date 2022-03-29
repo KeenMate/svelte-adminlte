@@ -340,11 +340,11 @@
 			(parentNodePath ? parentNodePath + "." : "") + newParrenId;
 		let targetNode = tree.find((x) => x.nodePath == targetNodePath);
 
-		console.log("newParrentID: " + newParrenId);
+		console.log("parentNodePath: " + newParrentNodePath);
 
 		tree = tree.map((node) => {
 			//change haschildren to true on target to show plus icon
-			if (node.nodePath == parentNodePath) {
+			if (!dontNest && node.nodePath == parentNodePath) {
 				node.hasChildren = true;
 				node[expandedProperty] = true;
 			}
@@ -359,24 +359,24 @@
 			}
 
 			//if it is moved node and it is moved node
-			if (!dontNest && node.nodePath == newParrentNodePath) {
-				let newpriority
+			if (
+				node.nodePath == newParrentNodePath ||
+				node.nodePath == movedNodePath
+			) {
+				let newpriority;
 
 				if (dontNest) {
-					console.log(targetNode);
 					//calculate next
 					newpriority = (targetNode[priorityProp] ?? 0) + 1;
-
-
 				} else {
 					//new items always placed first
 					newpriority = 0;
 				}
 				console.log("new priority:" + newpriority);
 
-					InsertPriority(tree, parentNodePath, newpriority, priorityProp);
+				InsertPriority(tree, parentNodePath, newpriority, priorityProp);
 
-					node[priorityProp] = newpriority;
+				node[priorityProp] = newpriority;
 			}
 			return node;
 		});
