@@ -391,7 +391,7 @@
 			if (node.nodePath == newParrentNodePath) {
 				movedNode = node;
 
-				if (targetNode[priorityProp]) {
+				if (targetNode[priorityProp] != null) {
 					let newpriority = 0;
 					if (!nest) {
 						//calculate next
@@ -410,7 +410,7 @@
 					);
 
 					node[priorityProp] = newpriority;
-				}else{
+				} else {
 					//so old priority doesnt mess up orderring
 					movedNode[priorityProp] = undefined;
 				}
@@ -423,14 +423,16 @@
 		tree.splice(oldIndex, 1);
 
 		let index = tree.findIndex((x) => x.nodePath == targetNode.nodePath);
-		tree.splice(index +1, 0, movedNode);
-
+		tree.splice(index + 1, 0, movedNode);
 
 		//hide plus icon if parrent of moved node doesnt have any more children
 		let movedNodeParrent = tree.find(
 			(x) => x.nodePath == getParentNodePath(movedNodePath)
 		);
-		if (movedNodeParrent && !allCHildren(tree, movedNodeParrent.nodePath, isChild).length) {
+		if (
+			movedNodeParrent &&
+			!allCHildren(tree, movedNodeParrent.nodePath, isChild).length
+		) {
 			movedNodeParrent.hasChildren = false;
 		}
 
@@ -684,8 +686,15 @@
 		dragTimeout = setTimeout(() => {
 			canNest = true;
 		}, timeToNest);
-		console.log(dragTimeout);
 		e.preventDefault();
+	}
+
+	function handleDragEnd(e, node) {
+		setTimeout(() => {
+			draggedPath = null;
+			expandCallback = null;
+			highlightedNode = null;
+		}, 1);
 	}
 
 	//computes all visual states when component is first created
@@ -712,7 +721,7 @@
 				on:drop={(e) => handleDragDrop(e, node)}
 				on:dragover={(e) => handleDragOver(e, node)}
 				on:dragenter={(e) => handleDragEnter(e, node)}
-				on:dragend={(e) => (draggedPath = null)}
+				on:dragend={(e) => handleDragEnd(e, node)}
 			>
 				{#if node.hasChildren}
 					<span on:click={() => toggleExpansion(node)}>
@@ -771,7 +780,13 @@
 				{/if}
 				<slot {node} />
 			</div>
-			<!--{@debug node}-->
+
+			{#if canNest && highlightedNode?.nodePath == node.nodePath}
+				<div class="insert-line-wrapper">
+					<div class="insert-line insert-line-child" />
+				</div>
+			{/if}
+			<!-- {@debug node} -->
 			<!--{@debug $_expansionState}-->
 			{#if node[expandedProperty] && node.hasChildren}
 				<!--tree={tree/*.filter(x => x.nodePath.startsWith(node.nodePath) && x.nodePath !== node.nodePath)*/} -->
@@ -799,13 +814,18 @@
 					on:closed
 					bind:highlightedNode
 					{timeToNest}
-
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
 			{/if}
 			{#if node[expandedProperty] != true && node.hasChildren}
 				<ul class:child-menu={childDepth > 0} />
+			{/if}
+		<!-- Show line if insering -->
+			{#if (!canNest && highlightedNode?.nodePath == node.nodePath)}
+				<div class="insert-line-wrapper">
+					<div class="insert-line" />
+				</div>
 			{/if}
 		</li>
 	{/each}
@@ -834,6 +854,7 @@
 
 				border: $treeview-lines
 				border-width: 0 0 1px 1px
+				padding: 0.3em 0
 
 				&:last-child > ul
 					border-left: 1px solid white
@@ -879,4 +900,23 @@
 				color: red
 			.hover
 				font-weight: bold
+			.insert-line
+				position: absolute
+				top: 0.8em
+				left: 0
+				z-index: 99
+				height: 3px
+				width: 200px
+				background-color: red
+				display: block
+				border-radius: 3px
+				margin-left: 2.5em
+			.insert-line-child
+				margin-left: 5em
+				background-color: green
+
+			.insert-line-wrapper
+				position: relative
+
+
 </style>
