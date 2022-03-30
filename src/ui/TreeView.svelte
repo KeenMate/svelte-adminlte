@@ -402,8 +402,6 @@
 				);
 
 				node[priorityProp] = newpriority;
-
-				console.log(node);
 			}
 			return node;
 		});
@@ -458,40 +456,48 @@
 	//#endregion
 
 	//! required
-	export let tree = null;
-	export let filteredTree;
-	export let treeId = null;
-
-	export let maxExpandedDepth = 3;
-
-	export let recursive = false;
-	export let checkboxes = false;
+	export let tree = null; //array of nodes with nodePath
+	export let treeId = null; //string
+	export let maxExpandedDepth = 3;  //number
+	//tree that will be rendered(will be same as tree if null)
+	export let filteredTree; //array of nodes with nodePath
+	export let recursive = false;  //bool
+	export let checkboxes = false;  //bool
 	//if true, will show checkboxes to elements with children
-	export let leafNodeCheckboxesOnly = false;
+	export let leafNodeCheckboxesOnly = false; //bool
 	//true = disabel hide = false
-	export let disableOrHide = false;
+	export let disableOrHide = false; //bool
+	//will allow you to move nodes between nodes and reorder them
+	export let dragAndDrop = false; //bool
 
-	export let dragAndDrop = false;
+	export let childDepth = 0; //number
+	export let parentId = null; //string
 
-	export let childDepth = 0;
-	export let parentId = null;
-	//path of currently dragged node
-	export let draggedPath = null;
-
+	//properties
 	export let expandedProperty = "__expanded";
 	export let selectedProperty = "__selected";
 	export let usecallbackPropery = "__useCallback";
 	export let priorityPropery = "__priority";
-
 	export let getId = (x) => x.nodePath;
 	export let getParentId = (x) => getParentNodePath(x.nodePath);
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
+	//class shown on div when it should expand on drag and drop
+	export let expandClass = "inserting-highlighted";
+	export const timeToNest = 2000;
 
-	//
+
+//DONT SET ONLY USED INTERNALLY
+
+	//path of currently dragged node
+	export let draggedPath = null;
 	export let expandCallback = null;
-	export const timeToNest = 1000;
+	export let highlightedNode;
+
+
 
 	let dragenterTimestamp;
+	let canNest;
+	let dragTimeout
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
@@ -574,7 +580,7 @@
 	function selectChildren(node, e) {
 		tree = ChangeSelectForAllChildren(
 			tree,
-			getId(node),
+			node.nodePath,
 			isChild,
 			selectedProperty,
 			e.target.checked,
@@ -625,6 +631,7 @@
 
 		dragenterTimestamp = null;
 		draggedPath = null;
+		highlightedNode = null;
 
 		dispatch("moved", { moved: draggedPath, to: node.nodePath });
 	}
@@ -650,6 +657,16 @@
 
 	function handleDragEnter(e, node) {
 		dragenterTimestamp = new Date();
+		canNest = false;
+
+		highlightedNode = node;
+
+		clearTimeout(dragTimeout)
+
+		dragTimeout = setTimeout(()=> {
+			canNest = true
+		}, timeToNest);
+		console.log(dragTimeout)
 		e.preventDefault();
 	}
 
@@ -667,7 +684,9 @@
 	{#each parentChildrenTree as node (getNodeId(node))}
 		<li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
 			<div
-				class="tree-item"
+				class="tree-item {canNest && highlightedNode?.nodePath == node.nodePath
+					? expandClass
+					: ''}"
 				class:div-has-children={node.hasChildren}
 				draggable={dragAndDrop}
 				on:dragstart={(e) => handleDragStart(e, node)}
@@ -759,6 +778,7 @@
 					on:expansion
 					on:expanded
 					on:closed
+					bind:highlightedNode
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -806,7 +826,6 @@
 					margin-left: -1px
 					padding-left: 1.25em
 					border-left: none
-
 			.has-children
 				border-bottom: 0px
 
@@ -834,4 +853,7 @@
 
 			.invisible
 				visibility: none
+
+			.inserting-highlighted
+				color: red
 </style>
