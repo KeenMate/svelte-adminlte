@@ -6,6 +6,8 @@
 	//#region helpers
 	/* Tree view helpers */
 
+	//#region basic helpres
+
 	function getParentNodePath(nodePath) {
 		return nodePath.substring(0, nodePath.lastIndexOf("."));
 	}
@@ -69,6 +71,8 @@
 		});
 		return tree;
 	}
+
+	//#endregion
 
 	//#region selection
 
@@ -339,7 +343,7 @@
 	) {
 		console.log(!nest ? "dont nest" : "nest");
 
-		//if you are not nesting, you want to be on same level
+		// if you are not nesting, you want to be on same level
 		let parentNodePath = !nest
 			? getParentNodePath(targetNodePath)
 			: targetNodePath;
@@ -360,8 +364,9 @@
 				getNextNodeId(tree, parentNodePath);
 		}
 
-		//find target node
+		//* find target node
 		let targetNode = tree.find((x) => x.nodePath == targetNodePath);
+		let movedNode;
 
 		console.log("parentNodePath: " + newParrentNodePath);
 
@@ -384,27 +389,38 @@
 
 			//if it is moved node and it is moved node
 			if (node.nodePath == newParrentNodePath) {
-				let newpriority = 0;
-				if (!nest) {
-					//calculate next
-					newpriority = (targetNode[priorityProp] ?? 0) + 1;
+				movedNode = node;
+
+				if (targetNode[priorityProp]) {
+					let newpriority = 0;
+					if (!nest) {
+						//calculate next
+						newpriority = (targetNode[priorityProp] ?? 0) + 1;
+					}
+
+					console.log("new priority:" + newpriority);
+
+					InsertPriority(
+						tree,
+						parentNodePath,
+						newParrentNodePath,
+						newpriority,
+						priorityProp,
+						isChild
+					);
+
+					node[priorityProp] = newpriority;
 				}
-
-				console.log("new priority:" + newpriority);
-
-				InsertPriority(
-					tree,
-					parentNodePath,
-					newParrentNodePath,
-					newpriority,
-					priorityProp,
-					isChild
-				);
-
-				node[priorityProp] = newpriority;
 			}
 			return node;
 		});
+
+		//* insert node at right possition of array
+		let oldIndex = tree.findIndex((x) => x.nodePath == newParrentNodePath);
+		tree.splice(oldIndex, 1);
+
+		let index = tree.findIndex((x) => x.nodePath == targetNode.nodePath);
+		tree.splice(index, 0, movedNode);
 
 		//hide plus icon if parrent of moved node doesnt have any more children
 		let movedNodeParrent = tree.find(
@@ -458,11 +474,11 @@
 	//! required
 	export let tree = null; //array of nodes with nodePath
 	export let treeId = null; //string
-	export let maxExpandedDepth = 3;  //number
+	export let maxExpandedDepth = 3; //number
 	//tree that will be rendered(will be same as tree if null)
 	export let filteredTree; //array of nodes with nodePath
-	export let recursive = false;  //bool
-	export let checkboxes = false;  //bool
+	export let recursive = false; //bool
+	export let checkboxes = false; //bool
 	//if true, will show checkboxes to elements with children
 	export let leafNodeCheckboxesOnly = false; //bool
 	//true = disabel hide = false
@@ -485,19 +501,16 @@
 	export let expandClass = "inserting-highlighted";
 	export const timeToNest = 2000;
 
-
-//DONT SET ONLY USED INTERNALLY
+	//! DONT SET ONLY USED INTERNALLY
 
 	//path of currently dragged node
 	export let draggedPath = null;
 	export let expandCallback = null;
-	export let highlightedNode;
-
-
+	export let highlightedNode = null;
 
 	let dragenterTimestamp;
 	let canNest;
-	let dragTimeout
+	let dragTimeout;
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
@@ -601,6 +614,7 @@
 
 	function handleDragDrop(e, node) {
 		//should be necesary but just in case
+		highlightedNode = null;
 		if (!dragAndDrop) return;
 		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
@@ -661,12 +675,12 @@
 
 		highlightedNode = node;
 
-		clearTimeout(dragTimeout)
+		clearTimeout(dragTimeout);
 
-		dragTimeout = setTimeout(()=> {
-			canNest = true
+		dragTimeout = setTimeout(() => {
+			canNest = true;
 		}, timeToNest);
-		console.log(dragTimeout)
+		console.log(dragTimeout);
 		e.preventDefault();
 	}
 
@@ -688,6 +702,7 @@
 					? expandClass
 					: ''}"
 				class:div-has-children={node.hasChildren}
+				class:hover={highlightedNode?.nodePath == node.nodePath}
 				draggable={dragAndDrop}
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
@@ -856,4 +871,6 @@
 
 			.inserting-highlighted
 				color: red
+			.hover
+				font-weight: bold
 </style>
