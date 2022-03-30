@@ -48,12 +48,12 @@
 		},
 		{ nodePath: "3.4", title: "	Omniknight" },
 		{ nodePath: "4", hasChildren:true,__expanded: true},
-		{ nodePath: "4.1",__priority:0 , title: "test2" },
-		{ nodePath: "4.6",__priority:6 , title: "test3" },
-		{ nodePath: "4.2",__priority:2 , title: "test4" },
-		{ nodePath: "4.3",__priority:3 , title: "test5" },
-		{ nodePath: "4.4",__priority:4 , title: "test6" },
-		{ nodePath: "4.5",__priority:5 , title: "test7" },
+		{ nodePath: "4.1",__priority:0 , title: "ITEM_1" },
+		{ nodePath: "4.6",__priority:6 , title: "ITEM_2" },
+		{ nodePath: "4.2",__priority:2 , title: "ITEM_3" },
+		{ nodePath: "4.3",__priority:3 , title: "ITEM_4" },
+		{ nodePath: "4.4",__priority:4 , title: "ITEM_5" },
+		{ nodePath: "4.5",__priority:10 , title: "ITEM_6" },
 	];
 	let dragAndDrop = true;
 </script>

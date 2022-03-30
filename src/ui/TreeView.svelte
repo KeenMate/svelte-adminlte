@@ -320,86 +320,122 @@
 
 	//* drag and drop
 
+	/**
+	 * moves node from one parent to another
+	 * @param {Object[]} tree - tree
+	 * @param {nodePath} movedNodePath - nodepath of moved(dragged) node
+	 * @param {nodePath} targetNodePath - nodepath of node where it should be moved ( either bellow it in priority or as child)
+	 * @param {function} isChild - funcion to get if child
+	 * @param {boolean} nest - if true, it will insert moved node as child of target node, if false, it will insert it bellow it in priority
+	 * @param {string} priorityProp - prop where priority is stored
+	 */
 	function moveNode(
 		tree,
 		movedNodePath,
 		targetNodePath,
 		isChild,
-		dontNest,
+		nest,
 		priorityProp
 	) {
-		console.log(dontNest ? "dont nest" : "nest");
-		let parentNodePath = dontNest
+		console.log(!nest ? "dont nest" : "nest");
+
+		//if you are not nesting, you want to be on same level
+		let parentNodePath = !nest
 			? getParentNodePath(targetNodePath)
 			: targetNodePath;
 
 		//trying to move parent to child
 		if (parentNodePath.startsWith(movedNodePath)) return;
 
-		let newParrenId = getNextNodeId(tree, parentNodePath);
-		let newParrentNodePath =
-			(parentNodePath ? parentNodePath + "." : "") + newParrenId;
+		//dont create new node if you only moved inside same parrent
+		let insideParent =
+			!nest &&
+			getParentNodePath(movedNodePath) == getParentNodePath(targetNodePath);
+
+		let newParrentNodePath = movedNodePath;
+
+		if (!insideParent) {
+			newParrentNodePath =
+				(parentNodePath ? parentNodePath + "." : "") +
+				getNextNodeId(tree, parentNodePath);
+		}
+
+		//find target node
 		let targetNode = tree.find((x) => x.nodePath == targetNodePath);
 
 		console.log("parentNodePath: " + newParrentNodePath);
 
 		tree = tree.map((node) => {
-			//change haschildren to true on target to show plus icon
+			//make sure that parent's haschild is set to true, so that children
 			if (node.nodePath == parentNodePath) {
 				node.hasChildren = true;
 				node[expandedProperty] = true;
 			}
 
 			//move nodes to target
-			if (node.nodePath.startsWith(movedNodePath)) {
-				//replace
-
+			if (!insideParent && node.nodePath.startsWith(movedNodePath)) {
+				//replace old parent with new
 				let newPath = node.nodePath.replace(movedNodePath, newParrentNodePath);
+
 				console.log(node.nodePath + " -> " + newPath);
+
 				node.nodePath = newPath;
 			}
 
 			//if it is moved node and it is moved node
 			if (node.nodePath == newParrentNodePath) {
-				let newpriority;
-
-				if (dontNest) {
+				let newpriority = 0;
+				if (!nest) {
 					//calculate next
 					newpriority = (targetNode[priorityProp] ?? 0) + 1;
-				} else {
-					//new items always placed first
-					newpriority = 0;
 				}
+
 				console.log("new priority:" + newpriority);
 
-				InsertPriority(tree, parentNodePath, newpriority, priorityProp);
+				InsertPriority(
+					tree,
+					parentNodePath,
+					newParrentNodePath,
+					newpriority,
+					priorityProp,
+					isChild
+				);
 
 				node[priorityProp] = newpriority;
+
+				console.log(node);
 			}
 			return node;
 		});
 
-		tree.forEach((node) => {
-			//check if it has any children left, if not change hasChildren to false
-			if (node.nodePath == getParentNodePath(movedNodePath)) {
-				//hasNoOtherChildren
-				if (!allCHildren(tree, node.nodePath, isChild).length) {
-					node.hasChildren = false;
-				}
-			}
-		});
+		//hide plus icon if parrent of moved node doesnt have any more children
+		let movedNodeParrent = tree.find(
+			(x) => x.nodePath == getParentNodePath(movedNodePath)
+		);
+		if (!allCHildren(tree, movedNodeParrent.nodePath, isChild).length) {
+			movedNodeParrent.hasChildren = false;
+		}
 
 		return tree;
 	}
 
-	//increase priority by 1 for every siblink, which priority is hier
-	function InsertPriority(tree, parentNode, insertedPriority, priorityProp) {
-		tree.forEach((n) => {
-			if (
-				parentNode == getParentNodePath(n.nodePath) &&
-				n[priorityProp] >= insertedPriority
-			) {
-				n[priorityProp]++;
+	//recomputes all priorities after inserted priority
+	//also changes all priorities to be one apart (1,5,6 => 1,2,3)
+	function InsertPriority(
+		tree,
+		parentNode,
+		movedNodePath,
+		insertedPriority,
+		priorityProp,
+		isChild
+	) {
+		let nextPriority = insertedPriority + 1;
+		OrderByPriority(
+			allCHildren(tree, parentNode, isChild),
+			priorityProp
+		).forEach((n) => {
+			if (n[priorityProp] >= insertedPriority && n.nodePath != movedNodePath) {
+				n[priorityProp] = nextPriority++;
 			}
 		});
 	}
@@ -573,7 +609,7 @@
 				draggedPath,
 				node.nodePath,
 				isChild,
-				false,
+				true,
 				priorityPropery
 			);
 		} else {
@@ -582,7 +618,7 @@
 				draggedPath,
 				node.nodePath,
 				isChild,
-				true,
+				false,
 				priorityPropery
 			);
 		}
