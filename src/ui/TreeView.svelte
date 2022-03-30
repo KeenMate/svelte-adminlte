@@ -410,6 +410,9 @@
 					);
 
 					node[priorityProp] = newpriority;
+				}else{
+					//so old priority doesnt mess up orderring
+					movedNode[priorityProp] = undefined;
 				}
 			}
 			return node;
@@ -420,13 +423,14 @@
 		tree.splice(oldIndex, 1);
 
 		let index = tree.findIndex((x) => x.nodePath == targetNode.nodePath);
-		tree.splice(index, 0, movedNode);
+		tree.splice(index +1, 0, movedNode);
+
 
 		//hide plus icon if parrent of moved node doesnt have any more children
 		let movedNodeParrent = tree.find(
 			(x) => x.nodePath == getParentNodePath(movedNodePath)
 		);
-		if (!allCHildren(tree, movedNodeParrent.nodePath, isChild).length) {
+		if (movedNodeParrent && !allCHildren(tree, movedNodeParrent.nodePath, isChild).length) {
 			movedNodeParrent.hasChildren = false;
 		}
 
@@ -794,6 +798,8 @@
 					on:expanded
 					on:closed
 					bind:highlightedNode
+					{timeToNest}
+
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
