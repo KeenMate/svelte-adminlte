@@ -391,7 +391,7 @@
 			if (node.nodePath == newParrentNodePath) {
 				movedNode = node;
 
-				if (targetNode[priorityProp] != null) {
+				if (nest || targetNode[priorityProp] != null) {
 					let newpriority = 0;
 					if (!nest) {
 						//calculate next
@@ -505,7 +505,9 @@
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
 	//class shown on div when it should expand on drag and drop
 	export let expandClass = "inserting-highlighted";
-	export const timeToNest = 2000;
+	//time, after it should nest
+	export const timeToNest = null;
+	export const pixelNestTreshold = 150;
 
 	//! DONT SET ONLY USED INTERNALLY
 
@@ -515,8 +517,12 @@
 	export let highlightedNode = null;
 
 	let dragenterTimestamp;
+	let canNestPos = false;
+	let canNestTime = false;
 	let canNest;
+	$: canNest = canNestPos || canNestTime;
 	let dragTimeout;
+	let validTarget = false;
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
@@ -626,10 +632,11 @@
 		console.log(draggedPath + " dropped on: " + node.nodePath);
 
 		//if dragenterTimestamp isnt dont nest
-		let lasted = dragenterTimestamp ? new Date() - dragenterTimestamp : 1;
+		canNestTime =
+			(dragenterTimestamp ? new Date() - dragenterTimestamp : 1) > timeToNest;
 
 		//check if it should nest or move to same layer
-		if (lasted > timeToNest) {
+		if (canNest) {
 			tree = moveNode(
 				tree,
 				draggedPath,
@@ -657,9 +664,21 @@
 	}
 
 	function handleDragOver(e, node) {
+		let diff = e.x - e.target.getBoundingClientRect().x;
+
+		if (pixelNestTreshold && diff > pixelNestTreshold) {
+			canNestPos = true;
+		} else {
+			canNestPos = false;
+		}
+
 		//if you arent dropping parent to child allow drop
-		if (dragAndDrop && !node.nodePath.startsWith(draggedPath))
+		if (dragAndDrop && !node.nodePath.startsWith(draggedPath)){
+			validTarget = true;
 			e.preventDefault();
+		}else{
+			validTarget = false;
+		}
 	}
 
 	function selectionEvents(node) {
@@ -676,16 +695,21 @@
 	}
 
 	function handleDragEnter(e, node) {
+		validTarget = false
 		dragenterTimestamp = new Date();
-		canNest = false;
-
+		// will cause flashing when moving wrom node to node while be able to nest
+		//* have to be here if you only use time
 		highlightedNode = node;
 
-		clearTimeout(dragTimeout);
+		if (timeToNest) {
+			canNestTime = false;
 
-		dragTimeout = setTimeout(() => {
-			canNest = true;
-		}, timeToNest);
+			clearTimeout(dragTimeout);
+
+			dragTimeout = setTimeout(() => {
+				canNestTime = true;
+			}, timeToNest);
+		}
 		e.preventDefault();
 	}
 
@@ -715,7 +739,7 @@
 					? expandClass
 					: ''}"
 				class:div-has-children={node.hasChildren}
-				class:hover={highlightedNode?.nodePath == node.nodePath}
+				class:hover={validTarget && (highlightedNode?.nodePath == node.nodePath)}
 				draggable={dragAndDrop}
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
@@ -781,7 +805,7 @@
 				<slot {node} />
 			</div>
 
-			{#if canNest && highlightedNode?.nodePath == node.nodePath}
+			{#if validTarget && canNest && (highlightedNode?.nodePath == node.nodePath)}
 				<div class="insert-line-wrapper">
 					<div class="insert-line insert-line-child" />
 				</div>
@@ -814,6 +838,7 @@
 					on:closed
 					bind:highlightedNode
 					{timeToNest}
+					{pixelNestTreshold}
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -821,8 +846,8 @@
 			{#if node[expandedProperty] != true && node.hasChildren}
 				<ul class:child-menu={childDepth > 0} />
 			{/if}
-		<!-- Show line if insering -->
-			{#if (!canNest && highlightedNode?.nodePath == node.nodePath)}
+			<!-- Show line if insering -->
+			{#if validTarget && !canNest && (highlightedNode?.nodePath == node.nodePath)}
 				<div class="insert-line-wrapper">
 					<div class="insert-line" />
 				</div>
@@ -851,10 +876,10 @@
 				margin-left: 1.5em
 
 			li
-
 				border: $treeview-lines
 				border-width: 0 0 1px 1px
-				padding: 0.3em 0
+				//padding: 0.3em 0
+
 
 				&:last-child > ul
 					border-left: 1px solid white
@@ -902,10 +927,10 @@
 				font-weight: bold
 			.insert-line
 				position: absolute
-				top: 0.8em
+				top: 0.75em
 				left: 0
 				z-index: 99
-				height: 3px
+				height: 2px
 				width: 200px
 				background-color: red
 				display: block
