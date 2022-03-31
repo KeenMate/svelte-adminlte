@@ -181,6 +181,10 @@
 			isChild,
 			getParentId
 		);
+
+		if(!children || children?.length == 0)
+			return "false"
+
 		//if every child is selected or vs=true return true
 		if (
 			children.every((x) => {
@@ -555,10 +559,6 @@
 
 		let val = node[expandedProperty];
 
-
-		console.log(val)
-		console.log(node[usecallbackPropery] == true)
-		console.log(expandCallback != null)
 		//trigger callback if it is present and node has useCallbackPropery
 		if (val && expandCallback != null && node[usecallbackPropery] == true) {
 			console.log("calling callback")
