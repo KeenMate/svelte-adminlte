@@ -341,8 +341,6 @@
 		nest,
 		priorityProp
 	) {
-		console.log(!nest ? "dont nest" : "nest");
-
 		// if you are not nesting, you want to be on same level
 		let parentNodePath = !nest
 			? getParentNodePath(targetNodePath)
@@ -355,13 +353,11 @@
 		let insideParent =
 			!nest &&
 			getParentNodePath(movedNodePath) == getParentNodePath(targetNodePath);
-
 		let newParrentNodePath = movedNodePath;
-
 		if (!insideParent) {
 			newParrentNodePath =
 				(parentNodePath ? parentNodePath + "." : "") +
-				getNextNodeId(tree, parentNodePath);
+				getNextNodeId(tree, parentNodePath, isChild);
 		}
 
 		//* find target node
@@ -377,17 +373,15 @@
 				node[expandedProperty] = true;
 			}
 
-			//move nodes to target
+			//move moved nodes to new location ( if location is being changed)
 			if (!insideParent && node.nodePath.startsWith(movedNodePath)) {
 				//replace old parent with new
 				let newPath = node.nodePath.replace(movedNodePath, newParrentNodePath);
-
 				console.log(node.nodePath + " -> " + newPath);
-
 				node.nodePath = newPath;
 			}
 
-			//if it is moved node and it is moved node
+			//if it is moved node
 			if (node.nodePath == newParrentNodePath) {
 				movedNode = node;
 
@@ -461,9 +455,10 @@
 	}
 
 	//return biggest value of nodepath number that children are using +1
-	function getNextNodeId(tree, parentPath) {
+	function getNextNodeId(tree, parentPath, isChild) {
 		let max = 0;
-		tree.forEach((node) => {
+		//findes biggest nodeNumber for
+		allCHildren(tree, parentPath, isChild).forEach((node) => {
 			let parent = getParentNodePath(node.nodePath);
 			if (parent == parentPath) {
 				let num = node.nodePath.substring(parent ? parent.length + 1 : 0);
@@ -506,8 +501,8 @@
 	//class shown on div when it should expand on drag and drop
 	export let expandClass = "inserting-highlighted";
 	//time, after it should nest
-	export const timeToNest = null;
-	export const pixelNestTreshold = 150;
+	export let timeToNest = null;
+	export let pixelNestTreshold = 150;
 
 	//! DONT SET ONLY USED INTERNALLY
 
@@ -516,13 +511,15 @@
 	export let expandCallback = null;
 	export let highlightedNode = null;
 
+
+
 	let dragenterTimestamp;
 	let canNestPos = false;
 	let canNestTime = false;
 	let canNest;
-	$: canNest = canNestPos || canNestTime;
 	let dragTimeout;
 	let validTarget = false;
+	$: canNest = canNestPos || canNestTime;
 
 	const getNodeId = (node) => `${treeId}-${getId(node)}`;
 
@@ -631,31 +628,22 @@
 		draggedPath = e.dataTransfer.getData("node_id");
 		console.log(draggedPath + " dropped on: " + node.nodePath);
 
-		//if dragenterTimestamp isnt dont nest
-		canNestTime =
-			(dragenterTimestamp ? new Date() - dragenterTimestamp : 1) > timeToNest;
-
-		//check if it should nest or move to same layer
-		if (canNest) {
-			tree = moveNode(
-				tree,
-				draggedPath,
-				node.nodePath,
-				isChild,
-				true,
-				priorityPropery
-			);
-		} else {
-			tree = moveNode(
-				tree,
-				draggedPath,
-				node.nodePath,
-				isChild,
-				false,
-				priorityPropery
-			);
+		//important to check if timetonest is set, otherwise you could spend 30 minutes fixing this shit :)
+		if (timeToNest) {
+			canNestTime =
+				(dragenterTimestamp ? new Date() - dragenterTimestamp : 1) > timeToNest;
 		}
 
+		tree = moveNode(
+			tree,
+			draggedPath,
+			node.nodePath,
+			isChild,
+			canNest,
+			priorityPropery
+		);
+
+		//reset props
 		dragenterTimestamp = null;
 		draggedPath = null;
 		highlightedNode = null;
@@ -664,8 +652,9 @@
 	}
 
 	function handleDragOver(e, node) {
+		//if you are further away from right then treshold allow nesting
 		let diff = e.x - e.target.getBoundingClientRect().x;
-
+		//console.log(diff + " - " + (diff > pixelNestTreshold))
 		if (pixelNestTreshold && diff > pixelNestTreshold) {
 			canNestPos = true;
 		} else {
@@ -673,10 +662,10 @@
 		}
 
 		//if you arent dropping parent to child allow drop
-		if (dragAndDrop && !node.nodePath.startsWith(draggedPath)){
+		if (dragAndDrop && !node.nodePath.startsWith(draggedPath)) {
 			validTarget = true;
 			e.preventDefault();
-		}else{
+		} else {
 			validTarget = false;
 		}
 	}
@@ -695,7 +684,7 @@
 	}
 
 	function handleDragEnter(e, node) {
-		validTarget = false
+		validTarget = false;
 		dragenterTimestamp = new Date();
 		// will cause flashing when moving wrom node to node while be able to nest
 		//* have to be here if you only use time
@@ -735,11 +724,13 @@
 	{#each parentChildrenTree as node (getNodeId(node))}
 		<li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
 			<div
-				class="tree-item {canNest && highlightedNode?.nodePath == node.nodePath
+				class="tree-item {validTarget &&
+				canNest &&
+				highlightedNode?.nodePath == node.nodePath
 					? expandClass
 					: ''}"
 				class:div-has-children={node.hasChildren}
-				class:hover={validTarget && (highlightedNode?.nodePath == node.nodePath)}
+				class:hover={validTarget && highlightedNode?.nodePath == node.nodePath}
 				draggable={dragAndDrop}
 				on:dragstart={(e) => handleDragStart(e, node)}
 				on:drop={(e) => handleDragDrop(e, node)}
@@ -805,7 +796,7 @@
 				<slot {node} />
 			</div>
 
-			{#if validTarget && canNest && (highlightedNode?.nodePath == node.nodePath)}
+			{#if validTarget && canNest && highlightedNode?.nodePath == node.nodePath}
 				<div class="insert-line-wrapper">
 					<div class="insert-line insert-line-child" />
 				</div>
@@ -837,8 +828,8 @@
 					on:expanded
 					on:closed
 					bind:highlightedNode
-					{timeToNest}
-					{pixelNestTreshold}
+					bind:timeToNest
+					bind:pixelNestTreshold
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
@@ -847,7 +838,7 @@
 				<ul class:child-menu={childDepth > 0} />
 			{/if}
 			<!-- Show line if insering -->
-			{#if validTarget && !canNest && (highlightedNode?.nodePath == node.nodePath)}
+			{#if validTarget && !canNest && highlightedNode?.nodePath == node.nodePath}
 				<div class="insert-line-wrapper">
 					<div class="insert-line" />
 				</div>
@@ -932,13 +923,13 @@
 				z-index: 99
 				height: 2px
 				width: 200px
-				background-color: red
+				background-color: blue
 				display: block
 				border-radius: 3px
 				margin-left: 2.5em
 			.insert-line-child
 				margin-left: 5em
-				background-color: green
+				background-color: red
 
 			.insert-line-wrapper
 				position: relative

@@ -79,7 +79,7 @@
 			console.log("callback from "+n.nodePath);
 			return {
 				nodePath: "1." + ++num
-			};
+			,__priority:0};
 		}}
 	>
  {node.nodePath} p: {node.__priority} t: {node.title}
