@@ -2,7 +2,7 @@
 	import { Card } from "../index";
 	import TreeView from "../src/ui/TreeView.svelte";
 
-	let num = 0
+	let num = 0;
 
 	let tree = [
 		{
@@ -47,13 +47,13 @@
 			__selected: false,
 		},
 		{ nodePath: "3.4", title: "	Omniknight" },
-		{ nodePath: "4", hasChildren:true,__expanded: true},
-		{ nodePath: "4.1",__priority:0 , title: "ITEM_1" },
-		{ nodePath: "4.6",__priority:6 , title: "ITEM_2" },
-		{ nodePath: "4.2",__priority:2 , title: "ITEM_3" },
-		{ nodePath: "4.3",__priority:3 , title: "ITEM_4" },
-		{ nodePath: "4.4",__priority:4 , title: "ITEM_5" },
-		{ nodePath: "4.5",__priority:10 , title: "ITEM_6" },
+		{ nodePath: "4", hasChildren: true, __expanded: true },
+		{ nodePath: "4.1", __priority: 0, title: "ITEM_1" },
+		{ nodePath: "4.6", __priority: 6, title: "ITEM_2" },
+		{ nodePath: "4.2", __priority: 2, title: "ITEM_3" },
+		{ nodePath: "4.3", __priority: 3, title: "ITEM_4" },
+		{ nodePath: "4.4", __priority: 4, title: "ITEM_5" },
+		{ nodePath: "4.5", __priority: 10, title: "ITEM_6" },
 	];
 	let dragAndDrop = true;
 </script>
@@ -75,14 +75,26 @@
 		on:selection={(e) => console.log(e.detail)}
 		on:expansion={(e) => console.log(e.detail)}
 		bind:dragAndDrop
-		expandCallback={(n) => {
-			console.log("callback from "+n.nodePath);
-			return {
-				nodePath: "1." + ++num
-			,__priority:0};
+		expandCallback={async (n) => {
+			console.log("callback from " + n.nodePath);
+			let data = await [
+				{
+					nodePath: n.nodePath+ "." + ++num,
+					__priority: 0,
+					__useCallback: true,
+					hasChildren: true,
+				},
+				{
+					nodePath: n.nodePath+ "." + ++num,
+					__priority: 0,
+					__useCallback: true,
+					hasChildren: true,
+				},
+			];
+			return data;
 		}}
 	>
- {node.nodePath} p: {node.__priority} t: {node.title}
+		{node.nodePath} p: {node.__priority} t: {node.title}
 	</TreeView>
 </Card>
 

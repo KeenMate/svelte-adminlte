@@ -511,8 +511,6 @@
 	export let expandCallback = null;
 	export let highlightedNode = null;
 
-
-
 	let dragenterTimestamp;
 	let canNestPos = false;
 	let canNestTime = false;
@@ -557,11 +555,23 @@
 
 		let val = node[expandedProperty];
 
+
+		console.log(val)
+		console.log(node[usecallbackPropery] == true)
+		console.log(expandCallback != null)
 		//trigger callback if it is present and node has useCallbackPropery
-		if (val && expandCallback != null && node[usecallbackPropery]) {
-			tree = tree.concat(expandCallback(node));
+		if (val && expandCallback != null && node[usecallbackPropery] == true) {
+			console.log("calling callback")
+			fetchNodeDataAsync(node).then((val) => {
+				tree = tree.concat(val);
+				node[usecallbackPropery] = false;
+			}).catch((reason)=>{
+				console.log("ERROR IS CALLBACK!!")
+				console.log(reason)
+			});
 		}
 
+		//expansion events
 		dispatch("expansion", {
 			path: node.nodePath,
 			value: val,
@@ -572,6 +582,14 @@
 		} else {
 			dispatch("closed", node.nodePath);
 		}
+	}
+
+	//awaits function provided in expandCallback
+	async function fetchNodeDataAsync(node) {
+		let data = await expandCallback(node);
+		console.log("loaded new nodes: ");
+		console.log(data);
+		return data;
 	}
 
 	function recomputeExpandedNodes() {
@@ -705,7 +723,6 @@
 	function handleDragEnd(e, node) {
 		setTimeout(() => {
 			draggedPath = null;
-			expandCallback = null;
 			highlightedNode = null;
 		}, 1);
 	}
@@ -830,6 +847,7 @@
 					bind:highlightedNode
 					bind:timeToNest
 					bind:pixelNestTreshold
+					{expandCallback}
 				>
 					<slot node={nodeNested} />
 				</svelte:self>
