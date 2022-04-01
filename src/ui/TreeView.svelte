@@ -182,8 +182,7 @@
 			getParentId
 		);
 
-		if(!children || children?.length == 0)
-			return "false"
+		if (!children || children?.length == 0) return "false";
 
 		//if every child is selected or vs=true return true
 		if (
@@ -326,7 +325,7 @@
 
 	//#endregion
 
-	//* drag and drop
+	//#region drag and drop
 
 	/**
 	 * moves node from one parent to another
@@ -472,6 +471,8 @@
 		return parseInt(max) + 1;
 	}
 
+	//#endregion
+
 	/* Tree view helpers end */
 
 	//#endregion
@@ -502,9 +503,12 @@
 	export let getId = (x) => x.nodePath;
 	export let getParentId = (x) => getParentNodePath(x.nodePath);
 	export let isChild = (x) => nodePathIsChild(x.nodePath);
+
+	//classes for customization of tree
+ 	export let treeCssClass = "", nodeCssClass = "", expandedToggleCss = "", collapsedToggleCss = ""
 	//class shown on div when it should expand on drag and drop
 	export let expandClass = "inserting-highlighted";
-	//time, after it should nest
+	//will nest of at least one of them is meet
 	export let timeToNest = null;
 	export let pixelNestTreshold = 150;
 
@@ -561,14 +565,16 @@
 
 		//trigger callback if it is present and node has useCallbackPropery
 		if (val && expandCallback != null && node[usecallbackPropery] == true) {
-			console.log("calling callback")
-			fetchNodeDataAsync(node).then((val) => {
-				tree = tree.concat(val);
-				node[usecallbackPropery] = false;
-			}).catch((reason)=>{
-				console.log("ERROR IS CALLBACK!!")
-				console.log(reason)
-			});
+			console.log("calling callback");
+			fetchNodeDataAsync(node)
+				.then((val) => {
+					tree = tree.concat(val);
+					node[usecallbackPropery] = false;
+				})
+				.catch((reason) => {
+					console.log("ERROR IN CALLBACK!!");
+					console.log(reason);
+				});
 		}
 
 		//expansion events
@@ -737,7 +743,7 @@
 	);
 </script>
 
-<ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0}>
+<ul class:treeview={childDepth === 0} class:child-menu={childDepth > 0} class={treeCssClass}>
 	{#each parentChildrenTree as node (getNodeId(node))}
 		<li class:is-child={isChild(node)} class:has-children={node.hasChildren}>
 			<div
@@ -745,7 +751,7 @@
 				canNest &&
 				highlightedNode?.nodePath == node.nodePath
 					? expandClass
-					: ''}"
+					: ''} {nodeCssClass}"
 				class:div-has-children={node.hasChildren}
 				class:hover={validTarget && highlightedNode?.nodePath == node.nodePath}
 				draggable={dragAndDrop}
@@ -758,7 +764,7 @@
 				{#if node.hasChildren}
 					<span on:click={() => toggleExpansion(node)}>
 						<i
-							class="far"
+							class="far {node[expandedProperty] ? expandedToggleCss : collapsedToggleCss}"
 							class:fa-minus-square={node[expandedProperty]}
 							class:fa-plus-square={!node[expandedProperty]}
 						/>
