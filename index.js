@@ -97,8 +97,6 @@ export {default as LteLabel} from "./src/ui/LteLabel.svelte"
 export {default as ModalCloseButton} from "./src/ui/ModalCloseButton.svelte"
 export {default as Pagination} from "./src/ui/Pagination.svelte"
 export {default as PasswordStrength} from "./src/ui/PasswordStrength.svelte"
-export {default as TreeView} from "./src/ui/TreeView.svelte"
-export {default as TreeViewWSearch} from "./src/ui/TreeViewWSearch.svelte"
 export {default as DraggableContainer} from "./src/ui/DraggableContainer.svelte"
 
 /* [6.1] UI > Context menu */
