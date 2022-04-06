@@ -102,3 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
+/.idea/.idea.svelte-adminlte.dir/.idea/.gitignore
+/.idea/.idea.svelte-adminlte.dir/.idea/encodings.xml
