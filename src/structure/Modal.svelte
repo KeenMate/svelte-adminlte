@@ -1,7 +1,7 @@
 <script>
+	import {onDestroy, onMount} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
-	import {onDestroy, onMount} from "svelte"
 
 	export let small = false
 	export let large = false
@@ -15,11 +15,11 @@
 	$: jModalElement = modalElement && jQuery(modalElement)
 
 	onMount(() => {
-		document.addEventListener("keypress", onDocumentKeyPress)
+		document.addEventListener("keydown", onDocumentKeyDown)
 	})
 
 	onDestroy(() => {
-		document.removeEventListener("keypress", onDocumentKeyPress)
+		document.removeEventListener("keydown", onDocumentKeyDown)
 	})
 
 	export function toggle() {
@@ -37,7 +37,7 @@
 		opened = false
 	}
 
-	function onDocumentKeyPress(ev) {
+	function onDocumentKeyDown(ev) {
 		if (!opened || ev.key !== "Escape")
 			return
 
