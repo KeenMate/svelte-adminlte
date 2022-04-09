@@ -1,4 +1,5 @@
 <script>
+	import {onDestroy, onMount} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
 
@@ -9,19 +10,38 @@
 	export let jModalElement
 
 	let modalElement = null
+	let opened = false
 
 	$: jModalElement = modalElement && jQuery(modalElement)
 
+	onMount(() => {
+		document.addEventListener("keydown", onDocumentKeyDown)
+	})
+
+	onDestroy(() => {
+		document.removeEventListener("keydown", onDocumentKeyDown)
+	})
+
 	export function toggle() {
 		jQuery(modalElement).modal("toggle")
+		opened = !opened
 	}
 
 	export function show() {
 		jQuery(modalElement).modal("show")
+		opened = true
 	}
 
 	export function hide() {
 		jQuery(modalElement).modal("hide")
+		opened = false
+	}
+
+	function onDocumentKeyDown(ev) {
+		if (!opened || ev.key !== "Escape")
+			return
+
+		hide()
 	}
 </script>
 
