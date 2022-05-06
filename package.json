@@ -3,31 +3,38 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "build": "npx rollup -c"
+    "build": "npx rollup -c",
+    "dev": "rollup -c dev.rollup.config.js -w",
+    "start": "sirv dev --no-clear"
   },
-  "svelte": "src/index.js",
+  "main": "index.js",
+  "svelte": "index.js",
   "module": "dist/index.esm.js",
-  "main": "src/index.js",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-inject": "^4.0.4",
     "@rollup/plugin-node-resolve": "^10.0.0",
+    "admin-lte": "^3.1.0",
+    "icheck-bootstrap": "^3.0.1",
     "postcss": "^8.3.6",
     "rollup": "^2.3.4",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-svelte": "^7.0.0",
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "icheck-bootstrap": "^3.0.1",
-    "admin-lte": "^3.1.0",
-    "sass": "^1.39.2",
+    "rollup-plugin-terser": "^7.0.0",
+    "sass": "^1.49.0",
+    "sirv-cli": "^2.0.0",
     "svelte": "^3.0.0",
     "svelte-preprocess": "^4.6.9",
-    "typescript": "^4.2.4"
-  },
-  "dependencies": {
+    "typescript": "^4.2.4",
     "@ckeditor/ckeditor5-build-decoupled-document": "^28.0.0",
     "@uppy/core": "^1.18.1",
     "@uppy/dashboard": "^1.19.1",
@@ -37,6 +44,10 @@
     "inputmask": "^5.0.6",
     "litepicker": "^2.0.11",
     "lodash": "^4.17.21",
-    "toastr": "^2.1.4"
+    "password-validator": "^5.2.1",
+    "quill": "^1.3.7",
+    "quill-image-resize": "^3.0.9",
+    "toastr": "^2.1.4",
+    "zxcvbn": "^4.4.2"
   }
 }

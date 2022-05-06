@@ -1,6 +1,6 @@
 <script>
 		import BaseAlert from "./BaseAlert.svelte"
-		
+
 		export let header = ""
 		export let closeable = true
 
@@ -8,10 +8,10 @@
 
 
 <BaseAlert
-	{header}
 	{closeable}
-	level="info"
+	{header}
 	icon="info"
+	level="info"
 	on:closed
 >
 	<slot />

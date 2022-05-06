@@ -7,7 +7,7 @@
 </div>
 
 <style lang="sass">
-	:global()
+	:global
 		.context-menu-entry
 			padding: .3rem .75rem
 			min-width: 15rem
@@ -22,9 +22,11 @@
 			&.danger
 				background-color: #d73925
 				color: white
+
 			&.success
 				background-color: #00a65a
 				color: white
+
 			&.info
 				background-color: #00c0ef
 				color: white

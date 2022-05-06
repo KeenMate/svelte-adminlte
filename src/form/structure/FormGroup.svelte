@@ -1,7 +1,10 @@
 <script>
-	export let row = false;
+	export let row = false
 </script>
 
-<div class:row={row} class="form-group {$$props.class || ''}">
+<div
+	class="form-group {$$props.class || ''}"
+	class:row
+>
 	<slot />
 </div>

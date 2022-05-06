@@ -1,4 +1,3 @@
-
 <div class="auto-scroll">
 	<slot />
 </div>

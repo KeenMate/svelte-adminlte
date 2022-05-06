@@ -1,11 +1,15 @@
 <script>
-  export let active = false;
+	export let active = false
 </script>
 
 <li class="nav-item {$$props.class || ''}" role="presentation" on:click>
-  <a class="nav-link" class:active href="javascript:void(0)" {...$$restProps}>
-    <slot />
-  </a>
+	<a
+		class="nav-link"
+		class:active
+		href="javascript:void(0)" {...$$restProps}
+	>
+		<slot />
+	</a>
 </li>
 
 <!-- <style lang="sass">

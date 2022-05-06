@@ -9,7 +9,7 @@
 	export let disabled = false
 	export let readonly = false
 	export let id = "ckEditorId"
-	export let toolbar = null;
+	export let additionalConfig = {}
 
 	let editor = DecoupledEditor
 	let editorInstance = null
@@ -18,9 +18,7 @@
 	let editorConfig
 
 	$: {
-		const tmpConfig = {};
-		if(toolbar)
-			tmpConfig.toolbar = toolbar
+		const tmpConfig = {...additionalConfig}
 		if (readonly)
 			tmpConfig.toolbar = {items: []}
 
@@ -36,9 +34,9 @@
 		editor.ui
 			.getEditableElement()
 			.parentElement.insertBefore(
-				editor.ui.view.toolbar.element,
-				editor.ui.getEditableElement()
-			)
+			editor.ui.view.toolbar.element,
+			editor.ui.getEditableElement()
+		)
 	}
 
 	function onInput({detail: {data}}) {
@@ -46,14 +44,14 @@
 	}
 </script>
 
-<main>
-	<div  {id}>
+<main class="{$$restProps.parentClass}">
+	<div {id}>
 		<CKEditor
-			bind:editor
 			bind:config={editorConfig}
+			bind:editor
 			bind:value={localValue}
-			on:ready={onReady}
 			on:input={onInput}
+			on:ready={onReady}
 		/>
 
 		<span style="display: none">

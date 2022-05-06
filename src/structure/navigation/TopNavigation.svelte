@@ -1,28 +1,26 @@
 <script>
-  import MobileNavToggle from "./MobileNavToggle.svelte";
-  import BrandNavLogoSidebar from "./BrandNavLogoSidebar.svelte";
-  import UserDropdownMenu from "./UserDropdownMenu.svelte";
+	import MobileNavToggle from "./MobileNavToggle.svelte"
 
-  function logout() {
-    // todo: make logout
-    // window.location.replace(LogoutPath)
-  }
+	function logout() {
+		// todo: make logout
+		// window.location.replace(LogoutPath)
+	}
 </script>
 
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-  <!-- Left navbar links -->
-  <ul class="navbar-nav">
-    <MobileNavToggle />
+<nav class="main-header navbar navbar-expand navbar-white navbar-light {$$props.class || ''}">
+	<!-- Left navbar links -->
+	<ul class="navbar-nav">
+		<MobileNavToggle />
 
-    <slot name="left" />
-  </ul>
+		<slot name="left" />
+	</ul>
 
-  <slot />
+	<slot />
 
-  <!-- Right navbar links -->
-  <ul class="navbar-nav ml-auto">
-    <slot name="right" />
-  </ul>
+	<!-- Right navbar links -->
+	<ul class="navbar-nav ml-auto">
+		<slot name="right" />
+	</ul>
 </nav>
 <!-- /.navbar -->

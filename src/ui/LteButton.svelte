@@ -1,5 +1,8 @@
 <script>
-	export let color = "default"
+	export let type = "button"
+	export let color = null
+	export let toggle = null
+
 
 	export let xsmall = false
 	export let small = false
@@ -11,24 +14,26 @@
 	export let disabled = false
 	export let app = false
 	export let squared = false
-
 </script>
 
 <button
-	class="btn btn-{outlined && 'outlined-' || ''}{color} btn-flat btn-sm"
-	class:btn-xs={xsmall}
-	class:btn-sm={small}
-	class:btn-lg={large}
-	class:btn-flat={borderless}
-	class:btn-social={social}
 	class:btn-app={app}
+	class:btn-flat={borderless}
+	class:btn-lg={large}
 	class:btn-link={link}
-	class:squared
+	class:btn-sm={small}
+	class:btn-social={social}
+	class:btn-xs={xsmall}
 	class:disabled
+	class:squared
+	{type}
+	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
+	class="btn btn-{outlined && 'outlined-' || ''}{color || 'default'} btn-flat {$$props.class || ''}"
 	on:click
 >
+	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
 	<slot />
 </button>
 

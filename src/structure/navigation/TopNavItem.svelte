@@ -1,14 +1,14 @@
 <script>
-  export let href = "#";
-  // export let icon;
+	export let href = "#"
+	// export let icon;
 </script>
 
 <li class="nav-item d-none d-sm-inline-block">
-  <a {href} on:click class="nav-link">
-    <!-- {#if icon}
-      <i class="nav-icon {icon}" />
-    {/if} -->
+	<a class="nav-link" {href} on:click>
+		<!-- {#if icon}
+			<i class="nav-icon {icon}" />
+		{/if} -->
 
-    <slot />
-  </a>
+		<slot />
+	</a>
 </li>

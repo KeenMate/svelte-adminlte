@@ -1,38 +1,45 @@
 <script>
-  import Inputmask from "inputmask";
+	import Inputmask from "inputmask"
 
-  export let id = "";
-  export let value = "";
-  export let name = "";
-  export let placeholder = "";
-  export let pattern = null;
-  export let readonly = false;
-  export let disabled = false;
-  export let inputMask = null;
-  export let invalid = false;
-  export let size = "sm"
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let placeholder = ""
+	export let pattern = null
+	export let readonly = false
+	export let plaintext = false
+	export let disabled = false
+	export let inputMask = null
+	export let invalid = false
+	export let maxlength = ""
+	export let size
 
-  export let inputElement = null;
+	export let inputElement = null
 
-  export function isValid() {
-    return inputElement.validity.valid;
-  }
+	export function isValid() {
+		return inputElement.validity.valid
+	}
 
-  $: inputElement && Inputmask().mask(inputElement);
+	$: inputElement && Inputmask().mask(inputElement)
 </script>
 
 <input
-  bind:this={inputElement}
-  bind:value
-  class="form-control form-control-{size} {$$props.class || ''}"
-  class:is-invalid={invalid}
-  type="text"
-  data-inputmask={inputMask || ""}
-  {id}
-  {name}
-  {placeholder}
-  {pattern}
-  {readonly}
-  {disabled}
-  on:keypress
+	bind:this={inputElement}
+	bind:value
+	type="text"
+	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class:form-control={!plaintext}
+	class:form-control-plaintext={plaintext}
+	class:is-invalid={invalid}
+	data-inputmask={inputMask || ""}
+	{id}
+	{maxlength}
+	{name}
+	{pattern}
+	{placeholder}
+	{disabled}
+	{readonly}
+	on:change
+	on:input
+	on:keypress
 />
