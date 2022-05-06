@@ -1,5 +1,5 @@
 <script>
-	export let href = "#"
+	export let href = "#";
 </script>
 
 <a
@@ -9,6 +9,7 @@
 	role="button"
 	data-toggle="dropdown"
 	on:click
+	{...$$restProps}
 >
 	<slot />
 </a>
