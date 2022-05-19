@@ -1,10 +1,11 @@
-<a href="#/" class="navbar-brand">
+<a class="navbar-brand" href="#/">
 	<img
 		src="/images/logo-ge-cp.svg"
 		alt="Home"
 		class="brand-image"
+		style="opacity: .8"
 		width="150"
-		style="opacity: .8">
+	>
 </a>
 
 <style lang="sass">

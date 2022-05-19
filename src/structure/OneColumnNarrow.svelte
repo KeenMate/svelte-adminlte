@@ -1,5 +1,5 @@
 ﻿<div class="narrow-column-container">
-  <slot />
+	<slot />
 </div>
 
 <style lang="sass">

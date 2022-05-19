@@ -1,7 +1,7 @@
 <li class="nav-item">
-  <a class="nav-link" data-widget="pushmenu" href="#" role="button" on:click>
-    <i class="fas fa-bars" />
-  </a>
+	<a class="nav-link" href="#" data-widget="pushmenu" role="button" on:click>
+		<i class="fas fa-bars"></i>
+	</a>
 </li>
 
 <style lang="sass">

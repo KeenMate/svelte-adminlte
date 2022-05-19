@@ -1,73 +1,75 @@
 <script>
-  // TODO merge common code with multiselect
+	// TODO merge common code with multiselect
 
-  import { createEventDispatcher, onMount } from "svelte";
-  import jQuery from "jquery";
-  import { debounce } from "lodash";
-  import { TypingDebounceDelay } from "../../../constants/ui";
+	import {createEventDispatcher, onMount} from "svelte"
+	import jQuery from "jquery"
+	import {debounce} from "lodash"
+	import {TypingDebounceDelay} from "../../../constants/ui"
 
-  export let value = null;
-  export let placeholder = "";
-  export let readonly = false;
-  export let invalid = false;
-  export let size = "sm"
+	export let value = null
+	export let placeholder = ""
+	export let readonly = false
+	export let invalid = false
+	export let size
 
-  const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-  let selectElement = null;
-  let select$ = null;
-  let searchDebounce = debounce((x) => {
-    dispatch("search", x);
-  }, TypingDebounceDelay);
+	let selectElement = null
+	let select$ = null
+	let searchDebounce = debounce((x) => {
+		dispatch("search", x)
+	}, TypingDebounceDelay)
 
-  $: jQuery(selectElement).val(value).trigger("change");
-  $: select$?.select2({ disabled: readonly && "readonly" });
+	$: jQuery(selectElement).val(value).trigger("change")
+	$: select$?.select2({disabled: readonly && "readonly"})
 
-  function attachSelectEvent(select$) {
-    select$.on("select2:select", (ev) => {
-      const selectedValues = Array.from(ev.target.selectedOptions).map((x) => x.value);
-      dispatch("change", selectedValues[0]);
-    });
-  }
+	function attachSelectEvent(select$) {
+		select$.on("select2:select", (ev) => {
+			const selectedValues = Array.from(ev.target.selectedOptions).map((x) => x.value)
+			dispatch("change", selectedValues[0])
+		})
+	}
 
-  function onKeyPress(ev) {
-    searchDebounce(ev.target.value);
-  }
+	function onKeyPress(ev) {
+		searchDebounce(ev.target.value)
+	}
 
-  function attachKeyDownEvent(select$) {
-    select$.on("select2:open", () => {
-      document.addEventListener("keydown", onKeyPress, true);
-    });
+	function attachKeyDownEvent(select$) {
+		select$.on("select2:open", () => {
+			document.addEventListener("keydown", onKeyPress, true)
+		})
 
-    select$.on("select2:close", () => {
-      document.removeEventListener("keydown", onKeyPress, true);
-    });
-  }
+		select$.on("select2:close", () => {
+			document.removeEventListener("keydown", onKeyPress, true)
+		})
+	}
 
-  onMount(() => {
-    select$ = jQuery(selectElement).select2({
-      language: {
-        noResults() {
-          return "Žádné výsledky";
-        },
-      },
-    });
-    attachSelectEvent(select$);
-    attachKeyDownEvent(select$);
-  });
+	onMount(() => {
+		select$ = jQuery(selectElement).select2({
+			language: {
+				noResults() {
+					return "Žádné výsledky"
+				}
+			}
+		})
+		attachSelectEvent(select$)
+		attachKeyDownEvent(select$)
+	})
 </script>
 
 <select
-  bind:this={selectElement}
-  bind:value
-  {readonly}
-  class="form-control select2 select2-hidden-accessible form-control-{size} {$$props.class || ''}"
-  class:is-invalid={invalid}
-  data-placeholder={placeholder}
-  style="width: 100%;"
-  tabindex="-1"
-  aria-hidden="true"><slot /></select
+	aria-hidden="true"
+	bind:this={selectElement}
+	bind:value
+	class="form-control select2 select2-hidden-accessible form-control-{size || 'md'} {$$props.class || ''}"
+	class:is-invalid={invalid}
+	data-placeholder={placeholder}
+	{readonly}
+	style="width: 100%;"
+	tabindex="-1"
 >
+	<slot />
+</select>
 
 <style lang="sass">
 	:global
@@ -86,5 +88,4 @@
 		.select2-results__option
 			padding-top: 4px !important
 			padding-bottom: 4px !important
-
 </style>

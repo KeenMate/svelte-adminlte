@@ -2,11 +2,9 @@
 	export let tooltip = ""
 </script>
 
-<li title={tooltip} on:click>
-	<a>
-		<slot />
-	</a>
-</li>
+<a role="button" class="dropdown-item" title={tooltip} on:click>
+	<slot />
+</a>
 
 <style lang="sass">
 	li

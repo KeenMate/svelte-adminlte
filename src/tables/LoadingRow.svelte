@@ -2,7 +2,7 @@
 	import TableRowFullWidth from "./TableRowFullWidth.svelte"
 	import Loader from "../ui/Loader.svelte"
 
-	export let minHeight = 8;
+	export let minHeight = 8
 </script>
 
 <TableRowFullWidth>
@@ -15,13 +15,13 @@
 </TableRowFullWidth>
 
 <style lang="sass">
-.loader-parent
-	display: flex
-	justify-content: center
-	align-items: center
+	.loader-parent
+		display: flex
+		justify-content: center
+		align-items: center
 
-	& > *
-		width: 4rem
-		height: 4rem
+		& > *
+			width: 4rem
+			height: 4rem
 
 </style>

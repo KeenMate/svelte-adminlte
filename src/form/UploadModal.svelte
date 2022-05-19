@@ -1,11 +1,8 @@
 <script>
-	import {createEventDispatcher} from "svelte"
-	import {get} from "svelte/store"
+	import {createEventDispatcher, onMount} from "svelte"
 	import {DashboardModal} from "@uppy/svelte"
 	import Uppy from "@uppy/core"
-	import Dashboard from "@uppy/dashboard"
 	import XHRUpload from "@uppy/xhr-upload"
-	import toastr from "../toasts/toastr"
 	import "@uppy/core/dist/style.css"
 	import "@uppy/dashboard/dist/style.css"
 
@@ -21,9 +18,7 @@
 	})()
 	export let uploadData = {}
 
-	let open = false
-
-	const uppy = new Uppy({
+	export const uppy = new Uppy({
 		restrictions: {
 			maxFileSize,
 			allowedFileTypes
@@ -35,6 +30,8 @@
 			fieldName,
 			limit: simultaneousUploads
 		})
+
+	let open = false
 
 	$: uppy.setMeta(uploadData)
 
@@ -52,38 +49,34 @@
 		limit: simultaneousUploads
 	})
 
-	uppy.on("complete", (result) => {
-		console.log("Upload complete! Upload result: ", result)
-
-		if (!result.failed.length)
-			toastr.success("Nahrání úspěšné")
-		else
-			toastr.error("Nahrávání některých souborů se nezdařilo")
-
-		if (result.successful.length)
-			dispatch("uploadCompleted", result)
-	})
-
-	uppy.on("upload-success", (file, response) => {
-		dispatch("uploadSuccessful", response)
-		// do something with file and response
-	})
-	uppy.on("upload-error", (file, error, response) => {
-		if (response.status === 409) {
-			console.error("Same filename already exists", file, error, response)
-			toastr.error(`Soubor se názvem '${file.meta.name}' již existuje`)
-		}
-	})
-	uppy.on("dashboard:modal-closed", (file, error, response) => {
-		open = false
-	})
-
 	export function openModal() {
 		open = true
 	}
 
 	export function closeModal() {
 		open = false
+	}
+
+	onMount(() => {
+		initUppy()
+	})
+
+	function initUppy() {
+		uppy.on("complete", result => {
+			dispatch("uploadCompleted", result)
+		})
+
+		uppy.on("upload-success", (file, response) => {
+			dispatch("uploadSuccessful", {file, response})
+			// do something with file and response
+		})
+		uppy.on("upload-error", (file, error, response) => {
+			dispatch("uploadError", {file, error, response})
+		})
+		uppy.on("dashboard:modal-closed", () => {
+			open = false
+			dispatch("modalClosed")
+		})
 	}
 </script>
 

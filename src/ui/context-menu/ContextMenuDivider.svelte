@@ -1,7 +1,7 @@
 <hr>
 
 <style lang="sass">
-	:global()
+	:global
 		hr
 			margin: 0
 </style>
