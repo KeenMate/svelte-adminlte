@@ -1,7 +1,6 @@
 <script>
+	import {createEventDispatcher, onDestroy} from "svelte"
 	import Litepicker from "litepicker"
-
-	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
 
@@ -51,6 +50,9 @@
 
 	let picker
 	$: if (inputElement) {
+		if (picker)
+			picker.destroy()
+
 		picker = new Litepicker({
 			element: inputElement,
 			singleMode: single,
@@ -76,6 +78,10 @@
 	$: picker && picker.on("show", onShow)
 	$: picker && picker.on("render", onRender)
 	$: picker && picker.on("button:apply", onButtonApply)
+
+	onDestroy(() => {
+		picker && picker.destroy()
+	})
 
 	function registerEventHandlers(p) {
 		if (!p)
