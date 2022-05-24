@@ -49,7 +49,18 @@
 	export let zIndex = 9999
 
 	let picker
-	$: if (inputElement) {
+	$: inputElement && initPicker()
+
+	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
+	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
+	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
+	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
+
+	onDestroy(() => {
+		picker && picker.destroy()
+	})
+
+	function initPicker() {
 		if (picker)
 			picker.destroy()
 
@@ -73,15 +84,6 @@
 
 		})
 	}
-
-	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
-	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
-	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
-	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
-
-	onDestroy(() => {
-		picker && picker.destroy()
-	})
 
 	// function registerEventHandlers(p) {
 	// 	if (!p)
