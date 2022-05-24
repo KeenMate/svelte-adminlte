@@ -74,34 +74,34 @@
 		})
 	}
 
-	$: picker && picker.on("selected", onSelected)
-	$: picker && picker.on("show", onShow)
-	$: picker && picker.on("render", onRender)
-	$: picker && picker.on("button:apply", onButtonApply)
+	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
+	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
+	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
+	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
 
 	onDestroy(() => {
 		picker && picker.destroy()
 	})
 
-	function registerEventHandlers(p) {
-		if (!p)
-			return
-
-		p.on("selected", onSelected)
-		p.on("show", onShow)
-		p.on("render", onRender)
-		p.on("button:apply", onButtonApply)
-	}
-
-	function freeEventHandlers(p) {
-		if (!p)
-			return
-
-		p.off("selected", onSelected)
-		p.off("show", onShow)
-		p.off("render", onRender)
-		p.off("button:apply", onButtonApply)
-	}
+	// function registerEventHandlers(p) {
+	// 	if (!p)
+	// 		return
+	//
+	// 	p.on("selected", onSelected)
+	// 	p.on("show", onShow)
+	// 	p.on("render", onRender)
+	// 	p.on("button:apply", onButtonApply)
+	// }
+	//
+	// function freeEventHandlers(p) {
+	// 	if (!p)
+	// 		return
+	//
+	// 	p.off("selected", onSelected)
+	// 	p.off("show", onShow)
+	// 	p.off("render", onRender)
+	// 	p.off("button:apply", onButtonApply)
+	// }
 
 	function onSelected(ds, de) {
 		dispatch("selected", {start: ds, end: de})
