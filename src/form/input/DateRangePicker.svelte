@@ -61,9 +61,11 @@
 	})
 
 	function initPicker() {
+		console.log("Init picker", picker)
 		if (picker)
 			picker.destroy()
 
+		console.log("Picker destroyed", picker)
 		picker = new Litepicker({
 			element: inputElement,
 			singleMode: single,
