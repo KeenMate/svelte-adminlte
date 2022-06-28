@@ -2,11 +2,13 @@
 	import {onDestroy, onMount} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
+	import Loader from "../ui/Loader.svelte"
 
 	export let small = false
 	export let large = false
 	export let xlarge = false
 	export let center = false
+	export let loading = false
 	export let jModalElement
 
 	let modalElement = null
@@ -62,13 +64,22 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<slot />
-			</div>
-			<div class="modal-footer">
-				<slot name="actions">
-					<ModalCloseButton />
-				</slot>
+			<div class="loader-wrapper card mb-0">
+				<div class="modal-body">
+					<slot />
+				</div>
+				<div class="modal-footer">
+					<slot name="actions">
+						<ModalCloseButton />
+					</slot>
+				</div>
+				{#if loading}
+					<div class="overlay">
+						<slot name="loading-icon">
+							<Loader />
+						</slot>
+					</div>
+				{/if}
 			</div>
 		</div>
 		<!-- /.modal-content -->

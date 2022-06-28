@@ -6,22 +6,5 @@
 </script>
 
 <TableRowFullWidth>
-	<!--<h5 class="text-center">Loading data</h5>-->
-	<div class="loader-parent" style="min-height: {minHeight}rem;">
-		<div>
-			<Loader />
-		</div>
-	</div>
+	<Loader style="min-height: {minHeight}rem;" />
 </TableRowFullWidth>
-
-<style lang="sass">
-	.loader-parent
-		display: flex
-		justify-content: center
-		align-items: center
-
-		& > *
-			width: 4rem
-			height: 4rem
-
-</style>

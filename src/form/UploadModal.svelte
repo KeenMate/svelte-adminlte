@@ -17,6 +17,7 @@
 		throw new Error("Endpoint prop of upload modal is required")
 	})()
 	export let uploadData = {}
+	export let uppyOptions = null
 
 	export const uppy = new Uppy({
 		restrictions: {
@@ -40,7 +41,8 @@
 			maxNumberOfFiles,
 			maxFileSize,
 			allowedFileTypes
-		}
+		},
+		...(uppyOptions || {})
 	})
 
 	$: uppy.getPlugin("XHRUpload").setOptions({
