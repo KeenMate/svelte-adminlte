@@ -40,33 +40,7 @@
 	{/if}
 	{#if loading}
 		<div class="overlay">
-			<!--<i class="fas fa-2x fa-sync-alt fa-spin"></i>-->
-			<div class="loader-parent" style="height: 100%">
-				<div>
-					<Loader />
-				</div>
-			</div>
+			<Loader />
 		</div>
 	{/if}
 </div>
-
-<!-- <style lang="sass">
-	.card
-		border-top-color: #d45f5c
-		background-color: #f9f9f9
-
-		&.bg-dark
-			background-color: #494949
-			color: white !important
-
-			a
-				color: white !important
-
-		.card-footer
-			padding: .5rem 1rem
-			background-color: #f9f9f9
-
-			&:empty
-				padding: 0
-
-</style> -->

@@ -39,6 +39,7 @@
 	on:change
 	on:input
 	on:keypress
+	{...$$restProps}
 ></textarea>
 <style>
 	.set-cols {
