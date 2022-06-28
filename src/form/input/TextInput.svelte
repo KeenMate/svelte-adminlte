@@ -42,4 +42,5 @@
 	on:change
 	on:input
 	on:keypress
+	{...$$restProps}
 />
