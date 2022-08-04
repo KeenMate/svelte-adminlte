@@ -1,53 +1,39 @@
 {
-  "name": "svelte-adminlte",
-  "version": "0.0.1",
-  "license": "MIT",
-  "scripts": {
-    "build": "npx rollup -c",
-    "dev": "rollup -c dev.rollup.config.js -w",
-    "start": "sirv dev --no-clear"
-  },
-  "main": "index.js",
-  "svelte": "index.js",
-  "module": "dist/index.esm.js",
-  "files": [
-    "src",
-    "dist",
-    "index.js"
-  ],
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@rollup/plugin-commonjs": "^16.0.0",
-    "@rollup/plugin-inject": "^4.0.4",
-    "@rollup/plugin-node-resolve": "^10.0.0",
-    "admin-lte": "^3.1.0",
-    "icheck-bootstrap": "^3.0.1",
-    "postcss": "^8.3.6",
-    "rollup": "^2.3.4",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-postcss": "^4.0.1",
-    "rollup-plugin-svelte": "^7.0.0",
-    "rollup-plugin-terser": "^7.0.0",
-    "sass": "^1.49.0",
-    "sirv-cli": "^2.0.0",
-    "svelte": "^3.0.0",
-    "svelte-preprocess": "^4.6.9",
-    "typescript": "^4.2.4",
-    "@ckeditor/ckeditor5-build-decoupled-document": "^28.0.0",
-    "@uppy/core": "^1.18.1",
-    "@uppy/dashboard": "^1.19.1",
-    "@uppy/svelte": "^0.1.9",
-    "@uppy/xhr-upload": "^1.7.2",
-    "ckeditor5-svelte": "^0.0.10",
-    "inputmask": "^5.0.6",
-    "litepicker": "^2.0.11",
-    "lodash": "^4.17.21",
-    "password-validator": "^5.2.1",
-    "quill": "^1.3.7",
-    "quill-image-resize": "^3.0.9",
-    "toastr": "^2.1.4",
-    "zxcvbn": "^4.4.2"
-  }
+	"name": "@keenmate/svelte-adminlte",
+	"version": "0.0.1",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
+	"repository": "https://github.com/keenmate/svelte-adminlte.git",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"package": "svelte-kit package",
+		"preview": "vite preview",
+		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
+		"format": "prettier --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-static": "next",
+		"@sveltejs/kit": "next",
+		"bootstrap": "^4.6.2",
+		"eslint": "^8.16.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"prettier": "^2.6.2",
+		"prettier-plugin-svelte": "^2.7.0",
+		"sass": "^1.54.1",
+		"svelte": "^3.44.0",
+		"svelte-preprocess": "^4.6.9",
+		"svelte2tsx": "^0.5.13",
+		"typescript": "^4.7.4",
+		"vite": "^3.0.0"
+	},
+	"dependencies": {
+		"admin-lte": "=3.1.0",
+		"icheck-bootstrap": "^3.0.1",
+		"litepicker": "^2.0.11"
+	},
+	"type": "module"
 }
