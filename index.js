@@ -31,6 +31,7 @@ export {default as Radio} from "./src/form/input/Radio.svelte"
 export {default as Switch} from "./src/form/input/Switch.svelte"
 export {default as Textarea} from "./src/form/input/Textarea.svelte"
 export {default as TextInput} from "./src/form/input/TextInput.svelte"
+export {default as RangeInput} from "./src/form/input/RangeInput.svelte"
 export {default as PasswordInput} from "./src/form/input/PasswordInput.svelte"
 export {default as PhoneInput} from "./src/form/input/PhoneInput.svelte"
 
