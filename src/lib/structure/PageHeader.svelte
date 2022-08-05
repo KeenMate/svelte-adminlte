@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
-	import LteButton from '../ui/LteButton.svelte';
+	import LteButton from '../ui/buttons/LteButton.svelte';
 
 	const dispatch = createEventDispatcher();
 

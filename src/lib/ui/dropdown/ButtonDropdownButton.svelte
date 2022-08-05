@@ -1,5 +1,5 @@
 <script>
-	import LteButton from './LteButton.svelte';
+	import LteButton from '../buttons/LteButton.svelte';
 </script>
 
 <LteButton

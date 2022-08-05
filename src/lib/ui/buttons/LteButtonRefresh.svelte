@@ -3,5 +3,5 @@
 </script>
 
 <LteButton color="info" small on:click>
-	<i class="fas fa-sync" />
+	<i class="fas fa-sync"></i>
 </LteButton>

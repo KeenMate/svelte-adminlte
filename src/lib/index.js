@@ -82,18 +82,19 @@ export { default as TableRowFullWidth } from './tables/TableRowFullWidth.svelte'
 export { default as AutoScroll } from './ui/AutoScroll.svelte';
 export { default as Badge } from './ui/Badge.svelte';
 export { default as BsProgress } from './ui/BsProgress.svelte';
-export { default as ButtonDropdown } from './ui/ButtonDropdown.svelte';
-export { default as ButtonDropdownButton } from './ui/ButtonDropdownButton.svelte';
-export { default as ButtonDropdownItem } from './ui/ButtonDropdownItem.svelte';
+export { default as ButtonDropdown } from './ui/dropdown/ButtonDropdown.svelte';
+export { default as ButtonDropdownButton } from './ui/dropdown/ButtonDropdownButton.svelte';
+export { default as ButtonDropdownItem } from './ui/dropdown/ButtonDropdownItem.svelte';
 export { default as Callout } from './ui/Callout.svelte';
 export { default as InfoBox } from './ui/InfoBox.svelte';
 export { default as Loader } from './ui/Loader.svelte';
-export { default as LteButton } from './ui/LteButton.svelte';
-export { default as LteButtonRefresh } from './ui/LteButtonRefresh.svelte';
+export { default as LteButton } from './ui/buttons/LteButton.svelte';
+export { default as LteButtonRefresh } from './ui/buttons/LteButtonRefresh.svelte';
 export { default as LteLabel } from './ui/LteLabel.svelte';
 export { default as ModalCloseButton } from './ui/ModalCloseButton.svelte';
 export { default as Pagination } from './ui/Pagination.svelte';
 export { default as DraggableContainer } from './ui/DraggableContainer.svelte';
+export { default as ProgressBar } from './ui/ProgressBar.svelte';
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from './ui/context-menu/ContextMenu.svelte';
