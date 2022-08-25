@@ -1,8 +1,3 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs {$$props.class || ''}">
 	<slot />
 </ul>
-
-<!-- <style lang="sass">
-	.nav-tabs
-		//border-bottom: none
-</style> -->
