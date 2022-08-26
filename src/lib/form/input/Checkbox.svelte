@@ -7,7 +7,7 @@
 	export let level = 'primary';
 </script>
 
-<div class="icheck-{level} {$$props.class || ''}">
+<div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
 	<input {id} bind:checked {value} {disabled} type="checkbox" {name} on:click />
 	<slot />
 </div>
