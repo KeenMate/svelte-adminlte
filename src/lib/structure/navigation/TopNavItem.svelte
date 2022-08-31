@@ -1,14 +1,10 @@
 <script>
-	export let href = '#';
-	// export let icon;
+	export let href = "#"
+	export let visibility = "d-none d-sm-inline-block"
 </script>
 
-<li class="nav-item d-none d-sm-inline-block">
+<li class="nav-item {visibility} {$$props.class || ''}">
 	<a class="nav-link" {href} on:click>
-		<!-- {#if icon}
-			<i class="nav-icon {icon}" />
-		{/if} -->
-
 		<slot />
 	</a>
 </li>
