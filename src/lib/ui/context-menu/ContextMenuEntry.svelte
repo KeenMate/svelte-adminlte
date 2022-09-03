@@ -2,7 +2,12 @@
 	export let color = null;
 </script>
 
-<div class="context-menu-entry {color || ''}" on:click>
+<div
+	class="context-menu-entry {color || ''}"
+	on:click
+	on:mouseenter
+	on:mouseleave
+>
 	<slot />
 </div>
 
