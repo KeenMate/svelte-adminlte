@@ -11,3 +11,9 @@
 	<input {id} bind:checked {value} {disabled} type="checkbox" {name} on:click />
 	<slot />
 </div>
+
+<style lang="scss">
+	div {
+		gap: .25rem
+	}
+</style>
