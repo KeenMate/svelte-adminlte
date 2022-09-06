@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	// this, in fact, is not a LTE component (I just could not think of a different name :))
 
 	import { createEventDispatcher } from 'svelte';

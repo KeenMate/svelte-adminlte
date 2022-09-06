@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	export let iconClasses = null;
 </script>
 

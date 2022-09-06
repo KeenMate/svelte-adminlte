@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	export let id
 	export let value
 	export let min

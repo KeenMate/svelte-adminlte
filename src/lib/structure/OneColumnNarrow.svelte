@@ -1,4 +1,4 @@
-﻿<div class="narrow-column-container">
+<div class="narrow-column-container">
 	<slot />
 </div>
 
