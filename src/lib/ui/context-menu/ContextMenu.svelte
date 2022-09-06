@@ -1,45 +1,51 @@
 <script>
-	let contextMenuElement = null;
+	import {createEventDispatcher} from "svelte"
+	
+	const dispatch = createEventDispatcher()
+	
+	let contextMenuElement = null
 
 	let posX,
 		posY,
-		contextMenuVisible = false;
+		contextMenuVisible = false
 
 	export function openContextMenu(pX, pY) {
-		posX = pX;
-		posY = pY;
-		contextMenuVisible = true;
+		posX = pX
+		posY = pY
+		contextMenuVisible = true
 
-		registerBodyOnClickEvent();
+		registerBodyOnClickEvent()
 	}
 
-	export function closeContextMenu() {
-		contextMenuVisible = false;
+	export function closeContextMenu(ev) {
+		contextMenuVisible = false
+		
+		dispatch("closed", ev)
 	}
 
 	// whenever x and y is changed, restrict box to be within bounds
 	$: (() => {
-		if (!contextMenuElement) return;
+		if (!contextMenuElement) return
 
-		const rect = contextMenuElement.getBoundingClientRect();
-		posX = Math.min(window.innerWidth - rect.width, posX);
-		if (posY > window.innerHeight - rect.height) posY -= rect.height;
-	})(posX, posY);
+		const rect = contextMenuElement.getBoundingClientRect()
+		posX = Math.min(window.innerWidth - rect.width, posX)
+		if (posY > window.innerHeight - rect.height) posY -= rect.height
+	})(posX, posY)
 
 	$: contextMenuStyle = `
-		display: ${(contextMenuVisible && 'block') || 'none'};
+		display: ${(contextMenuVisible && "block") || "none"};
 		top: ${posY}px;
 		left: ${posX}px;
-	`;
+	`
 
-	function onBodyClick(_ev) {
-		if (!contextMenuVisible) return;
+	function onBodyClick(ev) {
+		if (!contextMenuVisible) return
 
-		closeContextMenu();
+		closeContextMenu(ev)
 	}
 
 	function registerBodyOnClickEvent() {
-		document.body.addEventListener('click', onBodyClick, { once: true });
+		document.body.addEventListener("click", onBodyClick, {once: true})
 	}
 </script>
 
