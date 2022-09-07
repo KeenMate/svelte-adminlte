@@ -17,5 +17,6 @@
 		<slot />
 		<slot slot="footer" name="footer" />
 	</TableCondensed>
+	<slot name="afterTable" />
 	<!-- /.card-body -->
 </Card>
