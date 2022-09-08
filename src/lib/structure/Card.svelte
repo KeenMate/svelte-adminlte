@@ -24,7 +24,7 @@
 </script>
 
 <div
-	class="card card-{color} {$$props.class || ''}"
+	class="card {color && ('card-' + color) || ''} {$$props.class || ''}"
 	class:card-outline={outline}
 	class:card-outline-tabs={outlineTabs}
 	class:card-tabs={tabs}
