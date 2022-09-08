@@ -1,21 +1,22 @@
 <script>
-	import TableEmptyRow from './TableEmptyRow.svelte';
-	import Box from '../structure/Card.svelte';
+	import {getKeysByPrefix} from "$lib/helpers/object-helpers.js"
+	import TableCondensed from "$lib/tables/TableCondensed.svelte"
+	import Card from "../structure/Card.svelte"
+	
+	$: cardProps = getKeysByPrefix($$props, "card")
+	$: tableProps = getKeysByPrefix($$props, "table")
 </script>
 
-<Box>
+<Card {...cardProps}>
 	<slot name="header" slot="header" />
 	<slot name="tools" slot="tools" />
 	<slot name="beforeTable" />
-	<table class="table table-condensed">
-		<thead>
-			<slot name="headers" />
-		</thead>
-		<tbody>
-			<slot>
-				<TableEmptyRow />
-			</slot>
-		</tbody>
-	</table>
+	
+	<TableCondensed {...tableProps}>
+		<slot slot="headers" name="headers" />
+		<slot />
+		<slot slot="footer" name="footer" />
+	</TableCondensed>
+	<slot name="afterTable" />
 	<!-- /.card-body -->
-</Box>
+</Card>

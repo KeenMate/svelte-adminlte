@@ -1,3 +1,3 @@
-﻿<ul class="timeline">
+<ul class="timeline">
 	<slot />
 </ul>

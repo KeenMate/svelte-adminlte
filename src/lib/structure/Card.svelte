@@ -1,13 +1,26 @@
+<script context="module">
+	export const CardLoadingContext = Symbol()
+</script>
+
 <script>
-	import Loader from '../ui/Loader.svelte';
+	import {setContext} from "svelte"
+	import Loader from "../ui/Loader.svelte"
 
-	export let color = 'default';
+	export let color = "default"
 
-	export let outline = false;
-	export let tabs = false;
-	export let outlineTabs = false;
-	export let noPadding = false;
-	export let loading = false;
+	export let outline = false
+	export let tabs = false
+	export let outlineTabs = false
+	export let noPadding = false
+	export let loading = false
+	export let sharedLoading = false
+	
+	if (sharedLoading)
+		setContext(CardLoadingContext, {
+			setLoading(loading_) {
+				loading = loading_
+			}
+		})
 </script>
 
 <div

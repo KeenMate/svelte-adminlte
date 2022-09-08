@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	import LteButton from './LteButton.svelte';
 </script>
 
