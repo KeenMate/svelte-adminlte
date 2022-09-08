@@ -63,23 +63,21 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<div class="loader-wrapper card mb-0">
-				<div class="modal-body">
-					<slot />
-				</div>
-				<div class="modal-footer">
-					<slot name="actions">
-						<ModalCloseButton />
+			<div class="modal-body">
+				<slot />
+			</div>
+			<div class="modal-footer">
+				<slot name="actions">
+					<ModalCloseButton />
+				</slot>
+			</div>
+			{#if loading}
+				<div class="overlay">
+					<slot name="loading-icon">
+						<Loader />
 					</slot>
 				</div>
-				{#if loading}
-					<div class="overlay">
-						<slot name="loading-icon">
-							<Loader />
-						</slot>
-					</div>
-				{/if}
-			</div>
+			{/if}
 		</div>
 		<!-- /.modal-content -->
 	</div>
