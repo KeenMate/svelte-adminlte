@@ -1,8 +1,8 @@
 <script>
-	export let id
-	export let value
-	export let min
-	export let max
+	export let id = null
+	export let value = null
+	export let min = null
+	export let max = null
 </script>
 
 <input
