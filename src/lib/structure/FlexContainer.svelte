@@ -1,10 +1,10 @@
 <script>
-	export let row = false;
-	export let inline = false;
-	export let column = false;
-	export let justifyContent = null;
-	export let alignItems = null;
-	export let wrap = true;
+	export let row = false
+	export let inline = false
+	export let column = false
+	export let justifyContent = null
+	export let alignItems = null
+	export let wrap = true
 </script>
 
 <div

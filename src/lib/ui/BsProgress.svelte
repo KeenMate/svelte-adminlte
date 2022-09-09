@@ -1,9 +1,9 @@
 <script>
-	export let value = 0;
-	export let min = 0;
-	export let max = 100;
+	export let value = 0
+	export let min = 0
+	export let max = 100
 
-	export let color = 'default';
+	export let color = "default"
 </script>
 
 <div class="progress">

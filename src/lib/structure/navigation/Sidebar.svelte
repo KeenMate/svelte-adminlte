@@ -1,7 +1,7 @@
 <script>
-	export let color = null;
+	export let color = null
 
-	$: sidebarColor = color !== false ? (color && `sidebar-${color}`) || 'sidebar-dark-primary' : '';
+	$: sidebarColor = color !== false ? (color && `sidebar-${color}`) || "sidebar-dark-primary" : ""
 </script>
 
 <!-- Main Sidebar Container -->

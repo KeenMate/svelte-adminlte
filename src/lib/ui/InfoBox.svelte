@@ -1,5 +1,5 @@
 <script>
-	export let textCenter = false;
+	export let textCenter = false
 </script>
 
 <div class="info-box">

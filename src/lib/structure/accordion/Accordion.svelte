@@ -4,9 +4,9 @@
 
 	export let key
 	export let id
-	
+
 	let currentEntry = writable(null)
-	
+
 	setContext(key, {
 		currentEntry,
 		id

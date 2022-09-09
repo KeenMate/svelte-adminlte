@@ -1,5 +1,5 @@
 <script>
-	export let color = 'default';
+	export let color = "default"
 </script>
 
 <li class="time-label">

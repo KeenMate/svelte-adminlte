@@ -1,5 +1,5 @@
 <script>
-	export let iconClasses = null;
+	export let iconClasses = null
 </script>
 
 <li>

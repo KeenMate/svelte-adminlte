@@ -1,18 +1,18 @@
 <script>
-	export let type = 'button';
-	export let color = null;
-	export let toggle = null;
+	export let type = "button"
+	export let color = null
+	export let toggle = null
 
-	export let xsmall = false;
-	export let small = false;
-	export let large = false;
-	export let borderless = false;
-	export let outlined = false;
-	export let social = false;
-	export let link = false;
-	export let disabled = false;
-	export let app = false;
-	export let squared = false;
+	export let xsmall = false
+	export let small = false
+	export let large = false
+	export let borderless = false
+	export let outlined = false
+	export let social = false
+	export let link = false
+	export let disabled = false
+	export let app = false
+	export let squared = false
 </script>
 
 <button

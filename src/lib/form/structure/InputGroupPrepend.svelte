@@ -1,5 +1,5 @@
 <script>
-	export let text = false;
+	export let text = false
 </script>
 
 <span class="input-group-prepend {$$props.class || ''}">

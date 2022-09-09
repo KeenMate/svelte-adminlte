@@ -1,13 +1,13 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
-	import LteButton from '../ui/buttons/LteButton.svelte';
+	import {createEventDispatcher} from "svelte"
+	import LteButton from "../ui/buttons/LteButton.svelte"
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	export let showBackArrow = false;
+	export let showBackArrow = false
 
 	function backArrowClicked(event) {
-		dispatch('backArrowClicked', event.detail);
+		dispatch("backArrowClicked", event.detail)
 	}
 </script>
 

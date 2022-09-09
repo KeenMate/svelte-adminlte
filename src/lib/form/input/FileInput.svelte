@@ -1,26 +1,26 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import {createEventDispatcher} from "svelte"
 
-	export let id = '';
-	export let value = '';
-	export let name = '';
-	export let multiple = false;
-	export let placeholder = '';
-	export let pattern = null;
-	export let readonly = false;
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let multiple = false
+	export let placeholder = ""
+	export let pattern = null
+	export let readonly = false
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	let inputElement = null;
+	let inputElement = null
 
 	export function isValid() {
-		return inputElement.validity.valid;
+		return inputElement.validity.valid
 	}
 
 	function onInput(ev) {
-		const files = ev.target.files;
+		const files = ev.target.files
 
-		dispatch('input', (!multiple && files && files[0]) || files);
+		dispatch("input", (!multiple && files && files[0]) || files)
 	}
 </script>
 

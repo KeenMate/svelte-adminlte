@@ -1,5 +1,5 @@
 <script>
-	export let iconClass;
+	export let iconClass
 </script>
 
 <li>

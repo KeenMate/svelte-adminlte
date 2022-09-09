@@ -1,14 +1,14 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import {createEventDispatcher} from "svelte"
 
-	export let displayName = 'Neznámý';
-	export let darkTheme = false;
+	export let displayName = "Neznámý"
+	export let darkTheme = false
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
 	function onToggleTheme(ev) {
-		ev.preventDefault();
-		dispatch('toggleTheme');
+		ev.preventDefault()
+		dispatch("toggleTheme")
 	}
 </script>
 

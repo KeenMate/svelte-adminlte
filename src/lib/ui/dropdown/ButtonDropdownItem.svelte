@@ -1,5 +1,5 @@
 <script>
-	export let tooltip = '';
+	export let tooltip = ""
 </script>
 
 <a role="button" class="dropdown-item" title={tooltip} on:click>

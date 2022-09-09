@@ -1,27 +1,27 @@
 <script>
-	import Inputmask from 'inputmask';
+	import Inputmask from "inputmask"
 
-	export let id = '';
-	export let value = '';
-	export let name = '';
-	export let placeholder = '';
-	export let pattern = null;
-	export let readonly = false;
-	export let plaintext = false;
-	export let disabled = false;
-	export let inputMask = null;
-	export let invalid = false;
-	export let size;
-	export let min = '';
-	export let max = '';
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let placeholder = ""
+	export let pattern = null
+	export let readonly = false
+	export let plaintext = false
+	export let disabled = false
+	export let inputMask = null
+	export let invalid = false
+	export let size
+	export let min = ""
+	export let max = ""
 
-	export let inputElement = null;
+	export let inputElement = null
 
 	export function isValid() {
-		return inputElement.validity.valid;
+		return inputElement.validity.valid
 	}
 
-	$: inputElement && Inputmask().mask(inputElement);
+	$: inputElement && Inputmask().mask(inputElement)
 </script>
 
 <input

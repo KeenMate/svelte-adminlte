@@ -1,15 +1,15 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import {createEventDispatcher} from "svelte"
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	export let header;
-	export let closeable = true;
-	export let level = '';
-	export let icon = '';
+	export let header
+	export let closeable = true
+	export let level = ""
+	export let icon = ""
 
 	function alertClosed() {
-		dispatch('closed');
+		dispatch("closed")
 	}
 </script>
 
@@ -20,7 +20,8 @@
 			class="close"
 			data-dismiss="alert"
 			aria-hidden="true"
-			on:click={alertClosed}>×</button
+			on:click={alertClosed}>×
+		</button
 		>
 	{/if}
 

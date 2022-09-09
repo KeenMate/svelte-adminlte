@@ -1,24 +1,24 @@
 <script>
 	// this, in fact, is not a LTE component (I just could not think of a different name :))
 
-	import { createEventDispatcher } from 'svelte';
+	import {createEventDispatcher} from "svelte"
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	export let checked = false;
-	export let checkedClass = '';
-	export let uncheckedClass = '';
-	export let disabledClass = '';
-	export let disabled = false;
+	export let checked = false
+	export let checkedClass = ""
+	export let uncheckedClass = ""
+	export let disabledClass = ""
+	export let disabled = false
 
-	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass;
+	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass
 
 	function change() {
-		dispatch('change', !checked);
+		dispatch("change", !checked)
 		if (!checked) {
-			dispatch('checked', !checked);
+			dispatch("checked", !checked)
 		} else {
-			dispatch('unchecked', !checked);
+			dispatch("unchecked", !checked)
 		}
 	}
 </script>

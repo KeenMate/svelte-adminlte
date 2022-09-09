@@ -1,5 +1,5 @@
 <script>
-	export let size = 'md';
+	export let size = "md"
 </script>
 
 <div class="input-group input-group-{size} {$$props.class || ''}">

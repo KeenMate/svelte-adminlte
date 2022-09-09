@@ -1,48 +1,48 @@
 <script>
-	import { onDestroy, onMount } from 'svelte';
-	import jQuery from 'jquery';
-	import ModalCloseButton from '../ui/ModalCloseButton.svelte';
-	import Loader from '../ui/Loader.svelte';
+	import {onDestroy, onMount} from "svelte"
+	import jQuery from "jquery"
+	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
+	import Loader from "../ui/Loader.svelte"
 
-	export let small = false;
-	export let large = false;
-	export let xlarge = false;
-	export let center = false;
-	export let loading = false;
-	export let jModalElement;
+	export let small = false
+	export let large = false
+	export let xlarge = false
+	export let center = false
+	export let loading = false
+	export let jModalElement
 
-	let modalElement = null;
-	let opened = false;
+	let modalElement = null
+	let opened = false
 
-	$: jModalElement = modalElement && jQuery(modalElement);
+	$: jModalElement = modalElement && jQuery(modalElement)
 
 	onMount(() => {
-		document.addEventListener('keydown', onDocumentKeyDown);
-	});
+		document.addEventListener("keydown", onDocumentKeyDown)
+	})
 
 	onDestroy(() => {
-		document.removeEventListener('keydown', onDocumentKeyDown);
-	});
+		document.removeEventListener("keydown", onDocumentKeyDown)
+	})
 
 	export function toggle() {
-		jQuery(modalElement).modal('toggle');
-		opened = !opened;
+		jQuery(modalElement).modal("toggle")
+		opened = !opened
 	}
 
 	export function show() {
-		jQuery(modalElement).modal('show');
-		opened = true;
+		jQuery(modalElement).modal("show")
+		opened = true
 	}
 
 	export function hide() {
-		jQuery(modalElement).modal('hide');
-		opened = false;
+		jQuery(modalElement).modal("hide")
+		opened = false
 	}
 
 	function onDocumentKeyDown(ev) {
-		if (!opened || ev.key !== 'Escape') return;
+		if (!opened || ev.key !== "Escape") return
 
-		hide();
+		hide()
 	}
 </script>
 

@@ -1,65 +1,65 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
+	import {createEventDispatcher} from "svelte"
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	export let page;
-	export let pages;
-	export let visiblePagesCount = 5;
-	export let showEllipsis = false;
+	export let page
+	export let pages
+	export let visiblePagesCount = 5
+	export let showEllipsis = false
 
-	$: leftBorder = Math.max(page - visiblePagesCount, 1);
-	$: rightBorder = Math.min(page + visiblePagesCount, pages);
-	$: visiblePages = visiblePageArray(leftBorder, rightBorder);
+	$: leftBorder = Math.max(page - visiblePagesCount, 1)
+	$: rightBorder = Math.min(page + visiblePagesCount, pages)
+	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
 
 	function visiblePageArray(leftBorder, rightBorder) {
-		const offset = Math.floor((visiblePagesCount - 1) / 2);
-		const buffer = [];
-		let l, r;
+		const offset = Math.floor((visiblePagesCount - 1) / 2)
+		const buffer = []
+		let l, r
 
-		l = page - offset;
-		r = l + visiblePagesCount;
+		l = page - offset
+		r = l + visiblePagesCount
 
 		if (l < 1) {
-			l = 1;
-			r = visiblePagesCount + 1;
+			l = 1
+			r = visiblePagesCount + 1
 		}
 
 		if (r > pages) {
-			l = pages - visiblePagesCount + 1;
-			r = pages + 1;
+			l = pages - visiblePagesCount + 1
+			r = pages + 1
 		}
 
 		if (pages < visiblePagesCount) {
-			l = 1;
-			r = pages + 1;
+			l = 1
+			r = pages + 1
 		}
 
 		for (let i = l; i < r; i++) {
-			buffer.push(i);
+			buffer.push(i)
 		}
 
-		return buffer;
+		return buffer
 	}
 
 	function onStepFromPage(step) {
-		const resultPage = page + step;
+		const resultPage = page + step
 
 		if (resultPage < 1) {
-			updateCurrentPage(1);
-			return;
+			updateCurrentPage(1)
+			return
 		}
 
 		if (resultPage >= pages) {
-			updateCurrentPage(pages);
-			return;
+			updateCurrentPage(pages)
+			return
 		}
 
-		updateCurrentPage(resultPage);
+		updateCurrentPage(resultPage)
 	}
 
 	function updateCurrentPage(page) {
-		dispatch('updatePage', page);
+		dispatch("updatePage", page)
 	}
 </script>
 

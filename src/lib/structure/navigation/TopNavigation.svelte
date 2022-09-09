@@ -1,5 +1,5 @@
 <script>
-	import MobileNavToggle from './MobileNavToggle.svelte';
+	import MobileNavToggle from "./MobileNavToggle.svelte"
 
 	function logout() {
 		// todo: make logout

@@ -1,5 +1,5 @@
 <script>
-	export let color = '';
+	export let color = ""
 </script>
 
 <span class="badge {(color && 'bg-' + color) || ''} {$$props.classes || ''}">

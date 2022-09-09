@@ -1,8 +1,8 @@
 <script>
 	import {createEventDispatcher} from "svelte"
-	
+
 	const dispatch = createEventDispatcher()
-	
+
 	let contextMenuElement = null
 
 	let posX,
@@ -19,7 +19,7 @@
 
 	export function closeContextMenu(ev) {
 		contextMenuVisible = false
-		
+
 		dispatch("closed", ev)
 	}
 

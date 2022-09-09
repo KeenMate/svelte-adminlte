@@ -1,5 +1,5 @@
 <script>
-	export let active = false;
+	export let active = false
 </script>
 
 <li class="nav-item {$$props.class || ''}" role="presentation" on:click>

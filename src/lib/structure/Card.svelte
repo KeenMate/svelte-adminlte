@@ -14,7 +14,7 @@
 	export let noPadding = false
 	export let loading = false
 	export let sharedLoading = false
-	
+
 	if (sharedLoading)
 		setContext(CardLoadingContext, {
 			setLoading(loading_) {

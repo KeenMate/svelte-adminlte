@@ -4,7 +4,7 @@
 	export let key
 	export let id
 	export let headerId
-	
+
 	const {
 		currentEntry,
 		id: parentId

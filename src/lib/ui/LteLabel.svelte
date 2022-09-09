@@ -1,7 +1,7 @@
 <script>
-	export let color = '';
-	export let title = '';
-	export let classes = '';
+	export let color = ""
+	export let title = ""
+	export let classes = ""
 </script>
 
 <span class="label {(color && 'label-' + color) || ''} {classes || ''}" {title}>

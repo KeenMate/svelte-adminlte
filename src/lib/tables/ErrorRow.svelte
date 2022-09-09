@@ -1,5 +1,5 @@
 <script>
-	import TableRowFullWidth from './TableRowFullWidth.svelte';
+	import TableRowFullWidth from "./TableRowFullWidth.svelte"
 </script>
 
 <TableRowFullWidth>
