@@ -43,7 +43,7 @@
 			{/if}
 		</div>
 	{/if}
-	<div class="card-body" class:p-0={noPadding}>
+	<div class="card-body {$$restProps.bodyClass || ''}" class:p-0={noPadding}>
 		<slot />
 	</div>
 	{#if $$slots.footer}
