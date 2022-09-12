@@ -27,7 +27,6 @@
 	bind:this={inputElement}
 	bind:value
 	type="text"
-	class="form-control-{size || 'md'} {$$props.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
@@ -39,8 +38,9 @@
 	{placeholder}
 	{disabled}
 	{readonly}
+	{...$$restProps}
+	class="form-control-{size || 'md'} {$$restProps.class || ''}"
 	on:change
 	on:input
 	on:keypress
-	{...$$restProps}
 />
