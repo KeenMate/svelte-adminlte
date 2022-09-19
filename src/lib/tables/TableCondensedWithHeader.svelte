@@ -8,6 +8,7 @@
 </script>
 
 <Card {...cardProps}>
+	<slot name="fullHeader" slot="fullHeader" />
 	<slot name="header" slot="header" />
 	<slot name="tools" slot="tools" />
 	<slot name="beforeTable" />
