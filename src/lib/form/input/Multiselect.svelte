@@ -8,6 +8,7 @@
 	export let placeholder = ""
 	export let readonly = false
 	export let size
+	export let select2Options = null
 
 	const dispatch = createEventDispatcher()
 	const {TypingDebounceDelay} = getConfig()
@@ -43,13 +44,7 @@
 	}
 
 	onMount(() => {
-		select$ = jQuery(selectElement).select2({
-			language: {
-				noResults() {
-					return "Žádné výsledky"
-				}
-			}
-		})
+		select$ = jQuery(selectElement).select2(select2Options)
 		attachSelectEvent(select$)
 		attachKeyDownEvent(select$)
 	})
