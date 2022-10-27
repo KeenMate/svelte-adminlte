@@ -3,39 +3,20 @@
 
 	const dispatch = createEventDispatcher()
 
+	// zero-based page
 	export let page
 	export let pages
 	export let visiblePagesCount = 5
 	export let showEllipsis = false
 
-	$: leftBorder = Math.max(page - visiblePagesCount, 1)
-	$: rightBorder = Math.min(page + visiblePagesCount, pages)
+	$: leftBorder = Math.max(page - visiblePagesCount, 0)
+	$: rightBorder = Math.min(page + visiblePagesCount, pages - 1)
 	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
 
 	function visiblePageArray(leftBorder, rightBorder) {
-		const offset = Math.floor((visiblePagesCount - 1) / 2)
 		const buffer = []
-		let l, r
 
-		l = page - offset
-		r = l + visiblePagesCount
-
-		if (l < 1) {
-			l = 1
-			r = visiblePagesCount + 1
-		}
-
-		if (r > pages) {
-			l = pages - visiblePagesCount + 1
-			r = pages + 1
-		}
-
-		if (pages < visiblePagesCount) {
-			l = 1
-			r = pages + 1
-		}
-
-		for (let i = l; i < r; i++) {
+		for (let i = leftBorder; i < rightBorder; i++) {
 			buffer.push(i)
 		}
 
@@ -45,13 +26,13 @@
 	function onStepFromPage(step) {
 		const resultPage = page + step
 
-		if (resultPage < 1) {
-			updateCurrentPage(1)
+		if (resultPage < 0) {
+			updateCurrentPage(0)
 			return
 		}
 
 		if (resultPage >= pages) {
-			updateCurrentPage(pages)
+			updateCurrentPage(pages - 1)
 			return
 		}
 
