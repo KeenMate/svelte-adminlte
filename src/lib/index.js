@@ -22,6 +22,7 @@ export {default as Checkbox} from "./form/input/Checkbox.svelte"
 export {default as DateRangePicker} from "./form/input/DateRangePicker.svelte"
 // export { default as Dropdown } from "./form/input/Dropdown.svelte";
 export {default as EmailInput} from "./form/input/EmailInput.svelte"
+export {default as RichTextEditor} from "./form/input/RichTextEditor.svelte"
 export {default as FileInput} from "./form/input/FileInput.svelte"
 // export { default as Multiselect } from "./form/input/Multiselect.svelte";
 export {default as NumberInput} from "./form/input/NumberInput.svelte"
