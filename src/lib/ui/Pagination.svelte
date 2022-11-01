@@ -10,7 +10,7 @@
 	export let showEllipsis = false
 
 	$: leftBorder = Math.max(page - visiblePagesCount, 0)
-	$: rightBorder = Math.min(page + visiblePagesCount, pages - 1)
+	$: rightBorder = Math.min(page + visiblePagesCount, pages)
 	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
 
 	function visiblePageArray(leftBorder, rightBorder) {
@@ -72,7 +72,7 @@
 			on:click|preventDefault={() => updateCurrentPage(visiblePage)}
 		>
 			<a href="#" class="page-link">
-				{visiblePage}
+				{visiblePage + 1}
 			</a>
 		</li>
 	{/each}
