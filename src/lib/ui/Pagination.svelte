@@ -2,14 +2,15 @@
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
+	
+	const minPage = 1
 
-	// zero-based page
 	export let page
 	export let pages
 	export let visiblePagesCount = 5
 	export let showEllipsis = false
 
-	$: leftBorder = Math.max(page - visiblePagesCount, 0)
+	$: leftBorder = Math.max(page - visiblePagesCount, minPage)
 	$: rightBorder = Math.min(page + visiblePagesCount, pages)
 	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
 
@@ -26,13 +27,13 @@
 	function onStepFromPage(step) {
 		const resultPage = page + step
 
-		if (resultPage < 0) {
-			updateCurrentPage(0)
+		if (resultPage < minPage) {
+			updateCurrentPage(minPage)
 			return
 		}
 
-		if (resultPage >= pages) {
-			updateCurrentPage(pages - 1)
+		if (resultPage > pages) {
+			updateCurrentPage(pages)
 			return
 		}
 
