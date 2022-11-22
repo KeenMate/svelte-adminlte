@@ -73,7 +73,7 @@
 			on:click|preventDefault={() => updateCurrentPage(visiblePage)}
 		>
 			<a href="#" class="page-link">
-				{visiblePage + 1}
+				{visiblePage}
 			</a>
 		</li>
 	{/each}
