@@ -17,7 +17,7 @@
 	function visiblePageArray(leftBorder, rightBorder) {
 		const buffer = []
 
-		for (let i = leftBorder; i < rightBorder; i++) {
+		for (let i = leftBorder; i <= rightBorder; i++) {
 			buffer.push(i)
 		}
 
