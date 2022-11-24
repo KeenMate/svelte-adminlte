@@ -8,7 +8,16 @@
 </script>
 
 <div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
-	<input {id} bind:checked {value} {disabled} type="checkbox" {name} on:click />
+	<input
+		type="checkbox"
+		bind:checked
+		{id}
+		{value}
+		{name}
+		{disabled}
+		on:change
+		on:click
+	/>
 	<slot />
 </div>
 
