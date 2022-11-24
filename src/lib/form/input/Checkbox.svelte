@@ -8,7 +8,7 @@
 	export let level = "primary"
 </script>
 
-<div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
+<label class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
 	<input
 		type="checkbox"
 		bind:checked
@@ -21,10 +21,10 @@
 		on:click
 	/>
 	<slot />
-</div>
+</label>
 
 <style lang="scss">
-	div {
+	label {
 		gap: .25rem
 	}
 </style>
