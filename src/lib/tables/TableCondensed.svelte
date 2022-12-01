@@ -1,4 +1,9 @@
+<script>
+	export let node
+</script>
+
 <table
+	bind:this={node}
 	{...$$restProps}
 	class="table table-sm data-table {$$props.class || ''}" 
 >
