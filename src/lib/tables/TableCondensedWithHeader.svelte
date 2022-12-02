@@ -8,15 +8,25 @@
 </script>
 
 <Card {...cardProps}>
-	<slot name="fullHeader" slot="fullHeader" />
-	<slot name="header" slot="header" />
-	<slot name="tools" slot="tools" />
+	{#if $$slots.fullHeader}
+		<slot name="fullHeader" slot="fullHeader" />
+	{/if}
+	{#if $$slots.header}
+		<slot name="header" slot="header" />
+	{/if}
+	{#if $$slots.tools}
+		<slot name="tools" slot="tools" />
+	{/if}
 	<slot name="beforeTable" />
 
 	<TableCondensed {...tableProps}>
-		<slot slot="headers" name="headers" />
+		{#if $$slots.headers}
+			<slot slot="headers" name="headers" />
+		{/if}
 		<slot />
-		<slot slot="footer" name="footer" />
+		{#if $$slots.footer}
+			<slot slot="footer" name="footer" />
+		{/if}
 	</TableCondensed>
 	<slot name="afterTable" />
 	<!-- /.card-body -->
