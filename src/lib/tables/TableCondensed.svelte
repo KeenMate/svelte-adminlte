@@ -1,15 +1,17 @@
 <script>
-	import TableEmptyRow from "./TableEmptyRow.svelte"
+	export let node
 </script>
 
-<table class="table table-sm data-table {$$props.class || ''}">
+<table
+	bind:this={node}
+	{...$$restProps}
+	class="table table-sm data-table {$$props.class || ''}" 
+>
 	<thead>
 	<slot name="headers" />
 	</thead>
 	<tbody>
-	<slot>
-		<TableEmptyRow />
-	</slot>
+	<slot />
 	</tbody>
 	<slot name="footer" />
 </table>

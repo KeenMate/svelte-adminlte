@@ -22,7 +22,6 @@
 <textarea
 	bind:this={inputElement}
 	bind:value
-	class="form-control-{size || 'md'} {$$props.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:set-cols={cols}
@@ -39,6 +38,7 @@
 	on:input
 	on:keypress
 	{...$$restProps}
+	class="form-control-{size || 'md'} {$$restProps.class || ''}"
 />
 
 <style>
