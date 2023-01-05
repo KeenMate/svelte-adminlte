@@ -1,5 +1,5 @@
 <script>
-	export let href = "#"
+	export let href = null
 	export let visibility = "d-none d-sm-inline-block"
 </script>
 

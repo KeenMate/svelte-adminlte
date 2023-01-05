@@ -1,5 +1,5 @@
 <script>
-	export let href = "#"
+	export let href = null
 	export let icon
 	export let active = false
 	export let tooltip = ""
