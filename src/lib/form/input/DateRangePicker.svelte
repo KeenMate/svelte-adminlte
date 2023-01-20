@@ -51,7 +51,9 @@
 	let picker
 	$: inputElement && initPicker()
 
-	$: picker && (startDate, endDate, picker.setDateRange(startDate, endDate))
+	$: picker && (single
+		? checkValidDate(startDate) && picker.setDate(startDate)
+		: checkValidDate(startDate) && checkValidDate(endDate) && picker.setDateRange(startDate, endDate))
 	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
 	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
 	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
@@ -61,6 +63,12 @@
 		picker && picker.destroy()
 	})
 
+	function checkValidDate(date) {
+		return date == null
+			|| typeof date === "string"
+			&& !isNaN(new Date(date))
+	}
+	
 	function initPicker() {
 		if (picker) picker.destroy()
 
