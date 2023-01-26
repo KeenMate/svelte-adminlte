@@ -44,4 +44,6 @@
 	on:change
 	on:input
 	on:keypress
+	on:focusin
+	on:focusout
 />

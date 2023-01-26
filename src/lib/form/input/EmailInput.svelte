@@ -23,13 +23,15 @@
 	class="form-control-{size || 'md'} {$$props.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
-	{disabled}
 	{id}
 	{name}
-	on:change
-	on:input
-	on:keypress
 	{pattern}
 	{placeholder}
 	{readonly}
+	{disabled}
+	on:change
+	on:input
+	on:keypress
+	on:focusin
+	on:focusout
 />

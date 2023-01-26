@@ -28,15 +28,15 @@
 	<input
 		bind:this={inputElement}
 		bind:value
-		class="custom-file-input {$$props.class || ''}"
 		{id}
 		{multiple}
 		{name}
-		on:input={onInput}
 		{pattern}
 		{placeholder}
 		{readonly}
 		type="file"
+		class="custom-file-input {$$props.class || ''}"
+		on:input={onInput}
 	/>
 	<label class="custom-file-label" for={id}>
 		<slot />

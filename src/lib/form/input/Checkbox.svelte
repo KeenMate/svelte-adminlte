@@ -19,6 +19,8 @@
 		{disabled}
 		on:change
 		on:click
+		on:focusin
+		on:focusout
 	/>
 	<slot />
 </label>

@@ -34,11 +34,13 @@
 	{cols}
 	{readonly}
 	{disabled}
+	{...$$restProps}
+	class="form-control-{size || 'md'} {$$restProps.class || ''}"
 	on:change
 	on:input
 	on:keypress
-	{...$$restProps}
-	class="form-control-{size || 'md'} {$$restProps.class || ''}"
+	on:focusin
+	on:focusout
 />
 
 <style>
