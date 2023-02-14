@@ -4,25 +4,17 @@
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
 	import Loader from "../ui/Loader.svelte"
 
+	export let jModalElement
+	export let color = null
+	export let escapeClose = true
+	export let clickClose = true
+	export let showClose = true
+	export let closeExisting = false
 	export let small = false
 	export let large = false
 	export let xlarge = false
 	export let center = false
 	export let loading = false
-	export let jModalElement
-
-	let modalElement = null
-	let opened = false
-
-	$: jModalElement = modalElement && jQuery(modalElement)
-
-	onMount(() => {
-		document.addEventListener("keydown", onDocumentKeyDown)
-	})
-
-	onDestroy(() => {
-		document.removeEventListener("keydown", onDocumentKeyDown)
-	})
 
 	export function toggle() {
 		jQuery(modalElement).modal("toggle")
@@ -39,6 +31,28 @@
 		opened = false
 	}
 
+	let modalElement = null
+	let opened = false
+
+	$: modalElement && initModal()
+
+	onMount(() => {
+		document.addEventListener("keydown", onDocumentKeyDown)
+	})
+
+	onDestroy(() => {
+		document.removeEventListener("keydown", onDocumentKeyDown)
+	})
+
+	function initModal() {
+		jModalElement = jQuery(modalElement).modal({
+			escapeClose,
+			clickClose,
+			showClose,
+			show: false,
+		})
+	}
+	
 	function onDocumentKeyDown(ev) {
 		if (!opened || ev.key !== "Escape") return
 
@@ -54,7 +68,7 @@
 		class:modal-lg={large}
 		class:modal-xl={xlarge}
 	>
-		<div class="modal-content">
+		<div class="modal-content {color && `bg-${color}` || ''}">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<slot name="header" />
