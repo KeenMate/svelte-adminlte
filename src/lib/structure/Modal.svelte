@@ -49,6 +49,7 @@
 			escapeClose,
 			clickClose,
 			showClose,
+			closeExisting,
 			show: false,
 		})
 	}
