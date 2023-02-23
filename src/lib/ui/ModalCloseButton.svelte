@@ -1,3 +1,10 @@
-<button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">
-	<slot>Zavřít</slot>
+<button
+	type="button"
+	data-dismiss="modal"
+	{...$$props}
+	class="btn btn-default btn-sm pull-left {$$props.class || ''}"
+>
+	<slot>
+		Close
+	</slot>
 </button>
