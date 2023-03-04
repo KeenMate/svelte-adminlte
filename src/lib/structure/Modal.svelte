@@ -46,8 +46,8 @@
 
 	function initModal() {
 		jModalElement = jQuery(modalElement).modal({
-			escapeClose,
-			clickClose,
+			keyboard: escapeClose,
+			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
 			show: false,
