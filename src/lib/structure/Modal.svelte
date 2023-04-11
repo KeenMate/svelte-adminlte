@@ -3,8 +3,14 @@
 	import jQuery from "jquery"
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
 	import Loader from "../ui/Loader.svelte"
+	/**
+	 * @type {any?}
+	 */
 
 	export let jModalElement
+	/**
+	 * @type {string?}
+	 */
 	export let color = null
 	export let escapeClose = true
 	export let clickClose = true
@@ -31,6 +37,9 @@
 		opened = false
 	}
 
+	/**
+	 * @type {HTMLDivElement?}
+	 */
 	let modalElement = null
 	let opened = false
 
@@ -50,10 +59,13 @@
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show: false,
+			show: false
 		})
 	}
-	
+
+	/**
+	 * @param {{ key: string; }} ev
+	 */
 	function onDocumentKeyDown(ev) {
 		if (!opened || ev.key !== "Escape") return
 
@@ -69,7 +81,7 @@
 		class:modal-lg={large}
 		class:modal-xl={xlarge}
 	>
-		<div class="modal-content {color && `bg-${color}` || ''}">
+		<div class="modal-content {(color && `bg-${color}`) || ''}">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<slot name="header" />
