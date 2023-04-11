@@ -27,6 +27,6 @@
 
 <style lang="scss">
 	label {
-		gap: .25rem
+		gap: 0.25rem;
 	}
 </style>
