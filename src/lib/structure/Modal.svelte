@@ -7,7 +7,7 @@
 	 * @type {any?}
 	 */
 
-	export let jModalElement
+	export let jModalElement = undefined
 	/**
 	 * @type {string?}
 	 */
