@@ -31,10 +31,11 @@
 	export let inputElement = null
 
 	export function isValid() {
-		return inputElement.validity.valid
+		return inputElement?.validity.valid
 	}
 
-	$: inputElement && Inputmask().mask(inputElement)
+// @ts-ignore
+		$: inputElement && Inputmask().mask(inputElement)
 </script>
 
 <input
