@@ -5,17 +5,29 @@
 	export let rows = 2
 	export let cols = ""
 	export let placeholder = ""
+	/**
+	 * @type {string?}
+	 */
 	export let pattern = null
 	export let readonly = false
 	export let plaintext = false
 	export let disabled = false
-	export let maxlength = ""
+	/**
+	 * @type {number?}
+	 */
+	export let maxlength = null
+	/**
+	 * @type {string?}
+	 */
 	export let size
 
+	/**
+	 * @type {HTMLTextAreaElement?}
+	 */
 	let inputElement = null
 
 	export function isValid() {
-		return inputElement.validity.valid
+		return inputElement?.validity.valid
 	}
 </script>
 

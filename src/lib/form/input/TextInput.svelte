@@ -5,22 +5,37 @@
 	export let value = ""
 	export let name = ""
 	export let placeholder = ""
+	/**
+	 * @type {string?}
+	 */
 	export let pattern = null
 	export let readonly = false
 	export let plaintext = false
 	export let disabled = false
+	/**
+	 * @type {string?}
+	 */
 	export let inputMask = null
 	export let invalid = false
-	export let maxlength = ""
+	/**
+	 * @type {number?}
+	 */
+	export let maxlength = null
+	/**
+	 * @type {string?}
+	 */
 	export let size = null
 
+	/**
+	 * @type {HTMLInputElement?}
+	 */
 	export let inputElement = null
 
 	export function isValid() {
-		return inputElement.validity.valid
+		return inputElement?.validity.valid
 	}
 
-	$: inputElement && Inputmask().mask(inputElement)
+	$: inputMask && inputElement && Inputmask().mask(inputElement)
 </script>
 
 <input
@@ -30,7 +45,7 @@
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
-	data-inputmask={inputMask || ''}
+	data-inputmask={inputMask || ""}
 	{id}
 	{maxlength}
 	{name}

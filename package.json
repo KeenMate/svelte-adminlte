@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "next",
+		"@sveltejs/adapter-static": "^1.0.0-next.50",
 		"@sveltejs/kit": "next",
 		"bootstrap": "^4.6.2",
 		"eslint": "^8.16.0",
@@ -28,7 +28,7 @@
 		"svelte-preprocess": "^4.6.9",
 		"svelte2tsx": "^0.5.13",
 		"typescript": "^4.7.4",
-		"vite": "^3.0.0"
+		"vite": "^4.0.0"
 	},
 	"dependencies": {
 		"admin-lte": "=3.0.5",

@@ -1,6 +1,15 @@
 <script>
+	/**
+	 * @type {"button" | "reset" | "submit" | null | undefined}
+	 */
 	export let type = "button"
+	/**
+	 * @type {string?}
+	 */
 	export let color = null
+	/**
+	 * @type {string?}
+	 */
 	export let toggle = null
 
 	export let xsmall = false
@@ -29,7 +38,8 @@
 	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
-	class="btn btn-{(outlined && 'outlined-') || ''}{color || 'default'} btn-flat {$$restProps.class || ''}"
+	class="btn btn-{(outlined && 'outlined-') || ''}{color ||
+		'default'} btn-flat {$$restProps.class || ''}"
 	on:click
 >
 	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->

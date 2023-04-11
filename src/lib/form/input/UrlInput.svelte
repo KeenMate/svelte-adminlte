@@ -5,15 +5,29 @@
 	export let value = ""
 	export let name = ""
 	export let placeholder = ""
+	/**
+	 * @type {string?}
+	 */
 	export let pattern = null
 	export let readonly = false
 	export let plaintext = false
 	export let disabled = false
+	/**
+	 * @type {string?}
+	 */
 	export let inputMask = null
 	export let invalid = false
-	export let maxlength = ""
-	export let size
-
+	/**
+	 * @type {number?}
+	 */
+	export let maxlength = null
+	/**
+	 * @type {string?}
+	 */
+	export let size = null
+	/**
+	 * @type {HTMLInputElement?}
+	 */
 	export let inputElement = null
 
 	export function isValid() {
