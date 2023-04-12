@@ -23,7 +23,7 @@
 	/**
 	 * @type {string?}
 	 */
-	export let size
+	export let size = "md"
 	export let min = ""
 	export let max = ""
 
@@ -43,7 +43,7 @@
 <input
 	bind:this={inputElement}
 	bind:value
-	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control-{size} {$$props.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}

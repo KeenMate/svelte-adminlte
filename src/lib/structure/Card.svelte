@@ -1,5 +1,9 @@
-<script context="module">
+<script context="module" lang="ts">
 	export const CardLoadingContext = Symbol()
+
+	export type contextType = {
+		setLoading(setTo: boolean): void
+	}
 </script>
 
 <script>
@@ -24,7 +28,7 @@
 </script>
 
 <div
-	class="card {color && ('card-' + color) || ''} {$$props.class || ''}"
+	class="card {(color && 'card-' + color) || ''} {$$props.class || ''}"
 	class:card-outline={outline}
 	class:card-outline-tabs={outlineTabs}
 	class:card-tabs={tabs}

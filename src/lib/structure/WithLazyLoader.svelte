@@ -1,30 +1,38 @@
-<script>
+<script lang="ts">
 	// this is working in bundle
 	import {getContext} from "svelte"
 	import lazyLoader from "js-common-helpers/src/helpers/lazy-loader"
 	import {emptyPromise} from "js-common-helpers/src/helpers/promise"
-	import {CardLoadingContext} from "./Card.svelte"
+	import {CardLoadingContext, type contextType} from "./Card.svelte"
 	import {getConfig} from "$lib/config"
 	import Loader from "$lib/ui/Loader.svelte"
 
-	const context = getContext(CardLoadingContext)
+	type TData = $$Generic
+
+	interface $$Slots {
+		// If you want to type the default slot, change the property name below to "default"
+		default: {data: TData}
+		catch: {}
+		loader: {}
+	}
+
+	const context: contextType = getContext(CardLoadingContext)
 
 	const {lazyLoader: config} = getConfig()
-	/**
-  @type {Promise<unknown>}
-  */
-	export let task
+
+	export let task: Promise<TData>
 	export let loading = false
 	export let parentLoading = false
 
-	/**
-  @type {unknown}
-  */
-	let oldData
+	let oldData: TData
 
-	$: lazyTask = (task && lazyLoader(task, showLoader, hideLoader, config)) || emptyPromise
+	let lazyTask: Promise<TData>
+
+	$: lazyTask =
+		(task && lazyLoader<TData>(task, showLoader, hideLoader, config)) ||
+		(emptyPromise as Promise<TData>)
 	$: lazyTask?.then(x => {
-		oldData = x
+		oldData = x as TData
 	})
 
 	function showLoader() {
@@ -35,11 +43,7 @@
 		setLoading(false)
 	}
 
-	/**
-	 *
-	 * @param loading_ {boolean}
-	 */
-	function setLoading(loading_) {
+	function setLoading(loading_: boolean) {
 		loading = loading_
 		context?.setLoading(loading_)
 	}
