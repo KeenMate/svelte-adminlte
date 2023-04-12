@@ -1,15 +1,21 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.2.14",
+	"version": "0.3.0",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
 	"repository": "https://github.com/keenmate/svelte-adminlte.git",
 	"main": "src/lib/index.js",
+	"exports": {
+		".": {
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"package": "svelte-kit package",
+		"package": "svelte-package",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. ."
@@ -25,13 +31,14 @@
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"sass": "^1.54.1",
-		"svelte": "^3.44.0",
+		"svelte": "^3.58.0",
 		"svelte-preprocess": "^4.6.9",
 		"svelte2tsx": "^0.5.13",
 		"typescript": "^4.7.4",
 		"vite": "^4.0.0"
 	},
 	"dependencies": {
+		"@sveltejs/package": "^2.0.2",
 		"admin-lte": "=3.0.5",
 		"icheck-bootstrap": "^3.0.1",
 		"js-common-helpers": "github:keenmate/js-common-helpers",

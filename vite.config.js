@@ -1,13 +1,13 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+import {sveltekit} from "@sveltejs/kit/vite"
 
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [sveltekit()],
 	resolve: {
 		alias: {
-			'~bootstrap': 'bootstrap'
+			"~bootstrap": "bootstrap"
 		}
 	}
-};
+}
 
-export default config;
+export default config
