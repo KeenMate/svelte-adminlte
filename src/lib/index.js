@@ -50,6 +50,7 @@ export {default as Modal} from "./structure/Modal.svelte"
 export {default as OneColumnNarrow} from "./structure/OneColumnNarrow.svelte"
 export {default as PageHeader} from "./structure/PageHeader.svelte"
 export {default as FlexContainer} from "./structure/FlexContainer.svelte"
+export {default as WithLazyLoader} from "./structure/WithLazyLoader.svelte"
 
 /* [4.1] Structure > Navigation */
 export {default as BrandNavLogo} from "./structure/navigation/BrandNavLogo.svelte"
