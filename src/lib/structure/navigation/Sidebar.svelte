@@ -1,5 +1,5 @@
-<script>
-	export let color = null
+<script lang="ts">
+	export let color: string | boolean | null = null
 
 	$: sidebarColor = color !== false ? (color && `sidebar-${color}`) || "sidebar-dark-primary" : ""
 </script>
