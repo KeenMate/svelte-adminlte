@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher, onDestroy} from "svelte"
 	import Litepicker from "litepicker"
 
 	const dispatch = createEventDispatcher()
 
-	export let inputElement = null
+	export let inputElement: HTMLInputElement | null = null
 	export let startDate = ""
 	export let endDate = ""
 	export let minDate = ""
@@ -51,9 +51,12 @@
 	let picker
 	$: inputElement && initPicker()
 
-	$: picker && (single
-		? checkValidDate(startDate) && picker.setDate(startDate)
-		: checkValidDate(startDate) && checkValidDate(endDate) && picker.setDateRange(startDate, endDate))
+	$: picker &&
+		(single
+			? checkValidDate(startDate) && picker.setDate(startDate)
+			: checkValidDate(startDate) &&
+			  checkValidDate(endDate) &&
+			  picker.setDateRange(startDate, endDate))
 	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
 	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
 	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
@@ -64,11 +67,9 @@
 	})
 
 	function checkValidDate(date) {
-		return date == null
-			|| typeof date === "string"
-			&& !isNaN(new Date(date))
+		return date == null || (typeof date === "string" && !isNaN(new Date(date)))
 	}
-	
+
 	function initPicker() {
 		if (picker) picker.destroy()
 
@@ -83,7 +84,7 @@
 			numberOfMonths: visibleMonths,
 			numberOfColumns: columns,
 			lockDays: lockDays,
-			lockDaysFilter: disabled ? (_) => true : lockDaysFilter,
+			lockDaysFilter: disabled ? _ => true : lockDaysFilter,
 			allowRepick,
 			autoApply,
 			autoRefresh,

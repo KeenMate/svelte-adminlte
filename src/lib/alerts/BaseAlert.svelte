@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
 
-	export let header
+	export let header: string | undefined = undefined
 	export let closeable = true
 	export let level = ""
 	export let icon = ""
@@ -20,9 +20,9 @@
 			class="close"
 			data-dismiss="alert"
 			aria-hidden="true"
-			on:click={alertClosed}>×
-		</button
-		>
+			on:click={alertClosed}
+			>×
+		</button>
 	{/if}
 
 	{#if header}

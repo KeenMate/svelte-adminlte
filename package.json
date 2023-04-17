@@ -39,6 +39,7 @@
 	"dependencies": {
 		"@sveltejs/package": "^2.0.2",
 		"admin-lte": "=3.0.5",
+		"CBuffer": "^2.2.0",
 		"icheck-bootstrap": "^3.0.1",
 		"js-common-helpers": "github:keenmate/js-common-helpers",
 		"litepicker": "^2.0.11",

@@ -1,24 +1,24 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 	import CKEditor from "ckeditor5-svelte"
 	import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor"
 
 	const dispatch = createEventDispatcher()
 
-	export let value
+	export let value: string
 	export let disabled = false
 	export let readonly = false
 	export let id = "ckEditorId"
 	export let additionalConfig = {}
 
 	let editor = DecoupledEditor
-	let editorInstance = null
+	let editorInstance: any = null
 
 	let localValue = ""
-	let editorConfig
+	let editorConfig: any
 
 	$: {
-		const tmpConfig = {...additionalConfig}
+		const tmpConfig: any = {...additionalConfig}
 		if (readonly) tmpConfig.toolbar = {items: []}
 
 		editorConfig = tmpConfig
@@ -28,14 +28,14 @@
 
 	$: editorInstance && (editorInstance.isReadOnly = disabled || readonly)
 
-	function onReady({detail: editor}) {
+	function onReady({detail: editor}: {detail: any}) {
 		editorInstance = editor
 		editor.ui
 			.getEditableElement()
 			.parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement())
 	}
 
-	function onInput({detail: {data}}) {
+	function onInput({detail: {data}}: {detail: {data: string}}) {
 		dispatch("input", data)
 	}
 </script>

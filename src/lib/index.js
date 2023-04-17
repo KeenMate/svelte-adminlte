@@ -110,3 +110,4 @@ export {default as ContextMenuLabel} from "./ui/context-menu/ContextMenuLabel.sv
 
 /* [7] Toasts */
 export {default as Toastr} from "./toasts/toastr"
+export {default as NotificationProvider, NotificationType} from "./toasts/notification-provider"
