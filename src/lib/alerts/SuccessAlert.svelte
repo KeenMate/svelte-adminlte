@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import BaseAlert from "./BaseAlert.svelte"
 
 	export let header = ""
