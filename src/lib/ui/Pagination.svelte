@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
-	
+
 	const minPage = 1
 
-	export let page
-	export let pages
+	export let page: number
+	export let pages: number
 	export let visiblePagesCount = 5
 	export let showEllipsis = false
 
@@ -14,7 +14,7 @@
 	$: rightBorder = Math.min(page + visiblePagesCount, pages)
 	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
 
-	function visiblePageArray(leftBorder, rightBorder) {
+	function visiblePageArray(leftBorder: number, rightBorder: number) {
 		const buffer = []
 
 		for (let i = leftBorder; i <= rightBorder; i++) {
@@ -24,7 +24,7 @@
 		return buffer
 	}
 
-	function onStepFromPage(step) {
+	function onStepFromPage(step: number) {
 		const resultPage = page + step
 
 		if (resultPage < minPage) {
@@ -40,7 +40,7 @@
 		updateCurrentPage(resultPage)
 	}
 
-	function updateCurrentPage(page) {
+	function updateCurrentPage(page: number) {
 		dispatch("updatePage", page)
 	}
 </script>

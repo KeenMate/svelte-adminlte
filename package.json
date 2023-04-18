@@ -38,6 +38,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/package": "^2.0.2",
+		"@types/inputmask": "^5.0.3",
 		"admin-lte": "=3.0.5",
 		"CBuffer": "^2.2.0",
 		"icheck-bootstrap": "^3.0.1",

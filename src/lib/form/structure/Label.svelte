@@ -1,7 +1,7 @@
-<script>
-	export let inputId = null
+<script lang="ts">
+	export let inputId: string = ""
 </script>
 
-<label class={$$props.class || ''} for={inputId}>
+<label class={$$props.class || ""} for={inputId}>
 	<slot />
 </label>

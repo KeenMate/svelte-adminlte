@@ -1,14 +1,14 @@
-<script>
-	export let lower
-	export let higher
+<script lang="ts">
+	export let lower: number
+	export let higher: number
 
-	let progressElement
+	let progressElement: HTMLDivElement
 
 	$: percentage = Math.round((lower / higher) * 100)
-	$: percentageColor = `hsl(${((percentage / 100) * 120) + 25}deg, 100%, 53%)`
+	$: percentageColor = `hsl(${(percentage / 100) * 120 + 25}deg, 100%, 53%)`
 	$: progressElement && setProgressBackgroundColor(percentageColor, percentage)
 
-	function setProgressBackgroundColor(valueColor, valuePercentage) {
+	function setProgressBackgroundColor(valueColor: string, valuePercentage: number) {
 		progressElement.style.background = `linear-gradient(90deg, ${valueColor} ${valuePercentage}%, hsl(0, 0%, 90%) ${valuePercentage}%)`
 	}
 </script>

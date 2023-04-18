@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Inputmask from "inputmask"
 
 	export let id = ""
@@ -8,33 +8,22 @@
 	/**
 	 * @type {string?}
 	 */
-	export let pattern = null
+	export let pattern = ""
 	export let readonly = false
 	export let plaintext = false
 	export let disabled = false
-	/**
-	 * @type {string?}
-	 */
-	export let inputMask = null
+	export let inputMask = ""
 	export let invalid = false
-	/**
-	 * @type {number?}
-	 */
-	export let maxlength = null
-	/**
-	 * @type {string?}
-	 */
-	export let size = null
+	export let maxlength: number | null = null
+	export let size = "md"
 
-	/**
-	 * @type {HTMLInputElement?}
-	 */
-	export let inputElement = null
+	export let inputElement: HTMLInputElement | null = null
 
 	export function isValid() {
 		return inputElement?.validity.valid
 	}
 
+	//@ts-ignore
 	$: inputMask && inputElement && Inputmask().mask(inputElement)
 </script>
 
