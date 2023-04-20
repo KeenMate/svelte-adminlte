@@ -8,11 +8,11 @@
 	/**
 	 * @type {string?}
 	 */
-	export let pattern = ""
+	export let pattern: string | null = null
 	export let readonly = false
 	export let plaintext = false
 	export let disabled = false
-	export let inputMask = ""
+	export let inputMask: string | null = null
 	export let invalid = false
 	export let maxlength: number | null = null
 	export let size = "md"
