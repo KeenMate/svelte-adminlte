@@ -1,6 +1,6 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
@@ -8,8 +8,8 @@
 	"main": "./dist/index.js",
 	"exports": {
 		".": {
-			"default": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
 		}
 	},
 	"scripts": {
