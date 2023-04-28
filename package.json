@@ -1,6 +1,6 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.3.2",
+	"version": "0.3.5",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
@@ -11,6 +11,11 @@
 			"default": "./dist/index.js"
 		}
 	},
+	"files": [
+		"dist"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -36,12 +41,12 @@
 		"vite": "^4.0.0"
 	},
 	"dependencies": {
+		"@keenmate/js-common-helpers": "^0.1.8",
 		"@sveltejs/package": "^2.0.2",
 		"@types/inputmask": "^5.0.3",
 		"admin-lte": "=3.0.5",
 		"CBuffer": "^2.2.0",
 		"icheck-bootstrap": "^3.0.1",
-		"js-common-helpers": "github:keenmate/js-common-helpers",
 		"litepicker": "^2.0.11",
 		"svelte": "^3.58.0"
 	},
