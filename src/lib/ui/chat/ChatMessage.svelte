@@ -12,8 +12,12 @@
 		<span class="direct-chat-name float-left">{username}</span>
 		<span class="direct-chat-timestamp float-right">{datetime}</span>
 	</div>
-	<img class="direct-chat-img" src={avatar} alt={avatarAlt}>
+	<slot name="avatar">
+		<img class="direct-chat-img" src={avatar} alt={avatarAlt}>
+	</slot>
 	<div class="direct-chat-text">
-		{message}
+		<slot>
+			{message}
+		</slot>
 	</div>
 </div>
