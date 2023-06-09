@@ -13,7 +13,9 @@
 		<span class="direct-chat-timestamp float-right">{datetime || ""}</span>
 	</div>
 	<slot name="avatar">
-		<img class="direct-chat-img" src={avatar || ""} alt={avatarAlt || ""}>
+		{#if avatar || avatarAlt}
+			<img class="direct-chat-img" src={avatar || ""} alt={avatarAlt || ""}>
+		{/if}
 	</slot>
 	<div class="direct-chat-text">
 		<slot>
