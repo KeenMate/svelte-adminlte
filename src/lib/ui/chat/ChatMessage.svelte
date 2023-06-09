@@ -12,7 +12,7 @@
 </script>
 
 <div
-	class="direct-chat-msg"
+	class="direct-chat-msg {$$restProps.class || ''}"
 	class:right
 	on:click
 >
