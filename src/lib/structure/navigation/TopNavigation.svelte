@@ -1,6 +1,8 @@
 <script>
 	import MobileNavToggle from "./MobileNavToggle.svelte"
 
+	export let hideMobileNavToggle = false
+	
 	function logout() {
 		// todo: make logout
 		// window.location.replace(LogoutPath)
@@ -11,7 +13,9 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light {$$props.class || ''}">
 	<!-- Left navbar links -->
 	<ul class="navbar-nav">
-		<MobileNavToggle />
+		{#if !hideMobileNavToggle}
+			<MobileNavToggle />
+		{/if}
 
 		<slot name="left" />
 	</ul>

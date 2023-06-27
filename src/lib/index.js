@@ -45,7 +45,6 @@ export {default as Label} from "./form/structure/Label.svelte"
 /* [4] Structure */
 export {default as BreadcrumbItem} from "./structure/BreadcrumbItem.svelte"
 export {default as Card} from "./structure/Card.svelte"
-export {default as KeenFooter} from "./structure/KeenFooter.svelte"
 export {default as Modal} from "./structure/Modal.svelte"
 export {default as OneColumnNarrow} from "./structure/OneColumnNarrow.svelte"
 export {default as PageHeader} from "./structure/PageHeader.svelte"

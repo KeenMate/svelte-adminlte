@@ -5,7 +5,8 @@ const config = {
 	plugins: [sveltekit()],
 	resolve: {
 		alias: {
-			"~bootstrap": "bootstrap"
+			"~bootstrap": "bootstrap",
+			"$lib": "src/lib"
 		}
 	}
 }
