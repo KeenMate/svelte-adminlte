@@ -28,7 +28,7 @@
 		"@keenmate/js-common-helpers": "^0.1.8",
 		"@sveltejs/package": "^2.0.2",
 		"@types/inputmask": "^5.0.3",
-		"admin-lte": "^3.2.0",
+		"admin-lte": "=3.0.5",
 		"CBuffer": "^2.2.0",
 		"icheck-bootstrap": "^3.0.1",
 		"litepicker": "^2.0.11",
