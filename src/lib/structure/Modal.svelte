@@ -65,10 +65,12 @@
 	})
 	
 	function beforeOpenModal() {
+		console.log("beforeOpenModal", document.body.classList, document.body.classList.contains("modal-open"))
 		documentHadOpenedModal = document.body.classList.contains("modal-open")
 	}
 	
 	async function afterCloseModal() {
+		console.log("afterCloseModal", documentHadOpenedModal)
 		await tick()
 		
 		if (documentHadOpenedModal)
