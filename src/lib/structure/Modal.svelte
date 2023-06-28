@@ -1,5 +1,5 @@
 <script>
-	import {onDestroy, onMount} from "svelte"
+	import {onDestroy, onMount, tick} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
 	import Loader from "../ui/Loader.svelte"
@@ -23,11 +23,19 @@
 	export let loading = false
 
 	export function toggle() {
+		if (!opened)
+			beforeOpenModal()
+		
 		jQuery(modalElement).modal("toggle")
 		opened = !opened
+		
+		if (!opened)
+			afterCloseModal()
 	}
 
 	export function show() {
+		beforeOpenModal()
+		
 		jQuery(modalElement).modal("show")
 		opened = true
 	}
@@ -35,6 +43,8 @@
 	export function hide() {
 		jQuery(modalElement).modal("hide")
 		opened = false
+
+		afterCloseModal()
 	}
 
 	/**
@@ -42,6 +52,7 @@
 	 */
 	let modalElement = null
 	let opened = false
+	let documentHadOpenedModal = false
 
 	$: modalElement && initModal()
 
@@ -52,6 +63,17 @@
 	onDestroy(() => {
 		document.removeEventListener("keydown", onDocumentKeyDown)
 	})
+	
+	function beforeOpenModal() {
+		documentHadOpenedModal = document.body.classList.contains("modal-open")
+	}
+	
+	async function afterCloseModal() {
+		await tick()
+		
+		if (documentHadOpenedModal)
+			document.body.classList.add("modal-open")
+	}
 
 	function initModal() {
 		jModalElement = jQuery(modalElement).modal({
