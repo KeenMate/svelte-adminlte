@@ -34,7 +34,7 @@
 	}
 
 	export function show() {
-		beforeOpenModal()
+		// beforeOpenModal()
 		
 		jQuery(modalElement).modal("show")
 		opened = true
@@ -44,7 +44,7 @@
 		jQuery(modalElement).modal("hide")
 		opened = false
 
-		afterCloseModal()
+		// afterCloseModal()
 	}
 
 	/**
@@ -62,7 +62,17 @@
 
 	onDestroy(() => {
 		document.removeEventListener("keydown", onDocumentKeyDown)
+		
+		clearModalEventHandlers()
 	})
+	
+	function clearModalEventHandlers() {
+		if (!jModalElement)
+			return
+		
+		jModalElement.off("hidden.bs.modal", onModalHidden)
+		jModalElement.off("show.bs.modal", onModalShow)
+	}
 	
 	function beforeOpenModal() {
 		console.log("beforeOpenModal", document.body.classList, document.body.classList.contains("modal-open"))
@@ -85,6 +95,20 @@
 			closeExisting,
 			show: false
 		})
+		
+		jModalElement.on("hidden.bs.modal", onModalHidden)
+		jModalElement.on("show.bs.modal", onModalShow)
+	}
+	
+	async function onModalHidden() {
+		console.log("onModalHidden")
+		await tick()
+		afterCloseModal()
+	}
+	
+	function onModalShow() {
+		console.log("onModalShow")
+		beforeOpenModal()
 	}
 
 	/**
