@@ -1,6 +1,6 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.3.19",
+	"version": "0.3.20",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
