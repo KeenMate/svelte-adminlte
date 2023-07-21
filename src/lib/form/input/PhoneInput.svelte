@@ -31,7 +31,7 @@
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
-	data-inputmask={inputMask || ''}
+	data-inputmask={inputMask || ""}
 	{id}
 	{maxlength}
 	{name}

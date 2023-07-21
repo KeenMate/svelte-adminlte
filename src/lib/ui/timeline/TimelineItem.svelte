@@ -3,7 +3,7 @@
 </script>
 
 <li>
-	<i class={iconClasses || ''} />
+	<i class={iconClasses || ""} />
 
 	<div class="timeline-item">
 		{#if $$slots.time}

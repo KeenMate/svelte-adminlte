@@ -1,5 +1,5 @@
-import {lazyLoader} from "@keenmate/js-common-helpers/src/constatns/defaults"
-import {checkPermissions} from "@keenmate/js-common-helpers/src/helpers/permissions"
+import {lazyLoader} from "@keenmate/js-common-helpers/constatns/defaults"
+import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
 import {writable, type Writable} from "svelte/store"
 
 const defaultConfig = {

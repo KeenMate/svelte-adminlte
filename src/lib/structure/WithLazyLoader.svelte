@@ -1,12 +1,11 @@
 <script lang="ts">
 	// this is working in bundle
 	import {getContext} from "svelte"
-	import lazyLoader from "@keenmate/js-common-helpers/src/helpers/lazy-loader"
-	import {emptyPromise} from "@keenmate/js-common-helpers/src/helpers/promise"
+	import lazyLoader from "@keenmate/js-common-helpers/helpers/lazy-loader"
+	import {emptyPromise} from "@keenmate/js-common-helpers/helpers/promise"
 	import {CardLoadingContext, type contextType} from "./Card.svelte"
-	import {getConfig} from "$lib/config"
+	import {getConfig} from "$lib/config.js"
 	import Loader from "$lib/ui/Loader.svelte"
-
 	type TData = $$Generic
 
 	interface $$Slots {

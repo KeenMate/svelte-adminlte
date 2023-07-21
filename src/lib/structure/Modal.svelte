@@ -23,19 +23,17 @@
 	export let loading = false
 
 	export function toggle() {
-		if (!opened)
-			beforeOpenModal()
-		
+		if (!opened) beforeOpenModal()
+
 		jQuery(modalElement).modal("toggle")
 		opened = !opened
-		
-		if (!opened)
-			afterCloseModal()
+
+		if (!opened) afterCloseModal()
 	}
 
 	export function show() {
 		// beforeOpenModal()
-		
+
 		jQuery(modalElement).modal("show")
 		opened = true
 	}
@@ -62,27 +60,25 @@
 
 	onDestroy(() => {
 		document.removeEventListener("keydown", onDocumentKeyDown)
-		
+
 		clearModalEventHandlers()
 	})
-	
+
 	function clearModalEventHandlers() {
-		if (!jModalElement)
-			return
-		
+		if (!jModalElement) return
+
 		jModalElement.off("hidden.bs.modal", onModalHidden)
 		jModalElement.off("show.bs.modal", onModalShow)
 	}
-	
+
 	function beforeOpenModal() {
 		documentHadOpenedModal = document.body.classList.contains("modal-open")
 	}
-	
+
 	async function afterCloseModal() {
 		await tick()
-		
-		if (documentHadOpenedModal)
-			document.body.classList.add("modal-open")
+
+		if (documentHadOpenedModal) document.body.classList.add("modal-open")
 	}
 
 	function initModal() {
@@ -93,16 +89,16 @@
 			closeExisting,
 			show: false
 		})
-		
+
 		jModalElement.on("hidden.bs.modal", onModalHidden)
 		jModalElement.on("show.bs.modal", onModalShow)
 	}
-	
+
 	async function onModalHidden() {
 		await tick()
 		afterCloseModal()
 	}
-	
+
 	function onModalShow() {
 		beforeOpenModal()
 	}

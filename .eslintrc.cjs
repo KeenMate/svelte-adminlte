@@ -1,10 +1,10 @@
 module.exports = {
 	root: true,
-	extends: ['eslint:recommended', 'prettier'],
-	plugins: ['svelte3'],
-	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
+	extends: ["eslint:recommended", "prettier"],
+	plugins: ["svelte3"],
+	overrides: [{files: ["*.svelte"], processor: "svelte3/svelte3"}],
 	parserOptions: {
-		sourceType: 'module',
+		sourceType: "module",
 		ecmaVersion: 2020
 	},
 	env: {
@@ -16,6 +16,6 @@ module.exports = {
 		"object-curly-spacing": ["error", "never"],
 		"array-bracket-spacing": ["error", "never"],
 		"computed-property-spacing": ["error", "never"],
-		indent: ["error", "tab", {SwitchCase: 1}],
+		indent: ["error", "tab", {SwitchCase: 1}]
 	}
-};
+}

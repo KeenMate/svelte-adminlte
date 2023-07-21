@@ -16,7 +16,7 @@
 
 	let selectElement = null
 	let select$ = null
-	let searchDebounce = debounce((x) => {
+	let searchDebounce = debounce(x => {
 		dispatch("search", x)
 	}, TypingDebounceDelay)
 
@@ -24,8 +24,8 @@
 	$: select$?.select2({disabled: readonly && "readonly"})
 
 	function attachSelectEvent(select$) {
-		select$.on("select2:select", (ev) => {
-			const selectedValues = Array.from(ev.target.selectedOptions).map((x) => x.value)
+		select$.on("select2:select", ev => {
+			const selectedValues = Array.from(ev.target.selectedOptions).map(x => x.value)
 			dispatch("change", selectedValues[0])
 		})
 	}

@@ -6,7 +6,7 @@
 export function getKeysByPrefix(object, prefix) {
 	return Object.keys(object)
 		.filter(x => x.startsWith(prefix))
-		.reduce((acc, x) => (acc[extractPrefix(x, prefix)] = object[x], acc), {})
+		.reduce((acc, x) => ((acc[extractPrefix(x, prefix)] = object[x]), acc), {})
 }
 
 function extractPrefix(field, prefix) {

@@ -1,5 +1,5 @@
 <script type="ts">
-	import {getConfig} from "$lib/config"
+	import {getConfig} from "$lib/config.js"
 
 	const {permissions: config, currentUser} = getConfig()
 	export let permission: string[] | string

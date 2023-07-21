@@ -5,7 +5,7 @@
 // import "toastr/build/toastr.css";
 // import "admin-lte/dist/js/adminlte";
 
-export {getConfig, setConfig} from "./config"
+export {getConfig, setConfig} from "./config.js"
 
 /* [1] Alerts */
 export {default as BaseAlert} from "./alerts/BaseAlert.svelte"

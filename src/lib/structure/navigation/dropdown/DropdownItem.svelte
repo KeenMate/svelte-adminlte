@@ -1,5 +1,5 @@
-<script>
-	export let href = null
+<script lang="ts">
+	export let href: string | null = null
 	export let active = false
 	export let disabled = false
 </script>

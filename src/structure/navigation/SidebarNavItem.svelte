@@ -7,15 +7,9 @@
 </script>
 
 <li class="nav-item" data-toggle="tooltip" data-placement="right" title={tooltip}>
-	<a
-		class="nav-link"
-		class:active
-		{href}
-		{target}
-		{...$$restProps}
-	>
+	<a class="nav-link" class:active {href} {target} {...$$restProps}>
 		{#if icon}
-			<i class="nav-icon {icon}"></i>
+			<i class="nav-icon {icon}" />
 		{/if}
 
 		<slot />

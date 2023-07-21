@@ -1,5 +1,5 @@
 import toastr from "toastr"
-import {getConfig} from "../config"
+import {getConfig} from "../config.js"
 
 let config = getConfig()
 

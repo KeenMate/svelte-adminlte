@@ -5,11 +5,7 @@
 	export let id
 	export let headerId
 
-	const {
-		currentEntry,
-		id: parentId
-	} = getContext(key)
-	
+	const {currentEntry, id: parentId} = getContext(key)
 </script>
 
 <div class="card">
@@ -23,7 +19,7 @@
 					data-target="#{id}"
 					aria-expanded="true"
 					aria-controls={id}
-					on:click={() => $currentEntry = id}
+					on:click={() => ($currentEntry = id)}
 				>
 					<slot name="headerText" />
 				</button>
@@ -31,7 +27,13 @@
 		</h2>
 	</div>
 
-	<div {id} class="collapse" class:show={$currentEntry === id} aria-labelledby={headerId} data-parent="#{parentId}">
+	<div
+		{id}
+		class="collapse"
+		class:show={$currentEntry === id}
+		aria-labelledby={headerId}
+		data-parent="#{parentId}"
+	>
 		<div class="card-body">
 			<slot />
 		</div>

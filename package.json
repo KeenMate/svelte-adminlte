@@ -1,6 +1,6 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.3.20",
+	"version": "0.4.0",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
@@ -25,7 +25,7 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
-		"@keenmate/js-common-helpers": "^0.1.8",
+		"@keenmate/js-common-helpers": "^0.2.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-static": "^1.0.0-next.50",
 		"@sveltejs/kit": "next",

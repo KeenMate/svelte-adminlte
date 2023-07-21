@@ -34,8 +34,8 @@
 		return inputElement?.validity.valid
 	}
 
-// @ts-ignore
-		$: inputElement && Inputmask().mask(inputElement)
+	// @ts-ignore
+	$: inputElement && Inputmask().mask(inputElement)
 </script>
 
 <input
