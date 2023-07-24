@@ -1,8 +1,8 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "nodenext",
-		"module": "NodeNext",
+		"moduleResolution": "classic",
+		"module": "ESNext",
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,
@@ -13,6 +13,7 @@
 		"strict": true,
 		"paths": {
 			"$lib/*": ["src/lib/*"]
-		}
+		},
+		"ignoreDeprecations": "5.0"
 	}
 }
