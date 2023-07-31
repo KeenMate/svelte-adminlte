@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let text: string | null = null
+	export let text: boolean = false
 </script>
 
 <span class="input-group-prepend {$$props.class || ''}">
