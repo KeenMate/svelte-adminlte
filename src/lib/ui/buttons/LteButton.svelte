@@ -4,11 +4,11 @@
 	 */
 	export let type = "button"
 	/**
-	 * @type {string?}
+	 * @type {string | null}
 	 */
 	export let color = null
 	/**
-	 * @type {string?}
+	 * @type {string | null}
 	 */
 	export let toggle = null
 
@@ -22,6 +22,12 @@
 	export let disabled = false
 	export let app = false
 	export let squared = false
+
+	let buttonClass
+
+	$: buttonClass = "btn-" +
+		(outlined && 'outline-' || '') +
+		(color || 'default')
 </script>
 
 <button
@@ -38,24 +44,25 @@
 	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
-	class="btn btn-{(outlined && 'outlined-') || ''}{color ||
-		'default'} btn-flat {$$restProps.class || ''}"
+	class="btn btn-flat {buttonClass} {$$restProps.class || ''}"
 	on:click
 >
 	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
 	<slot />
 </button>
 
-<style lang="sass">
-	.squared
-		display: inline-flex
-		align-items: center
-		justify-content: center
+<style lang="scss">
+	.squared {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 
-		width: 3rem
-		height: 3rem
-		padding: .1rem
+		width: 3rem;
+		height: 3rem;
+		padding: .1rem;
 
-		&:hover
+		&:hover {
 			text-decoration: none
+		}
+	}
 </style>
