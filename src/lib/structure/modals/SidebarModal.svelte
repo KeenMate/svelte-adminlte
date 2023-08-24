@@ -1,6 +1,6 @@
 <script>
 	import {onDestroy, tick} from "svelte"
-	import SuperSlide from "$lib/svelte/transitions/super-slide.js"
+	import {SuperSlide} from "@keenmate/svelte-common-helpers/transitions"
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()

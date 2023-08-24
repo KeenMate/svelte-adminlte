@@ -26,6 +26,7 @@
 	},
 	"dependencies": {
 		"@keenmate/js-common-helpers": "^0.2.0",
+		"@keenmate/svelte-common-helpers": "^0.1.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-static": "^1.0.0-next.50",
 		"@sveltejs/kit": "next",

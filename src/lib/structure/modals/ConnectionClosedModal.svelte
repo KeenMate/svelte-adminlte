@@ -1,6 +1,7 @@
 <script>
-	import {Modal, ModalCloseButton} from "@keenmate/svelte-adminlte"
 	import {_} from "svelte-i18n"
+	import Modal from "$lib/structure/modals/Modal.svelte"
+	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 
 	export function showModal() {
 		show()
