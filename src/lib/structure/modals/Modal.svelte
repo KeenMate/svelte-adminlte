@@ -1,8 +1,8 @@
 <script>
 	import {onDestroy, onMount, tick} from "svelte"
 	import jQuery from "jquery"
-	import ModalCloseButton from "../ui/ModalCloseButton.svelte"
-	import Loader from "../ui/Loader.svelte"
+	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
+	import Loader from "$lib/ui/Loader.svelte"
 	/**
 	 * @type {any?}
 	 */
