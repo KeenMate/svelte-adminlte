@@ -1,6 +1,6 @@
 {
 	"name": "@keenmate/svelte-adminlte",
-	"version": "0.6.4",
+	"version": "0.6.5",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
@@ -11,7 +11,6 @@
 			"default": "./dist/index.js"
 		},
 		"./actions": {
-			
 			"types": "./dist/actions/index.d.ts",
 			"default": "./dist/actions/index.js"
 		}
