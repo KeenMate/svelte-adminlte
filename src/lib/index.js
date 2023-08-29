@@ -107,6 +107,7 @@ export {default as ModalCloseButton} from "./ui/ModalCloseButton.svelte"
 export {default as Pagination} from "./ui/Pagination.svelte"
 export {default as DraggableContainer} from "./ui/DraggableContainer.svelte"
 export {default as ProgressBar} from "./ui/ProgressBar.svelte"
+export {default as TippyTooltip} from "./ui/TippyTooltip.svelte"
 
 /* [6.1] UI > Context menu */
 export {default as ContextMenu} from "./ui/context-menu/ContextMenu.svelte"

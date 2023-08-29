@@ -9,6 +9,11 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
+		},
+		"./actions": {
+			
+			"types": "./dist/actions/index.d.ts",
+			"default": "./dist/actions/index.js"
 		}
 	},
 	"files": [
@@ -33,7 +38,7 @@
 		"@sveltejs/package": "^2.0.2",
 		"@types/inputmask": "^5.0.3",
 		"admin-lte": "=3.0.5",
-		"bootstrap": "^4.6.2",
+		"bootstrap": "^4.4.1",
 		"CBuffer": "^2.2.0",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
@@ -49,6 +54,7 @@
 		"svelte-i18n": "^3.7.0",
 		"svelte-preprocess": "^4.6.9",
 		"svelte2tsx": "^0.5.13",
+		"tippy.js": "^6.3.7",
 		"typescript": "^4.7.4",
 		"vite": "^4.0.0"
 	},
