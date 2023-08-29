@@ -25,6 +25,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "svelte-package",
+		"prepublishOnly": "npm run package",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. ."
