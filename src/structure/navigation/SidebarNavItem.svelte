@@ -8,11 +8,11 @@
 
 <li class="nav-item" data-toggle="tooltip" data-placement="right" title={tooltip}>
 	<a class="nav-link" class:active {href} {target} {...$$restProps}>
-		<slot name="icon">
-			{#if icon}
-				<i class="nav-icon {icon}" />
-			{/if}
-		</slot>
+		{#if icon}
+			<i class="nav-icon {icon}" />
+		{:else}
+			<slot name="icon" />
+		{/if}
 		
 		<slot />
 	</a>
