@@ -4,9 +4,9 @@
 	export let action
 	export let enabledWhenLoading = false
 
-	export let iconClass
-	export let disabled
-	export let loading
+	export let iconClass = null
+	export let disabled = false
+	export let loading = false
 	
 	$: computedDisabled = disabled
 		|| enabledWhenLoading ? false : loading
