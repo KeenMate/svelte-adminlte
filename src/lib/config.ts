@@ -18,11 +18,12 @@ const defaultConfig = {
 	},
 	currentUser: emptyUser()
 }
-type defaultUserType = {
-	permissions: string[]
+type DefaultUserType = {
+	permissions: string[],
+	roles: string[]
 }
 
-function emptyUser(): Writable<null | defaultUserType> {
+function emptyUser(): Writable<DefaultUserType | null> {
 	return writable(null)
 }
 

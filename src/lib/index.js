@@ -54,6 +54,7 @@ export {default as PageHeader} from "./structure/PageHeader.svelte"
 export {default as FlexContainer} from "./structure/FlexContainer.svelte"
 export {default as WithLazyLoader} from "./structure/WithLazyLoader.svelte"
 export {default as WithPermissions} from "./structure/WithPermissions.svelte"
+export {default as WithRoles} from "./structure/WithRoles.svelte"
 
 /* [4.1] Structure > Navigation */
 export {default as BrandNavLogo} from "./structure/navigation/BrandNavLogo.svelte"

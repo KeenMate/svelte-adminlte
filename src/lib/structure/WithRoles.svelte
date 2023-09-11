@@ -8,7 +8,7 @@
 	$: sanitizedPermission = ((typeof permission === "string" && [permission]) ||
 		permission) as string[]
 
-	$: isVisible = config.permissionCheck($currentUser?.permissions, {
+	$: isVisible = config.permissionCheck($currentUser?.roles, {
 		[comparison]: sanitizedPermission
 	})
 </script>
