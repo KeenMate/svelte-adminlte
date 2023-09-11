@@ -2,7 +2,7 @@ import {lazyLoader} from "@keenmate/js-common-helpers/constatns/defaults"
 import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
 import {writable, type Writable} from "svelte/store"
 
-const defaultConfig = {
+const currentConfig = {
 	ToastrOptions: {
 		closeButton: false,
 		debug: false,
@@ -42,12 +42,10 @@ function emptyUser(): Writable<DefaultUserType | null> {
 	return writable(null)
 }
 
-export type config = typeof defaultConfig
+export type config = typeof currentConfig
 
-let currentConfig = defaultConfig
-
-export function setConfig(config: object) {
-	currentConfig = {...currentConfig, ...config}
+export function setConfig(partialConfig: Partial<config>) {
+	Object.assign(currentConfig, partialConfig)
 }
 
 export function getConfig() {
