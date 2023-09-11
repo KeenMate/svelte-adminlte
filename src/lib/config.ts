@@ -3,8 +3,23 @@ import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
 import {writable, type Writable} from "svelte/store"
 
 const defaultConfig = {
-	ToastTimeOut: 3000,
-	ToastExtendedTimeOut: 1000,
+	ToastrOptions: {
+		closeButton: false,
+		debug: false,
+		newestOnTop: false,
+		progressBar: false,
+		positionClass: "toast-bottom-right",
+		preventDuplicates: false,
+		onclick: undefined,
+		showDuration: 300,
+		hideDuration: 1000,
+		timeOut: 3000,
+		extendedTimeOut: 1000,
+		showEasing: "swing",
+		hideEasing: "linear",
+		showMethod: "fadeIn",
+		hideMethod: "fadeOut"
+	},
 	DateFormat: "D",
 	DateTimeFormat: "f",
 	TimeFormat: "t",
