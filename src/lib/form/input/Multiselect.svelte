@@ -2,7 +2,7 @@
 	import {createEventDispatcher, onMount} from "svelte"
 	import jQuery from "jquery"
 	import {debounce} from "lodash"
-	import {getConfig} from "../../config,js"
+	import {Config} from "$lib/config.js"
 
 	export let value = null
 	export let placeholder = ""
@@ -11,14 +11,13 @@
 	export let select2Options = null
 
 	const dispatch = createEventDispatcher()
-	const {TypingDebounceDelay} = getConfig()
 
 	let selectElement = null
 	let select$ = null
-	let searchDebounce = debounce(x => {
-		dispatch("search", x)
-	}, TypingDebounceDelay)
-
+	
+  $: searchDebounce = debounce(x => {
+      dispatch("search", x)
+  }, $Config.TypingDebounceDelay)
 	$: jQuery(selectElement).val(value).trigger("change")
 	$: select$?.select2({disabled: readonly && "readonly"})
 

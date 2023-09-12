@@ -1,15 +1,15 @@
 <script lang="ts">
-	import {getConfig} from "$lib/config.js"
+	import {Config} from "$lib/config.js"
 
-	const {permissions: config, currentUser} = getConfig()
 	export let permission: string[] | string
-	export let comparison = config.defaultComparison
+	export let comparison: string | null = null
 
+	$: currentUser = $Config.currentUser
 	$: sanitizedPermission = ((typeof permission === "string" && [permission]) ||
 		permission) as string[]
 
-	$: isVisible = config.permissionCheck($currentUser?.permissions, {
-		[comparison]: sanitizedPermission
+	$: isVisible = $Config.permissions.permissionCheck(currentUser?.permissions, {
+		[comparison || $Config.permissions.defaultComparison]: sanitizedPermission
 	})
 </script>
 

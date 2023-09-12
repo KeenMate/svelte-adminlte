@@ -1,8 +1,9 @@
 import toastr from "toastr"
-import {getConfig} from "../config.js"
+import {Config} from "$lib/config.js"
 
-let config = getConfig()
-
-toastr.options = config.ToastrOptions
+Config.subscribe(config => {
+    console.log("Using toastr options from config")
+    toastr.options = config.ToastrOptions
+})
 
 export default toastr

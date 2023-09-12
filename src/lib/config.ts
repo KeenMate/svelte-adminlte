@@ -2,7 +2,7 @@ import {lazyLoader} from "@keenmate/js-common-helpers/constatns/defaults"
 import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
 import {writable, type Writable} from "svelte/store"
 
-const currentConfig = {
+export const Config = writable({
 	ToastrOptions: {
 		closeButton: false,
 		debug: false,
@@ -31,23 +31,7 @@ const currentConfig = {
 		defaultComparison: "any",
 		permissionCheck: checkPermissions
 	},
-	currentUser: emptyUser()
-}
-type DefaultUserType = {
-	permissions: string[],
-	roles: string[]
-}
+	currentUser: null
+})
 
-function emptyUser(): Writable<DefaultUserType | null> {
-	return writable(null)
-}
-
-export type config = typeof currentConfig
-
-export function setConfig(partialConfig: Partial<config>) {
-	Object.assign(currentConfig, partialConfig)
-}
-
-export function getConfig() {
-	return currentConfig
-}
+export type config = typeof Config

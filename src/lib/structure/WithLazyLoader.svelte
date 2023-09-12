@@ -4,7 +4,7 @@
 	import lazyLoader from "@keenmate/js-common-helpers/helpers/lazy-loader"
 	import {emptyPromise} from "@keenmate/js-common-helpers/helpers/promise"
 	import {CardLoadingContext, type contextType} from "./Card.svelte"
-	import {getConfig} from "$lib/config.js"
+	import {Config} from "$lib/config.js"
 	import Loader from "$lib/ui/Loader.svelte"
 	type TData = $$Generic
 
@@ -16,9 +16,7 @@
 	}
 
 	const context: contextType = getContext(CardLoadingContext)
-
-	const {lazyLoader: config} = getConfig()
-
+	
 	export let task: Promise<TData>
 	export let loading = false
 	export let parentLoading = false
@@ -28,7 +26,7 @@
 	let lazyTask: Promise<TData>
 
 	$: lazyTask =
-		(task && lazyLoader<TData>(task, showLoader, hideLoader, config)) ||
+		(task && lazyLoader<TData>(task, showLoader, hideLoader, $Config.lazyLoader)) ||
 		(emptyPromise as Promise<TData>)
 	$: lazyTask?.then(x => {
 		oldData = x as TData
