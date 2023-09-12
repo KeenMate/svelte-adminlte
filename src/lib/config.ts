@@ -1,4 +1,4 @@
-import {lazyLoader} from "@keenmate/js-common-helpers/constatns/defaults"
+import {lazyLoader} from "@keenmate/js-common-helpers/constants/defaults"
 import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
 import {writable, type Writable} from "svelte/store"
 
