@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
 	import LteButton from "./LteButton.svelte";
 
-	export let action
+	export let action: ((p: void) => Promise<any>)
 	export let enabledWhenLoading = false
 
-	export let iconClass = null
-	export let disabled = false
-	export let loading = false
+	export let iconClass: string | null = null
+	export let disabled: boolean = false
+	export let loading: boolean = false
 	
 	$: computedDisabled = disabled
-		|| enabledWhenLoading ? false : loading
+		|| (enabledWhenLoading ? false : loading)
 
 	async function onClick(ev) {
 		if (!action)
