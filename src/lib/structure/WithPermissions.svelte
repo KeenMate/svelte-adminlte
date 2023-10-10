@@ -15,4 +15,6 @@
 
 {#if isVisible}
 	<slot />
+{:else}
+	<slot name="else" />
 {/if}
