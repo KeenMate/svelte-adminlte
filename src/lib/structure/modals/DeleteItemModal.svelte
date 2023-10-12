@@ -40,7 +40,7 @@
 	}
 </script>
 
-<Modal bind:jModalElement bind:show bind:hide>
+<Modal bind:jModalElement bind:show bind:hide {...$$restProps}>
 	<svelte:fragment slot="header">
 		{$_("common.labels.deleteConfirmation")}
 	</svelte:fragment>
