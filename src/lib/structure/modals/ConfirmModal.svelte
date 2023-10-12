@@ -29,13 +29,19 @@
 
 	let resolveModal
 
-	$: jModalElement && jModalElement.off("hidden.bs.modal", doReject)
-	$: jModalElement && jModalElement.on("hidden.bs.modal", doReject)
+  $: jModalElement && jModalElement.off("hidden.bs.modal", onModalHidden)
+  $: jModalElement && jModalElement.on("hidden.bs.modal", onModalHidden)
+
+  function onModalHidden() {
+		dispatch("hidden")
+
+		doReject()
+  }
 
 	function doReject() {
 		resolveModal(false)
 		hide()
-	}
+  }
 
 	function doConfirm() {
 		resolveModal(true)
