@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
 	export let id = ""
@@ -6,19 +6,21 @@
 	export let name = ""
 	export let multiple = false
 	export let placeholder = ""
-	export let pattern = null
+	export let pattern: string | null | undefined = null
 	export let readonly = false
+	export let accept: string | null | undefined = null
 
 	const dispatch = createEventDispatcher()
 
-	let inputElement = null
+	let inputElement: HTMLInputElement | null = null
 
 	export function isValid() {
-		return inputElement.validity.valid
+		return inputElement?.validity.valid
 	}
 
-	function onInput(ev) {
-		const files = ev.target.files
+	type inputEvent = Event & {currentTarget: EventTarget & HTMLInputElement}
+	function onInput(ev: inputEvent) {
+		const files = inputElement?.files
 
 		dispatch("input", (!multiple && files && files[0]) || files)
 	}
@@ -34,6 +36,7 @@
 		{pattern}
 		{placeholder}
 		{readonly}
+		{accept}
 		type="file"
 		class="custom-file-input {$$props.class || ''}"
 		on:input={onInput}
