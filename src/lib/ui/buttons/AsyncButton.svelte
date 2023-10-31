@@ -1,19 +1,24 @@
 <script lang="ts">
-	import LteButton from "./LteButton.svelte";
+	import {createEventDispatcher} from "svelte"
+	import LteButton from "./LteButton.svelte"
+	
+	const dispatch = createEventDispatcher()
 
-	export let action: ((p: void) => Promise<any>)
+	export let action: ((p: void) => Promise<any>) | null
 	export let enabledWhenLoading = false
 
 	export let iconClass: string | null = null
 	export let disabled: boolean = false
 	export let loading: boolean = false
-	
+
 	$: computedDisabled = disabled
 		|| (enabledWhenLoading ? false : loading)
 
-	async function onClick(ev) {
-		if (!action)
+	async function onClick(ev: MouseEvent) {
+		if (!action) {
+			dispatch("click", ev)
 			return
+		}
 
 		try {
 			loading = true
@@ -31,5 +36,5 @@
 		<i class="{iconClass} fa-fw"></i>
 	{/if}
 
-	<slot />
+	<slot/>
 </LteButton>
