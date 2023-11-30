@@ -1,6 +1,6 @@
 <li
 	{...$$restProps}
-  class="nav-item dropdown {$$restProps.class || ''}"
+	class="nav-item dropdown {$$restProps.class || ''}"
 >
 	<slot />
 </li>

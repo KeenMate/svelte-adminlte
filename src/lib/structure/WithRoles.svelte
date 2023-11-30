@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {Config} from "$lib/config.js"
-	
+
 	export let permission: string[] | string
 	export let comparison: string | null = null
 
