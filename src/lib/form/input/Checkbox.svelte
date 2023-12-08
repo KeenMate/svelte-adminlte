@@ -8,7 +8,7 @@
 	export let level = "primary"
 </script>
 
-<label class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
+<div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
 	<input
 		type="checkbox"
 		bind:checked
@@ -22,8 +22,10 @@
 		on:focusin
 		on:focusout
 	/>
-	<slot />
-</label>
+	<label for={id}>
+		<slot />
+	</label>
+</div>
 
 <style lang="scss">
 	label {
