@@ -1,21 +1,25 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
+		"module": "ES6",
+		"moduleResolution": "Node",
+		"target": "ES6",
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"paths": {
-			"$lib": [
-				"src/lib"
-			],
-			"$lib/*": [
-				"src/lib/*"
-			]
-		}
+		"skipLibCheck": true,
+		"declaration": true,
+//		"paths": {
+//			"$lib": [
+//				"./src/lib"
+//			],
+//			"$lib/*": [
+//				"./src/lib/*"
+//			]
+//		}
 	}
 }

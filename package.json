@@ -31,7 +31,7 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
-		"@keenmate/js-common-helpers": "^0.2.1",
+		"@keenmate/js-common-helpers": "^0.4.5",
 		"@keenmate/svelte-common-helpers": "^0.1.9",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-static": "^1.0.0-next.50",
@@ -56,7 +56,7 @@
 		"svelte-preprocess": "^4.6.9",
 		"svelte2tsx": "^0.5.13",
 		"tippy.js": "^6.3.7",
-		"typescript": "^4.7.4",
+		"typescript": "^4.5.5",
 		"vite": "^4.5.1"
 	},
 	"type": "module"

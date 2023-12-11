@@ -1,6 +1,8 @@
-import {lazyLoader} from "@keenmate/js-common-helpers/constants/defaults"
-import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions"
-import {writable, type Writable} from "svelte/store"
+import {lazyLoader} from "@keenmate/js-common-helpers/constants/defaults.js"
+import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions.js"
+import type {Requirements} from "@keenmate/js-common-helpers/helpers/permissions.ts"
+import {writable} from "svelte/store"
+import type {IPermissionsUser} from "@keenmate/js-common-helpers/helpers/permissions.js"
 
 export const Config = writable({
 	ToastrOptions: {
@@ -29,7 +31,13 @@ export const Config = writable({
 	lazyLoader: lazyLoader,
 	permissions: {
 		defaultComparison: "any",
-		permissionCheck: checkPermissions
+		checkPermissions(user: IPermissionsUser, requiredPermissions?: Requirements) {
+			return checkPermissions(user.permissions, requiredPermissions)
+		},
+		checkRoles(user: IPermissionsUser, requiredPermissions?: Requirements) {
+			return checkPermissions(user.roles, requiredPermissions)
+		}
+		// permissionCheck: checkPermissions
 	},
 	currentUser: null
 })
