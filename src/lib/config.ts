@@ -1,8 +1,6 @@
 import {lazyLoader} from "@keenmate/js-common-helpers/constants/defaults.js"
-import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions.js"
-import type {Requirements} from "@keenmate/js-common-helpers/helpers/permissions.ts"
+import {checkPermissions, Requirements, IPermissionsUser} from "@keenmate/js-common-helpers/helpers/permissions.js"
 import {writable} from "svelte/store"
-import type {IPermissionsUser} from "@keenmate/js-common-helpers/helpers/permissions.js"
 
 export const Config = writable({
 	ToastrOptions: {
