@@ -5,9 +5,6 @@
 	export let value = ""
 	export let name = ""
 	export let placeholder = ""
-	/**
-	 * @type {string?}
-	 */
 	export let pattern: string | null = null
 	export let readonly = false
 	export let plaintext = false

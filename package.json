@@ -31,17 +31,15 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
-		"@keenmate/js-common-helpers": "^0.4.5",
+		"@keenmate/js-common-helpers": "^1.0.0",
 		"@keenmate/svelte-common-helpers": "^0.1.9",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/adapter-static": "^1.0.0-next.50",
 		"@sveltejs/kit": "^1.27.7",
 		"@sveltejs/package": "^2.0.2",
-		"@types/inputmask": "^5.0.3",
 		"admin-lte": "=3.0.5",
 		"bootstrap": "^4.4.1",
 		"CBuffer": "^2.2.0",
-		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"icheck-bootstrap": "^3.0.1",
@@ -54,10 +52,17 @@
 		"svelte": "^3.58.0",
 		"svelte-i18n": "^3.7.0",
 		"svelte-preprocess": "^4.6.9",
-		"svelte2tsx": "^0.5.13",
 		"tippy.js": "^6.3.7",
-		"typescript": "^5.1.6",
+		"typescript": "^4.9.5",
 		"vite": "^4.5.1"
 	},
-	"type": "module"
+	"type": "module",
+	"devDependencies": {
+		"@types/inputmask": "^5.0.3",
+		"@types/toastr": "^2.1.43",
+		"@typescript-eslint/eslint-plugin": "^6.14.0",
+		"@typescript-eslint/parser": "^6.14.0",
+		"eslint": "^8.55.0",
+		"eslint-plugin-svelte": "^2.35.1"
+	}
 }

@@ -121,5 +121,5 @@ export {default as Chat} from "./ui/chat/Chat.svelte"
 export {default as ChatMessage} from "./ui/chat/ChatMessage.svelte"
 
 /* [7] Toasts */
-export {default as Toastr} from "./toasts/toastr"
-export {default as NotificationProvider, NotificationType} from "./toasts/notification-provider"
+export {default as Toastr} from "./toasts/toastr.js"
+export {default as NotificationProvider, NotificationType} from "./toasts/notification-provider.js"
