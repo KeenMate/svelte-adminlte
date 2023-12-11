@@ -4,11 +4,10 @@
 	export let permission: string[] | string
 	export let comparison: string | null = null
 
-	$: currentUser = $Config.currentUser
 	$: sanitizedPermission = ((typeof permission === "string" && [permission]) ||
 		permission) as string[]
 
-	$: isVisible = $Config.permissions.checkPermissions(currentUser?.permissions, {
+	$: isVisible = $Config.permissions.checkPermissions($Config.currentUser, {
 		[comparison || $Config.permissions.defaultComparison]: sanitizedPermission
 	})
 </script>
