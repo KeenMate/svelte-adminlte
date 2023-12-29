@@ -13,7 +13,7 @@
 </script>
 
 <!-- <li class="dropdown user user-menu">
-	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
 		<span class="hidden-sm hidden-xs">{displayName}</span>
 		<span class="visible-sm visible-xs">
 			<i class="fas fa-user"></i>
@@ -42,7 +42,7 @@
 <!-- Menu Footer-->
 <!-- <li class="user-footer">
 			<div class="pull-left">
-				<a href="#" class="btn btn-default btn-flat">
+				<a href="javascript:void(0)" class="btn btn-default btn-flat">
 					{displayName}
 				</a>
 			</div>
@@ -55,14 +55,18 @@
 
 <!-- Messages Dropdown Menu -->
 <li class="nav-item dropdown">
-	<a class="nav-link" data-toggle="dropdown" href="#">
+	<!-- svelte-ignore a11y-invalid-attribute -->
+	<!-- eslint-disable-next-line -->
+	<a class="nav-link" data-toggle="dropdown" href="javascript:void(0)">
 		<span class="d-none d-md-inline">{displayName}</span>
 		<span class="d-inline d-md-none">
 			<i class="fas fa-user" />
 		</span>
 	</a>
 	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-		<a class="dropdown-item" href="#">
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
 			<div class="media">
 				<img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
@@ -78,7 +82,9 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider" />
-		<a class="dropdown-item" href="#">
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
 			<div class="media">
 				<img alt="User Avatar" class="img-size-50 img-circle mr-3" src="" />
@@ -94,7 +100,9 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider" />
-		<a class="dropdown-item" href="#">
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
 			<div class="media">
 				<img alt="User Avatar" class="img-size-50 img-circle mr-3" src="" />
@@ -110,7 +118,9 @@
 			<!-- Message End -->
 		</a>
 		<div class="dropdown-divider" />
-		<a class="dropdown-item dropdown-footer" href="#">See All Messages</a>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="dropdown-item dropdown-footer" href="javascript:void(0)">See All Messages</a>
 	</div>
 </li>
 

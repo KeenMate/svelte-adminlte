@@ -40,7 +40,7 @@
 		"admin-lte": "=3.0.5",
 		"bootstrap": "^4.4.1",
 		"CBuffer": "^2.2.0",
-		"eslint-config-prettier": "^8.3.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"icheck-bootstrap": "^3.0.1",
 		"inputmask": "^5.0.8",
@@ -60,9 +60,9 @@
 	"devDependencies": {
 		"@types/inputmask": "^5.0.3",
 		"@types/toastr": "^2.1.43",
-		"@typescript-eslint/eslint-plugin": "^6.14.0",
-		"@typescript-eslint/parser": "^6.14.0",
-		"eslint": "^8.55.0",
+		"@typescript-eslint/eslint-plugin": "^6.16.0",
+		"@typescript-eslint/parser": "^6.16.0",
+		"eslint": "^8.56.0",
 		"eslint-plugin-svelte": "^2.35.1"
 	}
 }

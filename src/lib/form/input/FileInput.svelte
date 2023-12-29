@@ -18,9 +18,9 @@
 		return inputElement?.validity.valid
 	}
 
-	type inputEvent = Event & {currentTarget: EventTarget & HTMLInputElement}
-	function onInput(ev: inputEvent) {
-		const files = inputElement?.files
+	type InputEvent = Event & {currentTarget: EventTarget & HTMLInputElement}
+	function onInput(ev: InputEvent) {
+		const files = (ev.target as HTMLInputElement)?.files
 
 		dispatch("input", (!multiple && files && files[0]) || files)
 	}

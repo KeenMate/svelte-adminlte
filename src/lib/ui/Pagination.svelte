@@ -47,22 +47,30 @@
 
 <ul class="pagination {$$props.class || ''}">
 	<li class="page-item">
-		<a class="page-link" href="#" on:click|preventDefault={() => onStepFromPage(-10)}>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(-10)}>
 			<i class="fas fa-angle-double-left" />
 		</a>
 	</li>
 	<li class="page-item">
-		<a class="page-link" href="#" on:click|preventDefault={() => onStepFromPage(-1)}>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(-1)}>
 			<i class="fas fa-chevron-left" />
 		</a>
 	</li>
 
 	{#if showEllipsis && visiblePages[0] > 1}
 		<li class="page-item">
-			<a href="#" class="page-link" on:click|preventDefault={() => updateCurrentPage(1)}> 1 </a>
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- eslint-disable-next-line -->
+			<a href="javascript:void(0)" class="page-link" on:click|preventDefault={() => updateCurrentPage(1)}> 1 </a>
 		</li>
 		<li class="page-item disabled">
-			<a href="#" class="page-link"> &hellip; </a>
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- eslint-disable-next-line -->
+			<a href="javascript:void(0)" class="page-link"> &hellip; </a>
 		</li>
 	{/if}
 
@@ -72,7 +80,9 @@
 			class:active={visiblePage === page}
 			on:click|preventDefault={() => updateCurrentPage(visiblePage)}
 		>
-			<a href="#" class="page-link">
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- eslint-disable-next-line -->
+			<a href="javascript:void(0)" class="page-link">
 				{visiblePage}
 			</a>
 		</li>
@@ -80,22 +90,30 @@
 
 	{#if showEllipsis && visiblePages[visiblePages.length - 1] < pages}
 		<li class="page-item disabled">
-			<a href="#" class="page-link"> &hellip; </a>
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- eslint-disable-next-line -->
+			<a href="javascript:void(0)" class="page-link"> &hellip; </a>
 		</li>
 		<li class="page-item">
-			<a href="#" class="page-link" on:click|preventDefault={() => updateCurrentPage(pages)}>
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- eslint-disable-next-line -->
+			<a href="javascript:void(0)" class="page-link" on:click|preventDefault={() => updateCurrentPage(pages)}>
 				{pages}
 			</a>
 		</li>
 	{/if}
 
 	<li class="page-item">
-		<a class="page-link" href="#" on:click|preventDefault={() => onStepFromPage(1)}>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(1)}>
 			<i class="fas fa-chevron-right" />
 		</a>
 	</li>
 	<li class="page-item">
-		<a class="page-link" href="#" on:click|preventDefault={() => onStepFromPage(10)}>
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- eslint-disable-next-line -->
+		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(10)}>
 			<i class="fas fa-angle-double-right" />
 		</a>
 	</li>

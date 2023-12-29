@@ -15,11 +15,7 @@ module.exports = {
 			files: ["*.svelte"],
 			parser: "svelte-eslint-parser",
 			parserOptions: {
-				parser: {
-					ts: "@typescript-eslint/parser",
-					js: "svelte-eslint-parser",
-					typescript: "@typescript-eslint/parser"
-				}
+				parser: "@typescript-eslint/parser"
 			}
 		}
 	],

@@ -1,10 +1,7 @@
 <li class="nav-item">
-	<a class="nav-link" href="#" data-widget="pushmenu" role="button" on:click>
+	<!-- svelte-ignore a11y-invalid-attribute -->
+	<!-- eslint-disable-next-line -->
+	<a class="nav-link" href="javascript:void(0)" data-widget="pushmenu" role="button" on:click>
 		<i class="fas fa-bars" />
 	</a>
 </li>
-
-<style lang="sass">
-	.sidebar-toggle:before
-		content: none
-</style>

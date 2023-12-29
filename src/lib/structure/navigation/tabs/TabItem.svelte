@@ -3,6 +3,8 @@
 </script>
 
 <li class="nav-item {$$props.class || ''}" role="presentation" on:click>
+	<!-- svelte-ignore a11y-invalid-attribute -->
+	<!-- eslint-disable-next-line -->
 	<a class="nav-link" class:active href="javascript:void(0)" {...$$restProps}>
 		<slot />
 	</a>
