@@ -12,9 +12,10 @@
 <LteButton
 	color="success"
 	title={$_("common.buttons.add")}
-	xsmall={xsmall || noSizeSet}
-	{small}
+	{xsmall}
+	small={small || noSizeSet}
 	{large}
+	{...$$restProps}
 	on:click
 >
 	<i class="fas fa-plus fa-fw" />

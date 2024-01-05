@@ -4,12 +4,19 @@
 
 	export let type = "submit"
 	export let short = false
+	export let xsmall = false
+	export let small = false
+	export let large = false
+
+	$: noSizeSet = !xsmall && !small && !large
 </script>
 
 <LteButton
 	color="success"
 	{type}
-	small
+	{xsmall}
+	small={small || noSizeSet}
+	{large}
 	title={$_("common.buttons.save")}
 	{...$$restProps}
 	on:click

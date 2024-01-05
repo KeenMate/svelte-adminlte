@@ -12,9 +12,10 @@
 <LteButton
 	color="danger"
 	title={$_("common.buttons.delete")}
-	xsmall={xsmall || noSizeSet}
-	{small}
+	{xsmall}
+	small={small || noSizeSet}
 	{large}
+	{...$$restProps}
 	on:click
 >
 	<i class="fas fa-trash fa-fw" />
