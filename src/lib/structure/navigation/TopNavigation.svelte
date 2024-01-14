@@ -2,11 +2,6 @@
 	import MobileNavToggle from "./MobileNavToggle.svelte"
 
 	export let hideMobileNavToggle = false
-
-	function logout() {
-		// todo: make logout
-		// window.location.replace(LogoutPath)
-	}
 </script>
 
 <!-- Navbar -->
