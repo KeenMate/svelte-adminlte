@@ -1,0 +1,34 @@
+<script>
+	export let checked = false
+	export let indeterminate = false
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let disabled = false
+	export let level = "primary"
+</script>
+
+<div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
+	<input
+		type="checkbox"
+		bind:checked
+		bind:indeterminate
+		{id}
+		{value}
+		{name}
+		{disabled}
+		on:change
+		on:click
+		on:focusin
+		on:focusout
+	/>
+	<label for={id}>
+		<slot />
+	</label>
+</div>
+
+<style lang="scss">
+	label {
+		gap: 0.25rem;
+	}
+</style>
