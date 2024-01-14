@@ -10,9 +10,3 @@
 >
 	<i class="fas fa-bars fa-fw" />
 </TopNavItem>
-
-<style lang="scss">
-	i.fas {
-		vertical-align: unset;
-	}
-</style>
