@@ -19,11 +19,12 @@ export {default as WarningAlert} from "./alerts/WarningAlert.svelte"
 
 /* [2.1] Form > Input */
 export {default as Checkbox} from "./form/input/Checkbox.svelte"
+export { default as CheckboxSimple } from "./form/input/CheckboxSimple.svelte"
 export {default as DateRangePicker} from "./form/input/DateRangePicker.svelte"
 // export { default as Dropdown } from "./form/input/Dropdown.svelte";
 export {default as EmailInput} from "./form/input/EmailInput.svelte"
 export {default as FileInput} from "./form/input/FileInput.svelte"
-// export { default as Multiselect } from "./form/input/Multiselect.svelte";
+//export {default as Multiselect} from "./form/input/Multiselect.svelte"
 export {default as NumberInput} from "./form/input/NumberInput.svelte"
 export {default as Radio} from "./form/input/Radio.svelte"
 export {default as RangeInput} from "./form/input/RangeInput.svelte"

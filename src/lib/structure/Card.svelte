@@ -23,6 +23,8 @@
 	export let sharedLoading = false
 	export let title = ""
 	export let icon = ""
+	export let headerBackgroundColor = "white"
+	export let titleColor = "black"
 
 	if (sharedLoading)
 		setContext(CardLoadingContext, {
@@ -39,19 +41,24 @@
 	class:card-tabs={tabs}
 >
 	{#if $$slots.header || $$slots.tools || $$slots.fullHeader || title !== "" || icon !== ""}
-		<div class="card-header {$$props.headerClass || ''}">
+		<div
+			class="card-header {$$props.headerClass || ''}"
+			style="background-color:{headerBackgroundColor};"
+		>
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
 				<h3 class="card-title">
-					{#if icon !== "" && !$$slots.header}
-						<i class={icon} />
-					{/if}
-					{#if title !== "" && !$$slots.header}
-						{title}
-					{:else}
-						<slot name="header" />
-					{/if}
+					<div style="color:{titleColor};">
+						{#if icon !== "" && !$$slots.header}
+							<i class={icon} />
+						{/if}
+						{#if title !== "" && !$$slots.header}
+							{title}
+						{:else}
+							<slot name="header" />
+						{/if}
+					</div>
 				</h3>
 
 				<div class="card-tools pull-right">
