@@ -23,6 +23,7 @@
 	import {Textarea} from "$lib/index"
 	import {Radio} from "$lib/index"
 	import {CheckboxSimple} from "$lib/index"
+	import {RadioSimple} from "$lib/index"
 </script>
 
 <Sidebar>
@@ -298,16 +299,13 @@
 							<div class="col-sm-6">
 								<FormGroup>
 									<div class="form-check">
-										<Checkbox>Checkbox</Checkbox>
-									</div>
-									<!-- <div class="form-check">
-										<Checkbox checked="true">Checkbox checked</Checkbox>
-									</div> -->
-									<div class="form-check">
-										<Checkbox checked="true">Checkbox checked</Checkbox>
+										<CheckboxSimple>Checkbox</CheckboxSimple>
 									</div>
 									<div class="form-check">
-										<Checkbox disabled="true">Checkbox disabled</Checkbox>
+										<CheckboxSimple checked="true">Checkbox checked</CheckboxSimple>
+									</div>
+									<div class="form-check">
+										<CheckboxSimple disabled="true">Checkbox disabled</CheckboxSimple>
 									</div>
 								</FormGroup>
 							</div>
@@ -315,28 +313,40 @@
 							<div class="col-sm-6">
 								<FormGroup>
 									<div class="form-check">
-										<Radio
+										<!-- <Radio
 											group="x"
 											name="abc"
 											id="abc">Radio</Radio
+										> -->
+										<RadioSimple
+											group="x"
+											name="abc"
+											id="abc"
 										>
+											<label for="abc">Radio</label>
+										</RadioSimple>
 									</div>
 
 									<div class="form-check">
-										<Radio
+										<RadioSimple
 											group="x"
 											name="aabc"
-											id="aabc">Radio selected</Radio
+											id="aabc"
+											selected=true
 										>
+											<label for="aabc">Radio selected</label>
+										</RadioSimple>
 									</div>
 
 									<div class="form-check">
-										<Radio
+										<RadioSimple
 											group="x"
-											name="abcc"
-											disabled="true"
-											id="aaabc"><label for="aaabc">Radio disabled</label></Radio
+											name="aaabc"
+											id="aaabc"
+											disabled=true
 										>
+											<label for="aaabc">Radio disabled</label>
+										</RadioSimple>
 									</div>
 								</FormGroup>
 							</div>
