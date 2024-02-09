@@ -2,7 +2,7 @@ import CBuffer from "CBuffer"
 import {type Writable, writable} from "svelte/store"
 import {DateTime} from "luxon"
 
-import Toastr from "./toastr"
+import Toastr from "./toastr.js"
 
 const MessageCount = 500
 
@@ -14,14 +14,14 @@ export const NotificationType = {
 
 type message = {
 	type: string
-	messsage: string
+	message: string
 	title: string | undefined
 	timestamp: DateTime
 }
 
 class NotificationProvider {
 	buffer: CBuffer<message>
-	messages: Writable<any[]>
+	messages: Writable<message[]>
 
 	constructor() {
 		this.buffer = new CBuffer<message>(MessageCount)
@@ -29,8 +29,6 @@ class NotificationProvider {
 	}
 
 	#saveMessage(type: string, message: string, title: string) {
-		// @ts-ignore
-		//buffer has wrong
 		this.buffer.push({type, message, title, timestamp: DateTime.now()})
 		this.messages.set(this.buffer.toArray())
 	}
