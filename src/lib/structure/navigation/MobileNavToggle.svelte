@@ -1,5 +1,5 @@
 <script>
-	import {TopNavItem} from "$lib/index.js"
+	import {TopNavItem} from "$lib/index.ts"
 </script>
 
 <TopNavItem 

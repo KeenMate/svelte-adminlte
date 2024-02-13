@@ -25,8 +25,6 @@
 	//@ts-ignore
 	$: inputMask && inputElement && Inputmask().mask(inputElement)
 </script>
-<!-- is-invalid; is-valid; is-warning -->
-<!-- validity: none, valid, invalid, warning -->
 <input
 	bind:this={inputElement}
 	bind:value

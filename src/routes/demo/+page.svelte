@@ -24,6 +24,17 @@
 	import {Radio} from "$lib/index"
 	import {CheckboxSimple} from "$lib/index"
 	import {RadioSimple} from "$lib/index"
+	import {Select} from "$lib/index"
+
+	const options = [
+		{value: "option1", label: "Option 1"},
+		{value: "option2", label: "Option 2"},
+		{value: "option3", label: "Option 3"}
+	]
+	let selectedValue = ""
+	function handleSelectChange(event) {
+		selectedValue = event.detail.value
+	}
 </script>
 
 <Sidebar>
@@ -332,7 +343,7 @@
 											group="x"
 											name="aabc"
 											id="aabc"
-											selected=true
+											selected="true"
 										>
 											<label for="aabc">Radio selected</label>
 										</RadioSimple>
@@ -343,7 +354,7 @@
 											group="x"
 											name="aaabc"
 											id="aaabc"
-											disabled=true
+											disabled="true"
 										>
 											<label for="aaabc">Radio disabled</label>
 										</RadioSimple>
@@ -356,22 +367,24 @@
 							<div class="col-sm-6">
 								<FormGroup>
 									<Label>Select</Label>
-									<select class="custom-select">
-										<option>Option 1</option>
-										<option>Option 2</option>
-									</select>
+									<Select
+										bind:value={selectedValue}
+										{options}
+										on:change={handleSelectChange}
+										searchBar
+									/>
 								</FormGroup>
 							</div>
 							<div class="col-sm-6">
 								<FormGroup>
-									<Label>Select</Label>
-									<select
+									<Label>Select Disabled</Label>
+									<Select
+										bind:value={selectedValue}
+										{options}
+										on:change={handleSelectChange}
 										disabled
-										class="custom-select"
-									>
-										<option>Option 1</option>
-										<option>Option 2</option>
-									</select>
+									
+									/>
 								</FormGroup>
 							</div>
 						</div>

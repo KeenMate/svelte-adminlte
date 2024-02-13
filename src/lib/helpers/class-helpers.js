@@ -12,3 +12,4 @@ export function getValidityClass(validity) {
 			return "";
 	}
 }
+
