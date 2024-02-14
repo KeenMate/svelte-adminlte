@@ -1,14 +1,10 @@
 <script lang="ts">
-	import {getValidityClass} from "../../helpers/class-helpers.js"
+	import {getValidityClass} from "../../helpers/class-helpers.ts"
+	import {Validity} from "../../helpers/class-helpers.ts"
 	import {TextInput} from "$lib/index.ts"
 
 	type Option = {[key: string]: any}
-	enum Validity {
-		None = "none",
-		Invalid = "invalid",
-		Warning = "warning",
-		Valid = "valid"
-	}
+	
 
 	export let id: string = ""
 	export let value: string = ""

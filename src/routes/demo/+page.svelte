@@ -393,29 +393,24 @@
 							<div class="col-sm-6">
 								<FormGroup>
 									<Label>Select Multiple</Label>
-									<select
+									<Select
+										{options}
+										on:change={handleSelectChange}
 										multiple
-										class="form-control"
-									>
-										<option>Option 1</option>
-										<option>Option 2</option>
-										<option>Option 3</option>
-									</select>
+									
+									/>
 								</FormGroup>
 							</div>
 
 							<div class="col-sm-6">
 								<FormGroup>
 									<Label>Select Multiple Disabled</Label>
-									<select
+									<Select
+										{options}
+										on:change={handleSelectChange}
 										multiple
 										disabled
-										class="form-control"
-									>
-										<option>Option 1</option>
-										<option>Option 2</option>
-										<option>Option 3</option>
-									</select>
+									/>
 								</FormGroup>
 							</div>
 						</div>

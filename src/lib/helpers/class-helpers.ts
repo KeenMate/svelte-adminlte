@@ -1,4 +1,4 @@
-export function getValidityClass(validity) {
+export function getValidityClass(validity:string) {
 	switch (validity) {
 		case "none":
 			return "";
@@ -12,4 +12,9 @@ export function getValidityClass(validity) {
 			return "";
 	}
 }
-
+export enum Validity {
+	None = "none",
+	Invalid = "invalid",
+	Warning = "warning",
+	Valid = "valid"
+}
