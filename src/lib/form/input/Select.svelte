@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {getValidityClass} from "../../helpers/class-helpers.ts"
-	import {Validity} from "../../helpers/class-helpers.ts"
+	import {Validity} from "../../types/global.d.ts"
 	import {TextInput} from "$lib/index.ts"
 
 	type Option = {[key: string]: any}
@@ -39,19 +39,12 @@
 	$: if (!value && filteredOptions.length > 0) {
 		value = filteredOptions[0][trackBy]
 	}
-
-	function handleTypeaheadInput(event: Event) {
-		if (event.target) {
-			typeaheadInput = (event.target as HTMLInputElement).value
-		}
-	}
 </script>
 
 {#if searchBar}
 	<div>
 		<TextInput
 			bind:value={typeaheadInput}
-			on:input={handleTypeaheadInput}
 		/>
 	</div>
 {/if}

@@ -12,9 +12,3 @@ export function getValidityClass(validity:string) {
 			return "";
 	}
 }
-export enum Validity {
-	None = "none",
-	Invalid = "invalid",
-	Warning = "warning",
-	Valid = "valid"
-}
