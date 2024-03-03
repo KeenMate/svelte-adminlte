@@ -4,3 +4,10 @@ export enum Validity {
     Warning = "warning",
     Valid = "valid"
 }
+
+export enum Shadow {
+    None = "none",
+    Small = "small",
+    Regular = "regular",
+    Large = "large"
+}

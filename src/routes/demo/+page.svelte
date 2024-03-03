@@ -29,12 +29,9 @@
 	const options = [
 		{value: "option1", label: "Option 1"},
 		{value: "option2", label: "Option 2"},
-		{value: "option3", label: "Option 3"}
+		{value: "aption3", label: "Aption 3"}
 	]
 	let selectedValue = ""
-	function handleSelectChange(event) {
-		selectedValue = event.detail.value
-	}
 </script>
 
 <Sidebar>
@@ -368,15 +365,15 @@
 								<FormGroup>
 									<Label>Select</Label>
 									<Select
-										bind:value={selectedValue}
+										bind:this={selectedValue}
 										{options}
-										on:change={handleSelectChange}
+										on:change
 										searchBar
 									/>
 								</FormGroup>
 							</div>
 							<div class="col-sm-6">
-								<FormGroup>
+								<!-- <FormGroup>
 									<Label>Select Disabled</Label>
 									<Select
 										bind:value={selectedValue}
@@ -385,7 +382,7 @@
 										disabled
 									
 									/>
-								</FormGroup>
+								</FormGroup> -->
 							</div>
 						</div>
 
@@ -395,7 +392,6 @@
 									<Label>Select Multiple</Label>
 									<Select
 										{options}
-										on:change={handleSelectChange}
 										multiple
 									
 									/>
@@ -407,7 +403,6 @@
 									<Label>Select Multiple Disabled</Label>
 									<Select
 										{options}
-										on:change={handleSelectChange}
 										multiple
 										disabled
 									/>

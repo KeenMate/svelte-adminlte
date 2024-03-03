@@ -97,7 +97,7 @@ export {default as ButtonDropdownButton} from "./ui/dropdown/ButtonDropdownButto
 export {default as ButtonDropdownItem} from "./ui/dropdown/ButtonDropdownItem.svelte"
 export {default as DropdownToggleButton} from "./ui/dropdown/DropdownToggleButton.svelte"
 export {default as Callout} from "./ui/Callout.svelte"
-export {default as InfoBox} from "./ui/InfoBox.svelte"
+export {default as InfoBox} from "./ui/infobox/InfoBox.svelte"
 export {default as Loader} from "./ui/Loader.svelte"
 export {default as LteButton} from "./ui/buttons/LteButton.svelte"
 export {default as AsyncButton} from "./ui/buttons/AsyncButton.svelte"
