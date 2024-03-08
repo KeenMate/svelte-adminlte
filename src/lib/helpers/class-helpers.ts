@@ -12,3 +12,17 @@ export function getValidityClass(validity:string) {
 			return "";
 	}
 }
+export function getBackgroundColorClass(backgroundColor: string) {
+	switch (backgroundColor) {
+		case "none":
+			return "";
+		case "danger":
+			return "bg-danger";
+		case "warning":
+			return "bg-warning";
+		case "success":
+			return "bg-success";
+		default:
+			return "";
+	}
+}

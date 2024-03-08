@@ -1,9 +1,12 @@
 <script lang="ts">
+	import {getBackgroundColorClass} from "../../helpers/class-helpers.ts"
 	import {Shadow} from "../../types/global.d.ts"
+	import {BackgroundColor} from "../../types/global.d.ts"
 
 	export let textCenter: boolean = false
 	export let text: string = ""
-	export let backgroundColor: string = ""
+	export let backgroundColorCode: string = ""
+	export let backgroundColorType: BackgroundColor = BackgroundColor.None
 	export let color: string = ""
 	export let imageBackground: string = ""
 	export let shadow: Shadow = Shadow.None
@@ -12,9 +15,9 @@
 </script>
 
 <div
-	class="info-box shadow-{shadow}"
+	class="info-box {shadow ? "shadow-"+shadow : ""} {getBackgroundColorClass(backgroundColorType)}"
 	class:small-box={smallBox}
-	style="background-color:{backgroundColor}; color:{color};"
+	style="background-color:{backgroundColorCode}; color:{color};"
 >
 	<span
 		class="info-box-icon"

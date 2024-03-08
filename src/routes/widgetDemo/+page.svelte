@@ -183,7 +183,7 @@
 		<div class="row">
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColor="rgb(23, 162, 184)"
+					backgroundColorCode="rgb(23, 162, 184)"
 					color="white"
 					text="Bookmarks"
 				>
@@ -199,7 +199,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColor="#28a745"
+					backgroundColorCode="#28a745"
 					color="white"
 					shadow="small"
 					text="Likes"
@@ -216,7 +216,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColor="#ffc107"
+					backgroundColorCode="#ffc107"
 					shadow="regular"
 					icon="far fa-calendar-alt"
 					text="Events"
@@ -226,7 +226,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColor="#dc3545"
+					backgroundColorType="danger"
 					color="white"
 					shadow="large"
 					text="Comments"
@@ -246,7 +246,7 @@
 		<div class="row">
 			<div class="col-lg-3 col-6">
 				<InfoBox
-					backgroundColor="rgb(23, 162, 184)"
+					backgroundColorCode="rgb(23, 162, 184)"
 					color="white"
 					shadow="regular"
 					icon="fas fa-shopping-cart"
