@@ -50,31 +50,39 @@
 	</div>
 </div>
 
-<style lang="sass">
-	.info-box 
+<style lang="scss">
+.info-box {
+  .info-box-content {
+    &.text-center-aligned {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90px;
+    }
+  }
 
-    .info-box-content
-      &.text-center-aligned 
-        display: flex
-        justify-content: center
-        align-items: center
-        min-height: 90px
-      
-    &.small-box 
-      .info-box-icon 
-        order: 2
-        color: rgba(0, 0, 0, 0.15)
-        font-size: 70px
-        margin-right: 16px
+  &.small-box {
+    .info-box-icon {
+      order: 2;
+      color: rgba(0, 0, 0, 0.15);
+      font-size: 70px;
+      margin-right: 16px;
+    }
 
-      .info-box-content 
-        order: 1
-	
-        .info-box-number 
-          font-size: 1.5em
-          margin-bottom: 16px
-		
-        .info-box-text
-          margin-bottom: 16px
+    .info-box-content {
+      order: 1;
+
+      .info-box-number {
+        font-size: 1.5em;
+        margin-bottom: 16px;
+      }
+
+      .info-box-text {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
 
 </style>
