@@ -5,17 +5,20 @@
 
 	export let textCenter: boolean = false
 	export let text: string = ""
-	export let backgroundColorCode: string = ""
-	export let backgroundColorType: BackgroundColor = BackgroundColor.None
+  
+  export let accent: Accents = Accents.None	
+  	
 	export let color: string = ""
-	export let imageBackground: string = ""
+  export let backgroundColor: string = ""
+  export let imageBackgroundColor: string = ""
+
 	export let shadow: Shadow = Shadow.None
 	export let icon: string = ""
 	export let smallBox: boolean = false
 </script>
 
 <div
-	class="info-box {shadow ? "shadow-"+shadow : ""} {getBackgroundColorClass(backgroundColorType)}"
+	class="info-box {shadow ? "shadow-" + shadow : ""} {getBackgroundColorClass(backgroundColorType)}"
 	class:small-box={smallBox}
 	style="background-color:{backgroundColorCode}; color:{color};"
 >
