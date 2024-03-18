@@ -60,7 +60,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Messages"
-					imageBackground="rgb(23, 162, 184)"
+					imageBackgroundColor="rgb(23, 162, 184)"
 				>
 					<div slot="image">
 						<i
@@ -75,7 +75,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Bookmarks"
-					imageBackground="#28a745"
+					imageBackgroundColor="#28a745"
 				>
 					<div slot="image">
 						<i
@@ -90,7 +90,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Uploads"
-					imageBackground="#ffc107"
+					imageBackgroundColor="#ffc107"
 				>
 					<div slot="image">
 						<i class="far fa-copy" />
@@ -102,7 +102,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Likes"
-					imageBackground="#dc3545"
+					imageBackgroundColor="#dc3545"
 				>
 					<div slot="image">
 						<i
@@ -121,7 +121,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Messages"
-					imageBackground="rgb(23, 162, 184)"
+					imageBackgroundColor="rgb(23, 162, 184)"
 				>
 					<div slot="image">
 						<i
@@ -136,7 +136,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Bookmarks"
-					imageBackground="#28a745"
+					imageBackgroundColor="#28a745"
 					shadow="small"
 				>
 					<div slot="image">
@@ -152,7 +152,7 @@
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
 					text="Uploads"
-					imageBackground="#ffc107"
+					imageBackgroundColor="#ffc107"
 					shadow="regular"
 				>
 					<div slot="image">
@@ -163,7 +163,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					imageBackground="#dc3545"
+					imageBackgroundColor="#dc3545"
 					shadow="large"
 					text="Likes"
 				>
@@ -183,7 +183,7 @@
 		<div class="row">
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColorCode="rgb(23, 162, 184)"
+					backgroundColor="rgb(23, 162, 184)"
 					color="white"
 					text="Bookmarks"
 				>
@@ -199,7 +199,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColorCode="#28a745"
+					backgroundColor="#28a745"
 					color="white"
 					shadow="small"
 					text="Likes"
@@ -216,7 +216,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColorCode="#ffc107"
+					backgroundColor="#ffc107"
 					shadow="regular"
 					icon="far fa-calendar-alt"
 					text="Events"
@@ -226,7 +226,7 @@
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
 				<InfoBox
-					backgroundColorType="danger"
+					accent="danger"
 					color="white"
 					shadow="large"
 					text="Comments"
@@ -246,7 +246,8 @@
 		<div class="row">
 			<div class="col-lg-3 col-6">
 				<InfoBox
-					backgroundColorCode="rgb(23, 162, 184)"
+					accent="info"
+					backgroundColor="rgb(23, 162, 184)"
 					color="white"
 					shadow="regular"
 					icon="fas fa-shopping-cart"

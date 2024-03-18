@@ -5,8 +5,9 @@ export enum Validity {
     Valid = "valid"
 }
 
-export enum BackgroundColor {
+export enum Accents {
     None = "none",
+    Info = "info",
     Danger = "danger",
     Warning = "warning",
     Success = "success"

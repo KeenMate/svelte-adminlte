@@ -12,10 +12,12 @@ export function getValidityClass(validity:string) {
 			return "";
 	}
 }
-export function getBackgroundColorClass(backgroundColor: string) {
-	switch (backgroundColor) {
+export function getAccentClass(accent: string) {
+	switch (accent) {
 		case "none":
 			return "";
+		case "info":
+			return "bg-info";
 		case "danger":
 			return "bg-danger";
 		case "warning":
