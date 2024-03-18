@@ -1,4 +1,7 @@
-<script context="module" lang="ts">
+<script
+	context="module"
+	lang="ts"
+>
 	export const CardLoadingContext = Symbol()
 
 	export type contextType = {
@@ -18,6 +21,10 @@
 	export let noPadding = false
 	export let loading = false
 	export let sharedLoading = false
+	export let title = ""
+	export let icon = ""
+	export let headerBackgroundColor = "white"
+	export let titleColor = "black"
 
 	if (sharedLoading)
 		setContext(CardLoadingContext, {
@@ -33,21 +40,37 @@
 	class:card-outline-tabs={outlineTabs}
 	class:card-tabs={tabs}
 >
-	{#if $$slots.header || $$slots.tools || $$slots.fullHeader}
-		<div class="card-header {$$props.headerClass || ''}">
+	{#if $$slots.header || $$slots.tools || $$slots.fullHeader || title !== "" || icon !== ""}
+		<div
+			class="card-header {$$props.headerClass || ''}"
+			style="background-color:{headerBackgroundColor};"
+		>
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
 				<h3 class="card-title">
-					<slot name="header" />
+					<div style="color:{titleColor};">
+						{#if icon !== "" && !$$slots.header}
+							<i class={icon} />
+						{/if}
+						{#if title !== "" && !$$slots.header}
+							{title}
+						{:else}
+							<slot name="header" />
+						{/if}
+					</div>
 				</h3>
+
 				<div class="card-tools pull-right">
 					<slot name="tools" />
 				</div>
 			{/if}
 		</div>
 	{/if}
-	<div class="card-body {$$restProps.bodyClass || ''}" class:p-0={noPadding}>
+	<div
+		class="card-body {$$restProps.bodyClass || ''}"
+		class:p-0={noPadding}
+	>
 		<slot />
 	</div>
 	{#if $$slots.footer}
