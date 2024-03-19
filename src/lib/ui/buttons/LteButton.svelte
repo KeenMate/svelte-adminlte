@@ -31,7 +31,7 @@
 	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
-	class="btn btn-flat {buttonClass} {$$restProps.class || ''}"
+	class="btn btn-flat {!link ? buttonClass : ''} {$$restProps.class || ''}"
 	on:click
 >
 	{#if icon}

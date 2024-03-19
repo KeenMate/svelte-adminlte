@@ -9,4 +9,7 @@
 
 <div class="wrapper">Page</div>
 <TextInput />
-<LteButton icon="fas fa-plus">Hello</LteButton>
+<LteButton
+	icon="fas fa-plus"
+	link>Hello</LteButton
+>
