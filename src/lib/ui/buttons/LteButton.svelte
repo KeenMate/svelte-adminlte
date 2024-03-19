@@ -1,17 +1,7 @@
-<script>
-	/**
-	 * @type {"button" | "reset" | "submit" | null | undefined}
-	 */
-	export let type = "button"
-	/**
-	 * @type {string | null}
-	 */
-	export let color = null
-	/**
-	 * @type {string | null}
-	 */
-	export let toggle = null
-
+<script lang="ts">
+	export let type: "button" | "reset" | "submit" | null = "button"
+	export let color: string | null = null
+	export let toggle: string | null = null
 	export let xsmall = false
 	export let small = false
 	export let large = false
@@ -22,12 +12,9 @@
 	export let disabled = false
 	export let app = false
 	export let squared = false
+	export let icon: string | null = null
 
-	let buttonClass
-
-	$: buttonClass = "btn-" +
-		(outlined && 'outline-' || '') +
-		(color || 'default')
+	$: buttonClass = "btn-" + ((outlined && "outline-") || "") + (color || "default")
 </script>
 
 <button
@@ -44,9 +31,12 @@
 	data-toggle={toggle || null}
 	{disabled}
 	{...$$restProps}
-	class="btn btn-flat {buttonClass} {$$restProps.class || ''}"
+	class="btn btn-flat {!link ? buttonClass : ''} {$$restProps.class || ''}"
 	on:click
 >
+	{#if icon}
+		<i class={icon} />
+	{/if}
 	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
 	<slot />
 </button>
@@ -59,10 +49,10 @@
 
 		width: 3rem;
 		height: 3rem;
-		padding: .1rem;
+		padding: 0.1rem;
 
 		&:hover {
-			text-decoration: none
+			text-decoration: none;
 		}
 	}
 </style>
