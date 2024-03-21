@@ -1,5 +1,6 @@
 <script>
 	export let checked = false
+	export let group = null
 	export let indeterminate = false
 	export let id = ""
 	export let value = ""
@@ -12,6 +13,7 @@
 	<input
 		type="checkbox"
 		bind:checked
+		bind:group
 		bind:indeterminate
 		{id}
 		{value}
