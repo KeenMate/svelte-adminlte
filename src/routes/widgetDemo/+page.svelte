@@ -10,6 +10,13 @@
 	import {TopNavItem} from "$lib/index"
 	import {InputGroup} from "$lib/index"
 	import {InfoBox} from "$lib/index"
+	import {SocialCard} from "$lib/index"
+
+	const footerItems = [
+		{title: "Projects", amount: 31},
+		{title: "Tasks", amount: 12},
+		{title: "Followers", amount: 3}
+	]
 </script>
 
 <Sidebar>
@@ -256,6 +263,20 @@
 				>
 					<div slot="number">1234</div>
 				</InfoBox>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<SocialCard
+					image="src\lib\images\image.png"
+					username="Velky Borec"
+					description="Lead Developer"
+					{footerItems}
+					badgeColor="primary"
+				>
+					
+				</SocialCard>
 			</div>
 		</div>
 	</div>
