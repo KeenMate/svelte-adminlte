@@ -15,7 +15,8 @@
 	const footerItems = [
 		{title: "Projects", amount: 31},
 		{title: "Tasks", amount: 12},
-		{title: "Followers", amount: 3}
+		{title: "Followers", amount: 3},
+		{title: "Completed", amount: 2}
 	]
 </script>
 
@@ -274,8 +275,33 @@
 					description="Lead Developer"
 					{footerItems}
 					badgeColor="primary"
+					headerAccent="warning"
 				>
-					
+				</SocialCard>
+			</div>
+
+			<div class="col-md-4">
+				<SocialCard
+					image="src\lib\images\image.png"
+					username="Maly Borec"
+					description="Lead Developer"
+					{footerItems}
+					headerAccent="info"
+					horizontalLayout=true
+				>
+				</SocialCard>
+			</div>
+
+			<div class="col-md-4">
+				<SocialCard
+					image="src\lib\images\image.png"
+					username="Maly Borec"
+					description="Lead Developer"
+					{footerItems}
+					headerAccent="info"
+					horizontalLayout=true
+					headerAlign="right"
+				>
 				</SocialCard>
 			</div>
 		</div>
