@@ -1,5 +1,6 @@
 <script lang="ts">
-	import {getAccentClass} from "../../helpers/class-helpers.ts"
+	import {getAccentClass} from "../../helpers/class-helpers.js"
+
 	import {Shadow} from "../../types/global.d.ts"
 	import {Accents} from "../../types/global.d.ts"
 

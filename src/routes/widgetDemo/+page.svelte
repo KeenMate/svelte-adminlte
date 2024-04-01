@@ -13,9 +13,9 @@
 	import {SocialCard} from "$lib/index"
 
 	const footerItems = [
-		{title: "Projects", amount: 31},
-		{title: "Tasks", amount: 12},
-		{title: "Followers", amount: 3},
+		{title: "Projects", amount: 31, url:"test"},
+		{title: "Tasks", amount: 12, url:"test"},
+		{title: "Followers", amount: 3, url:"test"},
 		{title: "Completed", amount: 2}
 	]
 </script>
@@ -276,8 +276,7 @@
 					{footerItems}
 					badgeColor="primary"
 					headerAccent="warning"
-				>
-				</SocialCard>
+				/>
 			</div>
 
 			<div class="col-md-4">
@@ -287,9 +286,8 @@
 					description="Lead Developer"
 					{footerItems}
 					headerAccent="info"
-					horizontalLayout=true
-				>
-				</SocialCard>
+					horizontalLayout="true"
+				/>
 			</div>
 
 			<div class="col-md-4">
@@ -299,10 +297,22 @@
 					description="Lead Developer"
 					{footerItems}
 					headerAccent="info"
-					horizontalLayout=true
-					headerAlign="right"
-				>
-				</SocialCard>
+					horizontalLayout="true"
+					headerAlign="left"
+				/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<SocialCard
+					image="src\lib\images\image.png"
+					username="Maly Borec"
+					description="Lead Developer"
+					{footerItems}
+					headerAccent="info"
+					horizontalLayout="true"
+					headerAlign="left"
+				/>
 			</div>
 		</div>
 	</div>

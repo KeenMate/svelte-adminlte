@@ -97,7 +97,7 @@ export { default as ButtonDropdownButton } from "./ui/dropdown/ButtonDropdownBut
 export { default as ButtonDropdownItem } from "./ui/dropdown/ButtonDropdownItem.svelte"
 export { default as DropdownToggleButton } from "./ui/dropdown/DropdownToggleButton.svelte"
 export { default as Callout } from "./ui/Callout.svelte"
-export { default as InfoBox } from "./ui/infobox/InfoBox.svelte"
+export { default as InfoBox } from "./ui/widgets/InfoBox.svelte"
 export { default as Loader } from "./ui/Loader.svelte"
 export { default as LteButton } from "./ui/buttons/LteButton.svelte"
 export { default as AsyncButton } from "./ui/buttons/AsyncButton.svelte"
@@ -112,7 +112,7 @@ export { default as Pagination } from "./ui/Pagination.svelte"
 export { default as DraggableContainer } from "./ui/DraggableContainer.svelte"
 export { default as ProgressBar } from "./ui/ProgressBar.svelte"
 export { default as TippyTooltip } from "./ui/TippyTooltip.svelte"
-export { default as SocialCard } from "./ui/SocialCard.svelte"
+export { default as SocialCard } from "./ui/widgets/SocialCard.svelte"
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte"
