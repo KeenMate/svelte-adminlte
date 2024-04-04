@@ -6,6 +6,8 @@
 	import LteButton from "$lib/ui/buttons/LteButton.svelte"
 
 	const dispatch = createEventDispatcher()
+	
+	export let htmlDisabled = false
 
 	export async function showModal(m, h) {
 		message = m
@@ -51,11 +53,19 @@
 
 <Modal bind:jModalElement bind:show bind:hide {...$$restProps}>
 	<svelte:fragment slot="header">
-		{header || ""}
+		{#if htmlDisabled}
+			{header || ""}
+		{:else}
+			{@html header || ""}
+		{/if}
 	</svelte:fragment>
 
 	<p>
-		{message || ""}
+		{#if htmlDisabled}
+			{message || ""}
+		{:else}
+			{@html message || ""}
+		{/if}
 	</p>
 
 	<svelte:fragment slot="actions">
