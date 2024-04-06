@@ -23,6 +23,8 @@
 	on:change
 	on:input
 	on:keypress
+	on:keydown
+	on:keyup
 	on:focusin
 	on:focusout
 />
