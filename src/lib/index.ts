@@ -113,6 +113,7 @@ export { default as DraggableContainer } from "./ui/DraggableContainer.svelte"
 export { default as ProgressBar } from "./ui/ProgressBar.svelte"
 export { default as TippyTooltip } from "./ui/TippyTooltip.svelte"
 export { default as SocialCard } from "./ui/widgets/SocialCard.svelte"
+export { default as SimpleProgressBar } from "./ui/SimpleProgressBar.svelte"
 
 /* [6.1] UI > Context menu */
 export { default as ContextMenu } from "./ui/context-menu/ContextMenu.svelte"

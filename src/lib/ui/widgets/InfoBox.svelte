@@ -3,6 +3,7 @@
 
 	import {Shadow} from "../../types/global.d.ts"
 	import {Accents} from "../../types/global.d.ts"
+	import {SimpleProgressBar} from "$lib/index.ts"
 
 	export let textCenter: boolean = false
 	export let text: string = ""
@@ -17,6 +18,10 @@
 	export let icon: string = ""
 	export let smallBox: boolean = false
 
+	export let progressBar: boolean = false
+	export let progressBarWidth: string = ""
+	export let progressBarAccent = Accents.None
+
 	const accentClass = accent !== Accents.None ? getAccentClass(accent) : ""
 	const backgroundStyle =
 		accent === Accents.None ? `background-color: ${backgroundColor}; color: ${color};` : ""
@@ -27,11 +32,11 @@
 <div
 	class="info-box {shadow ? 'shadow-' + shadow : ''} {accentClass}"
 	class:small-box={smallBox}
-	style="{backgroundStyle}"
+	style={backgroundStyle}
 >
 	<span
 		class="info-box-icon"
-		style="{iconBackgroundStyle}"
+		style={iconBackgroundStyle}
 	>
 		{#if icon !== ""}
 			<i class={icon} />
@@ -60,7 +65,12 @@
 				<slot name="number" />
 			</div>
 		{/if}
+		{#if progressBar}
+		<SimpleProgressBar width={progressBarWidth} accent={progressBarAccent}></SimpleProgressBar>
+		{/if}
 	</div>
+
+	
 </div>
 
 <style lang="scss">

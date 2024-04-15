@@ -11,11 +11,12 @@
 	import {InputGroup} from "$lib/index"
 	import {InfoBox} from "$lib/index"
 	import {SocialCard} from "$lib/index"
+	
 
 	const footerItems = [
-		{title: "Projects", amount: 31, url:"test"},
-		{title: "Tasks", amount: 12, url:"test"},
-		{title: "Followers", amount: 3, url:"test"},
+		{title: "Projects", amount: 31, url: "test"},
+		{title: "Tasks", amount: 12, url: "test"},
+		{title: "Followers", amount: 3, url: "test"},
 		{title: "Completed", amount: 2}
 	]
 </script>
@@ -238,6 +239,8 @@
 					color="white"
 					shadow="large"
 					text="Comments"
+					progressBar="true"
+					progressBarWidth="50%"
 				>
 					<div slot="image">
 						<i
@@ -261,6 +264,8 @@
 					icon="fas fa-shopping-cart"
 					smallBox="true"
 					text="User Registrations"
+
+					
 				>
 					<div slot="number">1234</div>
 				</InfoBox>
