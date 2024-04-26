@@ -1,6 +1,6 @@
 <script>
-	import LteButton from "./LteButton.svelte"
 	import {_} from "svelte-i18n"
+	import AsyncButton from "./AsyncButton.svelte"
 
 	export let short = false
 	export let xsmall = false
@@ -10,18 +10,19 @@
 	$: noSizeSet = !xsmall && !small && !large
 </script>
 
-<LteButton
-	color="info"
-	title={$_("common.buttons.refresh")}
+<AsyncButton
+	color="danger"
+	iconClass="fas fa-trash"
+	title={$_("common.buttons.delete")}
 	{xsmall}
 	small={small || noSizeSet}
 	{large}
+	{...$$restProps}
 	on:click
 >
 	<slot>
-		<i class="fas fa-sync fa-fw" />
 		{#if !short}
-			{$_("common.buttons.refresh")}
+			{$_("common.buttons.delete")}
 		{/if}
 	</slot>
-</LteButton>
+</AsyncButton>
