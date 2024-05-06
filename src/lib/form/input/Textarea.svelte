@@ -19,7 +19,7 @@
 	/**
 	 * @type {string?}
 	 */
-	export let size
+	export let size = null
 
 	/**
 	 * @type {HTMLTextAreaElement?}
