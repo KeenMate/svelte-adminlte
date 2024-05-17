@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Inputmask from "inputmask"
+	import { getValidityClass } from "../../helpers/class-helpers.js"
 
 	export let id = ""
 	export let value = ""
@@ -13,6 +14,7 @@
 	export let invalid = false
 	export let maxlength: number | null = null
 	export let size = "md"
+	export let validity = "none"
 
 	export let inputElement: HTMLInputElement | null = null
 
@@ -23,7 +25,6 @@
 	//@ts-ignore
 	$: inputMask && inputElement && Inputmask().mask(inputElement)
 </script>
-
 <input
 	bind:this={inputElement}
 	bind:value
@@ -40,7 +41,7 @@
 	{disabled}
 	{readonly}
 	{...$$restProps}
-	class="form-control-{size || 'md'} {$$restProps.class || ''}"
+	class="form-control-{size || 'md'} {$$restProps.class || ''} {getValidityClass(validity)}"
 	on:change
 	on:input
 	on:keypress

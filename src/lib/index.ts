@@ -19,13 +19,16 @@ export {default as WarningAlert} from "./alerts/WarningAlert.svelte"
 
 /* [2.1] Form > Input */
 export {default as Checkbox} from "./form/input/Checkbox.svelte"
+export {default as CheckboxSimple} from "./form/input/CheckboxSimple.svelte"
 export {default as DateRangePicker} from "./form/input/DateRangePicker.svelte"
 // export { default as Dropdown } from "./form/input/Dropdown.svelte";
 export {default as EmailInput} from "./form/input/EmailInput.svelte"
 export {default as FileInput} from "./form/input/FileInput.svelte"
 // export { default as Multiselect } from "./form/input/Multiselect.svelte";
 export {default as NumberInput} from "./form/input/NumberInput.svelte"
+export {default as Select} from "./form/input/Select.svelte"
 export {default as Radio} from "./form/input/Radio.svelte"
+export {default as RadioSimple} from "./form/input/RadioSimple.svelte"
 export {default as RangeInput} from "./form/input/RangeInput.svelte"
 export {default as Switch} from "./form/input/Switch.svelte"
 export {default as Textarea} from "./form/input/Textarea.svelte"
@@ -94,7 +97,7 @@ export {default as ButtonDropdownButton} from "./ui/dropdown/ButtonDropdownButto
 export {default as ButtonDropdownItem} from "./ui/dropdown/ButtonDropdownItem.svelte"
 export {default as DropdownToggleButton} from "./ui/dropdown/DropdownToggleButton.svelte"
 export {default as Callout} from "./ui/Callout.svelte"
-export {default as InfoBox} from "./ui/InfoBox.svelte"
+export {default as InfoBox} from "./ui/widgets/InfoBox.svelte"
 export {default as Loader} from "./ui/Loader.svelte"
 export {default as LteButton} from "./ui/buttons/LteButton.svelte"
 export {default as ButtonLink} from "./ui/buttons/ButtonLink.svelte"
@@ -113,6 +116,8 @@ export {default as Pagination} from "./ui/Pagination.svelte"
 export {default as DraggableContainer} from "./ui/DraggableContainer.svelte"
 export {default as ProgressBar} from "./ui/ProgressBar.svelte"
 export {default as TippyTooltip} from "./ui/TippyTooltip.svelte"
+export {default as SocialCard} from "./ui/widgets/SocialCard.svelte"
+export {default as SimpleProgressBar} from "./ui/SimpleProgressBar.svelte"
 
 /* [6.1] UI > Context menu */
 export {default as ContextMenu} from "./ui/context-menu/ContextMenu.svelte"
