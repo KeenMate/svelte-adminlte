@@ -12,10 +12,10 @@
 <div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
 	<input
 		type="checkbox"
-		bind:checked
-		bind:group
-		bind:indeterminate
+		{checked}
+		{indeterminate}
 		{id}
+		{group}
 		{value}
 		{name}
 		{disabled}
@@ -23,7 +23,7 @@
 		on:click
 		on:focusin
 		on:focusout
-	/>
+	>
 	<label for={id}>
 		<slot />
 	</label>
