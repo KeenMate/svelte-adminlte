@@ -1,9 +1,9 @@
 <script lang="ts">
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 
-	import {Shadow} from "../../types/global.d.ts"
-	import {Accents} from "../../types/global.d.ts"
-	import {SimpleProgressBar} from "$lib/index.ts"
+	import {Shadow} from "../../types/global.js"
+	import {Accents} from "../../types/global.js"
+	import {SimpleProgressBar} from "$lib/index.js"
 
 	export let textCenter: boolean = false
 	export let text: string        = ""

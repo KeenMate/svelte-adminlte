@@ -1,7 +1,7 @@
 <script lang="ts">
-	import {Badge} from "$lib/index.ts"
+	import {Badge} from "$lib/index.js"
 	// import {Accents} from "../../types/global.js"
-	import {Accents} from "../../types/global.d.ts"
+	import {Accents} from "../../types/global.js"
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 
 	export let image: string       = ""
