@@ -1,27 +1,39 @@
 <script>
 	import {_} from "svelte-i18n"
 	import LteButton from "./LteButton.svelte"
+	import {Config} from "$lib/config.js";
+	import AsyncButton from "$lib/ui/buttons/AsyncButton.svelte";
 
-	export let short = false
+	export let short = undefined
 	export let xsmall = false
 	export let small = false
 	export let large = false
 
 	$: noSizeSet = !xsmall && !small && !large
+
+	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
+	$: specialButtonDefaults = $Config.defaults?.buttons?.deleteButton || {} || {}
+	$: iconClass = specialButtonDefaults.iconClass
+	$: computedShort = short === undefined
+		? buttonDefaults.short
+		|| specialButtonDefaults.short
+		|| false
+		: short
 </script>
 
 <LteButton
-	color="danger"
 	title={$_("common.buttons.delete")}
 	{xsmall}
 	small={small || noSizeSet}
 	{large}
-	{...$$restProps}
+	{...{...buttonDefaults, ...specialButtonDefaults, ...$$restProps}}
 	on:click
 >
 	<slot>
-		<i class="fas fa-trash fa-fw" />
-		{#if !short}
+		{#if iconClass}
+			<i class={iconClass}/>
+		{/if}
+		{#if !computedShort}
 			{$_("common.buttons.delete")}
 		{/if}
 	</slot>

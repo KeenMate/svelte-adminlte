@@ -38,7 +38,41 @@ export const Config = writable({
 		}
 		// permissionCheck: checkPermissions
 	},
-	currentUser: null
+	currentUser: null,
+
+	defaults: {
+		// todo: add function that will compute options for (specialized) buttons
+		
+		/**
+		 * `options` are meant to be base for all buttons while specialized config (e.g. `refreshButton` will override/enhance config of the `options`).
+		 * All these options are supposed to be passed into the `LteButton` as-is
+		 */
+		buttons: {
+			options: {
+				size: null,
+				borderless: false,
+				outlined: false,
+				social: false,
+				link: false,
+				disabled: false,
+				app: false,
+				squared: false,
+			},
+
+			refreshButton: {
+				color: "info",
+				iconClass: "fas fa-sync"
+			},
+			saveButton: {
+				color: "success",
+				iconClass: "fas fa-save"
+			},
+			deleteButton: {
+				color: "danger",
+				iconClass: "fas fa-trash"
+			}
+		},
+	},
 })
 
 export type config = typeof Config
