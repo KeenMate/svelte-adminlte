@@ -3,7 +3,7 @@
 
 	import {Shadow} from "../../types/global.js"
 	import {Accents} from "../../types/global.js"
-	import {SimpleProgressBar} from "$lib/index.js"
+	import SimpleProgressBar from "$lib/ui/SimpleProgressBar.svelte"
 
 	export let textCenter: boolean = false
 	export let text: string        = ""

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {TopNavItem} from "$lib/index.js"
+import TopNavItem from "$lib/structure/navigation/TopNavItem.svelte"
 </script>
 
 <TopNavItem

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import {Badge} from "$lib/index.js"
 	// import {Accents} from "../../types/global.js"
 	import {Accents} from "../../types/global.js"
 	import {getAccentClass} from "../../helpers/class-helpers.js"
+	import Badge from "$lib/ui/Badge.svelte"
 
 	export let image: string       = ""
 	export let username: string    = ""

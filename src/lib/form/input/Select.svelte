@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {getValidityClass} from "../../helpers/class-helpers.js"
 	import {Validity} from "../../types/global.js"
-	import {TextInput} from "$lib/index.js"
+	import TextInput from "$lib/form/input/TextInput.svelte"
 
 	type Option = { [key: string]: any }
 
