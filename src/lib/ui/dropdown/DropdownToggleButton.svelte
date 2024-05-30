@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import LteButton from "$lib/ui/buttons/LteButton.svelte"
 </script>
 

@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import {onDestroy, onMount, tick} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 	import Loader from "$lib/ui/Loader.svelte"
+
 	/**
 	 * @type {any?}
 	 */
@@ -11,24 +12,28 @@
 	/**
 	 * @type {string?}
 	 */
-	export let color = null
-	export let escapeClose = true
-	export let clickClose = true
-	export let showClose = true
+	export let color         = null
+	export let escapeClose   = true
+	export let clickClose    = true
+	export let showClose     = true
 	export let closeExisting = false
-	export let small = false
-	export let large = false
-	export let xlarge = false
-	export let center = false
-	export let loading = false
+	export let small         = false
+	export let large         = false
+	export let xlarge        = false
+	export let center        = false
+	export let loading       = false
 
 	export function toggle() {
-		if (!opened) beforeOpenModal()
+		if (!opened) {
+			beforeOpenModal()
+		}
 
 		jQuery(modalElement).modal("toggle")
 		opened = !opened
 
-		if (!opened) afterCloseModal()
+		if (!opened) {
+			afterCloseModal()
+		}
 	}
 
 	export function show() {
@@ -48,8 +53,8 @@
 	/**
 	 * @type {HTMLDivElement?}
 	 */
-	let modalElement = null
-	let opened = false
+	let modalElement           = null
+	let opened                 = false
 	let documentHadOpenedModal = false
 
 	$: modalElement && initModal()
@@ -65,7 +70,9 @@
 	})
 
 	function clearModalEventHandlers() {
-		if (!jModalElement) return
+		if (!jModalElement) {
+			return
+		}
 
 		jModalElement.off("hidden.bs.modal", onModalHidden)
 		jModalElement.off("show.bs.modal", onModalShow)
@@ -78,7 +85,9 @@
 	async function afterCloseModal() {
 		await tick()
 
-		if (documentHadOpenedModal) document.body.classList.add("modal-open")
+		if (documentHadOpenedModal) {
+			document.body.classList.add("modal-open")
+		}
 	}
 
 	function initModal() {
@@ -87,7 +96,7 @@
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show: false
+			show:     false
 		})
 
 		jModalElement.on("hidden.bs.modal", onModalHidden)
@@ -107,7 +116,9 @@
 	 * @param {{ key: string; }} ev
 	 */
 	function onDocumentKeyDown(ev) {
-		if (!opened || ev.key !== "Escape") return
+		if (!opened || ev.key !== "Escape") {
+			return
+		}
 
 		hide()
 	}

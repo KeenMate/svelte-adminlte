@@ -1,9 +1,9 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "NodeNext",
-		"module": "NodeNext",
 		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
 		"allowSyntheticDefaultImports": true,
 //		"skipLibCheck": true,
 //		"sourceMap": true,

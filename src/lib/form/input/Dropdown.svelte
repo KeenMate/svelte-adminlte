@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	// TODO merge common code with multiselect
 
 	import {createEventDispatcher, onMount} from "svelte"
@@ -6,16 +6,16 @@
 	import {debounce} from "lodash"
 	import {TypingDebounceDelay} from "../../../constants/ui"
 
-	export let value = null
+	export let value       = null
 	export let placeholder = ""
-	export let readonly = false
-	export let invalid = false
+	export let readonly    = false
+	export let invalid     = false
 	export let size
 
 	const dispatch = createEventDispatcher()
 
-	let selectElement = null
-	let select$ = null
+	let selectElement  = null
+	let select$        = null
 	let searchDebounce = debounce(x => {
 		dispatch("search", x)
 	}, TypingDebounceDelay)

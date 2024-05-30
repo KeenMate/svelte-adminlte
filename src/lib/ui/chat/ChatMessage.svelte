@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
 
-	export let username = null
-	export let datetime = null
-	export let avatar = null
+	export let username  = null
+	export let datetime  = null
+	export let avatar    = null
 	export let avatarAlt = null
-	export let message = null
-	export let right = false
+	export let message   = null
+	export let right     = false
 </script>
 
 <div class="direct-chat-msg {$$restProps.class || ''}" class:right on:click>

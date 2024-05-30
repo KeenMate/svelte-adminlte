@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import MobileNavToggle from "./MobileNavToggle.svelte"
 
 	export let hideMobileNavToggle = false

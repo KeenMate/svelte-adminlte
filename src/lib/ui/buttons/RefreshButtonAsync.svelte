@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
 	import AsyncButton from "./AsyncButton.svelte"
 	import {_} from "svelte-i18n"
-	import {Config} from "$lib/config.js";
+	import {Config} from "$lib/config.js"
 
-	export let short = undefined
+	export let short: boolean | undefined = undefined
 	export let xsmall = false
-	export let small = false
-	export let large = false
+	export let small  = false
+	export let large  = false
 
 	$: noSizeSet = !xsmall && !small && !large
 

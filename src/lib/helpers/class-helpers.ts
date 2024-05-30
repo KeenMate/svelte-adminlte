@@ -1,30 +1,31 @@
-export function getValidityClass(validity:string) {
+export function getValidityClass(validity: string) {
 	switch (validity) {
 		case "none":
-			return "";
+			return ""
 		case "invalid":
-			return "is-invalid";
+			return "is-invalid"
 		case "warning":
-			return "is-warning";
+			return "is-warning"
 		case "valid":
-			return "is-valid";
+			return "is-valid"
 		default:
-			return "";
+			return ""
 	}
 }
+
 export function getAccentClass(accent: string) {
 	switch (accent) {
 		case "none":
-			return "";
+			return ""
 		case "info":
-			return "bg-info";
+			return "bg-info"
 		case "danger":
-			return "bg-danger";
+			return "bg-danger"
 		case "warning":
-			return "bg-warning";
+			return "bg-warning"
 		case "success":
-			return "bg-success";
+			return "bg-success"
 		default:
-			return "";
+			return ""
 	}
 }

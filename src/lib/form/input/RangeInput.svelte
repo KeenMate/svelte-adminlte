@@ -1,8 +1,8 @@
-<script>
-	export let id = null
+<script lang="ts">
+	export let id    = null
 	export let value = null
-	export let min = null
-	export let max = null
+	export let min   = null
+	export let max   = null
 </script>
 
 <input

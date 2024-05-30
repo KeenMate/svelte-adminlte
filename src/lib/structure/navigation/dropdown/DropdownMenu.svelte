@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let right = false
 	export let large = false
 </script>

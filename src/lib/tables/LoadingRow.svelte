@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import TableRowFullWidth from "./TableRowFullWidth.svelte"
 	import Loader from "../ui/Loader.svelte"
 

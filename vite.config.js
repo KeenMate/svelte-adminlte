@@ -9,7 +9,7 @@ const config = {
 	resolve: {
 		alias: {
 			"~bootstrap": "bootstrap",
-			$lib: "src/lib"
+			// $lib: "src/lib"
 		}
 	}
 }

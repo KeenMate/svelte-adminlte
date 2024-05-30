@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher, tick} from "svelte"
 	import {_} from "svelte-i18n"
 	import Modal from "./Modal.svelte"
@@ -6,12 +6,12 @@
 	import LteButton from "$lib/ui/buttons/LteButton.svelte"
 
 	const dispatch = createEventDispatcher()
-	
+
 	export let htmlDisabled = false
 
 	export async function showModal(m, h) {
 		message = m
-		header = h
+		header  = h
 		await tick()
 
 		show()
@@ -31,19 +31,19 @@
 
 	let resolveModal
 
-  $: jModalElement && jModalElement.off("hidden.bs.modal", onModalHidden)
-  $: jModalElement && jModalElement.on("hidden.bs.modal", onModalHidden)
+	$: jModalElement && jModalElement.off("hidden.bs.modal", onModalHidden)
+	$: jModalElement && jModalElement.on("hidden.bs.modal", onModalHidden)
 
-  function onModalHidden() {
+	function onModalHidden() {
 		dispatch("hidden")
 
 		doReject()
-  }
+	}
 
 	function doReject() {
 		resolveModal(false)
 		hide()
-  }
+	}
 
 	function doConfirm() {
 		resolveModal(true)

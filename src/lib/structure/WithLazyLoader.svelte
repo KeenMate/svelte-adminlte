@@ -19,7 +19,7 @@
 	const context: contextType = getContext(CardLoadingContext)
 
 	export let task: Promise<TData>
-	export let loading = false
+	export let loading       = false
 	export let parentLoading = false
 
 	let oldData: TData

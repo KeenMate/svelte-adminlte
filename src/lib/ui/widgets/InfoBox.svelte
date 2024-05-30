@@ -6,27 +6,27 @@
 	import {SimpleProgressBar} from "$lib/index.ts"
 
 	export let textCenter: boolean = false
-	export let text: string = ""
+	export let text: string        = ""
 
 	export let accent: Accents = Accents.None
 
-	export let color: string = ""
-	export let backgroundColor: string = ""
+	export let color: string                = ""
+	export let backgroundColor: string      = ""
 	export let imageBackgroundColor: string = ""
 
-	export let shadow: Shadow = Shadow.None
-	export let icon: string = ""
+	export let shadow: Shadow    = Shadow.None
+	export let icon: string      = ""
 	export let smallBox: boolean = false
 
-	export let progressBar: boolean = false
+	export let progressBar: boolean     = false
 	export let progressBarWidth: string = ""
-	export let progressBarAccent = Accents.None
+	export let progressBarAccent        = Accents.None
 
-	const accentClass = accent !== Accents.None ? getAccentClass(accent) : ""
-	const backgroundStyle =
-		accent === Accents.None ? `background-color: ${backgroundColor}; color: ${color};` : ""
+	const accentClass         = accent !== Accents.None ? getAccentClass(accent) : ""
+	const backgroundStyle     =
+		      accent === Accents.None ? `background-color: ${backgroundColor}; color: ${color};` : ""
 	const iconBackgroundStyle =
-		accent === Accents.None ? `background-color: ${imageBackgroundColor};` : ""
+		      accent === Accents.None ? `background-color: ${imageBackgroundColor};` : ""
 </script>
 
 <div
@@ -66,11 +66,11 @@
 			</div>
 		{/if}
 		{#if progressBar}
-		<SimpleProgressBar width={progressBarWidth} accent={progressBarAccent}></SimpleProgressBar>
+			<SimpleProgressBar width={progressBarWidth} accent={progressBarAccent}></SimpleProgressBar>
 		{/if}
 	</div>
 
-	
+
 </div>
 
 <style lang="scss">

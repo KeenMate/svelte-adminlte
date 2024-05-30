@@ -4,9 +4,9 @@
 	const dispatch = createEventDispatcher()
 
 	export let header: string | undefined = undefined
-	export let closeable = true
-	export let level = ""
-	export let icon = ""
+	export let closeable                  = true
+	export let level                      = ""
+	export let icon                       = ""
 
 	function alertClosed() {
 		dispatch("closed")
@@ -21,7 +21,7 @@
 			data-dismiss="alert"
 			aria-hidden="true"
 			on:click={alertClosed}
-			>×
+		>×
 		</button>
 	{/if}
 

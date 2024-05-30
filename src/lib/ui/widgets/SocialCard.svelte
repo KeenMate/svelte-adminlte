@@ -4,11 +4,11 @@
 	import {Accents} from "../../types/global.d.ts"
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 
-	export let image: string = ""
-	export let username: string = ""
+	export let image: string       = ""
+	export let username: string    = ""
 	export let description: string = ""
 
-	type FooterItem = {title: string; amount: string | number; url: string}
+	type FooterItem = { title: string; amount: string | number; url: string }
 	export let footerItems: FooterItem[] = []
 
 	export let badgeColor: string = ""
@@ -16,13 +16,13 @@
 	export let horizontalLayout: boolean = false
 
 	export let headerAccent: Accents = Accents.None
-	export let headerAlign: string = ""
-	export let headerImage: string = ""
+	export let headerAlign: string   = ""
+	export let headerImage: string   = ""
 
-	let style=""
+	let style = ""
 	if (headerImage) {
-    style = `background: url('${headerImage}') center center;`;
-  }
+		style = `background: url('${headerImage}') center center;`
+	}
 
 	const headerAccentClass = headerAccent !== Accents.None ? getAccentClass(headerAccent) : ""
 </script>
@@ -57,7 +57,8 @@
 								{item.title}
 								<Badge
 									color={badgeColor}
-									classes="float-right">{item.amount}</Badge
+									classes="float-right"
+								>{item.amount}</Badge
 								>
 							</a>
 						</li>

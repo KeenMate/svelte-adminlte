@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let href: string | null = null
-	export let visibility = "d-none d-sm-inline-block"
+	export let visibility          = "d-none d-sm-inline-block"
 </script>
 
 <li

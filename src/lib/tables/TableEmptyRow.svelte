@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import TableRowFullWidth from "./TableRowFullWidth.svelte"
 </script>
 

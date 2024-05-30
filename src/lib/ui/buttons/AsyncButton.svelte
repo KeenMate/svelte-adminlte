@@ -1,15 +1,15 @@
 <script lang="ts">
 	import {createEventDispatcher} from "svelte"
 	import LteButton from "./LteButton.svelte"
-	
+
 	const dispatch = createEventDispatcher()
 
 	export let action: (<T>() => Promise<T>) | null
 	export let enabledWhenLoading = false
 
 	export let iconClass: string | null = null
-	export let disabled: boolean = false
-	export let loading: boolean = false
+	export let disabled: boolean        = false
+	export let loading: boolean         = false
 
 	$: computedDisabled = disabled
 		|| (enabledWhenLoading ? false : loading)
@@ -36,5 +36,5 @@
 		<i class="{iconClass} fa-fw"></i>
 	{/if}
 
-	<slot/>
+	<slot />
 </LteButton>

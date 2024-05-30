@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
 	// this, in fact, is not a LTE component (I just could not think of a different name :))
 
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
 
-	export let checked = false
-	export let checkedClass = ""
+	export let checked        = false
+	export let checkedClass   = ""
 	export let uncheckedClass = ""
-	export let disabledClass = ""
-	export let disabled = false
+	export let disabledClass  = ""
+	export let disabled       = false
 
 	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass
 

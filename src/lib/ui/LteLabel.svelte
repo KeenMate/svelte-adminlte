@@ -1,6 +1,6 @@
-<script>
-	export let color = ""
-	export let title = ""
+<script lang="ts">
+	export let color   = ""
+	export let title   = ""
 	export let classes = ""
 </script>
 

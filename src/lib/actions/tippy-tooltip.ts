@@ -17,7 +17,7 @@ class TippyTooltip {
 
 	constructor(element: HTMLElement, options: TippyTooltipOptions | nullable = null) {
 		this.rootElement = element
-		this.options = options
+		this.options     = options
 	}
 
 	init() {
@@ -42,24 +42,25 @@ class TippyTooltip {
 			this.updateHTML()
 		})
 	}
-	
+
 	updateHTML() {
 		const content = this.getContent()
-		
+
 		if (!content) {
 			if (this.tippyInstance) {
 				this.tippyInstance.destroy()
 				this.tippyInstance = null
 			}
-			
+
 			return
 		}
-		
+
 		if (this.tippyInstance) {
 			this.tippyInstance.setContent(content)
-			
-			if (this.options?.tippyOptions)
+
+			if (this.options?.tippyOptions) {
 				this.tippyInstance.setProps(this.options.tippyOptions)
+			}
 		} else {
 			this.tippyInstance = tippy(this.rootElement, {
 				...this.options?.tippyOptions,
@@ -69,8 +70,9 @@ class TippyTooltip {
 	}
 
 	getContent(): string {
-		if (this.options?.content)
+		if (this.options?.content) {
 			return this.options.content
+		}
 
 		const templateElement = this.options?.templateId
 			&& document.getElementById(this.options?.templateId)

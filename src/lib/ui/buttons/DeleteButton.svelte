@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
 	import {_} from "svelte-i18n"
 	import LteButton from "./LteButton.svelte"
-	import {Config} from "$lib/config.js";
-	import AsyncButton from "$lib/ui/buttons/AsyncButton.svelte";
+	import {Config} from "$lib/config.js"
 
-	export let short = undefined
-	export let xsmall = false
-	export let small = false
-	export let large = false
+	export let short: boolean | undefined = undefined
+	export let xsmall                     = false
+	export let small                      = false
+	export let large                      = false
 
 	$: noSizeSet = !xsmall && !small && !large
 
@@ -31,7 +30,7 @@
 >
 	<slot>
 		{#if iconClass}
-			<i class={iconClass}/>
+			<i class={iconClass} />
 		{/if}
 		{#if !computedShort}
 			{$_("common.buttons.delete")}

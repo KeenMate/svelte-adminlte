@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
@@ -6,12 +6,12 @@
 	let contextMenuElement = null
 
 	let posX,
-		posY,
-		contextMenuVisible = false
+	    posY,
+	    contextMenuVisible = false
 
 	export function openContextMenu(pX, pY) {
-		posX = pX
-		posY = pY
+		posX               = pX
+		posY               = pY
 		contextMenuVisible = true
 
 		registerBodyOnClickEvent()
@@ -25,11 +25,15 @@
 
 	// whenever x and y is changed, restrict box to be within bounds
 	$: (() => {
-		if (!contextMenuElement) return
+		if (!contextMenuElement) {
+			return
+		}
 
 		const rect = contextMenuElement.getBoundingClientRect()
-		posX = Math.min(window.innerWidth - rect.width, posX)
-		if (posY > window.innerHeight - rect.height) posY -= rect.height
+		posX       = Math.min(window.innerWidth - rect.width, posX)
+		if (posY > window.innerHeight - rect.height) {
+			posY -= rect.height
+		}
 	})(posX, posY)
 
 	$: contextMenuStyle = `
@@ -39,7 +43,9 @@
 	`
 
 	function onBodyClick(ev) {
-		if (!contextMenuVisible) return
+		if (!contextMenuVisible) {
+			return
+		}
 
 		closeContextMenu(ev)
 	}

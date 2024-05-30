@@ -9,7 +9,7 @@ const MessageCount = 500
 export const NotificationType = {
 	Warning: "Warning",
 	Success: "Success",
-	Error: "Error"
+	Error:   "Error"
 }
 
 type message = {
@@ -24,7 +24,7 @@ class NotificationProvider {
 	messages: Writable<message[]>
 
 	constructor() {
-		this.buffer = new CBuffer<message>(MessageCount)
+		this.buffer   = new CBuffer<message>(MessageCount)
 		this.messages = writable([])
 	}
 

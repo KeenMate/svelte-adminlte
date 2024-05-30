@@ -1,10 +1,10 @@
-<script>
-	export let checked = false
+<script lang="ts">
+	export let checked       = false
 	export let indeterminate = false
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let disabled = false
+	export let id            = ""
+	export let value         = ""
+	export let name          = ""
+	export let disabled      = false
 </script>
 
 <div class="{$$props.class || ''}">

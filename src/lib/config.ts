@@ -4,31 +4,31 @@ import type {Requirements, IPermissionsUser} from "@keenmate/js-common-helpers/h
 import {writable} from "svelte/store"
 
 export const Config = writable({
-	ToastrOptions: {
-		closeButton: false,
-		debug: false,
-		newestOnTop: false,
-		progressBar: false,
-		positionClass: "toast-bottom-right",
+	ToastrOptions:         {
+		closeButton:       false,
+		debug:             false,
+		newestOnTop:       false,
+		progressBar:       false,
+		positionClass:     "toast-bottom-right",
 		preventDuplicates: false,
-		onclick: undefined,
-		showDuration: 300,
-		hideDuration: 1000,
-		timeOut: 3000,
-		extendedTimeOut: 1000,
-		showEasing: "swing",
-		hideEasing: "linear",
-		showMethod: "fadeIn",
-		hideMethod: "fadeOut"
+		onclick:           undefined,
+		showDuration:      300,
+		hideDuration:      1000,
+		timeOut:           3000,
+		extendedTimeOut:   1000,
+		showEasing:        "swing",
+		hideEasing:        "linear",
+		showMethod:        "fadeIn",
+		hideMethod:        "fadeOut"
 	},
-	DateFormat: "D",
-	DateTimeFormat: "f",
-	TimeFormat: "t",
-	ReverseDateFormat: "yyyy-LL-dd",
+	DateFormat:            "D",
+	DateTimeFormat:        "f",
+	TimeFormat:            "t",
+	ReverseDateFormat:     "yyyy-LL-dd",
 	ReverseDateTimeFormat: "yyyy-LL-dd_HH-mm-ss",
-	TypingDebounceDelay: 300,
-	lazyLoader: lazyLoader,
-	permissions: {
+	TypingDebounceDelay:   300,
+	lazyLoader:            lazyLoader,
+	permissions:           {
 		defaultComparison: "any",
 		checkPermissions(user?: IPermissionsUser, requiredPermissions?: Requirements) {
 			return checkPermissions(user?.permissions, requiredPermissions)
@@ -38,37 +38,37 @@ export const Config = writable({
 		}
 		// permissionCheck: checkPermissions
 	},
-	currentUser: null,
+	currentUser:           null,
 
 	defaults: {
 		// todo: add function that will compute options for (specialized) buttons
-		
+
 		/**
 		 * `options` are meant to be base for all buttons while specialized config (e.g. `refreshButton` will override/enhance config of the `options`).
 		 * All these options are supposed to be passed into the `LteButton` as-is
 		 */
 		buttons: {
 			options: {
-				size: null,
+				size:       null,
 				borderless: false,
-				outlined: false,
-				social: false,
-				link: false,
-				disabled: false,
-				app: false,
-				squared: false,
+				outlined:   false,
+				social:     false,
+				link:       false,
+				disabled:   false,
+				app:        false,
+				squared:    false,
 			},
 
 			refreshButton: {
-				color: "info",
+				color:     "info",
 				iconClass: "fas fa-sync"
 			},
-			saveButton: {
-				color: "success",
+			saveButton:    {
+				color:     "success",
 				iconClass: "fas fa-save"
 			},
-			deleteButton: {
-				color: "danger",
+			deleteButton:  {
+				color:     "danger",
 				iconClass: "fas fa-trash"
 			}
 		},

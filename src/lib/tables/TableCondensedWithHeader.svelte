@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {getKeysByPrefix} from "$lib/helpers/object-helpers.js"
 	import TableCondensed from "$lib/tables/TableCondensed.svelte"
 	import Card from "../structure/Card.svelte"

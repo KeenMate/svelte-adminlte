@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {updateQuerystringPartial} from "@keenmate/js-common-helpers/helpers/router.js"
 	import {_} from "svelte-i18n"
 

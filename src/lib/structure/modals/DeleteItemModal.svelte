@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {createEventDispatcher} from "svelte"
 	import {_} from "svelte-i18n"
 	import Modal from "$lib/structure/modals/Modal.svelte"
@@ -13,7 +13,7 @@
 
 		return new Promise((resolve, reject) => {
 			resolveModal = resolve
-			rejectModal = reject
+			rejectModal  = reject
 		})
 	}
 
@@ -32,10 +32,10 @@
 
 	function onModalHidden() {
 		dispatch("hidden")
-		
+
 		doReject()
 	}
-	
+
 	function doReject() {
 		rejectModal && rejectModal()
 	}

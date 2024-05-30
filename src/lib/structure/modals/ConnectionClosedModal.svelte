@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {_} from "svelte-i18n"
 	import Modal from "$lib/structure/modals/Modal.svelte"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"

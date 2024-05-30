@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import {TopNavItem} from "$lib/index.ts"
 </script>
 
-<TopNavItem 
+<TopNavItem
 	href="javascript:void(0)"
 	data-widget="pushmenu"
 	role="button"
