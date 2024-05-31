@@ -1,6 +1,4 @@
 <script lang="ts">
-	// this, in fact, is not an LTE component (I just could not think of a different name :))
-
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
@@ -14,12 +12,14 @@
 
 	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass
 
-	function onChange() {
-		dispatch("change", !checked)
-		if (!checked) {
-			dispatch("checked", !checked)
+	function onChange(ev: InputEvent) {
+		const inputChecked = (ev.target as HTMLInputElement).checked
+		
+		dispatch("change", inputChecked)
+		if (inputChecked) {
+			dispatch("checked")
 		} else {
-			dispatch("unchecked", !checked)
+			dispatch("unchecked")
 		}
 	}
 </script>
