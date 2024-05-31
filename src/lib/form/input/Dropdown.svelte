@@ -4,7 +4,7 @@
 	import {createEventDispatcher, onMount} from "svelte"
 	import jQuery from "jquery"
 	import {debounce} from "lodash"
-	import {TypingDebounceDelay} from "../../../constants/ui"
+	import {TypingDebounceDelay} from "../../../constants/ui.js"
 
 	export let value       = null
 	export let placeholder = ""

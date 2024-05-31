@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 
-	import {Shadow} from "../../types/global.js"
-	import {Accents} from "../../types/global.js"
+	import {Shadow} from "../../constants/index.js"
+	import {Accents} from "../../constants/index.js"
 	import SimpleProgressBar from "$lib/ui/SimpleProgressBar.svelte"
 
 	export let textCenter: boolean = false

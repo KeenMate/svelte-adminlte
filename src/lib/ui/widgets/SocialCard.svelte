@@ -1,6 +1,6 @@
 <script lang="ts">
-	// import {Accents} from "../../types/global.js"
-	import {Accents} from "../../types/global.js"
+	// import {Accents} from "../../constants/index.js"
+	import {Accents} from "../../constants/index.js"
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 	import Badge from "$lib/ui/Badge.svelte"
 

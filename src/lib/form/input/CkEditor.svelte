@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {createEventDispatcher} from "svelte"
 	import CKEditor from "ckeditor5-svelte"
-	import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor"
+	import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor.js"
 
 	const dispatch = createEventDispatcher()
 

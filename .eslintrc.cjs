@@ -36,6 +36,7 @@ module.exports = {
 		// because function declarations would have unused params as well
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": ["error"],
+		"@typescript-eslint/no-explicit-any": "off",
 		
 		indent: ["error", "tab", {SwitchCase: 1}]
 	}

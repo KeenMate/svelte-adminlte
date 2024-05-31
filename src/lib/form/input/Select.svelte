@@ -1,7 +1,7 @@
 <script lang="ts">
-	import {getValidityClass} from "../../helpers/class-helpers.js"
-	import {Validity} from "../../types/global.js"
+	import {getValidityClass} from "$lib/helpers/class-helpers.js"
 	import TextInput from "$lib/form/input/TextInput.svelte"
+	import {Validity} from "$lib/constants/index.js"
 
 	type Option = { [key: string]: any }
 
@@ -16,7 +16,6 @@
 	export let validity: Validity      = Validity.None
 	export let searchBar: boolean      = false
 	export let internalSearch: boolean = true
-	export let searchFunction: Function
 	export let trackBy: string         = "value"
 	export let optionLabel: string     = "label"
 

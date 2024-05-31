@@ -1,6 +1,6 @@
 <script lang="ts">
 	import {getAccentClass} from "../helpers/class-helpers.js"
-	import {Accents} from "../types/global.js"
+	import {Accents} from "../constants/index.js"
 
 	export let width: string   = "0"
 	export let accent: Accents = Accents.None
