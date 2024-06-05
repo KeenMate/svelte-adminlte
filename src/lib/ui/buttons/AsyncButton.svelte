@@ -33,7 +33,7 @@
 	{#if loading}
 		<i class="fas fa-circle-notch fa-spin fa-fw" style="--fa-animation-duration: 1s"></i>
 	{:else if iconClass}
-		<i class="{iconClass} fa-fw"></i>
+		<i class="{iconClass}"></i>
 	{/if}
 
 	<slot />

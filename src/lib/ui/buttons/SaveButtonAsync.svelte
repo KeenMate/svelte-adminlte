@@ -14,8 +14,8 @@
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
 	$: specialButtonDefaults = $Config.defaults?.buttons?.saveButton || {} || {}
 	$: computedShort = short === undefined
-		? buttonDefaults.short
-		|| specialButtonDefaults.short
+		? specialButtonDefaults.short
+		|| buttonDefaults.short
 		|| false
 		: short
 </script>

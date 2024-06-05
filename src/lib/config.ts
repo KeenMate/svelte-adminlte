@@ -43,13 +43,15 @@ export const Config = writable({
 	defaults: {
 		// todo: add function that will compute options for (specialized) buttons
 
-		/**
-		 * `options` are meant to be base for all buttons while specialized config (e.g. `refreshButton` will override/enhance config of the `options`).
-		 * All these options are supposed to be passed into the `LteButton` as-is
-		 */
 		buttons: {
+			/**
+			 * `options` are meant to be base for all buttons while specialized config (e.g. `refreshButton` will override/enhance config of the `options`).
+			 * All these options are supposed to be passed into the `LteButton` as-is
+			 */
 			options: {
-				size:       null,
+				// note: to be used in the future where button attributes small/xs/large
+				// will be merged into single size attribute
+				// size:       null,
 				borderless: false,
 				outlined:   false,
 				social:     false,
@@ -57,19 +59,28 @@ export const Config = writable({
 				disabled:   false,
 				app:        false,
 				squared:    false,
+				short:      false
 			},
 
+			addButton: {
+				color:     "success",
+				iconClass: "fas fa-plus fa-fw",
+				short: false
+			},
 			refreshButton: {
 				color:     "info",
-				iconClass: "fas fa-sync"
+				iconClass: "fas fa-sync fa-fw",
+				short: false
 			},
 			saveButton:    {
 				color:     "success",
-				iconClass: "fas fa-save"
+				iconClass: "fas fa-save fa-fw",
+				short: false
 			},
 			deleteButton:  {
 				color:     "danger",
-				iconClass: "fas fa-trash"
+				iconClass: "fas fa-trash fa-fw",
+				short: false
 			}
 		},
 	},

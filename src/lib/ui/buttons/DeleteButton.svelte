@@ -14,8 +14,8 @@
 	$: specialButtonDefaults = $Config.defaults?.buttons?.deleteButton || {} || {}
 	$: iconClass = specialButtonDefaults.iconClass
 	$: computedShort = short === undefined
-		? buttonDefaults.short
-		|| specialButtonDefaults.short
+		? specialButtonDefaults.short
+		|| buttonDefaults.short
 		|| false
 		: short
 </script>

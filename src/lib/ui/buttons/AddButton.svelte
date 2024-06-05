@@ -1,23 +1,39 @@
 <script lang="ts">
 	import {LteButton} from "@keenmate/svelte-adminlte"
 	import {_} from "svelte-i18n"
+	import {Config} from "$lib/config.js"
 
+	export let short: boolean | undefined = undefined
 	export let xsmall = false
 	export let small  = false
 	export let large  = false
 
 	$: noSizeSet = !xsmall && !small && !large
+
+	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
+	$: specialButtonDefaults = $Config.defaults?.buttons?.addButton || {} || {}
+	$: iconClass = specialButtonDefaults.iconClass
+	$: computedShort = short === undefined
+		? specialButtonDefaults.short
+		|| buttonDefaults.short
+		|| false
+		: short
 </script>
 
 <LteButton
-	color="success"
 	title={$_("common.buttons.add")}
 	{xsmall}
 	small={small || noSizeSet}
 	{large}
-	{...$$restProps}
+	{...{...buttonDefaults, ...specialButtonDefaults, ...$$restProps}}
 	on:click
 >
-	<i class="fas fa-plus fa-fw" />
-	<slot />
+	<slot>
+		{#if iconClass}
+			<i class={iconClass} />
+		{/if}
+		{#if !computedShort}
+			{$_("common.buttons.add")}
+		{/if}
+	</slot>
 </LteButton>

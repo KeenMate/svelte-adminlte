@@ -12,9 +12,10 @@
 
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
 	$: specialButtonDefaults = $Config.defaults?.buttons?.refreshButton || {} || {}
+	$: iconClass = specialButtonDefaults.iconClass
 	$: computedShort = short === undefined
-		? buttonDefaults.short
-		|| specialButtonDefaults.short
+		? specialButtonDefaults.short
+		|| buttonDefaults.short
 		|| false
 		: short
 </script>
@@ -28,7 +29,9 @@
 	on:click
 >
 	<slot>
-		<i class="fas fa-sync fa-fw" />
+		{#if iconClass}
+			<i class={iconClass} />
+		{/if}
 		{#if !computedShort}
 			{$_("common.buttons.refresh")}
 		{/if}

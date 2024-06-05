@@ -13,8 +13,8 @@
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
 	$: specialButtonDefaults = $Config.defaults?.buttons?.deleteButton || {} || {}
 	$: computedShort = short === undefined
-		? buttonDefaults.short
-		|| specialButtonDefaults.short
+		? specialButtonDefaults.short
+		|| buttonDefaults.short
 		|| false
 		: short
 </script>

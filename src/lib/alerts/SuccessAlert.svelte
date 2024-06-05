@@ -2,9 +2,16 @@
 	import BaseAlert from "./BaseAlert.svelte"
 
 	export let header    = ""
-	export let closeable = true
+	export let closeable: boolean | undefined = undefined
 </script>
 
-<BaseAlert {closeable} {header} icon="check" level="success" on:closed>
+<BaseAlert
+	{header}
+	icon="check"
+	level="success"
+	{closeable}
+	on:closed
+>
+	<slot name="header" slot="header" />
 	<slot />
 </BaseAlert>
