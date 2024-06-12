@@ -48,6 +48,7 @@ export {default as Label} from "./form/structure/Label.svelte"
 /* [4] Structure */
 export {default as BreadcrumbItem} from "./structure/BreadcrumbItem.svelte"
 export {default as Card} from "./structure/Card.svelte"
+export {default as CardTitle} from "./structure/CardTitle.svelte"
 export {default as Modal} from "./structure/modals/Modal.svelte"
 export {default as ConfirmModal} from "./structure/modals/ConfirmModal.svelte"
 export {default as ConnectionClosedModal} from "./structure/modals/ConnectionClosedModal.svelte"
