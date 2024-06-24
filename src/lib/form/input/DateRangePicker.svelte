@@ -67,7 +67,8 @@
 	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
 	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
 	$: picker &&
-		(picker.off("clear:selection", onButtonApply), picker.on("clear:selection", onButtonApply))
+		(picker.off("clear:selection", onClearSelection),
+		picker.on("clear:selection", onClearSelection))
 
 	onDestroy(() => {
 		picker && picker.destroy()
@@ -162,6 +163,10 @@
 
 	function onButtonApply(ds: Date, de: Date) {
 		dispatch("apply", {start: ds, end: de})
+	}
+
+	function onClearSelection() {
+		dispatch("clear")
 	}
 </script>
 
