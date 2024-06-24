@@ -5,8 +5,8 @@
 	const dispatch = createEventDispatcher()
 
 	export let inputElement: HTMLInputElement | null = null
-	export let startDate: Date | null = null
-	export let endDate: Date | null = null
+	export let startDate: Date | ""= ""
+	export let endDate: Date | "" = ""
 	export let minDate: Date | undefined = undefined
 	export let maxDate: Date | undefined = undefined
 	export let position = "bottom right"
