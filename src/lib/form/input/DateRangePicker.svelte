@@ -7,8 +7,8 @@
 	export let inputElement: HTMLInputElement | null = null
 	export let startDate: Date | null = null
 	export let endDate: Date | null = null
-	export let minDate: Date | null = null
-	export let maxDate: Date | null = null
+	export let minDate: Date | undefined = undefined
+	export let maxDate: Date | undefined = undefined
 	export let position = "bottom right"
 	export let single = false
 	export let disabled = false
