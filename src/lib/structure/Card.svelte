@@ -12,6 +12,7 @@
 <script lang="ts">
 	import {setContext} from "svelte"
 	import Loader from "../ui/Loader.svelte"
+	import CardTitle from "$lib/structure/CardTitle.svelte"
 
 	export let color = "default"
 
@@ -49,7 +50,7 @@
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
-				<h3 class="card-title">
+				<CardTitle>
 					<div style="color:{titleColor};">
 						{#if icon !== "" && !$$slots.header}
 							<i class={icon} />
@@ -60,7 +61,7 @@
 							<slot name="header" />
 						{/if}
 					</div>
-				</h3>
+				</CardTitle>
 
 				<div class="card-tools pull-right">
 					<slot name="tools" />
