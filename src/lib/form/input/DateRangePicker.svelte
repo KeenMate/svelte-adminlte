@@ -5,7 +5,7 @@
 	const dispatch = createEventDispatcher()
 
 	export let inputElement: HTMLInputElement | null = null
-	export let startDate: Date | ""= ""
+	export let startDate: Date | "" = ""
 	export let endDate: Date | "" = ""
 	export let minDate: Date | undefined = undefined
 	export let maxDate: Date | undefined = undefined
@@ -46,7 +46,8 @@
 	export let selectForward = false
 	export let showTooltip = true
 	export let showWeekNumbers = false
-	export let resetButton = false
+	type resetBtnFunc = () => HTMLElement
+	export let resetButton: boolean | resetBtnFunc = false
 	export let splitView = false
 	export let switchingMonths: number | null = null
 	export let tooltipNumber: number | null = null
