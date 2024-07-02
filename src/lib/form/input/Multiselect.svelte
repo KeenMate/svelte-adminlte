@@ -50,16 +50,16 @@
 </script>
 
 <select
-	aria-hidden="true"
 	bind:this={selectElement}
 	bind:value
+	aria-hidden="true"
 	class="form-control select2 select2-hidden-accessible form-control-{size ||
 		'md'} {$$props.class || ''}"
 	data-placeholder={placeholder}
-	multiple
-	{readonly}
 	style="width: 100%;"
 	tabindex="-1"
+	{readonly}
+	multiple
 >
 	<slot />
 </select>
