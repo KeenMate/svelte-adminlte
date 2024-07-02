@@ -32,11 +32,11 @@
 	"dependencies": {
 		"@keenmate/js-common-helpers": "^1.0.0",
 		"@keenmate/svelte-common-helpers": "^1.0.1",
-		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@sveltejs/package": "^2.0.2",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"admin-lte": "=3.0.5",
 		"bootstrap": "^4.4.1",
 		"CBuffer": "^2.2.0",

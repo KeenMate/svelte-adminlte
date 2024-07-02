@@ -1,15 +1,17 @@
 <script lang="ts">
 	export let href = null
+	export let isNavLink = false
 </script>
 
 <a
-	class="nav-link dropdown-toggle"
 	{href}
-	id="navbarDropdown"
 	role="button"
 	data-toggle="dropdown"
-	on:click
 	{...$$restProps}
+	class="dropdown-toggle {$$restProps.class || ''}"
+	class:nav-link={isNavLink}
+	class:dropdown-item={!isNavLink}
+	on:click
 >
 	<slot />
 </a>

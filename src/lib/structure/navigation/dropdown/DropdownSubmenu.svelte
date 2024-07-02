@@ -5,12 +5,13 @@
 	export let isDropdownHover = false
 </script>
 
-<ul
-	class="dropdown-menu {$$restProps.class || ''}"
+<li
+	{...$$restProps}
+	class="dropdown-submenu {$$restProps.class || ''}"
 	class:dropdown-menu-lg={large}
 	class:dropdown-menu-left={left}
 	class:dropdown-menu-right={right}
 	class:dropdown-hover={isDropdownHover}
 >
 	<slot />
-</ul>
+</li>

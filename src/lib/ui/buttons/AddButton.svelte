@@ -1,12 +1,12 @@
 <script lang="ts">
-	import {LteButton} from "@keenmate/svelte-adminlte"
 	import {_} from "svelte-i18n"
 	import {Config} from "$lib/config.js"
+	import LteButton from "$lib/ui/buttons/LteButton.svelte"
 
 	export let short: boolean | undefined = undefined
-	export let xsmall = false
-	export let small  = false
-	export let large  = false
+	export let xsmall                     = false
+	export let small                      = false
+	export let large                      = false
 
 	$: noSizeSet = !xsmall && !small && !large
 

@@ -76,6 +76,7 @@ export {default as DropdownButton} from "./structure/navigation/dropdown/Dropdow
 export {default as DropdownDivider} from "./structure/navigation/dropdown/DropdownDivider.svelte"
 export {default as DropdownItem} from "./structure/navigation/dropdown/DropdownItem.svelte"
 export {default as DropdownMenu} from "./structure/navigation/dropdown/DropdownMenu.svelte"
+export {default as DropdownSubmenu} from "./structure/navigation/dropdown/DropdownSubmenu.svelte"
 
 /* [4.1.2] Structure > Navigation > Tabs */
 export {default as TabItem} from "./structure/navigation/tabs/TabItem.svelte"
