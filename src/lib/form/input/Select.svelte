@@ -51,12 +51,12 @@
 <select
 	bind:this={selectElement}
 	bind:value
-	class:is-invalid={invalid}
 	{id}
 	{name}
 	{disabled}
-	class="form-control-{size || 'md'} custom-select {getValidityClass(validity)}"
 	{...$$restProps}
+	class:is-invalid={invalid}
+	class="form-control-{size || 'md'} custom-select {getValidityClass(validity)} {$$restProps.class || ''}"
 	on:change
 	on:focusin
 	on:focusout
