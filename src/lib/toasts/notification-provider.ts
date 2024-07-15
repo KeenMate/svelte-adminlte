@@ -40,7 +40,7 @@ class NotificationProvider {
 		if (!options.timeOut) {
 			options.timeOut = get(Config).ToastrOptions.warningTimeout
 		}
-		Toastr.warning(message, title, { ...options, timeOut: timeout })
+		Toastr.warning(message, title, { ...options, timeOut: options.timeOut })
 	}
 
 	success(message: string, title = "", options: ToastrOptions = {}) {
