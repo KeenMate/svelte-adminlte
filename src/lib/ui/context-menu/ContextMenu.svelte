@@ -6,12 +6,12 @@
 	let contextMenuElement = null
 
 	let posX,
-	    posY,
-	    contextMenuVisible = false
+		posY,
+		contextMenuVisible = false
 
 	export function openContextMenu(pX, pY) {
-		posX               = pX
-		posY               = pY
+		posX = pX
+		posY = pY
 		contextMenuVisible = true
 
 		registerBodyOnClickEvent()
@@ -30,7 +30,7 @@
 		}
 
 		const rect = contextMenuElement.getBoundingClientRect()
-		posX       = Math.min(window.innerWidth - rect.width, posX)
+		posX = Math.min(window.innerWidth - rect.width, posX)
 		if (posY > window.innerHeight - rect.height) {
 			posY -= rect.height
 		}

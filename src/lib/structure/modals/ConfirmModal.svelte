@@ -11,7 +11,7 @@
 
 	export async function showModal(m, h) {
 		message = m
-		header  = h
+		header = h
 		await tick()
 
 		show()

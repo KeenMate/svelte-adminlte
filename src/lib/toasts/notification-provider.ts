@@ -1,9 +1,9 @@
 import CBuffer from "CBuffer"
-import { get, type Writable, writable } from "svelte/store"
-import { DateTime } from "luxon"
+import {get, type Writable, writable} from "svelte/store"
+import {DateTime} from "luxon"
 
 import Toastr from "./toastr.js"
-import { Config } from "$lib/config.js"
+import {Config} from "$lib/config.js"
 
 const MessageCount = 500
 
@@ -30,7 +30,7 @@ class NotificationProvider {
 	}
 
 	#saveMessage(type: string, message: string, title: string) {
-		this.buffer.push({ type, message, title, timestamp: DateTime.now() })
+		this.buffer.push({type, message, title, timestamp: DateTime.now()})
 		this.messages.set(this.buffer.toArray())
 	}
 
@@ -40,7 +40,7 @@ class NotificationProvider {
 		if (!options.timeOut) {
 			options.timeOut = get(Config).ToastrOptions.warningTimeout
 		}
-		Toastr.warning(message, title, { ...options, timeOut: options.timeOut })
+		Toastr.warning(message, title, {...options, timeOut: options.timeOut})
 	}
 
 	success(message: string, title = "", options: ToastrOptions = {}) {
@@ -56,7 +56,7 @@ class NotificationProvider {
 		}
 
 
-		Toastr.error(message, title, { ...options, timeOut: options.timeOut })
+		Toastr.error(message, title, {...options, timeOut: options.timeOut})
 	}
 }
 

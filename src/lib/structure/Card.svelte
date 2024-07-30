@@ -16,16 +16,16 @@
 
 	export let color = "default"
 
-	export let outline               = false
-	export let tabs                  = false
-	export let outlineTabs           = false
-	export let noPadding             = false
-	export let loading               = false
-	export let sharedLoading         = false
-	export let title                 = ""
-	export let icon                  = ""
+	export let outline = false
+	export let tabs = false
+	export let outlineTabs = false
+	export let noPadding = false
+	export let loading = false
+	export let sharedLoading = false
+	export let title = ""
+	export let icon = ""
 	export let headerBackgroundColor = "white"
-	export let titleColor            = "black"
+	export let titleColor = "black"
 
 	if (sharedLoading) {
 		setContext(CardLoadingContext, {

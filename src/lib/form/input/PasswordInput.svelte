@@ -1,11 +1,11 @@
 <script lang="ts">
-	export let id          = ""
-	export let value       = ""
-	export let name        = ""
+	export let id = ""
+	export let value = ""
+	export let name = ""
 	export let placeholder = ""
 	export let size
-	export let disabled    = false
-	export let invalid     = false
+	export let disabled = false
+	export let invalid = false
 
 	export let inputElement = null
 </script>

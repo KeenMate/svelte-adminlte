@@ -3,11 +3,11 @@
 	import AsyncButton from "./AsyncButton.svelte"
 	import {Config} from "$lib/config.js"
 
-	export let type   = "submit"
+	export let type = "submit"
 	export let short: boolean | undefined = undefined
 	export let xsmall = false
-	export let small  = false
-	export let large  = false
+	export let small = false
+	export let large = false
 
 	$: noSizeSet = !xsmall && !small && !large
 

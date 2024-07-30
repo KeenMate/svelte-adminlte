@@ -4,16 +4,16 @@
 	import {debounce} from "lodash"
 	import {Config} from "$lib/config.js"
 
-	export let value          = null
-	export let placeholder    = ""
-	export let readonly       = false
+	export let value = null
+	export let placeholder = ""
+	export let readonly = false
 	export let size
 	export let select2Options = null
 
 	const dispatch = createEventDispatcher()
 
 	let selectElement = null
-	let select$       = null
+	let select$ = null
 
 	$: searchDebounce = debounce(x => {
 		dispatch("search", x)

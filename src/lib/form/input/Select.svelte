@@ -3,21 +3,21 @@
 	import TextInput from "$lib/form/input/TextInput.svelte"
 	import {Validity} from "$lib/constants/index.js"
 
-	type Option = { [key: string]: any }
+	type Option = {[key: string]: any}
 
 
-	export let id: string              = ""
-	export let value: string           = ""
-	export let name: string            = ""
-	export let options: Option[]       = []
-	export let disabled: boolean       = false
-	export let invalid: boolean        = false
-	export let size: string            = "md"
-	export let validity: Validity      = Validity.None
-	export let searchBar: boolean      = false
+	export let id: string = ""
+	export let value: string = ""
+	export let name: string = ""
+	export let options: Option[] = []
+	export let disabled: boolean = false
+	export let invalid: boolean = false
+	export let size: string = "md"
+	export let validity: Validity = Validity.None
+	export let searchBar: boolean = false
 	export let internalSearch: boolean = true
-	export let trackBy: string         = "value"
-	export let optionLabel: string     = "label"
+	export let trackBy: string = "value"
+	export let optionLabel: string = "label"
 
 	let selectElement
 	let typeaheadInput: string = ""

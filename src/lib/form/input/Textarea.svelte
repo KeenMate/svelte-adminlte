@@ -1,25 +1,25 @@
 <script lang="ts">
-	export let id          = ""
-	export let value       = ""
-	export let name        = ""
-	export let rows        = 2
-	export let cols        = ""
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let rows = 2
+	export let cols = ""
 	export let placeholder = ""
 	/**
 	 * @type {string?}
 	 */
-	export let pattern     = null
-	export let readonly    = false
-	export let plaintext   = false
-	export let disabled    = false
+	export let pattern = null
+	export let readonly = false
+	export let plaintext = false
+	export let disabled = false
 	/**
 	 * @type {number?}
 	 */
-	export let maxlength   = null
+	export let maxlength = null
 	/**
 	 * @type {string?}
 	 */
-	export let size        = null
+	export let size = null
 
 	/**
 	 * @type {HTMLTextAreaElement?}

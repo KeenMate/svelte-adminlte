@@ -8,8 +8,8 @@
 	export let enabledWhenLoading = false
 
 	export let iconClass: string | null = null
-	export let disabled: boolean        = false
-	export let loading: boolean         = false
+	export let disabled: boolean = false
+	export let loading: boolean = false
 
 	$: computedDisabled = disabled
 		|| (enabledWhenLoading ? false : loading)

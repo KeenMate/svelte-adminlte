@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BaseAlert from "./BaseAlert.svelte"
 
-	export let header                         = ""
+	export let header = ""
 	export let closeable: boolean | undefined = undefined
 </script>
 

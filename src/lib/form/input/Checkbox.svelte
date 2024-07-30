@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let checked       = false
-	export let group         = null
+	export let checked = false
+	export let group = null
 	export let indeterminate = false
-	export let id            = ""
-	export let value         = ""
-	export let name          = ""
-	export let disabled      = false
-	export let level         = "primary"
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let disabled = false
+	export let level = "primary"
 </script>
 
 <div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">

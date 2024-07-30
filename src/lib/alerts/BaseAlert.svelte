@@ -3,10 +3,10 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let header: string | undefined     = undefined
+	export let header: string | undefined = undefined
 	export let closeable: boolean | undefined = undefined
-	export let level                          = ""
-	export let icon                           = ""
+	export let level = ""
+	export let icon = ""
 
 	function alertClosed() {
 		dispatch("closed")

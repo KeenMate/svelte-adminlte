@@ -4,7 +4,7 @@
 	export let listElement
 	export let items
 	export let idProp = "id"
-	export let color  = "info"
+	export let color = "info"
 </script>
 
 <div bind:this={listElement} id="draggable-list">

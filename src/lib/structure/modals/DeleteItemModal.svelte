@@ -13,7 +13,7 @@
 
 		return new Promise((resolve, reject) => {
 			resolveModal = resolve
-			rejectModal  = reject
+			rejectModal = reject
 		})
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let right     = false
-	export let large     = false
+	export let right = false
+	export let large = false
 	export let isSubmenu = false
 </script>
 

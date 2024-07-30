@@ -12,16 +12,16 @@
 	/**
 	 * @type {string?}
 	 */
-	export let color         = null
-	export let escapeClose   = true
-	export let clickClose    = true
-	export let showClose     = true
+	export let color = null
+	export let escapeClose = true
+	export let clickClose = true
+	export let showClose = true
 	export let closeExisting = false
-	export let small         = false
-	export let large         = false
-	export let xlarge        = false
-	export let center        = false
-	export let loading       = false
+	export let small = false
+	export let large = false
+	export let xlarge = false
+	export let center = false
+	export let loading = false
 
 	export function toggle() {
 		if (!opened) {
@@ -53,8 +53,8 @@
 	/**
 	 * @type {HTMLDivElement?}
 	 */
-	let modalElement           = null
-	let opened                 = false
+	let modalElement = null
+	let opened = false
 	let documentHadOpenedModal = false
 
 	$: modalElement && initModal()
@@ -96,7 +96,7 @@
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show:     false
+			show: false
 		})
 
 		jModalElement.on("hidden.bs.modal", onModalHidden)

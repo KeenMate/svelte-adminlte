@@ -3,18 +3,18 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let checked           = false
+	export let checked = false
 	export let id: string | null = null
-	export let checkedClass      = ""
-	export let uncheckedClass    = ""
-	export let disabledClass     = ""
-	export let disabled          = false
+	export let checkedClass = ""
+	export let uncheckedClass = ""
+	export let disabledClass = ""
+	export let disabled = false
 
 	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass
 
 	function onChange(ev: InputEvent) {
 		const inputChecked = (ev.target as HTMLInputElement).checked
-		
+
 		dispatch("change", inputChecked)
 		if (inputChecked) {
 			dispatch("checked")

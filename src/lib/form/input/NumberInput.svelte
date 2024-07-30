@@ -1,31 +1,31 @@
 <script lang="ts">
 	import Inputmask from "inputmask"
 
-	export let id          = ""
+	export let id = ""
 	/**
 	 * @type {number?}
 	 */
-	export let value       = null
-	export let name        = ""
+	export let value = null
+	export let name = ""
 	export let placeholder = ""
 	/**
 	 * @type {string?}
 	 */
-	export let pattern     = null
-	export let readonly    = false
-	export let plaintext   = false
-	export let disabled    = false
+	export let pattern = null
+	export let readonly = false
+	export let plaintext = false
+	export let disabled = false
 	/**
 	 * @type {string?}
 	 */
-	export let inputMask   = null
-	export let invalid     = false
+	export let inputMask = null
+	export let invalid = false
 	/**
 	 * @type {string?}
 	 */
-	export let size        = "md"
-	export let min         = ""
-	export let max         = ""
+	export let size = "md"
+	export let min = ""
+	export let max = ""
 
 	/**
 	 * @type {HTMLInputElement?}

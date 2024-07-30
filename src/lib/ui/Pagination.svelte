@@ -8,7 +8,7 @@
 	export let page: number
 	export let pages: number
 	export let visiblePagesCount = 5
-	export let showEllipsis      = false
+	export let showEllipsis = false
 
 	$: leftBorder = Math.max(page - visiblePagesCount, minPage)
 	$: rightBorder = Math.min(page + visiblePagesCount, pages)

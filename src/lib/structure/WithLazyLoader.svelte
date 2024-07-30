@@ -11,7 +11,7 @@
 
 	interface $$Slots {
 		// If you want to type the default slot, change the property name below to "default"
-		default: { data: TData }
+		default: {data: TData}
 		catch: {}
 		loader: {}
 	}
@@ -19,7 +19,7 @@
 	const context: contextType = getContext(CardLoadingContext)
 
 	export let task: Promise<TData>
-	export let loading       = false
+	export let loading = false
 	export let parentLoading = false
 
 	let oldData: TData
