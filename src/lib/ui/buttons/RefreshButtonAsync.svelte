@@ -11,7 +11,7 @@
 	$: noSizeSet = !xsmall && !small && !large
 
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
-	$: specialButtonDefaults = $Config.defaults?.buttons?.refreshButton || {} || {}
+	$: specialButtonDefaults = $Config.defaults?.buttons?.refreshButton || {}
 	$: computedShort = short === undefined
 		? specialButtonDefaults.short
 		|| buttonDefaults.short

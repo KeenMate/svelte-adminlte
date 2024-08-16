@@ -12,7 +12,7 @@
 	$: noSizeSet = !xsmall && !small && !large
 
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
-	$: specialButtonDefaults = $Config.defaults?.buttons?.saveButton || {} || {}
+	$: specialButtonDefaults = $Config.defaults?.buttons?.saveButton || {}
 	$: iconClass = specialButtonDefaults.iconClass
 	$: computedShort = short === undefined
 		? specialButtonDefaults.short

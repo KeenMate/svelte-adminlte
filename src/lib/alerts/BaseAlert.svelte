@@ -3,10 +3,10 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let header: string | undefined = undefined
+	export let header: string | null | undefined = undefined
 	export let closeable: boolean | undefined = undefined
-	export let level = ""
-	export let icon = ""
+	export let level: string | null | undefined = undefined
+	export let icon: string | null | undefined = undefined
 
 	function alertClosed() {
 		dispatch("closed")
@@ -37,3 +37,13 @@
 
 	<slot />
 </div>
+
+<style lang="scss">
+	.alert {
+		h4 {
+			&:empty {
+				display: none;
+			}
+		}
+	}
+</style>

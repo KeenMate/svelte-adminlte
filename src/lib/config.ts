@@ -43,8 +43,31 @@ export const Config = writable({
 	currentUser: null,
 
 	defaults: {
-		// todo: add function that will compute options for (specialized) buttons
+		alerts: {
+			base: {
+				iconClass: null,
+				level: null
+			},
 
+			warning: {
+				iconClass: "fa-exclamation-triangle",
+				level: "warning"
+			},
+			success: {
+				iconClass: "fa-check",
+				level: "success"
+			},
+			info: {
+				iconClass: "fa-info",
+				level: "info"
+			},
+			danger: {
+				iconClass: "fa-ban",
+				level: "danger"
+			}
+		},
+
+		// todo: add function that will compute options for (specialized) buttons
 		buttons: {
 			/**
 			 * `options` are meant to be base for all buttons while specialized config (e.g. `refreshButton` will override/enhance config of the `options`).
