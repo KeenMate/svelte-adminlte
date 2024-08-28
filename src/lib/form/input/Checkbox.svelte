@@ -7,9 +7,14 @@
 	export let name = ""
 	export let disabled = false
 	export let level = "primary"
+	
+	$: classContainsFlex = $$restProps.class?.split(" ").some((x: string) => /flex/.test(x)) || false
 </script>
 
-<div class="icheck-{level} d-flex align-items-center {$$props.class || ''}">
+<div
+	{...$$restProps}
+	class="icheck-{level} {classContainsFlex ? '' : 'd-flex align-items-center'} {$$props.class || ''}"
+>
 	<input
 		type="checkbox"
 		{checked}
