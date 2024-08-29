@@ -4,7 +4,7 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let action: (() => Promise<any>) | null
+	export let action: (() => Promise<any>) | null = null
 	export let enabledWhenLoading = false
 
 	export let iconClass: string | null = null
