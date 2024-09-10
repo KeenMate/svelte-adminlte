@@ -1,4 +1,6 @@
 <script lang="ts">
+	import useActions from "$lib/actions/use-actions.js"
+
 	export let href: string
 	export let target: string | null = null
 	export let color: string | null = null
@@ -14,6 +16,7 @@
 	export let app = false
 	export let squared = false
 	export let icon: string | null = null
+	export let use: ((node: HTMLElement) => any) | undefined = undefined
 
 	$: buttonClass = "btn-" + ((outlined && "outline-") || "") + (color || "default")
 </script>
@@ -31,6 +34,7 @@
 	class:disabled
 	class:squared
 	data-toggle={toggle || null}
+	use:useActions={use}
 	{...$$restProps}
 	class="btn btn-flat {!link ? buttonClass : ''} {$$restProps.class || ''}"
 	on:click

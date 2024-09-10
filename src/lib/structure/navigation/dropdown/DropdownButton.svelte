@@ -1,15 +1,19 @@
 <script lang="ts">
-	export let href = null
+	import useActions from "$lib/actions/use-actions.js"
+
+	export let href: string | undefined = undefined
+	export let use: ((node: HTMLElement) => any) | undefined = undefined
 </script>
 
 <a
-	class="nav-link dropdown-toggle"
-	{href}
 	id="navbarDropdown"
+	{href}
 	role="button"
+	class="nav-link dropdown-toggle"
 	data-toggle="dropdown"
-	on:click
+	use:useActions={use}
 	{...$$restProps}
+	on:click
 >
 	<slot />
 </a>
