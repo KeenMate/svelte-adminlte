@@ -50,17 +50,15 @@
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
-				<CardTitle>
-					<div style="color:{titleColor};">
-						{#if icon !== "" && !$$slots.header}
-							<i class={icon} />
-						{/if}
-						{#if title !== "" && !$$slots.header}
-							{title}
-						{:else}
-							<slot name="header" />
-						{/if}
-					</div>
+				<CardTitle color={titleColor}>
+					{#if icon !== "" && !$$slots.header}
+						<i class={icon} />
+					{/if}
+					{#if title !== "" && !$$slots.header}
+						{title}
+					{:else}
+						<slot name="header" />
+					{/if}
 				</CardTitle>
 
 				<div class="card-tools pull-right">
