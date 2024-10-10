@@ -3,6 +3,9 @@
 	import jQuery from "jquery"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 	import Loader from "$lib/ui/Loader.svelte"
+	import {createEventDispatcher} from "svelte"
+	
+	const dispatch = createEventDispatcher()
 
 	/**
 	 * @type {any?}
@@ -100,16 +103,23 @@
 		})
 
 		jModalElement.on("hidden.bs.modal", onModalHidden)
+		jModalElement.on("shown.bs.modal", onModalShown)
 		jModalElement.on("show.bs.modal", onModalShow)
 	}
 
 	async function onModalHidden() {
+		dispatch("hidden")
+		
 		await tick()
 		afterCloseModal()
 	}
 
 	function onModalShow() {
 		beforeOpenModal()
+	}
+	
+	function onModalShown() {
+		dispatch("shown")
 	}
 
 	/**
