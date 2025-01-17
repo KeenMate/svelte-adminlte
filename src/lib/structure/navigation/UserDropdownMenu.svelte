@@ -2,7 +2,7 @@
 	import {createEventDispatcher} from "svelte"
 
 	export let displayName = "Neznámý"
-	export let darkTheme   = false
+	export let darkTheme = false
 
 	const dispatch = createEventDispatcher()
 

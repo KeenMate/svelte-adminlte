@@ -5,25 +5,27 @@
 	import "toastr/build/toastr.css"
 	import TextInput from "$lib/form/input/TextInput.svelte"
 	// import TopNavigation from "$lib/structure/navigation/TopNavigation.svelte"
-	import {TopNavigation} from "$lib/index.js"
-	import {Sidebar} from "$lib/index.js"
-	import {SidebarNavItem} from "$lib/index.js"
-	import {TopNavItem} from "$lib/index.js"
-	import {Form} from "$lib/index.js"
-	import {Label} from "$lib/index.js"
-	import {Card} from "$lib/index.js"
-	import {EmailInput} from "$lib/index.js"
-	import {PasswordInput} from "$lib/index.js"
-	import {FileInput} from "$lib/index.js"
-	import {Checkbox} from "$lib/index.js"
-	import {LteButton} from "$lib/index.js"
-	import {ButtonGroup} from "$lib/index.js"
-	import {InputGroup} from "$lib/index.js"
-	import {FormGroup} from "$lib/index.js"
-	import {Textarea} from "$lib/index.js"
-	import {CheckboxSimple} from "$lib/index.js"
-	import {RadioSimple} from "$lib/index.js"
-	import {Select} from "$lib/index.js"
+	import {
+		ButtonGroup,
+		Card,
+		Checkbox,
+		CheckboxSimple,
+		EmailInput,
+		FileInput,
+		Form,
+		FormGroup,
+		InputGroup,
+		Label,
+		LteButton,
+		PasswordInput,
+		RadioSimple,
+		Select,
+		Sidebar,
+		SidebarNavItem,
+		Textarea,
+		TopNavigation,
+		TopNavItem
+	} from "$lib/index.js"
 
 	const options = [
 		{value: "option1", label: "Option 1"},
@@ -392,7 +394,7 @@
 									<Select
 										{options}
 										multiple
-									
+
 									/>
 								</FormGroup>
 							</div>

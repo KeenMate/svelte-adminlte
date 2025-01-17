@@ -6,12 +6,12 @@
 	const dispatch = createEventDispatcher()
 
 	export let value: string
-	export let disabled         = false
-	export let readonly         = false
-	export let id               = "ckEditorId"
+	export let disabled = false
+	export let readonly = false
+	export let id = "ckEditorId"
 	export let additionalConfig = {}
 
-	let editor              = DecoupledEditor
+	let editor = DecoupledEditor
 	let editorInstance: any = null
 
 	let localValue = ""
@@ -30,14 +30,14 @@
 
 	$: editorInstance && (editorInstance.isReadOnly = disabled || readonly)
 
-	function onReady({detail: editor}: { detail: any }) {
+	function onReady({detail: editor}: {detail: any}) {
 		editorInstance = editor
 		editor.ui
 			.getEditableElement()
 			.parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement())
 	}
 
-	function onInput({detail: {data}}: { detail: { data: string } }) {
+	function onInput({detail: {data}}: {detail: {data: string}}) {
 		dispatch("input", data)
 	}
 </script>

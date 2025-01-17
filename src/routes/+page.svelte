@@ -11,5 +11,6 @@
 <TextInput />
 <LteButton
 	icon="fas fa-plus"
-	link>Hello</LteButton
+	link>Hello
+</LteButton
 >

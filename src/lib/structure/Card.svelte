@@ -16,16 +16,16 @@
 
 	export let color = "default"
 
-	export let outline               = false
-	export let tabs                  = false
-	export let outlineTabs           = false
-	export let noPadding             = false
-	export let loading               = false
-	export let sharedLoading         = false
-	export let title                 = ""
-	export let icon                  = ""
+	export let outline = false
+	export let tabs = false
+	export let outlineTabs = false
+	export let noPadding = false
+	export let loading = false
+	export let sharedLoading = false
+	export let title = ""
+	export let icon = ""
 	export let headerBackgroundColor = "white"
-	export let titleColor            = "black"
+	export let titleColor = "black"
 
 	if (sharedLoading) {
 		setContext(CardLoadingContext, {
@@ -50,17 +50,15 @@
 			{#if $$slots.fullHeader}
 				<slot name="fullHeader" />
 			{:else}
-				<CardTitle>
-					<div style="color:{titleColor};">
-						{#if icon !== "" && !$$slots.header}
-							<i class={icon} />
-						{/if}
-						{#if title !== "" && !$$slots.header}
-							{title}
-						{:else}
-							<slot name="header" />
-						{/if}
-					</div>
+				<CardTitle color={titleColor}>
+					{#if icon !== "" && !$$slots.header}
+						<i class={icon} />
+					{/if}
+					{#if title !== "" && !$$slots.header}
+						{title}
+					{:else}
+						<slot name="header" />
+					{/if}
 				</CardTitle>
 
 				<div class="card-tools pull-right">

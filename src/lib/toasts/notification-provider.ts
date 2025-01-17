@@ -1,15 +1,16 @@
 import CBuffer from "CBuffer"
-import {type Writable, writable} from "svelte/store"
+import {get, type Writable, writable} from "svelte/store"
 import {DateTime} from "luxon"
 
 import Toastr from "./toastr.js"
+import {Config} from "$lib/config.js"
 
 const MessageCount = 500
 
 export const NotificationType = {
 	Warning: "Warning",
 	Success: "Success",
-	Error:   "Error"
+	Error: "Error"
 }
 
 type message = {
@@ -24,7 +25,7 @@ class NotificationProvider {
 	messages: Writable<message[]>
 
 	constructor() {
-		this.buffer   = new CBuffer<message>(MessageCount)
+		this.buffer = new CBuffer<message>(MessageCount)
 		this.messages = writable([])
 	}
 
@@ -33,19 +34,29 @@ class NotificationProvider {
 		this.messages.set(this.buffer.toArray())
 	}
 
-	warning(message: string, title = "", options = {}) {
+	warning(message: string, title = "", options: ToastrOptions = {}) {
 		this.#saveMessage(NotificationType.Warning, message, title)
-		Toastr.warning(message, title, options)
+
+		if (!options.timeOut) {
+			options.timeOut = get(Config).ToastrOptions.warningTimeout
+		}
+		Toastr.warning(message, title, {...options, timeOut: options.timeOut})
 	}
 
-	success(message: string, title = "", options = {}) {
+	success(message: string, title = "", options: ToastrOptions = {}) {
 		this.#saveMessage(NotificationType.Success, message, title)
 		Toastr.success(message, title, options)
 	}
 
-	error(message: string, title = "", options = {}) {
+	error(message: string, title = "", options: ToastrOptions = {}) {
 		this.#saveMessage(NotificationType.Error, message, title)
-		Toastr.error(message, title, options)
+
+		if (!options.timeOut) {
+			options.timeOut = get(Config).ToastrOptions.errorTimeout
+		}
+
+
+		Toastr.error(message, title, {...options, timeOut: options.timeOut})
 	}
 }
 

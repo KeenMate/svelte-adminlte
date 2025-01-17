@@ -58,17 +58,17 @@
 	$: inputElement && initPicker()
 
 	$: picker &&
-		(single
-			? checkValidDate(startDate) && picker.setDate(startDate)
-			: checkValidDate(startDate) &&
-			  checkValidDate(endDate) &&
-			  picker.setDateRange(startDate, endDate))
+	(single
+		? checkValidDate(startDate) && picker.setDate(startDate)
+		: checkValidDate(startDate) &&
+		checkValidDate(endDate) &&
+		picker.setDateRange(startDate, endDate))
 	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
 	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
 	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
 	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
 	$: picker &&
-		(picker.off("clear:selection", onClearSelection),
+	(picker.off("clear:selection", onClearSelection),
 		picker.on("clear:selection", onClearSelection))
 
 	onDestroy(() => {

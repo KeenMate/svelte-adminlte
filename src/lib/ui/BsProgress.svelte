@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let value = 0
-	export let min   = 0
-	export let max   = 100
+	export let min = 0
+	export let max = 100
 
 	export let color = "default"
 </script>

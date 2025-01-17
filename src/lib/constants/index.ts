@@ -1,21 +1,21 @@
 export enum Validity {
-	None    = "none",
+	None = "none",
 	Invalid = "invalid",
 	Warning = "warning",
-	Valid   = "valid"
+	Valid = "valid"
 }
 
 export enum Accents {
-	None    = "none",
-	Info    = "info",
-	Danger  = "danger",
+	None = "none",
+	Info = "info",
+	Danger = "danger",
 	Warning = "warning",
 	Success = "success"
 }
 
 export enum Shadow {
-	None    = "none",
-	Small   = "small",
+	None = "none",
+	Small = "small",
 	Regular = "regular",
-	Large   = "large"
+	Large = "large"
 }

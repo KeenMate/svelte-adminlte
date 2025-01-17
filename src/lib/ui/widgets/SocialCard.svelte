@@ -3,12 +3,13 @@
 	import {Accents} from "../../constants/index.js"
 	import {getAccentClass} from "../../helpers/class-helpers.js"
 	import Badge from "$lib/ui/Badge.svelte"
+	import useActions from "$lib/actions/use-actions.js"
 
-	export let image: string       = ""
-	export let username: string    = ""
+	export let image: string = ""
+	export let username: string = ""
 	export let description: string = ""
 
-	type FooterItem = { title: string; amount: string | number; url: string }
+	type FooterItem = {title: string; amount: string | number; url: string}
 	export let footerItems: FooterItem[] = []
 
 	export let badgeColor: string = ""
@@ -16,8 +17,9 @@
 	export let horizontalLayout: boolean = false
 
 	export let headerAccent: Accents = Accents.None
-	export let headerAlign: string   = ""
-	export let headerImage: string   = ""
+	export let headerAlign: string = ""
+	export let headerImage: string = ""
+	export let use: ((node: HTMLElement) => any) | undefined = undefined
 
 	let style = ""
 	if (headerImage) {
@@ -53,6 +55,7 @@
 							<a
 								href={item.url}
 								class="nav-link"
+								use:useActions={use}
 							>
 								{item.title}
 								<Badge

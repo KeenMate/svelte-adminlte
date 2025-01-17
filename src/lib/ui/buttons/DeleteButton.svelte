@@ -4,14 +4,14 @@
 	import {Config} from "$lib/config.js"
 
 	export let short: boolean | undefined = undefined
-	export let xsmall                     = false
-	export let small                      = false
-	export let large                      = false
+	export let xsmall = false
+	export let small = false
+	export let large = false
 
 	$: noSizeSet = !xsmall && !small && !large
 
 	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
-	$: specialButtonDefaults = $Config.defaults?.buttons?.deleteButton || {} || {}
+	$: specialButtonDefaults = $Config.defaults?.buttons?.deleteButton || {}
 	$: iconClass = specialButtonDefaults.iconClass
 	$: computedShort = short === undefined
 		? specialButtonDefaults.short

@@ -1,18 +1,18 @@
 <script lang="ts">
 	export let type: "button" | "reset" | "submit" | null = "button"
-	export let color: string | null                       = null
-	export let toggle: string | null                      = null
-	export let xsmall                                     = false
-	export let small                                      = false
-	export let large                                      = false
-	export let borderless                                 = false
-	export let outlined                                   = false
-	export let social                                     = false
-	export let link                                       = false
-	export let disabled                                   = false
-	export let app                                        = false
-	export let squared                                    = false
-	export let icon: string | null                        = null
+	export let color: string | null = null
+	export let toggle: string | null = null
+	export let xsmall = false
+	export let small = false
+	export let large = false
+	export let borderless = false
+	export let outlined = false
+	export let social = false
+	export let link = false
+	export let disabled = false
+	export let app = false
+	export let squared = false
+	export let icon: string | null = null
 
 	$: buttonClass = "btn-" + ((outlined && "outline-") || "") + (color || "default")
 </script>

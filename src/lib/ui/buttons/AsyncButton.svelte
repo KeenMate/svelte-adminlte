@@ -4,15 +4,14 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let action: (<T>() => Promise<T>) | null
+	export let action: (() => Promise<any>) | null = null
 	export let enabledWhenLoading = false
 
 	export let iconClass: string | null = null
-	export let disabled: boolean        = false
-	export let loading: boolean         = false
+	export let disabled: boolean = false
+	export let loading: boolean = false
 
-	$: computedDisabled = disabled
-		|| (enabledWhenLoading ? false : loading)
+	$: computedDisabled = disabled || (enabledWhenLoading ? false : loading)
 
 	async function onClick(ev: MouseEvent) {
 		if (!action) {
@@ -29,11 +28,18 @@
 	}
 </script>
 
-<LteButton {...$$restProps} disabled={computedDisabled} on:click={onClick}>
+<LteButton
+	{...$$restProps}
+	disabled={computedDisabled}
+	on:click={onClick}
+>
 	{#if loading}
-		<i class="fas fa-circle-notch fa-spin fa-fw" style="--fa-animation-duration: 1s"></i>
+		<i
+			class="fas fa-circle-notch fa-spin fa-fw"
+			style="--fa-animation-duration: 1s"
+		/>
 	{:else if iconClass}
-		<i class="{iconClass}"></i>
+		<i class={iconClass} />
 	{/if}
 
 	<slot />

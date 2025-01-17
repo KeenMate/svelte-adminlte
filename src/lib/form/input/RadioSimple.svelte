@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let id       = ""
-	export let value    = ""
-	export let name     = ""
+	export let id = ""
+	export let value = ""
+	export let name = ""
 	export let disabled = false
 	export let group
 </script>

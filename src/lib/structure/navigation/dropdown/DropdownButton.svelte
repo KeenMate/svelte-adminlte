@@ -1,16 +1,18 @@
 <script lang="ts">
-	export let href = null
-	export let isNavLink = false
+	import useActions from "$lib/actions/use-actions.js"
+
+	export let href: string | undefined = undefined
+	export let use: ((node: HTMLElement) => any) | undefined = undefined
 </script>
 
 <a
+	id="navbarDropdown"
 	{href}
 	role="button"
+	class="nav-link dropdown-toggle"
 	data-toggle="dropdown"
+	use:useActions={use}
 	{...$$restProps}
-	class="dropdown-toggle {$$restProps.class || ''}"
-	class:nav-link={isNavLink}
-	class:dropdown-item={!isNavLink}
 	on:click
 >
 	<slot />

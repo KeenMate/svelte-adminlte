@@ -1,11 +1,20 @@
 <script lang="ts">
-	export let active = false
+	import useActions from "$lib/actions/use-actions.js"
+	
+	export let active: boolean = false
+	export let use: ((node: HTMLElement) => any) | undefined = undefined
 </script>
 
 <li class="nav-item {$$props.class || ''}" role="presentation" on:click>
 	<!-- svelte-ignore a11y-invalid-attribute -->
 	<!-- eslint-disable-next-line -->
-	<a class="nav-link" class:active href="javascript:void(0)" {...$$restProps}>
+	<a
+		href="javascript:void(0)"
+		class="nav-link"
+		class:active
+		use:useActions={use}
+		{...$$restProps}
+	>
 		<slot />
 	</a>
 </li>

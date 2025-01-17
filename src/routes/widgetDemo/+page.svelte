@@ -4,14 +4,8 @@
 	import "admin-lte/build/scss/AdminLTE.scss"
 	import "toastr/build/toastr.css"
 	// import TopNavigation from "$lib/structure/navigation/TopNavigation.svelte"
-	import {TopNavigation} from "$lib/index.js"
-	import {Sidebar} from "$lib/index.js"
-	import {SidebarNavItem} from "$lib/index.js"
-	import {TopNavItem} from "$lib/index.js"
-	import {InputGroup} from "$lib/index.js"
-	import {InfoBox} from "$lib/index.js"
-	import {SocialCard} from "$lib/index.js"
-	
+	import {InfoBox, InputGroup, Sidebar, SidebarNavItem, SocialCard, TopNavigation, TopNavItem} from "$lib/index.js"
+
 
 	const footerItems = [
 		{title: "Projects", amount: 31, url: "test"},
@@ -265,7 +259,7 @@
 					smallBox="true"
 					text="User Registrations"
 
-					
+
 				>
 					<div slot="number">1234</div>
 				</InfoBox>

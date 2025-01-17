@@ -3,6 +3,9 @@
 	import jQuery from "jquery"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 	import Loader from "$lib/ui/Loader.svelte"
+	import {createEventDispatcher} from "svelte"
+	
+	const dispatch = createEventDispatcher()
 
 	/**
 	 * @type {any?}
@@ -12,16 +15,16 @@
 	/**
 	 * @type {string?}
 	 */
-	export let color         = null
-	export let escapeClose   = true
-	export let clickClose    = true
-	export let showClose     = true
+	export let color = null
+	export let escapeClose = true
+	export let clickClose = true
+	export let showClose = true
 	export let closeExisting = false
-	export let small         = false
-	export let large         = false
-	export let xlarge        = false
-	export let center        = false
-	export let loading       = false
+	export let small = false
+	export let large = false
+	export let xlarge = false
+	export let center = false
+	export let loading = false
 
 	export function toggle() {
 		if (!opened) {
@@ -53,8 +56,8 @@
 	/**
 	 * @type {HTMLDivElement?}
 	 */
-	let modalElement           = null
-	let opened                 = false
+	let modalElement = null
+	let opened = false
 	let documentHadOpenedModal = false
 
 	$: modalElement && initModal()
@@ -96,20 +99,27 @@
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show:     false
+			show: false
 		})
 
 		jModalElement.on("hidden.bs.modal", onModalHidden)
+		jModalElement.on("shown.bs.modal", onModalShown)
 		jModalElement.on("show.bs.modal", onModalShow)
 	}
 
 	async function onModalHidden() {
+		dispatch("hidden")
+		
 		await tick()
 		afterCloseModal()
 	}
 
 	function onModalShow() {
 		beforeOpenModal()
+	}
+	
+	function onModalShown() {
+		dispatch("shown")
 	}
 
 	/**

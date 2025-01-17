@@ -9,9 +9,10 @@
 
 	export let htmlDisabled = false
 
-	export async function showModal(m, h) {
-		message = m
-		header  = h
+	export async function showModal(message_?: string | null, header_?: string | null, data_?: any) {
+		message = message_
+		header = header_
+		data = data_
 		await tick()
 
 		show()
@@ -26,8 +27,11 @@
 	}
 
 	let jModalElement
-	let show, hide
-	let message, header
+	let show: () => void
+	let hide: () => void
+	let message: string | null | undefined
+	let header: string | null | undefined
+	let data: any
 
 	let resolveModal
 
@@ -53,20 +57,24 @@
 
 <Modal bind:jModalElement bind:show bind:hide {...$$restProps}>
 	<svelte:fragment slot="header">
-		{#if htmlDisabled}
-			{header || ""}
-		{:else}
-			{@html header || ""}
-		{/if}
+		<slot name="header" {data}>
+			{#if htmlDisabled}
+				{header || ""}
+			{:else}
+				{@html header || ""}
+			{/if}
+		</slot>
 	</svelte:fragment>
 
-	<p>
-		{#if htmlDisabled}
-			{message || ""}
-		{:else}
-			{@html message || ""}
-		{/if}
-	</p>
+	<slot {data}>
+		<p>
+			{#if htmlDisabled}
+				{message || ""}
+			{:else}
+				{@html message || ""}
+			{/if}
+		</p>
+	</slot>
 
 	<svelte:fragment slot="actions">
 		<ModalCloseButton>

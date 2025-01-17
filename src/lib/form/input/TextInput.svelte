@@ -2,19 +2,19 @@
 	import Inputmask from "inputmask"
 	import {getValidityClass} from "../../helpers/class-helpers.js"
 
-	export let id                       = ""
-	export let value                    = ""
-	export let name                     = ""
-	export let placeholder              = ""
-	export let pattern: string | null   = null
-	export let readonly                 = false
-	export let plaintext                = false
-	export let disabled                 = false
+	export let id = ""
+	export let value = ""
+	export let name = ""
+	export let placeholder = ""
+	export let pattern: string | null = null
+	export let readonly = false
+	export let plaintext = false
+	export let disabled = false
 	export let inputMask: string | null = null
-	export let invalid                  = false
+	export let invalid = false
 	export let maxlength: number | null = null
-	export let size                     = "md"
-	export let validity                 = "none"
+	export let size = "md"
+	export let validity = "none"
 
 	export let inputElement: HTMLInputElement | null = null
 
