@@ -1,4 +1,5 @@
 <!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot making the component unusable -->
+<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot making the component unusable -->
 <script lang="ts">
 	// this is working in bundle
 	import {getContext} from "svelte"

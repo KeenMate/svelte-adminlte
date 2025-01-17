@@ -1,4 +1,5 @@
 <!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot making the component unusable -->
+<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot making the component unusable -->
 <script lang="ts">
 	import {createEventDispatcher, tick} from "svelte"
 	import {_} from "svelte-i18n"
