@@ -1,31 +1,45 @@
 <script lang="ts">
-	export let iconClasses = null
+	interface Props {
+		iconClasses?: any;
+		time?: import('svelte').Snippet;
+		header?: import('svelte').Snippet;
+		children?: import('svelte').Snippet;
+		footer?: import('svelte').Snippet;
+	}
+
+	let {
+		iconClasses = null,
+		time,
+		header,
+		children,
+		footer
+	}: Props = $props();
 </script>
 
 <li>
-	<i class={iconClasses || ""} />
+	<i class={iconClasses || ""}></i>
 
 	<div class="timeline-item">
-		{#if $$slots.time}
+		{#if time}
 			<span class="time">
-				<i class="fa fa-clock-o" />
-				<slot name="time" />
+				<i class="fa fa-clock-o"></i>
+				{@render time?.()}
 			</span>
 		{/if}
 
-		{#if $$slots.header}
+		{#if header}
 			<h3 class="timeline-header">
-				<slot name="header" />
+				{@render header?.()}
 			</h3>
 		{/if}
 
 		<div class="timeline-body">
-			<slot />
+			{@render children?.()}
 		</div>
 
-		{#if $$slots.footer}
+		{#if footer}
 			<div class="timeline-footer">
-				<slot name="footer" />
+				{@render footer?.()}
 			</div>
 		{/if}
 	</div>

@@ -1,8 +1,17 @@
 <script lang="ts">
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import useActions from "$lib/actions/use-actions.js"
 
-	export let href: string | undefined = undefined
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	interface Props {
+		href?: string | undefined;
+		use?: ((node: HTMLElement) => any) | undefined;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { href = undefined, use = undefined, children, ...rest }: Props = $props();
 </script>
 
 <a
@@ -12,8 +21,8 @@
 	class="nav-link dropdown-toggle"
 	data-toggle="dropdown"
 	use:useActions={use}
-	{...$$restProps}
-	on:click
+	{...rest}
+	onclick={bubble('click')}
 >
-	<slot />
+	{@render children?.()}
 </a>

@@ -1,16 +1,32 @@
 <script lang="ts">
-	export let color: string | boolean | null = null
+	interface Props {
+		color?: string | boolean | null;
+		header?: import('svelte').Snippet;
+		beforeNav?: import('svelte').Snippet;
+		children?: import('svelte').Snippet;
+		afterNav?: import('svelte').Snippet;
+		afterSidebar?: import('svelte').Snippet;
+	}
 
-	$: sidebarColor = color !== false ? (color && `sidebar-${color}`) || "sidebar-dark-primary" : ""
+	let {
+		color = null,
+		header,
+		beforeNav,
+		children,
+		afterNav,
+		afterSidebar
+	}: Props = $props();
+
+	let sidebarColor = $derived(color !== false ? (color && `sidebar-${color}`) || "sidebar-dark-primary" : "")
 </script>
 
 <aside class="main-sidebar {sidebarColor} elevation-4">
 	<!-- Brand Logo -->
-	<slot name="header" />
+	{@render header?.()}
 
 	<!-- Sidebar -->
 	<div class="sidebar">
-		<slot name="beforeNav" />
+		{@render beforeNav?.()}
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
@@ -18,14 +34,14 @@
 				<!-- Add icons to the links using the .nav-icon class
 							 with font-awesome or any other icon font library -->
 
-				<slot />
+				{@render children?.()}
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->
 
-		<slot name="afterNav" />
+		{@render afterNav?.()}
 	</div>
 	<!-- /.sidebar -->
 
-	<slot name="afterSidebar" />
+	{@render afterSidebar?.()}
 </aside>

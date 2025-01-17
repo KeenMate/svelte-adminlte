@@ -5,23 +5,38 @@
 	import Badge from "$lib/ui/Badge.svelte"
 	import useActions from "$lib/actions/use-actions.js"
 
-	export let image: string = ""
-	export let username: string = ""
-	export let description: string = ""
 
 	type FooterItem = {title: string; amount: string | number; url: string}
-	export let footerItems: FooterItem[] = []
 
-	export let badgeColor: string = ""
 
-	export let horizontalLayout: boolean = false
 
-	export let headerAccent: Accents = Accents.None
-	export let headerAlign: string = ""
-	export let headerImage: string = ""
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	interface Props {
+		image?: string;
+		username?: string;
+		description?: string;
+		footerItems?: FooterItem[];
+		badgeColor?: string;
+		horizontalLayout?: boolean;
+		headerAccent?: Accents;
+		headerAlign?: string;
+		headerImage?: string;
+		use?: ((node: HTMLElement) => any) | undefined;
+	}
 
-	let style = ""
+	let {
+		image = "",
+		username = "",
+		description = "",
+		footerItems = [],
+		badgeColor = "",
+		horizontalLayout = false,
+		headerAccent = Accents.None,
+		headerAlign = "",
+		headerImage = "",
+		use = undefined
+	}: Props = $props();
+
+	let style = $state("")
 	if (headerImage) {
 		style = `background: url('${headerImage}') center center;`
 	}

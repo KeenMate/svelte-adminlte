@@ -1,8 +1,12 @@
 <script lang="ts">
 	import useActions from "$lib/actions/use-actions.js"
 
-	export let href: string | undefined = undefined
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	interface Props {
+		href?: string | undefined;
+		use?: ((node: HTMLElement) => any) | undefined;
+	}
+
+	let { href = undefined, use = undefined }: Props = $props();
 </script>
 
 <a

@@ -65,14 +65,18 @@
 					text="Messages"
 					imageBackgroundColor="rgb(23, 162, 184)"
 				>
-					<div slot="image">
-						<i
-							class="far fa-envelope"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-envelope"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -80,14 +84,18 @@
 					text="Bookmarks"
 					imageBackgroundColor="#28a745"
 				>
-					<div slot="image">
-						<i
-							class="far fa-flag"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-flag"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -95,11 +103,15 @@
 					text="Uploads"
 					imageBackgroundColor="#ffc107"
 				>
-					<div slot="image">
-						<i class="far fa-copy" />
-					</div>
+					{#snippet image()}
+										<div >
+							<i class="far fa-copy"></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -107,14 +119,18 @@
 					text="Likes"
 					imageBackgroundColor="#dc3545"
 				>
-					<div slot="image">
-						<i
-							class="far fa-star"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-star"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 		</div>
@@ -126,14 +142,18 @@
 					text="Messages"
 					imageBackgroundColor="rgb(23, 162, 184)"
 				>
-					<div slot="image">
-						<i
-							class="far fa-envelope"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-envelope"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -142,14 +162,18 @@
 					imageBackgroundColor="#28a745"
 					shadow="small"
 				>
-					<div slot="image">
-						<i
-							class="far fa-flag"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-flag"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -158,10 +182,14 @@
 					imageBackgroundColor="#ffc107"
 					shadow="regular"
 				>
-					<div slot="image">
-						<i class="far fa-copy" />
-					</div>
-					<div slot="number">1234</div>
+					{#snippet image()}
+										<div >
+							<i class="far fa-copy"></i>
+						</div>
+									{/snippet}
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -170,14 +198,18 @@
 					shadow="large"
 					text="Likes"
 				>
-					<div slot="image">
-						<i
-							class="far fa-star"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-star"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 		</div>
@@ -190,14 +222,18 @@
 					color="white"
 					text="Bookmarks"
 				>
-					<div slot="image">
-						<i
-							class="far fa-bookmark"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-bookmark"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -207,14 +243,18 @@
 					shadow="small"
 					text="Likes"
 				>
-					<div slot="image">
-						<i
-							class="far fa-thumbs-up"
-							style="color:white;"
-						/>
-					</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-thumbs-up"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
 
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -224,7 +264,9 @@
 					icon="far fa-calendar-alt"
 					text="Events"
 				>
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 			<div class="col-md-3 col-sm-6 col-12">
@@ -236,13 +278,17 @@
 					progressBar="true"
 					progressBarWidth="50%"
 				>
-					<div slot="image">
-						<i
-							class="far fa-comments"
-							style="color:white;"
-						/>
-					</div>
-					<div slot="number">1234</div>
+					{#snippet image()}
+										<div >
+							<i
+								class="far fa-comments"
+								style="color:white;"
+							></i>
+						</div>
+									{/snippet}
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 		</div>
@@ -261,7 +307,9 @@
 
 
 				>
-					<div slot="number">1234</div>
+					{#snippet number()}
+										<div >1234</div>
+									{/snippet}
 				</InfoBox>
 			</div>
 		</div>

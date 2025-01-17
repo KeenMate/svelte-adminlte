@@ -1,6 +1,15 @@
+<script lang="ts">
+	interface Props {
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { children, ...rest }: Props = $props();
+</script>
+
 <li
-	{...$$restProps}
-	class="nav-item dropdown {$$restProps.class || ''}"
+	{...rest}
+	class="nav-item dropdown {rest.class || ''}"
 >
-	<slot />
+	{@render children?.()}
 </li>

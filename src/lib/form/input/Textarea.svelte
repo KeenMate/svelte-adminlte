@@ -1,30 +1,46 @@
 <script lang="ts">
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let rows = 2
-	export let cols = ""
-	export let placeholder = ""
-	/**
-	 * @type {string?}
-	 */
-	export let pattern = null
-	export let readonly = false
-	export let plaintext = false
-	export let disabled = false
-	/**
-	 * @type {number?}
-	 */
-	export let maxlength = null
-	/**
-	 * @type {string?}
-	 */
-	export let size = null
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
+	
+	
+	
+	interface Props {
+		id?: string;
+		value?: string;
+		name?: string;
+		rows?: number;
+		cols?: string;
+		placeholder?: string;
+		pattern?: string?;
+		readonly?: boolean;
+		plaintext?: boolean;
+		disabled?: boolean;
+		maxlength?: number?;
+		size?: string?;
+		[key: string]: any
+	}
+
+	let {
+		id = "",
+		value = $bindable(""),
+		name = "",
+		rows = 2,
+		cols = "",
+		placeholder = "",
+		pattern = null,
+		readonly = false,
+		plaintext = false,
+		disabled = false,
+		maxlength = null,
+		size = null,
+		...rest
+	}: Props = $props();
 
 	/**
 	 * @type {HTMLTextAreaElement?}
 	 */
-	let inputElement = null
+	let inputElement = $state(null)
 
 	export function isValid() {
 		return inputElement?.validity.valid
@@ -46,16 +62,16 @@
 	{cols}
 	{readonly}
 	{disabled}
-	{...$$restProps}
-	class="form-control-{size || 'md'} {$$restProps.class || ''}"
-	on:change
-	on:input
-	on:keypress
-	on:keydown
-	on:keyup
-	on:focusin
-	on:focusout
-/>
+	{...rest}
+	class="form-control-{size || 'md'} {rest.class || ''}"
+	onchange={bubble('change')}
+	oninput={bubble('input')}
+	onkeypress={bubble('keypress')}
+	onkeydown={bubble('keydown')}
+	onkeyup={bubble('keyup')}
+	onfocusin={bubble('focusin')}
+	onfocusout={bubble('focusout')}
+></textarea>
 
 <style>
 	.set-cols {

@@ -1,10 +1,26 @@
 <script lang="ts">
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import useActions from "$lib/actions/use-actions.js"
 	
-	export let href: string | undefined = undefined
-	export let active: boolean = false
-	export let disabled: boolean = false
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	interface Props {
+		href?: string | undefined;
+		active?: boolean;
+		disabled?: boolean;
+		use?: ((node: HTMLElement) => any) | undefined;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let {
+		href = undefined,
+		active = false,
+		disabled = false,
+		use = undefined,
+		children,
+		...rest
+	}: Props = $props();
 </script>
 
 <a
@@ -13,8 +29,8 @@
 	class:active
 	class:disabled
 	use:useActions={use}
-	{...$$restProps}
-	on:click
+	{...rest}
+	onclick={bubble('click')}
 >
-	<slot />
+	{@render children?.()}
 </a>

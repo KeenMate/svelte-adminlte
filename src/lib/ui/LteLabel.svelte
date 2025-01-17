@@ -1,9 +1,19 @@
 <script lang="ts">
-	export let color = ""
-	export let title = ""
-	export let classes = ""
+	interface Props {
+		color?: string;
+		title?: string;
+		classes?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		color = "",
+		title = "",
+		classes = "",
+		children
+	}: Props = $props();
 </script>
 
 <span class="label {(color && 'label-' + color) || ''} {classes || ''}" {title}>
-	<slot />
+	{@render children?.()}
 </span>

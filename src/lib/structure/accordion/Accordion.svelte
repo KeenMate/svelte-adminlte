@@ -2,8 +2,7 @@
 	import {setContext} from "svelte"
 	import {writable} from "svelte/store"
 
-	export let key
-	export let id
+	let { key, id, children } = $props();
 
 	let currentEntry = writable(null)
 
@@ -14,5 +13,5 @@
 </script>
 
 <div class="accordion" {id}>
-	<slot />
+	{@render children?.()}
 </div>

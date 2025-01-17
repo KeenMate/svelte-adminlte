@@ -3,21 +3,35 @@
 	import AsyncButton from "./AsyncButton.svelte"
 	import {Config} from "$lib/config.js"
 
-	export let type = "submit"
-	export let short: boolean | undefined = undefined
-	export let xsmall = false
-	export let small = false
-	export let large = false
+	interface Props {
+		type?: string;
+		short?: boolean | undefined;
+		xsmall?: boolean;
+		small?: boolean;
+		large?: boolean;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
 
-	$: noSizeSet = !xsmall && !small && !large
+	let {
+		type = "submit",
+		short = undefined,
+		xsmall = false,
+		small = false,
+		large = false,
+		children,
+		...rest
+	}: Props = $props();
 
-	$: buttonDefaults = $Config.defaults?.buttons?.options || {}
-	$: specialButtonDefaults = $Config.defaults?.buttons?.saveButton || {}
-	$: computedShort = short === undefined
+	let noSizeSet = $derived(!xsmall && !small && !large)
+
+	let buttonDefaults = $derived($Config.defaults?.buttons?.options || {})
+	let specialButtonDefaults = $derived($Config.defaults?.buttons?.saveButton || {})
+	let computedShort = $derived(short === undefined
 		? specialButtonDefaults.short
 		|| buttonDefaults.short
 		|| false
-		: short
+		: short)
 </script>
 
 <AsyncButton
@@ -26,12 +40,12 @@
 	{xsmall}
 	small={small || noSizeSet}
 	{large}
-	{...{...buttonDefaults, ...specialButtonDefaults, ...$$restProps}}
+	{...{...buttonDefaults, ...specialButtonDefaults, ...rest}}
 	on:click
 >
-	<slot>
+	{#if children}{@render children()}{:else}
 		{#if !computedShort}
 			{$_("common.buttons.save")}
 		{/if}
-	</slot>
+	{/if}
 </AsyncButton>

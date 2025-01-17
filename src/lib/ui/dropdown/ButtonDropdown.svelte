@@ -1,7 +1,12 @@
 <script lang="ts">
-	export let xPlacement = null
+	interface Props {
+		xPlacement?: any;
+		children?: import('svelte').Snippet;
+	}
+
+	let { xPlacement = null, children }: Props = $props();
 </script>
 
 <div class="dropdown-menu" role="menu" x-placement={xPlacement || "top-start"}>
-	<slot />
+	{@render children?.()}
 </div>

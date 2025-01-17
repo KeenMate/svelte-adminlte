@@ -1,34 +1,52 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import {createEventDispatcher} from "svelte"
 	import CKEditor from "ckeditor5-svelte"
 	import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor.js"
 
 	const dispatch = createEventDispatcher()
 
-	export let value: string
-	export let disabled = false
-	export let readonly = false
-	export let id = "ckEditorId"
-	export let additionalConfig = {}
+	interface Props {
+		value: string;
+		disabled?: boolean;
+		readonly?: boolean;
+		id?: string;
+		additionalConfig?: any;
+		[key: string]: any
+	}
 
-	let editor = DecoupledEditor
-	let editorInstance: any = null
+	let {
+		value,
+		disabled = false,
+		readonly = false,
+		id = "ckEditorId",
+		additionalConfig = {},
+		...rest
+	}: Props = $props();
 
-	let localValue = ""
-	let editorConfig: any
+	let editor = $state(DecoupledEditor)
+	let editorInstance: any = $state(null)
 
-	$: {
+	let localValue = $state("")
+	let editorConfig: any = $state()
+
+	run(() => {
 		const tmpConfig: any = {...additionalConfig}
 		if (readonly) {
 			tmpConfig.toolbar = {items: []}
 		}
 
 		editorConfig = tmpConfig
-	}
+	});
 
-	$: localValue = value
+	run(() => {
+		localValue = value
+	});
 
-	$: editorInstance && (editorInstance.isReadOnly = disabled || readonly)
+	run(() => {
+		editorInstance && (editorInstance.isReadOnly = disabled || readonly)
+	});
 
 	function onReady({detail: editor}: {detail: any}) {
 		editorInstance = editor
@@ -42,7 +60,7 @@
 	}
 </script>
 
-<main class={$$restProps.parentClass}>
+<main class={rest.parentClass}>
 	<div {id}>
 		<CKEditor
 			bind:config={editorConfig}

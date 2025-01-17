@@ -4,7 +4,13 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let showBackArrow = false
+	interface Props {
+		showBackArrow?: boolean;
+		children?: import('svelte').Snippet;
+		breadcrumbs?: import('svelte').Snippet;
+	}
+
+	let { showBackArrow = false, children, breadcrumbs }: Props = $props();
 
 	function backArrowClicked(event) {
 		dispatch("backArrowClicked", event.detail)
@@ -17,17 +23,17 @@
 			<div class="col-sm-6">
 				{#if showBackArrow}
 					<LteButton small link squared color="" on:click={backArrowClicked}>
-						<i class="fas fa-arrow-left" />
+						<i class="fas fa-arrow-left"></i>
 					</LteButton>
 				{/if}
 				<h1>
-					<slot />
+					{@render children?.()}
 				</h1>
 			</div>
 
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
-					<slot name="breadcrumbs" />
+					{@render breadcrumbs?.()}
 				</ol>
 			</div>
 		</div>

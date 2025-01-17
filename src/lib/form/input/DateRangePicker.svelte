@@ -1,75 +1,112 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import {createEventDispatcher, onDestroy} from "svelte"
 	import Litepicker from "litepicker"
 
 	const dispatch = createEventDispatcher()
 
-	export let inputElement: HTMLInputElement | null = null
-	export let startDate: string | "" = ""
-	export let endDate: string | "" = ""
-	export let minDate: Date | undefined = undefined
-	export let maxDate: Date | undefined = undefined
-	export let position = "bottom right"
-	export let single = false
-	export let disabled = false
-	export let visibleMonths = 2
-	export let columns = 2
-	export let lockDaysFilter: Function | null = null
-	export let lockDays: Date[] = []
-	export let allowRepick = false
-	export let autoApply = true
-	export let autoRefresh = false
-	export let buttonText: {
+	type resetBtnFunc = () => HTMLElement
+	interface Props {
+		inputElement?: HTMLInputElement | null;
+		startDate?: string | "";
+		endDate?: string | "";
+		minDate?: Date | undefined;
+		maxDate?: Date | undefined;
+		position?: string;
+		single?: boolean;
+		disabled?: boolean;
+		visibleMonths?: number;
+		columns?: number;
+		lockDaysFilter?: Function | null;
+		lockDays?: Date[];
+		allowRepick?: boolean;
+		autoApply?: boolean;
+		autoRefresh?: boolean;
+		buttonText?: {
 		apply?: string
 		cancel?: string
 		previousMonth?: string
 		nextMonth?: string
 		reset?: string
-	} | null = null
-	export let delimetr = " - "
-	export let disallowLockDaysInRange = false
-	export let dropdowns = {minYear: 1990, maxYear: null, months: false, years: false}
-	export let elementEnd: HTMLInputElement | null = null
-	export let firstDay = 1
-	export let format = "YYYY-MM-DD"
-	export let highlightedDays: Date[] = []
-	export let highlightedDaysFormat = "YYYY-MM-DD"
-	export let inlineMode = false
-	export let lang = "en-US"
-	export let lockDaysFormat = "YYYY-MM-DD"
-	export let lockDaysInclusivity = "[]"
-	export let maxDays: number | null = null
-	export let minDays: number | null = null
-	export let parentEl: HTMLElement | null = null
-	export let scrollToDate = true
-	export let selectBackward = false
-	export let selectForward = false
-	export let showTooltip = true
-	export let showWeekNumbers = false
-	type resetBtnFunc = () => HTMLElement
-	export let resetButton: boolean | resetBtnFunc = false
-	export let splitView = false
-	export let switchingMonths: number | null = null
-	export let tooltipNumber: number | null = null
-	export let tooltipText = {one: "day", other: "days"}
-	export let zIndex = 9999
+	} | null;
+		delimetr?: string;
+		disallowLockDaysInRange?: boolean;
+		dropdowns?: any;
+		elementEnd?: HTMLInputElement | null;
+		firstDay?: number;
+		format?: string;
+		highlightedDays?: Date[];
+		highlightedDaysFormat?: string;
+		inlineMode?: boolean;
+		lang?: string;
+		lockDaysFormat?: string;
+		lockDaysInclusivity?: string;
+		maxDays?: number | null;
+		minDays?: number | null;
+		parentEl?: HTMLElement | null;
+		scrollToDate?: boolean;
+		selectBackward?: boolean;
+		selectForward?: boolean;
+		showTooltip?: boolean;
+		showWeekNumbers?: boolean;
+		resetButton?: boolean | resetBtnFunc;
+		splitView?: boolean;
+		switchingMonths?: number | null;
+		tooltipNumber?: number | null;
+		tooltipText?: any;
+		zIndex?: number;
+		children?: import('svelte').Snippet;
+	}
 
-	let picker: any
-	$: inputElement && initPicker()
+	let {
+		inputElement = null,
+		startDate = "",
+		endDate = "",
+		minDate = undefined,
+		maxDate = undefined,
+		position = "bottom right",
+		single = false,
+		disabled = false,
+		visibleMonths = 2,
+		columns = 2,
+		lockDaysFilter = null,
+		lockDays = [],
+		allowRepick = false,
+		autoApply = true,
+		autoRefresh = false,
+		buttonText = null,
+		delimetr = " - ",
+		disallowLockDaysInRange = false,
+		dropdowns = {minYear: 1990, maxYear: null, months: false, years: false},
+		elementEnd = null,
+		firstDay = 1,
+		format = "YYYY-MM-DD",
+		highlightedDays = [],
+		highlightedDaysFormat = "YYYY-MM-DD",
+		inlineMode = false,
+		lang = "en-US",
+		lockDaysFormat = "YYYY-MM-DD",
+		lockDaysInclusivity = "[]",
+		maxDays = null,
+		minDays = null,
+		parentEl = null,
+		scrollToDate = true,
+		selectBackward = false,
+		selectForward = false,
+		showTooltip = true,
+		showWeekNumbers = false,
+		resetButton = false,
+		splitView = false,
+		switchingMonths = null,
+		tooltipNumber = null,
+		tooltipText = {one: "day", other: "days"},
+		zIndex = 9999,
+		children
+	}: Props = $props();
 
-	$: picker &&
-	(single
-		? checkValidDate(startDate) && picker.setDate(startDate)
-		: checkValidDate(startDate) &&
-		checkValidDate(endDate) &&
-		picker.setDateRange(startDate, endDate))
-	$: picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
-	$: picker && (picker.off("show", onShow), picker.on("show", onShow))
-	$: picker && (picker.off("render", onRender), picker.on("render", onRender))
-	$: picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
-	$: picker &&
-	(picker.off("clear:selection", onClearSelection),
-		picker.on("clear:selection", onClearSelection))
+	let picker: any = $state()
+
 
 	onDestroy(() => {
 		picker && picker.destroy()
@@ -169,6 +206,34 @@
 	function onClearSelection() {
 		dispatch("clear")
 	}
+	run(() => {
+		inputElement && initPicker()
+	});
+	run(() => {
+		picker &&
+		(single
+			? checkValidDate(startDate) && picker.setDate(startDate)
+			: checkValidDate(startDate) &&
+			checkValidDate(endDate) &&
+			picker.setDateRange(startDate, endDate))
+	});
+	run(() => {
+		picker && (picker.off("selected", onSelected), picker.on("selected", onSelected))
+	});
+	run(() => {
+		picker && (picker.off("show", onShow), picker.on("show", onShow))
+	});
+	run(() => {
+		picker && (picker.off("render", onRender), picker.on("render", onRender))
+	});
+	run(() => {
+		picker && (picker.off("button:apply", onButtonApply), picker.on("button:apply", onButtonApply))
+	});
+	run(() => {
+		picker &&
+		(picker.off("clear:selection", onClearSelection),
+			picker.on("clear:selection", onClearSelection))
+	});
 </script>
 
-<slot />
+{@render children?.()}

@@ -1,29 +1,55 @@
 <script lang="ts">
+	import { run, createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import Inputmask from "inputmask"
 	import {getValidityClass} from "../../helpers/class-helpers.js"
 
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let placeholder = ""
-	export let pattern: string | null = null
-	export let readonly = false
-	export let plaintext = false
-	export let disabled = false
-	export let inputMask: string | null = null
-	export let invalid = false
-	export let maxlength: number | null = null
-	export let size = "md"
-	export let validity = "none"
 
-	export let inputElement: HTMLInputElement | null = null
+	interface Props {
+		id?: string;
+		value?: string;
+		name?: string;
+		placeholder?: string;
+		pattern?: string | null;
+		readonly?: boolean;
+		plaintext?: boolean;
+		disabled?: boolean;
+		inputMask?: string | null;
+		invalid?: boolean;
+		maxlength?: number | null;
+		size?: string;
+		validity?: string;
+		inputElement?: HTMLInputElement | null;
+		[key: string]: any
+	}
+
+	let {
+		id = "",
+		value = $bindable(""),
+		name = "",
+		placeholder = "",
+		pattern = null,
+		readonly = false,
+		plaintext = false,
+		disabled = false,
+		inputMask = null,
+		invalid = false,
+		maxlength = null,
+		size = "md",
+		validity = "none",
+		inputElement = $bindable(null),
+		...rest
+	}: Props = $props();
 
 	export function isValid() {
 		return inputElement?.validity.valid
 	}
 
 	//@ts-ignore
-	$: inputMask && inputElement && Inputmask().mask(inputElement)
+	run(() => {
+		inputMask && inputElement && Inputmask().mask(inputElement)
+	});
 </script>
 <input
 	bind:this={inputElement}
@@ -40,13 +66,13 @@
 	{placeholder}
 	{disabled}
 	{readonly}
-	{...$$restProps}
-	class="form-control-{size || 'md'} {$$restProps.class || ''} {getValidityClass(validity)}"
-	on:change
-	on:input
-	on:keypress
-	on:keydown
-	on:keyup
-	on:focusin
-	on:focusout
+	{...rest}
+	class="form-control-{size || 'md'} {rest.class || ''} {getValidityClass(validity)}"
+	onchange={bubble('change')}
+	oninput={bubble('input')}
+	onkeypress={bubble('keypress')}
+	onkeydown={bubble('keydown')}
+	onkeyup={bubble('keyup')}
+	onfocusin={bubble('focusin')}
+	onfocusout={bubble('focusout')}
 />

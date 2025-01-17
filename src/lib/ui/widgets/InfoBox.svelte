@@ -4,22 +4,43 @@
 	import {Accents, Shadow} from "../../constants/index.js"
 	import SimpleProgressBar from "$lib/ui/SimpleProgressBar.svelte"
 
-	export let textCenter: boolean = false
-	export let text: string = ""
 
-	export let accent: Accents = Accents.None
 
-	export let color: string = ""
-	export let backgroundColor: string = ""
-	export let imageBackgroundColor: string = ""
 
-	export let shadow: Shadow = Shadow.None
-	export let icon: string = ""
-	export let smallBox: boolean = false
 
-	export let progressBar: boolean = false
-	export let progressBarWidth: string = ""
-	export let progressBarAccent = Accents.None
+	interface Props {
+		textCenter?: boolean;
+		text?: string;
+		accent?: Accents;
+		color?: string;
+		backgroundColor?: string;
+		imageBackgroundColor?: string;
+		shadow?: Shadow;
+		icon?: string;
+		smallBox?: boolean;
+		progressBar?: boolean;
+		progressBarWidth?: string;
+		progressBarAccent?: any;
+		image?: import('svelte').Snippet;
+		number?: import('svelte').Snippet;
+	}
+
+	let {
+		textCenter = false,
+		text = "",
+		accent = Accents.None,
+		color = "",
+		backgroundColor = "",
+		imageBackgroundColor = "",
+		shadow = Shadow.None,
+		icon = "",
+		smallBox = false,
+		progressBar = false,
+		progressBarWidth = "",
+		progressBarAccent = Accents.None,
+		image,
+		number
+	}: Props = $props();
 
 	const accentClass = accent !== Accents.None ? getAccentClass(accent) : ""
 	const backgroundStyle =
@@ -38,18 +59,18 @@
 		style={iconBackgroundStyle}
 	>
 		{#if icon !== ""}
-			<i class={icon} />
+			<i class={icon}></i>
 		{:else}
-			<slot name="image" />
+			{@render image?.()}
 		{/if}
 	</span>
 	<div
 		class="info-box-content"
 		class:text-center-aligned={textCenter}
 	>
-		{#if $$slots.number && smallBox}
+		{#if number && smallBox}
 			<div class="info-box-number">
-				<slot name="number" />
+				{@render number?.()}
 			</div>
 		{/if}
 		<span class="info-box-text">
@@ -59,9 +80,9 @@
 				{text}
 			{/if}
 		</span>
-		{#if $$slots.number && !smallBox}
+		{#if number && !smallBox}
 			<div class="info-box-number">
-				<slot name="number" />
+				{@render number?.()}
 			</div>
 		{/if}
 		{#if progressBar}

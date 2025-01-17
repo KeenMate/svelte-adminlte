@@ -1,24 +1,52 @@
 <script lang="ts">
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import useActions from "$lib/actions/use-actions.js"
 
-	export let href: string
-	export let target: string | null = null
-	export let color: string | null = null
-	export let toggle: string | null = null
-	export let xsmall = false
-	export let small = false
-	export let large = false
-	export let borderless = false
-	export let outlined = false
-	export let social = false
-	export let link = false
-	export let disabled = false
-	export let app = false
-	export let squared = false
-	export let icon: string | null = null
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	interface Props {
+		href: string;
+		target?: string | null;
+		color?: string | null;
+		toggle?: string | null;
+		xsmall?: boolean;
+		small?: boolean;
+		large?: boolean;
+		borderless?: boolean;
+		outlined?: boolean;
+		social?: boolean;
+		link?: boolean;
+		disabled?: boolean;
+		app?: boolean;
+		squared?: boolean;
+		icon?: string | null;
+		use?: ((node: HTMLElement) => any) | undefined;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
 
-	$: buttonClass = "btn-" + ((outlined && "outline-") || "") + (color || "default")
+	let {
+		href,
+		target = null,
+		color = null,
+		toggle = null,
+		xsmall = false,
+		small = false,
+		large = false,
+		borderless = false,
+		outlined = false,
+		social = false,
+		link = false,
+		disabled = false,
+		app = false,
+		squared = false,
+		icon = null,
+		use = undefined,
+		children,
+		...rest
+	}: Props = $props();
+
+	let buttonClass = $derived("btn-" + ((outlined && "outline-") || "") + (color || "default"))
 </script>
 
 <a
@@ -35,14 +63,14 @@
 	class:squared
 	data-toggle={toggle || null}
 	use:useActions={use}
-	{...$$restProps}
-	class="btn btn-flat {!link ? buttonClass : ''} {$$restProps.class || ''}"
-	on:click
+	{...rest}
+	class="btn btn-flat {!link ? buttonClass : ''} {rest.class || ''}"
+	onclick={bubble('click')}
 >
 	{#if icon}
-		<i class={icon} />
+		<i class={icon}></i>
 	{/if}
-	<slot />
+	{@render children?.()}
 </a>
 
 <style lang="scss">

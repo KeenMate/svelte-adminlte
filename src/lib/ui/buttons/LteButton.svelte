@@ -1,20 +1,46 @@
 <script lang="ts">
-	export let type: "button" | "reset" | "submit" | null = "button"
-	export let color: string | null = null
-	export let toggle: string | null = null
-	export let xsmall = false
-	export let small = false
-	export let large = false
-	export let borderless = false
-	export let outlined = false
-	export let social = false
-	export let link = false
-	export let disabled = false
-	export let app = false
-	export let squared = false
-	export let icon: string | null = null
+	import { createBubbler } from 'svelte/legacy';
 
-	$: buttonClass = "btn-" + ((outlined && "outline-") || "") + (color || "default")
+	const bubble = createBubbler();
+	interface Props {
+		type?: "button" | "reset" | "submit" | null;
+		color?: string | null;
+		toggle?: string | null;
+		xsmall?: boolean;
+		small?: boolean;
+		large?: boolean;
+		borderless?: boolean;
+		outlined?: boolean;
+		social?: boolean;
+		link?: boolean;
+		disabled?: boolean;
+		app?: boolean;
+		squared?: boolean;
+		icon?: string | null;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let {
+		type = "button",
+		color = null,
+		toggle = null,
+		xsmall = false,
+		small = false,
+		large = false,
+		borderless = false,
+		outlined = false,
+		social = false,
+		link = false,
+		disabled = false,
+		app = false,
+		squared = false,
+		icon = null,
+		children,
+		...rest
+	}: Props = $props();
+
+	let buttonClass = $derived("btn-" + ((outlined && "outline-") || "") + (color || "default"))
 </script>
 
 <button
@@ -30,15 +56,15 @@
 	{type}
 	data-toggle={toggle || null}
 	{disabled}
-	{...$$restProps}
-	class="btn btn-flat {!link ? buttonClass : ''} {$$restProps.class || ''}"
-	on:click
+	{...rest}
+	class="btn btn-flat {!link ? buttonClass : ''} {rest.class || ''}"
+	onclick={bubble('click')}
 >
 	{#if icon}
-		<i class={icon} />
+		<i class={icon}></i>
 	{/if}
 	<!-- note: the class attribute is after the {...$$restProps} on purpose -> to prevent static classes from being overriden -->
-	<slot />
+	{@render children?.()}
 </button>
 
 <style lang="scss">

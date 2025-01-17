@@ -1,8 +1,12 @@
 <script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
-	export let displayName = "Neznámý"
-	export let darkTheme = false
+	interface Props {
+		displayName?: string;
+		darkTheme?: boolean;
+	}
+
+	let { displayName = "Neznámý", darkTheme = false }: Props = $props();
 
 	const dispatch = createEventDispatcher()
 
@@ -55,16 +59,16 @@
 
 <!-- Messages Dropdown Menu -->
 <li class="nav-item dropdown">
-	<!-- svelte-ignore a11y-invalid-attribute -->
+	<!-- svelte-ignore a11y_invalid_attribute -->
 	<!-- eslint-disable-next-line -->
 	<a class="nav-link" data-toggle="dropdown" href="javascript:void(0)">
 		<span class="d-none d-md-inline">{displayName}</span>
 		<span class="d-inline d-md-none">
-			<i class="fas fa-user" />
+			<i class="fas fa-user"></i>
 		</span>
 	</a>
 	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
 		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
@@ -73,16 +77,16 @@
 				<div class="media-body">
 					<h3 class="dropdown-item-title">
 						Brad Diesel
-						<span class="float-right text-sm text-danger"><i class="fas fa-star" /></span>
+						<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
 					</h3>
 					<p class="text-sm">Call me whenever you can...</p>
-					<p class="text-sm text-muted"><i class="far fa-clock mr-1" /> 4 Hours Ago</p>
+					<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
 				</div>
 			</div>
 			<!-- Message End -->
 		</a>
-		<div class="dropdown-divider" />
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<div class="dropdown-divider"></div>
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
 		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
@@ -91,16 +95,16 @@
 				<div class="media-body">
 					<h3 class="dropdown-item-title">
 						John Pierce
-						<span class="float-right text-sm text-muted"><i class="fas fa-star" /></span>
+						<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
 					</h3>
 					<p class="text-sm">I got your message bro</p>
-					<p class="text-sm text-muted"><i class="far fa-clock mr-1" /> 4 Hours Ago</p>
+					<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
 				</div>
 			</div>
 			<!-- Message End -->
 		</a>
-		<div class="dropdown-divider" />
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<div class="dropdown-divider"></div>
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
 		<a class="dropdown-item" href="javascript:void(0)">
 			<!-- Message Start -->
@@ -109,16 +113,16 @@
 				<div class="media-body">
 					<h3 class="dropdown-item-title">
 						Nora Silvester
-						<span class="float-right text-sm text-warning"><i class="fas fa-star" /></span>
+						<span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
 					</h3>
 					<p class="text-sm">The subject goes here</p>
-					<p class="text-sm text-muted"><i class="far fa-clock mr-1" /> 4 Hours Ago</p>
+					<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
 				</div>
 			</div>
 			<!-- Message End -->
 		</a>
-		<div class="dropdown-divider" />
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<div class="dropdown-divider"></div>
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
 		<a class="dropdown-item dropdown-footer" href="javascript:void(0)">See All Messages</a>
 	</div>

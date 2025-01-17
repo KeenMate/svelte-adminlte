@@ -32,7 +32,7 @@
 		{value: "option2", label: "Option 2"},
 		{value: "aption3", label: "Aption 3"}
 	]
-	let selectedValue = ""
+	let selectedValue = $state("")
 </script>
 
 <Sidebar>
@@ -104,11 +104,13 @@
 
 						<Checkbox>Check me out</Checkbox>
 					</Form>
-					<svelte:fragment slot="footer">
-						<ButtonGroup>
-							<LteButton>Submit</LteButton>
-						</ButtonGroup>
-					</svelte:fragment>
+					{#snippet footer()}
+									
+							<ButtonGroup>
+								<LteButton>Submit</LteButton>
+							</ButtonGroup>
+						
+									{/snippet}
 				</Card>
 				<!-- </div> -->
 

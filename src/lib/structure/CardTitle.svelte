@@ -1,13 +1,19 @@
 <script lang="ts">
-	export let color: string | null | undefined = undefined
+	interface Props {
+		color?: string | null | undefined;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { color = undefined, children, ...rest }: Props = $props();
 </script>
 
 <h3
-	{...$$restProps}
-	class="card-title {$$restProps.class || ''}"
+	{...rest}
+	class="card-title {rest.class || ''}"
 	style:--color={color}
 >
-	<slot />
+	{@render children?.()}
 </h3>
 
 <style lang="scss">
