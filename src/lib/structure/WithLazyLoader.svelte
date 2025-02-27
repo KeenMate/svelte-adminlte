@@ -43,7 +43,10 @@
 
 	function setLoading(loading_: boolean) {
 		loading = loading_
-		context?.setLoading(loading_)
+		
+		if (parentLoading) {
+			context?.setLoading(loading_)
+		}
 	}
 </script>
 
