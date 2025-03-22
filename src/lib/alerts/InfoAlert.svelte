@@ -14,6 +14,7 @@
 </script>
 
 <BaseAlert
+	{...$$restProps}
 	{header}
 	icon={iconClass}
 	level={computedLevel}

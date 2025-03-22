@@ -13,7 +13,11 @@
 	}
 </script>
 
-<div class="alert alert-{level}" class:alert-dismissible={closeable}>
+<div
+	{...$$restProps}
+	class="alert alert-{level} {$$restProps.class || ''}"
+	class:alert-dismissible={closeable}
+>
 	{#if closeable}
 		<button
 			type="button"
