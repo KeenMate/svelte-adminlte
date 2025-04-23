@@ -9,11 +9,11 @@
 
 	<a
 	{href}
-	class="dropdown-item"
+	{...$$restProps}
+	class="dropdown-item {$$restProps.class || ''}"
 	class:active
 	class:disabled
 	use:useActions={use}
-	{...$$restProps}
 	on:click
 >
 	<slot />
