@@ -1,30 +1,59 @@
 <script lang="ts">
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let placeholder = ""
-	export let size
-	export let disabled = false
-	export let invalid = false
+	type Props = {
+		id?: string;
+		value?: string;
+		name?: string;
+		placeholder?: string;
+		size: any;
+		disabled?: boolean;
+		invalid?: boolean;
+		inputElement?: any;
+		onChange?: (ev: Event) => void
+		onInput?: (ev: Event) => void
+		onKeypress?: (ev: Event) => void
+		onKeydown?: (ev: Event) => void
+		onKeyup?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
 
-	export let inputElement = null
+		[key: string]: any
+	}
+
+	let {
+		    id           = "",
+		    value        = $bindable(""),
+		    name         = "",
+		    placeholder  = "",
+		    size,
+		    disabled     = false,
+		    invalid      = false,
+		    inputElement = $bindable(null),
+		    onChange = undefined,
+		    onInput = undefined,
+		    onKeypress = undefined,
+		    onKeydown = undefined,
+		    onKeyup = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <input
 	bind:this={inputElement}
 	bind:value
 	type="password"
-	class="form-control form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control form-control-{size || 'md'} {restProps.class || ''}"
 	class:is-invalid={invalid}
 	{id}
 	{placeholder}
 	{name}
 	{disabled}
-	on:change
-	on:input
-	on:keypress
-	on:keydown
-	on:keyup
-	on:focusin
-	on:focusout
+	onchange={onChange}
+	oninput={onInput}
+	onkeypress={onKeypress}
+	onkeydown={onKeydown}
+	onkeyup={onKeyup}
+	onfocusin={onFocusin}
+	onfocusout={onFocusout}
 />

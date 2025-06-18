@@ -1,12 +1,30 @@
 <script lang="ts">
 	import useActions from "$lib/actions/use-actions.js"
-	
-	export let href: string | null = "#"
-	export let icon: string | null = null
-	export let active: boolean = false
-	export let tooltip: string | null = ""
-	export let target: string | null = ""
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+
+	type Props = {
+		href?: string | null;
+		iconClass?: string | null;
+		active?: boolean;
+		tooltip?: string | null;
+		target?: string | null;
+		use?: ((node: HTMLElement) => any) | undefined;
+		icon?: import("svelte").Snippet;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {
+		    href      = "#",
+		    iconClass = null,
+		    active    = false,
+		    tooltip   = "",
+		    target    = "",
+		    use       = undefined,
+		    icon,
+		    children,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <li class="nav-item" data-toggle="tooltip" data-placement="right" title={tooltip}>
@@ -15,15 +33,15 @@
 		class:active
 		{href}
 		{target}
-		{...$$restProps}
+		{...restProps}
 		use:useActions={use}
 	>
-		{#if icon}
-			<i class="nav-icon {icon}" />
+		{#if iconClass}
+			<i class="nav-icon {iconClass}"></i>
 		{:else}
-			<slot name="icon" />
+			{@render icon?.()}
 		{/if}
 
-		<slot />
+		{@render children?.()}
 	</a>
 </li>

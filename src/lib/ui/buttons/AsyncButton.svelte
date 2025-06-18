@@ -4,14 +4,29 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let action: (() => Promise<any>) | null = null
-	export let enabledWhenLoading = false
 
-	export let iconClass: string | null = null
-	export let disabled: boolean = false
-	export let loading: boolean = false
+	type Props = {
+		action?: (() => Promise<any>) | null;
+		enabledWhenLoading?: boolean;
+		iconClass?: string | null;
+		disabled?: boolean;
+		loading?: boolean;
+		children?: import("svelte").Snippet;
 
-	$: computedDisabled = disabled || (enabledWhenLoading ? false : loading)
+		[key: string]: any
+	}
+
+	let {
+		    action             = null,
+		    enabledWhenLoading = false,
+		    iconClass          = null,
+		    disabled           = false,
+		    loading            = $bindable(false),
+		    children,
+		    ...restProps
+	    }: Props = $props()
+
+	let computedDisabled = $derived(disabled || (enabledWhenLoading ? false : loading))
 
 	async function onClick(ev: MouseEvent) {
 		if (!action) {
@@ -29,7 +44,7 @@
 </script>
 
 <LteButton
-	{...$$restProps}
+	{...restProps}
 	disabled={computedDisabled}
 	on:click={onClick}
 >
@@ -37,10 +52,10 @@
 		<i
 			class="fas fa-circle-notch fa-spin fa-fw"
 			style="--fa-animation-duration: 1s"
-		/>
+		></i>
 	{:else if iconClass}
-		<i class={iconClass} />
+		<i class={iconClass}></i>
 	{/if}
 
-	<slot />
+	{@render children?.()}
 </LteButton>

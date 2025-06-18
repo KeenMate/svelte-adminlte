@@ -1,23 +1,39 @@
 <script lang="ts">
-	export let row = false
-	export let inline = false
-	export let column = false
-	export let justifyContent = null
-	export let alignItems = null
-	export let wrap = true
+	type Props = {
+		row?: boolean;
+		inline?: boolean;
+		column?: boolean;
+		justifyContent?: any;
+		alignItems?: any;
+		wrap?: boolean;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {
+		    row            = false,
+		    inline         = false,
+		    column         = false,
+		    justifyContent = null,
+		    alignItems     = null,
+		    wrap           = true,
+		    children,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <div
 	class="{justifyContent ? 'justify-content-' + justifyContent : ''} {alignItems
 		? 'align-items-' + alignItems
-		: ''} {$$props.class || ''}"
+		: ''} {restProps.class || ''}"
 	class:row
 	class:d-inline-flex={inline}
 	class:d-flex={!inline}
 	class:flex-wrap={wrap}
 	class:flex-column={column}
 >
-	<slot />
+	{@render children?.()}
 </div>
 
 <!-- <style>

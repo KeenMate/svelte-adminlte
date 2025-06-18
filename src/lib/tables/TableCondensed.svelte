@@ -1,13 +1,19 @@
 <script lang="ts">
-	export let node = undefined
+	let {
+		    node = $bindable(undefined),
+		    headers,
+		    children,
+		    footer,
+		    ...restProps
+	    } = $props()
 </script>
 
-<table bind:this={node} {...$$restProps} class="table table-sm data-table {$$props.class || ''}">
+<table bind:this={node} {...restProps} class="table table-sm data-table {restProps.class || ''}">
 	<thead>
-	<slot name="headers" />
+	{@render headers?.()}
 	</thead>
 	<tbody>
-	<slot />
+	{@render children?.()}
 	</tbody>
-	<slot name="footer" />
+	{@render footer?.()}
 </table>

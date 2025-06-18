@@ -1,17 +1,25 @@
 <script lang="ts">
+	import {run} from "svelte/legacy"
+
 	import {createEventDispatcher} from "svelte"
+
+	type Props = {
+		children?: import("svelte").Snippet;
+	}
+
+	let {children}: Props = $props()
 
 	const dispatch = createEventDispatcher()
 
-	let contextMenuElement = null
+	let contextMenuElement = $state(null)
 
-	let posX,
-		posY,
-		contextMenuVisible = false
+	let posX               = $state(),
+	    posY               = $state(),
+	    contextMenuVisible = $state(false)
 
 	export function openContextMenu(pX, pY) {
-		posX = pX
-		posY = pY
+		posX               = pX
+		posY               = pY
 		contextMenuVisible = true
 
 		registerBodyOnClickEvent()
@@ -24,23 +32,25 @@
 	}
 
 	// whenever x and y is changed, restrict box to be within bounds
-	$: (() => {
-		if (!contextMenuElement) {
-			return
-		}
+	run(() => {
+		(() => {
+			if (!contextMenuElement) {
+				return
+			}
 
-		const rect = contextMenuElement.getBoundingClientRect()
-		posX = Math.min(window.innerWidth - rect.width, posX)
-		if (posY > window.innerHeight - rect.height) {
-			posY -= rect.height
-		}
-	})(posX, posY)
+			const rect = contextMenuElement.getBoundingClientRect()
+			posX       = Math.min(window.innerWidth - rect.width, posX)
+			if (posY > window.innerHeight - rect.height) {
+				posY -= rect.height
+			}
+		})(posX, posY)
+	})
 
-	$: contextMenuStyle = `
+	let contextMenuStyle = $derived(`
 		display: ${(contextMenuVisible && "block") || "none"};
 		top: ${posY}px;
 		left: ${posX}px;
-	`
+	`)
 
 	function onBodyClick(ev) {
 		if (!contextMenuVisible) {
@@ -56,7 +66,7 @@
 </script>
 
 <div bind:this={contextMenuElement} class="context-menu" style={contextMenuStyle}>
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="sass">

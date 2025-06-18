@@ -1,18 +1,29 @@
 <script lang="ts">
+	import {preventDefault} from "svelte/legacy"
+
 	import {createEventDispatcher} from "svelte"
 
 	const dispatch = createEventDispatcher()
 
 	const minPage = 1
 
-	export let page: number
-	export let pages: number
-	export let visiblePagesCount = 5
-	export let showEllipsis = false
+	type Props = {
+		page: number;
+		pages: number;
+		visiblePagesCount?: number;
+		showEllipsis?: boolean;
 
-	$: leftBorder = Math.max(page - visiblePagesCount, minPage)
-	$: rightBorder = Math.min(page + visiblePagesCount, pages)
-	$: visiblePages = visiblePageArray(leftBorder, rightBorder)
+		[key: string]: any
+	}
+
+	let {
+		    page,
+		    pages,
+		    visiblePagesCount = 5,
+		    showEllipsis      = false,
+		    ...restProps
+	    }: Props = $props()
+
 
 	function visiblePageArray(leftBorder: number, rightBorder: number) {
 		const buffer = []
@@ -43,32 +54,36 @@
 	function updateCurrentPage(page: number) {
 		dispatch("updatePage", page)
 	}
+
+	let leftBorder   = $derived(Math.max(page - visiblePagesCount, minPage))
+	let rightBorder  = $derived(Math.min(page + visiblePagesCount, pages))
+	let visiblePages = $derived(visiblePageArray(leftBorder, rightBorder))
 </script>
 
-<ul class="pagination {$$props.class || ''}">
+<ul class="pagination {restProps.class || ''}">
 	<li class="page-item">
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
-		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(-10)}>
-			<i class="fas fa-angle-double-left" />
+		<a class="page-link" href="javascript:void(0)" onclick={preventDefault(() => onStepFromPage(-10))}>
+			<i class="fas fa-angle-double-left"></i>
 		</a>
 	</li>
 	<li class="page-item">
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
-		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(-1)}>
-			<i class="fas fa-chevron-left" />
+		<a class="page-link" href="javascript:void(0)" onclick={preventDefault(() => onStepFromPage(-1))}>
+			<i class="fas fa-chevron-left"></i>
 		</a>
 	</li>
 
 	{#if showEllipsis && visiblePages[0] > 1}
 		<li class="page-item">
-			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- svelte-ignore a11y_invalid_attribute -->
 			<!-- eslint-disable-next-line -->
-			<a href="javascript:void(0)" class="page-link" on:click|preventDefault={() => updateCurrentPage(1)}> 1 </a>
+			<a href="javascript:void(0)" class="page-link" onclick={preventDefault(() => updateCurrentPage(1))}> 1 </a>
 		</li>
 		<li class="page-item disabled">
-			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- svelte-ignore a11y_invalid_attribute -->
 			<!-- eslint-disable-next-line -->
 			<a href="javascript:void(0)" class="page-link"> &hellip; </a>
 		</li>
@@ -78,9 +93,9 @@
 		<li
 			class="page-item"
 			class:active={visiblePage === page}
-			on:click|preventDefault={() => updateCurrentPage(visiblePage)}
+			onclick={preventDefault(() => updateCurrentPage(visiblePage))}
 		>
-			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- svelte-ignore a11y_invalid_attribute -->
 			<!-- eslint-disable-next-line -->
 			<a href="javascript:void(0)" class="page-link">
 				{visiblePage}
@@ -90,31 +105,31 @@
 
 	{#if showEllipsis && visiblePages[visiblePages.length - 1] < pages}
 		<li class="page-item disabled">
-			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- svelte-ignore a11y_invalid_attribute -->
 			<!-- eslint-disable-next-line -->
 			<a href="javascript:void(0)" class="page-link"> &hellip; </a>
 		</li>
 		<li class="page-item">
-			<!-- svelte-ignore a11y-invalid-attribute -->
+			<!-- svelte-ignore a11y_invalid_attribute -->
 			<!-- eslint-disable-next-line -->
-			<a href="javascript:void(0)" class="page-link" on:click|preventDefault={() => updateCurrentPage(pages)}>
+			<a href="javascript:void(0)" class="page-link" onclick={preventDefault(() => updateCurrentPage(pages))}>
 				{pages}
 			</a>
 		</li>
 	{/if}
 
 	<li class="page-item">
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
-		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(1)}>
-			<i class="fas fa-chevron-right" />
+		<a class="page-link" href="javascript:void(0)" onclick={preventDefault(() => onStepFromPage(1))}>
+			<i class="fas fa-chevron-right"></i>
 		</a>
 	</li>
 	<li class="page-item">
-		<!-- svelte-ignore a11y-invalid-attribute -->
+		<!-- svelte-ignore a11y_invalid_attribute -->
 		<!-- eslint-disable-next-line -->
-		<a class="page-link" href="javascript:void(0)" on:click|preventDefault={() => onStepFromPage(10)}>
-			<i class="fas fa-angle-double-right" />
+		<a class="page-link" href="javascript:void(0)" onclick={preventDefault(() => onStepFromPage(10))}>
+			<i class="fas fa-angle-double-right"></i>
 		</a>
 	</li>
 </ul>

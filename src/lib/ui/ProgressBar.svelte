@@ -1,16 +1,25 @@
 <script lang="ts">
-	export let lower: number
-	export let higher: number
+	import {run} from "svelte/legacy"
 
-	let progressElement: HTMLDivElement
+	type Props = {
+		lower: number;
+		higher: number;
+	}
 
-	$: percentage = Math.round((lower / higher) * 100)
-	$: percentageColor = `hsl(${(percentage / 100) * 120 + 25}deg, 100%, 53%)`
-	$: progressElement && setProgressBackgroundColor(percentageColor, percentage)
+	let {lower, higher}: Props = $props()
+
+	let progressElement: HTMLDivElement = $state()
+
 
 	function setProgressBackgroundColor(valueColor: string, valuePercentage: number) {
 		progressElement.style.background = `linear-gradient(90deg, ${valueColor} ${valuePercentage}%, hsl(0, 0%, 90%) ${valuePercentage}%)`
 	}
+
+	let percentage      = $derived(Math.round((lower / higher) * 100))
+	let percentageColor = $derived(`hsl(${(percentage / 100) * 120 + 25}deg, 100%, 53%)`)
+	run(() => {
+		progressElement && setProgressBackgroundColor(percentageColor, percentage)
+	})
 </script>
 
 <div bind:this={progressElement} class="custom-progress">

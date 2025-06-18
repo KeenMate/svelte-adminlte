@@ -1,24 +1,42 @@
 <script lang="ts">
 	import {createEventDispatcher} from "svelte"
 
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let multiple = false
-	export let placeholder = ""
-	export let pattern: string | null | undefined = null
-	export let readonly = false
-	export let accept: string | null | undefined = null
+	type Props = {
+		id?: string;
+		value?: string;
+		name?: string;
+		multiple?: boolean;
+		placeholder?: string;
+		pattern?: string | null | undefined;
+		readonly?: boolean;
+		accept?: string | null | undefined;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {
+		    id          = "",
+		    value       = $bindable(""),
+		    name        = "",
+		    multiple    = false,
+		    placeholder = "",
+		    pattern     = null,
+		    readonly    = false,
+		    accept      = null,
+		    children,
+		    ...restProps
+	    }: Props = $props()
 
 	const dispatch = createEventDispatcher()
 
-	let inputElement: HTMLInputElement | null = null
+	let inputElement: HTMLInputElement | null = $state(null)
 
 	export function isValid() {
 		return inputElement?.validity.valid
 	}
 
-	type InputEvent = Event & {currentTarget: EventTarget & HTMLInputElement}
+	type InputEvent = Event & { currentTarget: EventTarget & HTMLInputElement }
 
 	function onInput(ev: InputEvent) {
 		const files = (ev.target as HTMLInputElement)?.files
@@ -39,10 +57,10 @@
 		{readonly}
 		{accept}
 		type="file"
-		class="custom-file-input {$$props.class || ''}"
-		on:input={onInput}
+		class="custom-file-input {restProps.class || ''}"
+		oninput={onInput}
 	/>
 	<label class="custom-file-label" for={id}>
-		<slot />
+		{@render children?.()}
 	</label>
 </div>

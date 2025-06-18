@@ -1,11 +1,24 @@
 <script lang="ts">
-	export let color = ""
+	type Props = {
+		color?: string;
+		children?: import("svelte").Snippet;
+		onClick?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    color   = "",
+		    children,
+		    onClick = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <span
-	{...$$restProps}
-	class="badge {(color && 'bg-' + color) || ''} {$$props.classes || ''}"
-	on:click
+	{...restProps}
+	class="badge {(color && 'bg-' + color) || ''} {restProps.class || ''}"
+	onclick={onClick}
 >
-	<slot />
+	{@render children?.()}
 </span>

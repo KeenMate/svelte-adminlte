@@ -17,7 +17,7 @@ class TippyTooltip {
 
 	constructor(element: HTMLElement, options: TippyTooltipOptions | nullable = null) {
 		this.rootElement = element
-		this.options = options
+		this.options     = options
 	}
 
 	init() {
@@ -88,7 +88,7 @@ class TippyTooltip {
 	}
 }
 
-export default function(element: HTMLElement, options: TippyTooltipOptions) {
+export default function (element: HTMLElement, options: TippyTooltipOptions) {
 	const instance = new TippyTooltip(element, options)
 
 	return instance.init()

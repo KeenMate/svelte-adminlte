@@ -1,21 +1,35 @@
 <script lang="ts">
 	import useActions from "$lib/actions/use-actions.js"
-	
-	export let active: boolean = false
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+
+	type Props = {
+		active?: boolean;
+		use?: ((node: HTMLElement) => any) | undefined;
+		children?: import("svelte").Snippet;
+		onClick?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    active = false,
+		    use = undefined,
+		    children,
+		    onClick = undefined,
+		    ...restProps
+	}: Props = $props()
 </script>
 
-<li class="nav-item {$$props.class || ''}" role="presentation" on:click>
-	<!-- svelte-ignore a11y-invalid-attribute -->
+<li class="nav-item {restProps.class || ''}" role="presentation" onclick={onClick}>
+	<!-- svelte-ignore a11y_invalid_attribute -->
 	<!-- eslint-disable-next-line -->
 	<a
 		href="javascript:void(0)"
-		class="nav-link"
 		class:active
 		use:useActions={use}
-		{...$$restProps}
+		{...restProps}
+		class="nav-link {restProps.linkClass || ''}"
 	>
-		<slot />
+		{@render children?.()}
 	</a>
 </li>
 

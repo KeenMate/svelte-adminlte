@@ -7,7 +7,7 @@
 		show()
 	}
 
-	let show, hide
+	let show = $state(), hide = $state()
 </script>
 
 <Modal
@@ -16,17 +16,21 @@
 	color="danger"
 	center
 >
-	<svelte:fragment slot="header">
+	{#snippet header()}
+
 		{$_("common.headers.connectionClosed")}
-	</svelte:fragment>
+
+	{/snippet}
 
 	<p>
 		{@html $_("common.messages.connectionClosed")}
 	</p>
 
-	<svelte:fragment slot="actions">
+	{#snippet actions()}
+
 		<ModalCloseButton>
 			{$_("common.buttons.close")}
 		</ModalCloseButton>
-	</svelte:fragment>
+
+	{/snippet}
 </Modal>

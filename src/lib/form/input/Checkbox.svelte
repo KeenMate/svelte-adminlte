@@ -1,19 +1,45 @@
 <script lang="ts">
-	export let checked = false
-	export let group = null
-	export let indeterminate = false
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let disabled = false
-	export let level = "primary"
-	
-	$: classContainsFlex = $$restProps.class?.split(" ").some((x: string) => /flex/.test(x)) || false
+	type Props = {
+		checked?: boolean;
+		group?: any;
+		indeterminate?: boolean;
+		id?: string;
+		value?: string;
+		name?: string;
+		disabled?: boolean;
+		level?: string;
+		children?: import("svelte").Snippet;
+		onChange?: (ev: Event) => void
+		onClick?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    checked       = false,
+		    group         = null,
+		    indeterminate = false,
+		    id            = "",
+		    value         = "",
+		    name          = "",
+		    disabled      = false,
+		    level         = "primary",
+		    children,
+		    onChange = undefined,
+		    onClick = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
+
+	let classContainsFlex = $derived(restProps.class?.split(" ").some((x: string) => /flex/.test(x)) || false)
 </script>
 
 <div
-	{...$$restProps}
-	class="icheck-{level} {classContainsFlex ? '' : 'd-flex align-items-center'} {$$props.class || ''}"
+	{...restProps}
+	class="icheck-{level} {classContainsFlex ? '' : 'd-flex align-items-center'} {restProps.class || ''}"
 >
 	<input
 		type="checkbox"
@@ -24,13 +50,13 @@
 		{value}
 		{name}
 		{disabled}
-		on:change
-		on:click
-		on:focusin
-		on:focusout
+		onchange={onChange}
+		onclick={onClick}
+		onfocusin={onFocusin}
+		onfocusout={onFocusout}
 	>
 	<label for={id}>
-		<slot />
+		{@render children?.()}
 	</label>
 </div>
 

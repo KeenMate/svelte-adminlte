@@ -1,49 +1,74 @@
+<!-- @migration-task Error while migrating Svelte code: Unexpected token
+https://svelte.dev/e/js_parse_error -->
+https://svelte.dev/e/js_parse_error -->
 <script lang="ts">
 	import Inputmask from "inputmask"
+	
+	type Props = {
+		id?: string;
+		value?: number | null | undefined
+		name?: string;
+		placeholder?: string;
+		pattern?: string | null | undefined
+		readonly?: boolean;
+		plaintext?: boolean;
+		disabled?: boolean;
+		inputMask?: string | null | undefined
+		invalid?: boolean;
+		size?: string | null | undefined
+		min?: string;
+		max?: string;
+		inputElement?: HTMLInputElement | null | undefined
+		onChange?: (ev: Event) => void
+		onInput?: (ev: Event) => void
+		onKeypress?: (ev: Event) => void
+		onKeydown?: (ev: Event) => void
+		onKeyup?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
 
-	export let id = ""
-	/**
-	 * @type {number?}
-	 */
-	export let value = null
-	export let name = ""
-	export let placeholder = ""
-	/**
-	 * @type {string?}
-	 */
-	export let pattern = null
-	export let readonly = false
-	export let plaintext = false
-	export let disabled = false
-	/**
-	 * @type {string?}
-	 */
-	export let inputMask = null
-	export let invalid = false
-	/**
-	 * @type {string?}
-	 */
-	export let size = "md"
-	export let min = ""
-	export let max = ""
+		[key: string]: any
+	}
 
-	/**
-	 * @type {HTMLInputElement?}
-	 */
-	export let inputElement = null
+	let {
+		    id           = "",
+		    value        = $bindable(null),
+		    name         = "",
+		    placeholder  = "",
+		    pattern      = null,
+		    readonly     = false,
+		    plaintext    = false,
+		    disabled     = false,
+		    inputMask    = null,
+		    invalid      = false,
+		    size         = "md",
+		    min          = "",
+		    max          = "",
+		    inputElement = $bindable(null),
+		    onChange = undefined,
+		    onInput = undefined,
+		    onKeypress = undefined,
+		    onKeydown = undefined,
+		    onKeyup = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
 
 	export function isValid() {
 		return inputElement?.validity.valid
 	}
 
 	// @ts-ignore
-	$: inputElement && Inputmask().mask(inputElement)
+	run(() => {
+		inputElement && Inputmask().mask(inputElement)
+	})
 </script>
 
 <input
 	bind:this={inputElement}
 	bind:value
-	class="form-control-{size} {$$props.class || ''}"
+	class="form-control-{size} {restProps.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
@@ -57,11 +82,11 @@
 	{pattern}
 	{placeholder}
 	{readonly}
-	on:change
-	on:input
-	on:keypress
-	on:keydown
-	on:keyup
-	on:focusin
-	on:focusout
+	onchange={onChange}
+	oninput={onInput}
+	onkeypress={onKeypress}
+	onkeydown={onKeydown}
+	onkeyup={onKeyup}
+	onfocusin={onFocusin}
+	onfocusout={onFocusout}
 />

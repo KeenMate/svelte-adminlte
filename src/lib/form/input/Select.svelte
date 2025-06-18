@@ -3,41 +3,70 @@
 	import TextInput from "$lib/form/input/TextInput.svelte"
 	import {Validity} from "$lib/constants/index.js"
 
-	type Option = {[key: string]: any}
+	type Option = { [key: string]: any }
 
+	type Props = {
+		id?: string;
+		value?: string;
+		name?: string;
+		options?: Option[];
+		disabled?: boolean;
+		invalid?: boolean;
+		size?: string;
+		validity?: Validity;
+		searchBar?: boolean;
+		internalSearch?: boolean;
+		trackBy?: string;
+		optionLabel?: string;
+		onChange?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
 
-	export let id: string = ""
-	export let value: string = ""
-	export let name: string = ""
-	export let options: Option[] = []
-	export let disabled: boolean = false
-	export let invalid: boolean = false
-	export let size: string = "md"
-	export let validity: Validity = Validity.None
-	export let searchBar: boolean = false
-	export let internalSearch: boolean = true
-	export let trackBy: string = "value"
-	export let optionLabel: string = "label"
-
-	let selectElement
-	let typeaheadInput: string = ""
-	let filteredOptions: Option[]
-
-	$: getOptionLabel = (option: Option) => option[optionLabel]
-
-	$: if (internalSearch) {
-		filteredOptions = options.filter(
-			option =>
-				getOptionLabel(option).toLowerCase().includes(typeaheadInput.toLowerCase()) ||
-				option[trackBy].toLowerCase().includes(typeaheadInput.toLowerCase())
-		)
-	} else {
-		filteredOptions = options
+		[key: string]: any
 	}
 
-	$: if (!value && filteredOptions.length > 0) {
-		value = filteredOptions[0][trackBy]
-	}
+	let {
+		    id             = "",
+		    value          = $bindable(""),
+		    name           = "",
+		    options        = [],
+		    disabled       = false,
+		    invalid        = false,
+		    size           = "md",
+		    validity       = Validity.None,
+		    searchBar      = false,
+		    internalSearch = true,
+		    trackBy        = "value",
+		    optionLabel    = "label",
+		    onChange = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
+
+	let selectElement             = $state()
+	let typeaheadInput: string    = $state("")
+	let filteredOptions: Option[] = $state()
+
+	let getOptionLabel = $derived((option: Option) => option[optionLabel])
+
+	run(() => {
+		if (internalSearch) {
+			filteredOptions = options.filter(
+				option =>
+					getOptionLabel(option).toLowerCase().includes(typeaheadInput.toLowerCase()) ||
+					option[trackBy].toLowerCase().includes(typeaheadInput.toLowerCase())
+			)
+		} else {
+			filteredOptions = options
+		}
+	})
+
+	run(() => {
+		if (!value && filteredOptions.length > 0) {
+			value = filteredOptions[0][trackBy]
+		}
+	})
 </script>
 
 {#if searchBar}
@@ -54,12 +83,12 @@
 	{id}
 	{name}
 	{disabled}
-	{...$$restProps}
+	{...restProps}
 	class:is-invalid={invalid}
-	class="form-control-{size || 'md'} custom-select {getValidityClass(validity)} {$$restProps.class || ''}"
-	on:change
-	on:focusin
-	on:focusout
+	class="form-control-{size || 'md'} custom-select {getValidityClass(validity)} {restProps.class || ''}"
+	onchange={onChange}
+	onfocusin={onFocusin}
+	onfocusout={onFocusout}
 >
 	{#each filteredOptions as option (option[trackBy])}
 		<option value={option[trackBy]}>{getOptionLabel(option)}</option>

@@ -2,8 +2,12 @@
 	import {getAccentClass} from "../helpers/class-helpers.js"
 	import {Accents} from "../constants/index.js"
 
-	export let width: string = "0"
-	export let accent: Accents = Accents.None
+	type Props = {
+		width?: string;
+		accent?: Accents;
+	}
+
+	let {width = "0", accent = Accents.None}: Props = $props()
 
 	const accentClass = accent !== Accents.None ? getAccentClass(accent) : ""
 </script>

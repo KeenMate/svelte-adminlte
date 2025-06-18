@@ -4,33 +4,33 @@ import {checkPermissions} from "@keenmate/js-common-helpers/helpers/permissions.
 import {writable} from "svelte/store"
 
 export const Config = writable({
-	ToastrOptions: {
-		closeButton: false,
-		debug: false,
-		newestOnTop: false,
-		progressBar: false,
-		positionClass: "toast-bottom-right",
+	ToastrOptions:         {
+		closeButton:       false,
+		debug:             false,
+		newestOnTop:       false,
+		progressBar:       false,
+		positionClass:     "toast-bottom-right",
 		preventDuplicates: false,
-		onclick: undefined,
-		showDuration: 300,
-		hideDuration: 1000,
-		timeOut: 3000,
-		extendedTimeOut: 1000,
-		showEasing: "swing",
-		hideEasing: "linear",
-		showMethod: "fadeIn",
-		hideMethod: "fadeOut",
-		errorTimeout: 10000,
-		warningTimeout: 5000
+		onclick:           undefined,
+		showDuration:      300,
+		hideDuration:      1000,
+		timeOut:           3000,
+		extendedTimeOut:   1000,
+		showEasing:        "swing",
+		hideEasing:        "linear",
+		showMethod:        "fadeIn",
+		hideMethod:        "fadeOut",
+		errorTimeout:      10000,
+		warningTimeout:    5000
 	},
-	DateFormat: "D",
-	DateTimeFormat: "f",
-	TimeFormat: "t",
-	ReverseDateFormat: "yyyy-LL-dd",
+	DateFormat:            "D",
+	DateTimeFormat:        "f",
+	TimeFormat:            "t",
+	ReverseDateFormat:     "yyyy-LL-dd",
 	ReverseDateTimeFormat: "yyyy-LL-dd_HH-mm-ss",
-	TypingDebounceDelay: 300,
-	lazyLoader: lazyLoader,
-	permissions: {
+	TypingDebounceDelay:   300,
+	lazyLoader:            lazyLoader,
+	permissions:           {
 		defaultComparison: "any",
 		checkPermissions(user?: IPermissionsUser, requiredPermissions?: Requirements) {
 			return checkPermissions(user?.permissions, requiredPermissions)
@@ -40,30 +40,30 @@ export const Config = writable({
 		}
 		// permissionCheck: checkPermissions
 	},
-	currentUser: null,
+	currentUser:           null,
 
 	defaults: {
 		alerts: {
 			base: {
 				iconClass: null,
-				level: null
+				level:     null
 			},
 
 			warning: {
 				iconClass: "fa-exclamation-triangle",
-				level: "warning"
+				level:     "warning"
 			},
 			success: {
 				iconClass: "fa-check",
-				level: "success"
+				level:     "success"
 			},
-			info: {
+			info:    {
 				iconClass: "fa-info",
-				level: "info"
+				level:     "info"
 			},
-			danger: {
+			danger:  {
 				iconClass: "fa-ban",
-				level: "danger"
+				level:     "danger"
 			}
 		},
 
@@ -78,34 +78,34 @@ export const Config = writable({
 				// will be merged into single size attribute
 				// size:       null,
 				borderless: false,
-				outlined: false,
-				social: false,
-				link: false,
-				disabled: false,
-				app: false,
-				squared: false,
-				short: false
+				outlined:   false,
+				social:     false,
+				link:       false,
+				disabled:   false,
+				app:        false,
+				squared:    false,
+				short:      false
 			},
 
-			addButton: {
-				color: "success",
+			addButton:     {
+				color:     "success",
 				iconClass: "fas fa-plus fa-fw",
-				short: false
+				short:     false
 			},
 			refreshButton: {
-				color: "info",
+				color:     "info",
 				iconClass: "fas fa-sync fa-fw",
-				short: false
+				short:     false
 			},
-			saveButton: {
-				color: "success",
+			saveButton:    {
+				color:     "success",
 				iconClass: "fas fa-save fa-fw",
-				short: false
+				short:     false
 			},
-			deleteButton: {
-				color: "danger",
+			deleteButton:  {
+				color:     "danger",
 				iconClass: "fas fa-trash fa-fw",
-				short: false
+				short:     false
 			}
 		}
 	}

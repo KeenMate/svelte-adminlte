@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {run} from "svelte/legacy"
+
 	import {createEventDispatcher, tick} from "svelte"
 	import {_} from "svelte-i18n"
 	import Modal from "./Modal.svelte"
@@ -7,12 +9,20 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let htmlDisabled = false
+	type Props = {
+		htmlDisabled?: boolean;
+		header?: import("svelte").Snippet<[any]>;
+		children?: import("svelte").Snippet<[any]>;
+
+		[key: string]: any
+	}
+
+	let {htmlDisabled = false, header, children, ...restProps}: Props = $props()
 
 	export async function showModal(message_?: string | null, header_?: string | null, data_?: any) {
-		message = message_
-		header = header_
-		data = data_
+		message    = message_
+		headerText = header_
+		data       = data_
 		await tick()
 
 		show()
@@ -26,17 +36,15 @@
 		hide()
 	}
 
-	let jModalElement
-	let show: () => void
-	let hide: () => void
-	let message: string | null | undefined
-	let header: string | null | undefined
-	let data: any
+	let jModalElement                         = $state()
+	let show: () => void                      = $state()
+	let hide: () => void                      = $state()
+	let message: string | null | undefined    = $state()
+	let headerText: string | null | undefined = $state()
+	let data: any                             = $state()
 
 	let resolveModal
 
-	$: jModalElement && jModalElement.off("hidden.bs.modal", onModalHidden)
-	$: jModalElement && jModalElement.on("hidden.bs.modal", onModalHidden)
 
 	function onModalHidden() {
 		dispatch("hidden")
@@ -53,20 +61,31 @@
 		resolveModal(true)
 		hide()
 	}
+
+	run(() => {
+		jModalElement && jModalElement.off("hidden.bs.modal", onModalHidden)
+	})
+	run(() => {
+		jModalElement && jModalElement.on("hidden.bs.modal", onModalHidden)
+	})
+
+	const header_render = $derived(header)
 </script>
 
-<Modal bind:jModalElement bind:show bind:hide {...$$restProps}>
-	<svelte:fragment slot="header">
-		<slot name="header" {data}>
-			{#if htmlDisabled}
-				{header || ""}
-			{:else}
-				{@html header || ""}
-			{/if}
-		</slot>
-	</svelte:fragment>
+<Modal bind:jModalElement bind:show bind:hide {...restProps}>
+	{#snippet header()}
 
-	<slot {data}>
+		{#if header_render}{@render header_render({data,})}{:else}
+			{#if htmlDisabled}
+				{headerText || ""}
+			{:else}
+				{@html headerText || ""}
+			{/if}
+		{/if}
+
+	{/snippet}
+
+	{#if children}{@render children({data,})}{:else}
 		<p>
 			{#if htmlDisabled}
 				{message || ""}
@@ -74,9 +93,10 @@
 				{@html message || ""}
 			{/if}
 		</p>
-	</slot>
+	{/if}
 
-	<svelte:fragment slot="actions">
+	{#snippet actions()}
+
 		<ModalCloseButton>
 			{$_("common.buttons.close")}
 		</ModalCloseButton>
@@ -88,5 +108,6 @@
 		>
 			<i class="fas fa-check fa-fw"></i> {$_("common.buttons.confirm")}
 		</LteButton>
-	</svelte:fragment>
+
+	{/snippet}
 </Modal>

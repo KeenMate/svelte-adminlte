@@ -1,9 +1,18 @@
 <script lang="ts">
-	export let value = 0
-	export let min = 0
-	export let max = 100
 
-	export let color = "default"
+	type Props = {
+		value?: number;
+		min?: number;
+		max?: number;
+		color?: string;
+	}
+
+	let {
+		    value = 0,
+		    min   = 0,
+		    max   = 100,
+		    color = "default"
+	    }: Props = $props()
 </script>
 
 <div class="progress">
@@ -14,7 +23,7 @@
 		aria-valuemax={max}
 		aria-valuemin={min}
 		aria-valuenow={value}
-	/>
+	></div>
 </div>
 
 <style lang="sass">

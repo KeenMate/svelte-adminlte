@@ -1,5 +1,5 @@
 <script
-	context="module"
+	module
 	lang="ts"
 >
 	export const CardLoadingContext = Symbol()
@@ -14,18 +14,47 @@
 	import Loader from "../ui/Loader.svelte"
 	import CardTitle from "$lib/structure/CardTitle.svelte"
 
-	export let color = "default"
 
-	export let outline = false
-	export let tabs = false
-	export let outlineTabs = false
-	export let noPadding = false
-	export let loading = false
-	export let sharedLoading = false
-	export let title = ""
-	export let icon = ""
-	export let headerBackgroundColor = "white"
-	export let titleColor = "black"
+	type Props = {
+		color?: string;
+		outline?: boolean;
+		tabs?: boolean;
+		outlineTabs?: boolean;
+		noPadding?: boolean;
+		loading?: boolean;
+		sharedLoading?: boolean;
+		title?: string;
+		icon?: string;
+		headerBackgroundColor?: string;
+		titleColor?: string;
+		header?: import("svelte").Snippet;
+		tools?: import("svelte").Snippet;
+		fullHeader?: import("svelte").Snippet;
+		children?: import("svelte").Snippet;
+		footer?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {
+		    color                 = "default",
+		    outline               = false,
+		    tabs                  = false,
+		    outlineTabs           = false,
+		    noPadding             = false,
+		    loading               = $bindable(false),
+		    sharedLoading         = false,
+		    title                 = "",
+		    icon                  = "",
+		    headerBackgroundColor = "white",
+		    titleColor            = "black",
+		    header,
+		    tools,
+		    fullHeader,
+		    children,
+		    footer,
+		    ...restProps
+	    }: Props = $props()
 
 	if (sharedLoading) {
 		setContext(CardLoadingContext, {
@@ -37,45 +66,45 @@
 </script>
 
 <div
-	class="card {(color && 'card-' + color) || ''} {$$props.class || ''}"
+	class="card {(color && 'card-' + color) || ''} {restProps.class || ''}"
 	class:card-outline={outline}
 	class:card-outline-tabs={outlineTabs}
 	class:card-tabs={tabs}
 >
-	{#if $$slots.header || $$slots.tools || $$slots.fullHeader || title !== "" || icon !== ""}
+	{#if header || tools || fullHeader || title !== "" || icon !== ""}
 		<div
-			class="card-header {$$props.headerClass || ''}"
+			class="card-header {restProps.headerClass || ''}"
 			style="background-color:{headerBackgroundColor};"
 		>
-			{#if $$slots.fullHeader}
-				<slot name="fullHeader" />
+			{#if fullHeader}
+				{@render fullHeader?.()}
 			{:else}
 				<CardTitle color={titleColor}>
-					{#if icon !== "" && !$$slots.header}
-						<i class={icon} />
+					{#if icon !== "" && !header}
+						<i class={icon}></i>
 					{/if}
-					{#if title !== "" && !$$slots.header}
+					{#if title !== "" && !header}
 						{title}
 					{:else}
-						<slot name="header" />
+						{@render header?.()}
 					{/if}
 				</CardTitle>
 
 				<div class="card-tools pull-right">
-					<slot name="tools" />
+					{@render tools?.()}
 				</div>
 			{/if}
 		</div>
 	{/if}
 	<div
-		class="card-body {$$restProps.bodyClass || ''}"
+		class="card-body {restProps.bodyClass || ''}"
 		class:p-0={noPadding}
 	>
-		<slot />
+		{@render children?.()}
 	</div>
-	{#if $$slots.footer}
+	{#if footer}
 		<div class="card-footer">
-			<slot name="footer" />
+			{@render footer?.()}
 		</div>
 	{/if}
 	{#if loading}

@@ -1,38 +1,62 @@
 <script lang="ts">
-	import {createEventDispatcher} from "svelte"
+	type Props = {
+		username?: any;
+		datetime?: any;
+		avatarImageSrc?: any;
+		avatarAlt?: any;
+		message?: any;
+		right?: boolean;
+		avatar?: import("svelte").Snippet;
+		children?: import("svelte").Snippet;
+		onClick?: (ev: Event) => void
+		onUsernameClick?: (ev: Event) => void
+		onDatetimeClick?: (ev: Event) => void
+		onAvatarClick?: (ev: Event) => void
+		onChatBodyClick?: (ev: Event) => void
 
-	const dispatch = createEventDispatcher()
+		[key: string]: any
+	}
 
-	export let username = null
-	export let datetime = null
-	export let avatar = null
-	export let avatarAlt = null
-	export let message = null
-	export let right = false
+	let {
+		    username       = null,
+		    datetime       = null,
+		    avatarImageSrc = null,
+		    avatarAlt      = null,
+		    message        = null,
+		    right          = false,
+		    avatar,
+		    children,
+		    onClick = undefined,
+		    onUsernameClick = undefined,
+		    onDatetimeClick = undefined,
+		    onAvatarClick = undefined,
+		    onChatBodyClick = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
-<div class="direct-chat-msg {$$restProps.class || ''}" class:right on:click>
+<div class="direct-chat-msg {restProps.class || ''}" class:right onclick={onClick}>
 	<div class="direct-chat-infos clearfix">
-		<span class="direct-chat-name float-left" on:click={ev => dispatch("usernameClick", ev)}>
+		<span class="direct-chat-name float-left" onclick={onUsernameClick}>
 			{username || ""}
 		</span>
-		<span class="direct-chat-timestamp float-right" on:click={ev => dispatch("datetimeClick", ev)}>
+		<span class="direct-chat-timestamp float-right" onclick={onDatetimeClick}>
 			{datetime || ""}
 		</span>
 	</div>
-	<slot name="avatar">
-		{#if avatar || avatarAlt}
+	{#if avatar}{@render avatar()}{:else}
+		{#if avatarImageSrc || avatarAlt}
 			<img
 				class="direct-chat-img"
-				src={avatar || ""}
+				src={avatarImageSrc || ""}
 				alt={avatarAlt || ""}
-				on:click={ev => dispatch("avatarClick", ev)}
+				onclick={onAvatarClick}
 			/>
 		{/if}
-	</slot>
-	<div class="direct-chat-text" on:click={ev => dispatch("chatBodyClicked", ev)}>
-		<slot>
+	{/if}
+	<div class="direct-chat-text" onclick={onChatBodyClick}>
+		{#if children}{@render children()}{:else}
 			{message || ""}
-		</slot>
+		{/if}
 	</div>
 </div>

@@ -1,19 +1,33 @@
 <script lang="ts">
 	import useActions from "$lib/actions/use-actions.js"
 
-	export let href: string | undefined = undefined
-	export let use: ((node: HTMLElement) => any) | undefined = undefined
+	type Props = {
+		href?: string | undefined;
+		use?: ((node: HTMLElement) => any) | undefined;
+		children?: import("svelte").Snippet;
+		onClick?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    href    = undefined,
+		    use     = undefined,
+		    children,
+		    onClick = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <a
 	id="navbarDropdown"
 	{href}
 	role="button"
-	class="nav-link dropdown-toggle"
 	data-toggle="dropdown"
+	{...restProps}
+	class="nav-link dropdown-toggle {restProps.class || ''}"
+	onclick={onClick}
 	use:useActions={use}
-	{...$$restProps}
-	on:click
 >
-	<slot />
+	{@render children?.()}
 </a>

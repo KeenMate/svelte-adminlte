@@ -1,11 +1,18 @@
 <script lang="ts">
-	export let form
-	export let horizontal = false
+	type Props = {
+		form: any;
+		horizontal?: boolean;
+		children?: import("svelte").Snippet;
 
-	$: formParam = form || (() => {
-	})
+		[key: string]: any
+	}
+
+	let {form, horizontal = false, children, ...restProps}: Props = $props()
+
+	let formParam = $derived(form || (() => {
+	}))
 </script>
 
-<form use:formParam class={$$props.class || ""} class:form-horizontal={horizontal} {...$$restProps}>
-	<slot />
+<form use:formParam class={restProps.class || ""} class:form-horizontal={horizontal} {...restProps}>
+	{@render children?.()}
 </form>

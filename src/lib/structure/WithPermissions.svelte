@@ -1,19 +1,30 @@
 <script lang="ts">
 	import {Config} from "$lib/config.js"
 
-	export let permission: string[] | string
-	export let comparison: string | null = null
+	type Props = {
+		permission: string[] | string;
+		comparison?: string | null;
+		children?: import("svelte").Snippet;
+		unmatched?: import("svelte").Snippet;
+	}
 
-	$: sanitizedPermission = ((typeof permission === "string" && [permission]) ||
-		permission) as string[]
+	let {
+		    permission,
+		    comparison = null,
+		    children,
+		    unmatched
+	    }: Props = $props()
 
-	$: isVisible = $Config.permissions.checkPermissions($Config.currentUser, {
+	let sanitizedPermission = $derived(((typeof permission === "string" && [permission]) ||
+		permission) as string[])
+
+	let isVisible = $derived($Config.permissions.checkPermissions($Config.currentUser, {
 		[comparison || $Config.permissions.defaultComparison]: sanitizedPermission
-	})
+	}))
 </script>
 
 {#if isVisible}
-	<slot />
+	{@render children?.()}
 {:else}
-	<slot name="else" />
+	{@render unmatched?.()}
 {/if}

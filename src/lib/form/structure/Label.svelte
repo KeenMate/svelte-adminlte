@@ -1,7 +1,14 @@
 <script lang="ts">
-	export let inputId: string = ""
+	type Props = {
+		inputId?: string;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {inputId = "", children, ...restProps}: Props = $props()
 </script>
 
-<label class={$$props.class || ""} for={inputId}>
-	<slot />
+<label class={restProps.class || ""} for={inputId}>
+	{@render children?.()}
 </label>

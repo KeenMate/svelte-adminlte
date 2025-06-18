@@ -1,4 +1,6 @@
-<script lang="ts">
+<script lang="ts" generics="TData">
+	import {run} from "svelte/legacy"
+
 	// this is working in bundle
 	import {getContext} from "svelte"
 	import lazyLoader from "@keenmate/js-common-helpers/helpers/lazy-loader.js"
@@ -7,31 +9,30 @@
 	import {Config} from "$lib/config.js"
 	import Loader from "$lib/ui/Loader.svelte"
 
-	type TData = $$Generic
-
-	interface $$Slots {
-		// If you want to type the default slot, change the property name below to "default"
-		default: {data: TData}
-		catch: {}
-		loader: {}
-	}
-
 	const context: contextType = getContext(CardLoadingContext)
 
-	export let task: Promise<TData>
-	export let loading = false
-	export let parentLoading = false
+	type Props = {
+		task: Promise<TData>;
+		loading?: boolean;
+		parentLoading?: boolean;
+		loader?: import("svelte").Snippet;
+		children?: import("svelte").Snippet<[any]>;
+		onError?: import("svelte").Snippet<[any]>;
+	}
 
-	let oldData: TData
+	let {
+		    task,
+		    loading       = $bindable(false),
+		    parentLoading = false,
+		    loader,
+		    children,
+		    onError
+	    }: Props = $props()
 
-	let lazyTask: Promise<TData>
+	let oldData: TData = $state()
 
-	$: lazyTask =
-		(task && lazyLoader<TData>(task, showLoader, hideLoader, $Config.lazyLoader)) ||
-		(emptyPromise as Promise<TData>)
-	$: lazyTask?.then(x => {
-		oldData = x as TData
-	})
+	let lazyTask: Promise<TData> = $state()
+
 
 	function showLoader() {
 		setLoading(true)
@@ -43,23 +44,34 @@
 
 	function setLoading(loading_: boolean) {
 		loading = loading_
-		
+
 		if (parentLoading) {
 			context?.setLoading(loading_)
 		}
 	}
+
+	run(() => {
+		lazyTask =
+			(task && lazyLoader<TData>(task, showLoader, hideLoader, $Config.lazyLoader)) ||
+			(emptyPromise as Promise<TData>)
+	})
+	run(() => {
+		lazyTask?.then(x => {
+			oldData = x as TData
+		})
+	})
 </script>
 
 {#await lazyTask}
 	{#if loading && !parentLoading}
-		<slot name="loader">
+		{#if loader}{@render loader()}{:else}
 			<Loader />
-		</slot>
+		{/if}
 	{:else}
-		<slot data={oldData} />
+		{@render children?.({data: oldData,})}
 	{/if}
 {:then data}
-	<slot {data} />
+	{@render children?.({data,})}
 {:catch error}
-	<slot name="catch" {error} />
+	{@render onError?.({error,})}
 {/await}

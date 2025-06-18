@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let iconClass
+	let {iconClass} = $props()
 </script>
 
 <li>
-	<i class={iconClass} />
+	<i class={iconClass}></i>
 </li>

@@ -1,30 +1,56 @@
+https://svelte.dev/e/js_parse_error -->
 <script lang="ts">
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let rows = 2
-	export let cols = ""
-	export let placeholder = ""
-	/**
-	 * @type {string?}
-	 */
-	export let pattern = null
-	export let readonly = false
-	export let plaintext = false
-	export let disabled = false
-	/**
-	 * @type {number?}
-	 */
-	export let maxlength = null
-	/**
-	 * @type {string?}
-	 */
-	export let size = null
+	type Props = {
+		id?: string;
+		value?: string;
+		name?: string;
+		rows?: number;
+		cols?: string;
+		placeholder?: string;
+		pattern?: string;
+		readonly?: boolean;
+		plaintext?: boolean;
+		disabled?: boolean;
+		maxlength?: number;
+		size?: string;
+		onChange?: (ev: Event) => void
+		onInput?: (ev: Event) => void
+		onKeypress?: (ev: Event) => void
+		onKeydown?: (ev: Event) => void
+		onKeyup?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    id          = "",
+		    value       = $bindable(""),
+		    name        = "",
+		    rows        = 2,
+		    cols        = "",
+		    placeholder = "",
+		    pattern     = null,
+		    readonly    = false,
+		    plaintext   = false,
+		    disabled    = false,
+		    maxlength   = null,
+		    size        = null,
+		    onChange = undefined,
+		    onInput = undefined,
+		    onKeypress = undefined,
+		    onKeydown = undefined,
+		    onKeyup = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
 
 	/**
 	 * @type {HTMLTextAreaElement?}
 	 */
-	let inputElement = null
+	let inputElement = $state(null)
 
 	export function isValid() {
 		return inputElement?.validity.valid
@@ -46,16 +72,16 @@
 	{cols}
 	{readonly}
 	{disabled}
-	{...$$restProps}
-	class="form-control-{size || 'md'} {$$restProps.class || ''}"
-	on:change
-	on:input
-	on:keypress
-	on:keydown
-	on:keyup
-	on:focusin
-	on:focusout
-/>
+	{...restProps}
+	class="form-control-{size || 'md'} {restProps.class || ''}"
+	onchange={onChange}
+	oninput={onInput}
+	onkeypress={onKeypress}
+	onkeydown={onKeydown}
+	onkeyup={onKeyup}
+	onfocusin={onFocusin}
+	onfocusout={onFocusout}
+></textarea>
 
 <style>
 	.set-cols {

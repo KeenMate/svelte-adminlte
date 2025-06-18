@@ -1,19 +1,39 @@
 <script lang="ts">
-	export let id = null
-	export let value = null
-	export let min = null
-	export let max = null
+	type Props = {
+		id?: any;
+		value?: any;
+		min?: any;
+		max?: any;
+		onInput?: (ev: Event) => void
+		onChange?: (ev: Event) => void
+		onFocus?: (ev: Event) => void
+		onBlur?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    id    = null,
+		    value = $bindable(null),
+		    min   = null,
+		    max   = null,
+		    onInput = undefined,
+		    onChange = undefined,
+		    onFocus = undefined,
+		    onBlur = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
 <input
 	bind:value
 	type="range"
-	class="custom-range {$$props.class || ''}"
+	class="custom-range {restProps.class || ''}"
 	{id}
 	{min}
 	{max}
-	on:input
-	on:change
-	on:focus
-	on:blur
+	oninput={onInput}
+	onchange={onChange}
+	onfocus={onFocus}
+	onblur={onBlur}
 />

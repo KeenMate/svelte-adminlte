@@ -1,9 +1,14 @@
 <script lang="ts">
 	import {getContext} from "svelte"
 
-	export let key
-	export let id
-	export let headerId
+	let {
+		    key,
+		    id,
+		    headerId,
+		    header,
+		    headerText,
+		    children
+	    } = $props()
 
 	const {currentEntry, id: parentId} = getContext(key)
 </script>
@@ -11,7 +16,7 @@
 <div class="card">
 	<div class="card-header" id={headerId}>
 		<h2 class="mb-0">
-			<slot name="header">
+			{#if header}{@render header()}{:else}
 				<button
 					class="btn btn-link btn-block text-left"
 					type="button"
@@ -19,11 +24,11 @@
 					data-target="#{id}"
 					aria-expanded="true"
 					aria-controls={id}
-					on:click={() => ($currentEntry = id)}
+					onclick={() => ($currentEntry = id)}
 				>
-					<slot name="headerText" />
+					{@render headerText?.()}
 				</button>
-			</slot>
+			{/if}
 		</h2>
 	</div>
 
@@ -35,7 +40,7 @@
 		data-parent="#{parentId}"
 	>
 		<div class="card-body">
-			<slot />
+			{@render children?.()}
 		</div>
 	</div>
 </div>

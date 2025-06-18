@@ -2,6 +2,6 @@ export default function useActions(node: HTMLElement, options?: ((node: HTMLElem
 	if (!options) {
 		return
 	}
-	
+
 	return options(node)
 }

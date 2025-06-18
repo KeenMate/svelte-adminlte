@@ -3,10 +3,26 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let header: string | null | undefined = undefined
-	export let closeable: boolean | undefined = undefined
-	export let level: string | null | undefined = undefined
-	export let icon: string | null | undefined = undefined
+	type Props = {
+		headerText?: string | null | undefined;
+		closeable?: boolean | undefined;
+		level?: string | null | undefined;
+		icon?: string | null | undefined;
+		header?: import("svelte").Snippet;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {
+		    headerText = undefined,
+		    closeable  = undefined,
+		    level      = undefined,
+		    icon       = undefined,
+		    header,
+		    children,
+		    ...restProps
+	    }: Props = $props()
 
 	function alertClosed() {
 		dispatch("closed")
@@ -14,8 +30,8 @@
 </script>
 
 <div
-	{...$$restProps}
-	class="alert alert-{level} {$$restProps.class || ''}"
+	{...restProps}
+	class="alert alert-{level} {restProps.class || ''}"
 	class:alert-dismissible={closeable}
 >
 	{#if closeable}
@@ -24,22 +40,22 @@
 			class="close"
 			data-dismiss="alert"
 			aria-hidden="true"
-			on:click={alertClosed}
+			onclick={alertClosed}
 		>
 			×
 		</button>
 	{/if}
 
 	<h4>
-		<slot name="header">
-			{#if header}
-				<i class="icon {icon}" />
-				{header}
+		{#if header}{@render header()}{:else}
+			{#if headerText}
+				<i class="icon {icon}"></i>
+				{headerText}
 			{/if}
-		</slot>
+		{/if}
 	</h4>
 
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="scss">

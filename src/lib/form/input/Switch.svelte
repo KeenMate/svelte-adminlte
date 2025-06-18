@@ -3,14 +3,25 @@
 
 	const dispatch = createEventDispatcher()
 
-	export let checked = false
-	export let id: string | null = null
-	export let checkedClass = ""
-	export let uncheckedClass = ""
-	export let disabledClass = ""
-	export let disabled = false
+	type Props = {
+		checked?: boolean;
+		id?: string | null;
+		checkedClass?: string;
+		uncheckedClass?: string;
+		disabledClass?: string;
+		disabled?: boolean;
+	}
 
-	$: sliderClasses = disabled ? disabledClass : checked ? checkedClass : uncheckedClass
+	let {
+		    checked        = $bindable(false),
+		    id             = null,
+		    checkedClass   = "",
+		    uncheckedClass = "",
+		    disabledClass  = "",
+		    disabled       = false
+	    }: Props = $props()
+
+	let sliderClasses = $derived(disabled ? disabledClass : checked ? checkedClass : uncheckedClass)
 
 	function onChange(ev: InputEvent) {
 		const inputChecked = (ev.target as HTMLInputElement).checked
@@ -30,9 +41,9 @@
 		type="checkbox"
 		{disabled}
 		{id}
-		on:change={onChange}
+		onchange={onChange}
 	/>
-	<span class="slider {sliderClasses}" />
+	<span class="slider {sliderClasses}"></span>
 </label>
 
 <style lang="scss">

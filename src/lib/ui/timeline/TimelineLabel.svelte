@@ -1,9 +1,14 @@
 <script lang="ts">
-	export let color = "default"
+	type Props = {
+		color?: string;
+		children?: import("svelte").Snippet;
+	}
+
+	let {color = "default", children}: Props = $props()
 </script>
 
 <li class="time-label">
 	<span class={(color && "bg-" + color) || ""}>
-		<slot />
+		{@render children?.()}
 	</span>
 </li>

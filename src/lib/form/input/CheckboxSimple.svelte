@@ -1,13 +1,37 @@
 <script lang="ts">
-	export let checked = false
-	export let indeterminate = false
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let disabled = false
+	type Props = {
+		checked?: boolean;
+		indeterminate?: boolean;
+		id?: string;
+		value?: string;
+		name?: string;
+		disabled?: boolean;
+		children?: import("svelte").Snippet;
+		onChange?: (ev: Event) => void
+		onClick?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
+
+		[key: string]: any
+	}
+
+	let {
+		    checked       = $bindable(false),
+		    indeterminate = $bindable(false),
+		    id            = "",
+		    value         = "",
+		    name          = "",
+		    disabled      = false,
+		    children = undefined,
+		    onChange = undefined,
+		    onClick = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
 </script>
 
-<div class="{$$props.class || ''}">
+<div class="{restProps.class || ''}">
 	<input
 		type="checkbox"
 		bind:checked
@@ -16,13 +40,13 @@
 		{value}
 		{name}
 		{disabled}
-		on:change
-		on:click
-		on:focusin
-		on:focusout
+		onchange={onChange}
+		onclick={onClick}
+		onfocusin={onFocusin}
+		onfocusout={onFocusout}
 	/>
 	<label for={id}>
-		<slot />
+		{@render children?.()}
 	</label>
 </div>
 

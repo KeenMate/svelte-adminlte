@@ -1,13 +1,20 @@
 <script lang="ts">
-	export let text = false
+	type Props = {
+		text?: boolean;
+		children?: import("svelte").Snippet;
+
+		[key: string]: any
+	}
+
+	let {text = false, children, ...restProps}: Props = $props()
 </script>
 
-<span class="input-group-append {$$props.class || ''}">
+<span class="input-group-append {restProps.class || ''}">
 	{#if !text}
-		<slot />
+		{@render children?.()}
 	{:else}
 		<div class="input-group-text">
-			<slot />
+			{@render children?.()}
 		</div>
 	{/if}
 </span>

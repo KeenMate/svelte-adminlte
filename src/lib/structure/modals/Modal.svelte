@@ -1,30 +1,53 @@
+<!-- @migration-task Error while migrating Svelte code: Unexpected token
+https://svelte.dev/e/js_parse_error -->
+https://svelte.dev/e/js_parse_error -->
 <script lang="ts">
+	import {run} from "svelte/legacy"
+
 	import {onDestroy, onMount, tick} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 	import Loader from "$lib/ui/Loader.svelte"
 	import {createEventDispatcher} from "svelte"
-	
+
 	const dispatch = createEventDispatcher()
 
-	/**
-	 * @type {any?}
-	 */
 
-	export let jModalElement = undefined
-	/**
-	 * @type {string?}
-	 */
-	export let color = null
-	export let escapeClose = true
-	export let clickClose = true
-	export let showClose = true
-	export let closeExisting = false
-	export let small = false
-	export let large = false
-	export let xlarge = false
-	export let center = false
-	export let loading = false
+	type Props = {
+		jModalElement?: any;
+		color?: string | null | undefined
+		escapeClose?: boolean;
+		clickClose?: boolean;
+		showClose?: boolean;
+		closeExisting?: boolean;
+		small?: boolean;
+		large?: boolean;
+		xlarge?: boolean;
+		center?: boolean;
+		loading?: boolean;
+		header?: import("svelte").Snippet;
+		children?: import("svelte").Snippet;
+		actions?: import("svelte").Snippet;
+		loadingIcon?: import("svelte").Snippet;
+	}
+
+	let {
+		    jModalElement = $bindable(undefined),
+		    color         = null,
+		    escapeClose   = true,
+		    clickClose    = true,
+		    showClose     = true,
+		    closeExisting = false,
+		    small         = false,
+		    large         = false,
+		    xlarge        = false,
+		    center        = false,
+		    loading       = false,
+		    header,
+		    children,
+		    actions,
+		    loadingIcon
+	    }: Props = $props()
 
 	export function toggle() {
 		if (!opened) {
@@ -56,11 +79,10 @@
 	/**
 	 * @type {HTMLDivElement?}
 	 */
-	let modalElement = null
-	let opened = false
+	let modalElement           = $state(null)
+	let opened                 = false
 	let documentHadOpenedModal = false
 
-	$: modalElement && initModal()
 
 	onMount(() => {
 		document.addEventListener("keydown", onDocumentKeyDown)
@@ -99,7 +121,7 @@
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show: false
+			show:     false
 		})
 
 		jModalElement.on("hidden.bs.modal", onModalHidden)
@@ -109,7 +131,7 @@
 
 	async function onModalHidden() {
 		dispatch("hidden")
-		
+
 		await tick()
 		afterCloseModal()
 	}
@@ -117,7 +139,7 @@
 	function onModalShow() {
 		beforeOpenModal()
 	}
-	
+
 	function onModalShown() {
 		dispatch("shown")
 	}
@@ -132,6 +154,10 @@
 
 		hide()
 	}
+
+	run(() => {
+		modalElement && initModal()
+	})
 </script>
 
 <div bind:this={modalElement} class="modal fade in">
@@ -145,25 +171,25 @@
 		<div class="modal-content {(color && `bg-${color}`) || ''}">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					<slot name="header" />
+					{@render header?.()}
 				</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<slot />
+				{@render children?.()}
 			</div>
 			<div class="modal-footer">
-				<slot name="actions">
+				{#if actions}{@render actions()}{:else}
 					<ModalCloseButton />
-				</slot>
+				{/if}
 			</div>
 			{#if loading}
 				<div class="overlay">
-					<slot name="loading-icon">
+					{#if loadingIcon}{@render loadingIcon()}{:else}
 						<Loader />
-					</slot>
+					{/if}
 				</div>
 			{/if}
 		</div>

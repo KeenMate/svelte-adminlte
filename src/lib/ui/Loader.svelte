@@ -1,6 +1,14 @@
-<div class="loader-parent" {...$$props}>
+<script lang="ts">
+	type Props = {
+		[key: string]: any
+	}
+
+	let {...props}: Props = $props()
+</script>
+
+<div class="loader-parent" {...props}>
 	<div>
-		<div class="lds-dual-ring center-block" />
+		<div class="lds-dual-ring center-block"></div>
 	</div>
 </div>
 

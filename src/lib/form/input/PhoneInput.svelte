@@ -1,33 +1,65 @@
 <script lang="ts">
 	import Inputmask from "inputmask"
 
-	export let id = ""
-	export let value = ""
-	export let name = ""
-	export let placeholder = ""
-	export let pattern = null
-	export let readonly = false
-	export let plaintext = false
-	export let disabled = false
-	export let inputMask = null
-	export let invalid = false
-	export let maxlength = ""
-	export let size
+	type Props = {
+		id?: string;
+		value?: string;
+		name?: string;
+		placeholder?: string;
+		pattern?: any;
+		readonly?: boolean;
+		plaintext?: boolean;
+		disabled?: boolean;
+		inputMask?: any;
+		invalid?: boolean;
+		maxlength?: string;
+		size: any;
+		inputElement?: any;
+		onChange?: (ev: Event) => void
+		onInput?: (ev: Event) => void
+		onKeypress?: (ev: Event) => void
+		onFocusin?: (ev: Event) => void
+		onFocusout?: (ev: Event) => void
 
-	export let inputElement = null
+		[key: string]: any
+	}
+
+	let {
+		    id           = "",
+		    value        = $bindable(""),
+		    name         = "",
+		    placeholder  = "",
+		    pattern      = null,
+		    readonly     = false,
+		    plaintext    = false,
+		    disabled     = false,
+		    inputMask    = null,
+		    invalid      = false,
+		    maxlength    = "",
+		    size,
+		    inputElement = $bindable(null),
+		    onChange = undefined,
+		    onInput = undefined,
+		    onKeypress = undefined,
+		    onFocusin = undefined,
+		    onFocusout = undefined,
+		    ...restProps
+	    }: Props = $props()
 
 	export function isValid() {
 		return inputElement.validity.valid
 	}
 
-	$: inputElement && Inputmask().mask(inputElement)
+	run(() => {
+		inputElement && Inputmask().mask(inputElement)
+	})
 </script>
 
 <input
 	bind:this={inputElement}
 	bind:value
 	type="tel"
-	class="form-control-{size || 'md'} {$$props.class || ''}"
+	class="form-control-{size || 'md'} {restProps.class || ''}"
 	class:form-control={!plaintext}
 	class:form-control-plaintext={plaintext}
 	class:is-invalid={invalid}
@@ -39,9 +71,9 @@
 	{placeholder}
 	{disabled}
 	{readonly}
-	on:change
-	on:input
-	on:keypress
-	on:focusin
-	on:focusout
+	onchange={onChange}
+	oninput={onInput}
+	onkeypress={onKeypress}
+	onfocusin={onFocusin}
+	onfocusout={onFocusout}
 />
