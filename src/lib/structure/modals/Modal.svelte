@@ -12,7 +12,6 @@ https://svelte.dev/e/js_parse_error -->
 
 	const dispatch = createEventDispatcher()
 
-
 	type Props = {
 		jModalElement?: any;
 		color?: string | null | undefined

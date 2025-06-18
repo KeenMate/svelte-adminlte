@@ -36,10 +36,10 @@
 		{...restProps}
 		use:useActions={use}
 	>
-		{#if iconClass}
-			<i class="nav-icon {iconClass}"></i>
+		{#if icon}
+			{@render icon()}
 		{:else}
-			{@render icon?.()}
+			<i class="nav-icon {iconClass}"></i>
 		{/if}
 
 		{@render children?.()}

@@ -1,11 +1,16 @@
 <script lang="ts">
+	import {_} from "svelte-i18n"
+
 	type Props = {
 		children?: import("svelte").Snippet;
 
 		[key: string]: any
 	}
 
-	let {...props}: Props = $props()
+	let {
+		    children = undefined,
+		    ...props
+	    }: Props = $props()
 </script>
 
 <button
@@ -14,5 +19,9 @@
 	{...props}
 	class="btn btn-default btn-sm pull-left {props.class || ''}"
 >
-	{#if children}{@render props.children()}{:else}Close{/if}
+	{#if children}
+		{@render children()}
+	{:else}
+		{$_("common.buttons.close")}
+	{/if}
 </button>
