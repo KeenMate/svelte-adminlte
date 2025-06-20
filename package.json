@@ -35,7 +35,6 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"dependencies": {
-		"@keenmate/svelte-adminlte": "^5.0.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/kit": "^2.5.27",
@@ -63,8 +62,8 @@
 		"eslint-plugin-svelte": "^2.45.1"
 	},
 	"peerDependencies": {
-		"@keenmate/js-common-helpers": "^1.0.0",
-		"@keenmate/svelte-common-helpers": "^1.0.1",
+		"@keenmate/js-common-helpers": "^3.0.4",
+		"@keenmate/svelte-common-helpers": "^3.1.2",
 		"admin-lte": "=3.0.5",
 		"bootstrap": "^4.4.1",
 		"icheck-bootstrap": "^3.0.1",
