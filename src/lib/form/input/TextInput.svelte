@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Inputmask from "inputmask"
 	import {getValidityClass} from "../../helpers/class-helpers.js"
-
-
+	
 	type Props = {
 		id?: string;
 		value?: string;
@@ -44,13 +43,13 @@
 		    size         = "md",
 		    validity     = "none",
 		    inputElement = $bindable(null),
-		    onChange = undefined,
-		    onInput = undefined,
-		    onKeypress = undefined,
-		    onKeydown = undefined,
-		    onKeyup = undefined,
-		    onFocusin = undefined,
-		    onFocusout = undefined,
+		    onChange     = undefined,
+		    onInput      = undefined,
+		    onKeypress   = undefined,
+		    onKeydown    = undefined,
+		    onKeyup      = undefined,
+		    onFocusin    = undefined,
+		    onFocusout   = undefined,
 		    ...restProps
 	    }: Props = $props()
 
@@ -58,9 +57,11 @@
 		return inputElement?.validity.valid
 	}
 
-	//@ts-ignore
-	run(() => {
-		inputMask && inputElement && Inputmask().mask(inputElement)
+	$effect(() => {
+		if (inputMask && inputElement) {
+			//@ts-ignore
+			Inputmask().mask(inputElement)
+		}
 	})
 </script>
 <input
