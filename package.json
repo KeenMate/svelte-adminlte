@@ -25,16 +25,22 @@
 		}
 	},
 	"files": [
-		"dist"
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
 	],
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^3.0.0",
+		"@keenmate/svelte-adminlte": "^5.0.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-static": "^3.0.0",
 		"@sveltejs/kit": "^2.5.27",
-		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@sveltejs/package": "^2.3.7",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"CBuffer": "^2.2.0",
 		"eslint-config-prettier": "^9.1.0",
 		"litepicker": "^2.0.11",
@@ -61,10 +67,10 @@
 		"@keenmate/svelte-common-helpers": "^1.0.1",
 		"admin-lte": "=3.0.5",
 		"bootstrap": "^4.4.1",
-		"svelte-i18n": "^4.0.1",
 		"icheck-bootstrap": "^3.0.1",
 		"inputmask": "^5.0.8",
-		"jquery": "^3.7.0"
+		"jquery": "^3.7.0",
+		"svelte-i18n": "^4.0.1"
 	},
 	"overrides": {
 		"summernote": "file:./__I_REMOVED_THIS_PACKAGE_BECAUSE_OF_HUSKY_NOT_FOUND_ERROR_DURING_INSTALL_PHASE__"
