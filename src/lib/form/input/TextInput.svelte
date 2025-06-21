@@ -30,7 +30,7 @@
 
 	let {
 		    id           = "",
-		    value        = $bindable(""),
+		    value        = $bindable(),
 		    name         = "",
 		    placeholder  = "",
 		    pattern      = null,
@@ -42,7 +42,7 @@
 		    maxlength    = null,
 		    size         = "md",
 		    validity     = "none",
-		    inputElement = $bindable(null),
+		    inputElement = $bindable(),
 		    onChange     = undefined,
 		    onInput      = undefined,
 		    onKeypress   = undefined,

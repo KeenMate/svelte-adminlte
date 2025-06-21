@@ -82,6 +82,9 @@ https://svelte.dev/e/js_parse_error -->
 	let opened                 = false
 	let documentHadOpenedModal = false
 
+	$effect(() => {
+		modalElement && initModal()
+	})
 
 	onMount(() => {
 		document.addEventListener("keydown", onDocumentKeyDown)
@@ -153,10 +156,6 @@ https://svelte.dev/e/js_parse_error -->
 
 		hide()
 	}
-
-	run(() => {
-		modalElement && initModal()
-	})
 </script>
 
 <div bind:this={modalElement} class="modal fade in">
