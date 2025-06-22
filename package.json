@@ -41,7 +41,6 @@
 		"@sveltejs/package": "^2.3.7",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"CBuffer": "^2.2.0",
-		"eslint-config-prettier": "^9.1.0",
 		"litepicker": "^2.0.11",
 		"prettier": "^3.1.0",
 		"prettier-plugin-svelte": "^3.2.6",
@@ -55,11 +54,7 @@
 	},
 	"devDependencies": {
 		"@types/inputmask": "^5.0.3",
-		"@types/toastr": "^2.1.43",
-		"@typescript-eslint/eslint-plugin": "^6.16.0",
-		"@typescript-eslint/parser": "^6.16.0",
-		"eslint": "^8.56.0",
-		"eslint-plugin-svelte": "^2.45.1"
+		"@types/toastr": "^2.1.43"
 	},
 	"peerDependencies": {
 		"@keenmate/js-common-helpers": "^3.0.4",

@@ -1,6 +1,3 @@
-<!-- @migration-task Error while migrating Svelte code: Unexpected token
-https://svelte.dev/e/js_parse_error -->
-https://svelte.dev/e/js_parse_error -->
 <script lang="ts">
 	import Inputmask from "inputmask"
 
@@ -54,7 +51,7 @@ https://svelte.dev/e/js_parse_error -->
 	}
 
 	// @ts-ignore
-	run(() => {
+	$effect(() => {
 		inputElement && Inputmask().mask(inputElement)
 	})
 </script>

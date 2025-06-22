@@ -1,16 +1,8 @@
-<!-- @migration-task Error while migrating Svelte code: Unexpected token
-https://svelte.dev/e/js_parse_error -->
-https://svelte.dev/e/js_parse_error -->
 <script lang="ts">
-	import {run} from "svelte/legacy"
-
-	import {onDestroy, onMount, tick} from "svelte"
+	import {onDestroy, onMount, tick, untrack} from "svelte"
 	import jQuery from "jquery"
 	import ModalCloseButton from "$lib/ui/ModalCloseButton.svelte"
 	import Loader from "$lib/ui/Loader.svelte"
-	import {createEventDispatcher} from "svelte"
-
-	const dispatch = createEventDispatcher()
 
 	type Props = {
 		jModalElement?: any;
@@ -24,6 +16,7 @@ https://svelte.dev/e/js_parse_error -->
 		xlarge?: boolean;
 		center?: boolean;
 		loading?: boolean;
+		onHidden?: VoidFunction
 		header?: import("svelte").Snippet;
 		children?: import("svelte").Snippet;
 		actions?: import("svelte").Snippet;
@@ -31,22 +24,23 @@ https://svelte.dev/e/js_parse_error -->
 	}
 
 	let {
-		    jModalElement = $bindable(undefined),
-		    color         = null,
-		    escapeClose   = true,
-		    clickClose    = true,
-		    showClose     = true,
-		    closeExisting = false,
-		    small         = false,
-		    large         = false,
-		    xlarge        = false,
-		    center        = false,
-		    loading       = false,
-		    header,
-		    children,
-		    actions,
-		    loadingIcon
-	    }: Props = $props()
+		jModalElement = $bindable(),
+		color = null,
+		escapeClose = true,
+		clickClose = true,
+		showClose = true,
+		closeExisting = false,
+		small = false,
+		large = false,
+		xlarge = false,
+		center = false,
+		loading = false,
+		onHidden = undefined,
+		header,
+		children,
+		actions,
+		loadingIcon
+	}: Props = $props()
 
 	export function toggle() {
 		if (!opened) {
@@ -78,8 +72,8 @@ https://svelte.dev/e/js_parse_error -->
 	/**
 	 * @type {HTMLDivElement?}
 	 */
-	let modalElement           = $state(null)
-	let opened                 = false
+	let modalElement = $state(null)
+	let opened = false
 	let documentHadOpenedModal = false
 
 	$effect(() => {
@@ -123,16 +117,17 @@ https://svelte.dev/e/js_parse_error -->
 			backdrop: clickClose ? true : "static",
 			showClose,
 			closeExisting,
-			show:     false
+			show: false
 		})
 
-		jModalElement.on("hidden.bs.modal", onModalHidden)
-		jModalElement.on("shown.bs.modal", onModalShown)
-		jModalElement.on("show.bs.modal", onModalShow)
+		const jModal = untrack(() => jModalElement)
+		jModal.on("hidden.bs.modal", onModalHidden)
+		jModal.on("shown.bs.modal", onModalShown)
+		jModal.on("show.bs.modal", onModalShow)
 	}
 
 	async function onModalHidden() {
-		dispatch("hidden")
+		onHidden?.()
 
 		await tick()
 		afterCloseModal()
