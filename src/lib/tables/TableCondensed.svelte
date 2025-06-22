@@ -1,6 +1,6 @@
 <script lang="ts">
 	let {
-		    node = $bindable(undefined),
+		    node = $bindable(),
 		    headers,
 		    children,
 		    footer,
