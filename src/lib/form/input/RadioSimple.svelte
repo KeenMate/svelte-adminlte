@@ -1,7 +1,7 @@
 <script lang="ts">
 	type Props = {
 		id?: string;
-		value?: string;
+		value?: any;
 		name?: string;
 		disabled?: boolean;
 		group: any;

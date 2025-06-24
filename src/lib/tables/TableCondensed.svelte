@@ -1,19 +1,25 @@
 <script lang="ts">
 	let {
-		    node = $bindable(),
-		    headers,
-		    children,
-		    footer,
+		    node     = $bindable(),
+		    headers  = undefined,
+		    children = undefined,
+		    footer   = undefined,
 		    ...restProps
 	    } = $props()
 </script>
 
 <table bind:this={node} {...restProps} class="table table-sm data-table {restProps.class || ''}">
-	<thead>
-	{@render headers?.()}
-	</thead>
+	{#if headers}
+		<thead>
+		{@render headers?.()}
+		</thead>
+	{/if}
 	<tbody>
 	{@render children?.()}
 	</tbody>
-	{@render footer?.()}
+	{#if footer}
+		<tfoot>
+		{@render footer?.()}
+		</tfoot>
+	{/if}
 </table>
