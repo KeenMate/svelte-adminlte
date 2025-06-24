@@ -68,10 +68,10 @@
 			<Loader />
 		{/if}
 	{:else}
-		{@render children?.({data: oldData,})}
+		{@render children?.(oldData)}
 	{/if}
 {:then data}
-	{@render children?.({data,})}
+	{@render children?.(data)}
 {:catch error}
-	{@render onError?.({error,})}
+	{@render onError?.(error)}
 {/await}
