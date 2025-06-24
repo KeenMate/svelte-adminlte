@@ -1,7 +1,7 @@
 <script lang="ts">
 	type Props = {
 		id?: string;
-		value?: string;
+		value?: any;
 		name?: string;
 		disabled?: boolean;
 		group: any;
@@ -19,7 +19,7 @@
 		    disabled = false,
 		    group    = $bindable(),
 		    level    = "primary",
-		    children,
+		    children = undefined,
 		    onClick = undefined,
 		    ...restProps
 	    }: Props = $props()
@@ -27,5 +27,7 @@
 
 <div class="icheck-{level} {restProps.class || ''}">
 	<input bind:group {value} {disabled} {id} {name} type="radio" onclick={onClick} />
-	{@render children?.()}
+	<label for={id}>
+		{@render children?.()}
+	</label>
 </div>
