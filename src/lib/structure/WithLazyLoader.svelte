@@ -64,7 +64,9 @@
 
 {#await lazyTask}
 	{#if loading && !parentLoading}
-		{#if loader}{@render loader()}{:else}
+		{#if loader}
+			{@render loader()}
+		{:else}
 			<Loader />
 		{/if}
 	{:else}
