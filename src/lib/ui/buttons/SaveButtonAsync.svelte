@@ -42,7 +42,6 @@
 	small={small || noSizeSet}
 	{large}
 	{...{...buttonDefaults, ...specialButtonDefaults, ...restProps}}
-	on:click
 >
 	{#if children}{@render children()}{:else}
 		{#if !computedShort}

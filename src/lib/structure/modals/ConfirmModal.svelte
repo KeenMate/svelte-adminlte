@@ -96,7 +96,6 @@
 	{/if}
 
 	{#snippet actions()}
-
 		<ModalCloseButton>
 			{$_("common.buttons.close")}
 		</ModalCloseButton>
@@ -104,10 +103,9 @@
 		<LteButton
 			color="success"
 			small
-			on:click={doConfirm}
+			onClick={doConfirm}
 		>
 			<i class="fas fa-check fa-fw"></i> {$_("common.buttons.confirm")}
 		</LteButton>
-
 	{/snippet}
 </Modal>

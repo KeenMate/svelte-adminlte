@@ -370,7 +370,6 @@
 									<Select
 										bind:this={selectedValue}
 										{options}
-										on:change
 										searchBar
 									/>
 								</FormGroup>

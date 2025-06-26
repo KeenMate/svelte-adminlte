@@ -1,9 +1,5 @@
 <script lang="ts">
-	import {createEventDispatcher} from "svelte"
 	import LteButton from "./LteButton.svelte"
-
-	const dispatch = createEventDispatcher()
-
 
 	type Props = {
 		action?: (() => Promise<any>) | null;
@@ -11,6 +7,7 @@
 		iconClass?: string | null;
 		disabled?: boolean;
 		loading?: boolean;
+		onClick?: (ev: MouseEvent) => void
 		children?: import("svelte").Snippet;
 
 		[key: string]: any
@@ -22,15 +19,16 @@
 		    iconClass          = null,
 		    disabled           = false,
 		    loading            = $bindable(false),
-		    children,
+		    onClick = undefined,
+		    children = undefined,
 		    ...restProps
 	    }: Props = $props()
 
 	let computedDisabled = $derived(disabled || (enabledWhenLoading ? false : loading))
 
-	async function onClick(ev: MouseEvent) {
+	async function onClickInternal(ev: MouseEvent) {
 		if (!action) {
-			dispatch("click", ev)
+			onClick?.(ev)
 			return
 		}
 
@@ -46,7 +44,7 @@
 <LteButton
 	{...restProps}
 	disabled={computedDisabled}
-	on:click={onClick}
+	onClick={onClickInternal}
 >
 	{#if loading}
 		<i

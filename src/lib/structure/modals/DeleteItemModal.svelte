@@ -19,7 +19,7 @@
 
 	export function showModal(dd) {
 		deleteData = dd
-		show()
+		modalElement?.show()
 
 		return new Promise((resolve, reject) => {
 			resolveModal = resolve
@@ -28,11 +28,11 @@
 	}
 
 	export function hideModal() {
-		hide()
+		modalElement?.hide()
 	}
 
 	let jModalElement = $state()
-	let show          = $state(), hide = $state()
+	let modalElement: HTMLElement & any = $state()
 	let deleteData    = $state()
 
 	let resolveModal, rejectModal
@@ -61,17 +61,14 @@
 	})
 </script>
 
-<Modal bind:jModalElement bind:show bind:hide {...restProps}>
+<Modal bind:this={modalElement} bind:jModalElement {...restProps}>
 	{#snippet header()}
-
 		{$_("common.labels.deleteConfirmation")}
-
 	{/snippet}
 
 	{@render children?.({data: deleteData,})}
 
 	{#snippet actions()}
-
 		<ModalCloseButton>
 			{$_("common.buttons.close")}
 		</ModalCloseButton>
@@ -79,10 +76,9 @@
 		<LteButton
 			color="danger"
 			small
-			on:click={doConfirm}
+			onClick={doConfirm}
 		>
 			<i class="fas fa-trash fa-fw"></i> {$_("common.buttons.delete")}
 		</LteButton>
-
 	{/snippet}
 </Modal>

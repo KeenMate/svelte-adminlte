@@ -15,7 +15,7 @@
 		squared?: boolean;
 		icon?: string | null;
 		children?: import("svelte").Snippet;
-		onClick?: (ev: Event) => void
+		onClick?: (ev: MouseEvent) => any
 		
 		[key: string]: any
 	}

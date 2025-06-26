@@ -22,7 +22,7 @@
 		<div class="row mb-2">
 			<div class="col-sm-6">
 				{#if showBackArrow}
-					<LteButton small link squared color="" on:click={backArrowClicked}>
+					<LteButton small link squared color="" onClick={backArrowClicked}>
 						<i class="fas fa-arrow-left"></i>
 					</LteButton>
 				{/if}

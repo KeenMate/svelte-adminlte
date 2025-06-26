@@ -13,7 +13,6 @@
 	data-widget="pushmenu"
 	role="button"
 	{...restProps}
-	on:click
 >
 	<i class="fas fa-bars fa-fw"></i>
 </TopNavItem>

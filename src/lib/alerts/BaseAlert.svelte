@@ -1,13 +1,10 @@
 <script lang="ts">
-	import {createEventDispatcher} from "svelte"
-
-	const dispatch = createEventDispatcher()
-
 	type Props = {
 		headerText?: string | null | undefined;
 		closeable?: boolean | undefined;
 		level?: string | null | undefined;
 		icon?: string | null | undefined;
+		onClosed?: VoidFunction
 		header?: import("svelte").Snippet;
 		children?: import("svelte").Snippet;
 
@@ -19,13 +16,14 @@
 		    closeable  = undefined,
 		    level      = undefined,
 		    icon       = undefined,
+		onClosed = undefined,
 		    header,
 		    children,
 		    ...restProps
 	    }: Props = $props()
 
 	function alertClosed() {
-		dispatch("closed")
+		onClosed?.()
 	}
 </script>
 

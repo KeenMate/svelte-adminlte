@@ -7,6 +7,7 @@
 		icon?: string | undefined;
 		level?: string | undefined;
 		closeable?: boolean | undefined;
+		onClosed?: VoidFunction
 		header?: import("svelte").Snippet;
 		children?: import("svelte").Snippet;
 
@@ -14,10 +15,8 @@
 	}
 
 	let {
-		    headerText = undefined,
 		    icon       = undefined,
 		    level      = undefined,
-		    closeable  = undefined,
 		    header,
 		    children,
 		    ...restProps
@@ -33,11 +32,8 @@
 
 <BaseAlert
 	{...restProps}
-	{headerText}
 	icon={iconClass}
 	level={computedLevel}
-	{closeable}
-	on:closed
 >
 	{#snippet header()}
 		{@render header_render?.()}
