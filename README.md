@@ -1,3 +1,8 @@
+> [!WARNING]
+> **This library is no longer being developed or supported in any way.**
+>
+> We have replaced it with **[Svelte Pure Admin](https://pure-admin.keenmate.dev)** ([GitHub](https://github.com/keenmate/svelte-pure-admin)), a lightweight admin template that uses only the grid/column parts of PureCSS with no other dependencies except Floating UI. AdminLTE was based on Bootstrap and was too heavy for our needs.
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
